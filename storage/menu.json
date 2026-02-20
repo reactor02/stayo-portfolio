@@ -1,0 +1,322 @@
+{
+  "schema": "jungseoks_kids.menu",
+  "version": "0.1",
+  "generatedAt": "2026-02-20T00:00:00+09:00",
+  "meta": {
+    "appName": "jungseoks_kids",
+    "layout": "top+leftTree",
+    "notes": "WO/LOT/EQP/EVT 4개 대메뉴, 각 5개 화면(중메뉴), 화면 내부 탭/액션은 하위메뉴로 표현"
+  },
+  "menus": [
+    {
+      "id": "M_WO",
+      "key": "wo",
+      "title": "WO",
+      "icon": "clipboard",
+      "order": 10,
+      "route": "#/wo/list",
+      "children": [
+        {
+          "id": "WO_001",
+          "key": "wo_list",
+          "title": "작업지시 목록",
+          "order": 10,
+          "route": "#/wo/list",
+          "api": "GET /api/wo/list",
+          "children": [
+            { "id": "WO_001_FILTER", "title": "필터/조회", "order": 10, "action": "filter" },
+            { "id": "WO_001_EXPORT", "title": "내보내기", "order": 20, "action": "export" },
+            { "id": "WO_001_BULK", "title": "일괄 작업", "order": 30, "action": "bulk" }
+          ]
+        },
+        {
+          "id": "WO_002",
+          "key": "wo_create",
+          "title": "작업지시 생성",
+          "order": 20,
+          "route": "#/wo/create",
+          "api": "POST /api/wo/create",
+          "children": [
+            { "id": "WO_002_STEP1", "title": "1) 기본정보", "order": 10, "tab": "basic" },
+            { "id": "WO_002_STEP2", "title": "2) 계획", "order": 20, "tab": "plan" },
+            { "id": "WO_002_STEP3", "title": "3) 자재", "order": 30, "tab": "material" },
+            { "id": "WO_002_STEP4", "title": "4) 검토/저장", "order": 40, "tab": "review" }
+          ]
+        },
+        {
+          "id": "WO_003",
+          "key": "wo_progress",
+          "title": "진행현황",
+          "order": 30,
+          "route": "#/wo/progress",
+          "api": "GET /api/wo/progress",
+          "children": [
+            { "id": "WO_003_KPI", "title": "KPI", "order": 10, "tab": "kpi" },
+            { "id": "WO_003_KANBAN", "title": "상태 캔반", "order": 20, "tab": "kanban" },
+            { "id": "WO_003_CHART", "title": "차트", "order": 30, "tab": "chart" }
+          ]
+        },
+        {
+          "id": "WO_004",
+          "key": "wo_due",
+          "title": "납기 관리",
+          "order": 40,
+          "route": "#/wo/due",
+          "api": "GET /api/wo/due",
+          "children": [
+            { "id": "WO_004_LIST", "title": "리스트", "order": 10, "tab": "list" },
+            { "id": "WO_004_GANTT", "title": "간트", "order": 20, "tab": "gantt" },
+            { "id": "WO_004_ALERT", "title": "위험 알림", "order": 30, "tab": "alert" }
+          ]
+        },
+        {
+          "id": "WO_005",
+          "key": "wo_detail",
+          "title": "상세/이력",
+          "order": 50,
+          "route": "#/wo/detail",
+          "api": "GET /api/wo/detail",
+          "children": [
+            { "id": "WO_005_INFO", "title": "기본정보", "order": 10, "tab": "info" },
+            { "id": "WO_005_HISTORY", "title": "변경/생산 이력", "order": 20, "tab": "history" },
+            { "id": "WO_005_DOCS", "title": "문서", "order": 30, "tab": "docs" },
+            { "id": "WO_005_ROLLBACK", "title": "롤백", "order": 40, "action": "rollback", "permission": "ADMIN" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "M_LOT",
+      "key": "lot",
+      "title": "LOT",
+      "icon": "boxes",
+      "order": 20,
+      "route": "#/lot/list",
+      "children": [
+        {
+          "id": "LOT_001",
+          "key": "lot_list",
+          "title": "LOT 목록",
+          "order": 10,
+          "route": "#/lot/list",
+          "api": "GET /api/lot/list",
+          "children": [
+            { "id": "LOT_001_SPLIT", "title": "분할", "order": 10, "action": "split" },
+            { "id": "LOT_001_MERGE", "title": "병합", "order": 20, "action": "merge" },
+            { "id": "LOT_001_LABEL", "title": "라벨", "order": 30, "action": "label" },
+            { "id": "LOT_001_STATUS", "title": "상태 변경", "order": 40, "action": "status_change" }
+          ]
+        },
+        {
+          "id": "LOT_002",
+          "key": "lot_trace",
+          "title": "LOT 추적",
+          "order": 20,
+          "route": "#/lot/trace",
+          "api": "GET /api/lot/trace",
+          "children": [
+            { "id": "LOT_002_FLOW", "title": "공정 흐름", "order": 10, "tab": "flow" },
+            { "id": "LOT_002_GENEALOGY", "title": "계보", "order": 20, "tab": "genealogy" },
+            { "id": "LOT_002_INSPECTION", "title": "검사", "order": 30, "tab": "inspection" },
+            { "id": "LOT_002_EVENTS", "title": "이벤트", "order": 40, "tab": "events" }
+          ]
+        },
+        {
+          "id": "LOT_003",
+          "key": "lot_by_step",
+          "title": "공정별 현황",
+          "order": 30,
+          "route": "#/lot/by-step",
+          "api": "GET /api/lot/by-step",
+          "children": [
+            { "id": "LOT_003_KANBAN", "title": "캔반", "order": 10, "tab": "kanban" },
+            { "id": "LOT_003_MOVE", "title": "공정 이동", "order": 20, "action": "move_step" },
+            { "id": "LOT_003_PRIORITY", "title": "우선순위", "order": 30, "action": "priority" }
+          ]
+        },
+        {
+          "id": "LOT_004",
+          "key": "lot_status",
+          "title": "상태 관리",
+          "order": 40,
+          "route": "#/lot/status",
+          "api": "POST /api/lot/status",
+          "children": [
+            { "id": "LOT_004_HOLD", "title": "HOLD", "order": 10, "action": "hold" },
+            { "id": "LOT_004_RESUME", "title": "RESUME", "order": 20, "action": "resume" },
+            { "id": "LOT_004_SCRAP", "title": "SCRAP", "order": 30, "action": "scrap" },
+            { "id": "LOT_004_REWORK", "title": "REWORK", "order": 40, "action": "rework" }
+          ]
+        },
+        {
+          "id": "LOT_005",
+          "key": "lot_stats",
+          "title": "통계",
+          "order": 50,
+          "route": "#/lot/stats",
+          "api": "GET /api/lot/stats",
+          "children": [
+            { "id": "LOT_005_YIELD", "title": "수율", "order": 10, "tab": "yield" },
+            { "id": "LOT_005_DEFECT", "title": "불량", "order": 20, "tab": "defect" },
+            { "id": "LOT_005_TAT", "title": "TAT", "order": 30, "tab": "tat" },
+            { "id": "LOT_005_REWORK", "title": "재작업", "order": 40, "tab": "rework" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "M_EQP",
+      "key": "eqp",
+      "title": "설비",
+      "icon": "factory",
+      "order": 30,
+      "route": "#/eqp/list",
+      "children": [
+        {
+          "id": "EQP_001",
+          "key": "eqp_list",
+          "title": "설비 목록",
+          "order": 10,
+          "route": "#/eqp/list",
+          "api": "GET /api/eqp/list",
+          "children": [
+            { "id": "EQP_001_VIEW", "title": "리스트/카드 전환", "order": 10, "action": "toggle_view" },
+            { "id": "EQP_001_PM", "title": "정비 예약", "order": 20, "action": "pm_schedule" },
+            { "id": "EQP_001_DOWN", "title": "비가동 등록", "order": 30, "action": "downtime_create" }
+          ]
+        },
+        {
+          "id": "EQP_002",
+          "key": "eqp_monitor",
+          "title": "모니터링",
+          "order": 20,
+          "route": "#/eqp/monitor",
+          "api": "WS /api/eqp/monitor",
+          "children": [
+            { "id": "EQP_002_STATUS", "title": "상태", "order": 10, "tab": "status" },
+            { "id": "EQP_002_ALARM", "title": "알람", "order": 20, "tab": "alarm" },
+            { "id": "EQP_002_ESC", "title": "에스컬레이션", "order": 30, "action": "escalate" }
+          ]
+        },
+        {
+          "id": "EQP_003",
+          "key": "eqp_history",
+          "title": "이력",
+          "order": 30,
+          "route": "#/eqp/history",
+          "api": "GET /api/eqp/history",
+          "children": [
+            { "id": "EQP_003_TIMELINE", "title": "타임라인", "order": 10, "tab": "timeline" },
+            { "id": "EQP_003_MTBF", "title": "MTBF", "order": 20, "tab": "mtbf" },
+            { "id": "EQP_003_MTTR", "title": "MTTR", "order": 30, "tab": "mttr" }
+          ]
+        },
+        {
+          "id": "EQP_004",
+          "key": "eqp_oee",
+          "title": "OEE 분석",
+          "order": 40,
+          "route": "#/eqp/oee",
+          "api": "GET /api/eqp/oee",
+          "children": [
+            { "id": "EQP_004_OEE", "title": "OEE", "order": 10, "tab": "oee" },
+            { "id": "EQP_004_LOSS", "title": "손실 분해", "order": 20, "tab": "loss" },
+            { "id": "EQP_004_TARGET", "title": "목표 설정", "order": 30, "action": "target" }
+          ]
+        },
+        {
+          "id": "EQP_005",
+          "key": "eqp_reasons",
+          "title": "정지원인 관리",
+          "order": 50,
+          "route": "#/eqp/reasons",
+          "api": "CRUD /api/eqp/reasons",
+          "children": [
+            { "id": "EQP_005_LIST", "title": "목록", "order": 10, "tab": "list" },
+            { "id": "EQP_005_CREATE", "title": "추가", "order": 20, "action": "create" },
+            { "id": "EQP_005_DELETE", "title": "삭제", "order": 30, "action": "delete", "constraint": "참조 중 삭제 금지" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "M_EVT",
+      "key": "evt",
+      "title": "이벤트",
+      "icon": "bell",
+      "order": 40,
+      "route": "#/evt/log",
+      "children": [
+        {
+          "id": "EVT_001",
+          "key": "evt_log",
+          "title": "로그 조회",
+          "order": 10,
+          "route": "#/evt/log",
+          "api": "GET /api/event/log",
+          "children": [
+            { "id": "EVT_001_FILTER", "title": "필터", "order": 10, "action": "filter" },
+            { "id": "EVT_001_DETAIL", "title": "상세 모달", "order": 20, "action": "open_detail" },
+            { "id": "EVT_001_SUBSCRIBE", "title": "구독 설정", "order": 30, "action": "subscribe" }
+          ]
+        },
+        {
+          "id": "EVT_002",
+          "key": "evt_prod",
+          "title": "생산 이벤트",
+          "order": 20,
+          "route": "#/evt/prod",
+          "api": "GET /api/event/prod",
+          "children": [
+            { "id": "EVT_002_TRACKIN", "title": "Track-In", "order": 10, "action": "track_in" },
+            { "id": "EVT_002_TRACKOUT", "title": "Track-Out", "order": 20, "action": "track_out" },
+            { "id": "EVT_002_SCRAP", "title": "Scrap 분석", "order": 30, "tab": "scrap" },
+            { "id": "EVT_002_REWORK", "title": "Rework 분석", "order": 40, "tab": "rework" }
+          ]
+        },
+        {
+          "id": "EVT_003",
+          "key": "evt_eqp",
+          "title": "설비 이벤트",
+          "order": 30,
+          "route": "#/evt/eqp",
+          "api": "GET /api/event/eqp",
+          "children": [
+            { "id": "EVT_003_STATUS", "title": "상태 변화", "order": 10, "tab": "status" },
+            { "id": "EVT_003_ALARM", "title": "알람", "order": 20, "tab": "alarm" },
+            { "id": "EVT_003_MAINT", "title": "정비 작업 생성", "order": 30, "action": "create_maintenance" }
+          ]
+        },
+        {
+          "id": "EVT_004",
+          "key": "evt_quality",
+          "title": "품질 이벤트",
+          "order": 40,
+          "route": "#/evt/quality",
+          "api": "GET /api/event/quality",
+          "children": [
+            { "id": "EVT_004_INSPECTION", "title": "검사", "order": 10, "tab": "inspection" },
+            { "id": "EVT_004_DEFECT", "title": "불량 분석", "order": 20, "tab": "defect" },
+            { "id": "EVT_004_REWORK_WO", "title": "재작업 WO 생성", "order": 30, "action": "create_rework_wo" }
+          ]
+        },
+        {
+          "id": "EVT_005",
+          "key": "evt_audit",
+          "title": "감사 로그",
+          "order": 50,
+          "route": "#/evt/audit",
+          "api": "GET /api/event/audit",
+          "children": [
+            { "id": "EVT_005_USER", "title": "사용자 활동", "order": 10, "tab": "user" },
+            { "id": "EVT_005_POLICY", "title": "보존 정책", "order": 20, "tab": "retention" },
+            { "id": "EVT_005_PERM", "title": "권한별 액션", "order": 30, "tab": "permission" }
+          ]
+        }
+      ]
+    }
+  ]
+}
