@@ -1,0 +1,68 @@
+From 866ab6c8098ad5c8e983a2832df3e175b7801373 Mon Sep 17 00:00:00 2001
+From: leehan2121 <leehan2121@gmail.com>
+Date: Fri, 20 Feb 2026 16:48:23 +0900
+Subject: [PATCH] test
+
+---
+ index - 복사본.html | 48 +++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 48 insertions(+)
+ create mode 100644 index - 복사본.html
+
+diff --git a/index - 복사본.html b/index - 복사본.html
+new file mode 100644
+index 0000000..769a030
+--- /dev/null
++++ b/index - 복사본.html	
+@@ -0,0 +1,48 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++    <meta charset="UTF-8">
++    <meta name="viewport" content="width=device-width, initial-scale=1.0">
++    <title>Document</title>
++    <!-- js import by phi S-->
++    <script src="/js/jquery-3.7.1.js"></script>
++    <script src="/js/main.js"></script>
++    <!-- js import by phi E-->
++     <script>
++        const MENU_KEY = "jungseoks_kids.menu";
++
++        $(function(){
++
++        $.getJSON("/storage/menu.json")
++            .done(function(menuData){
++
++            localStorage.setItem(MENU_KEY, JSON.stringify(menuData));
++
++            console.log("Menu loaded:", menuData.menus);
++
++            })
++            .fail(function(xhr){
++            console.error("menu.json load failed", xhr.status);
++            });
++
++        });
++        </script>
++</head>
++<body>
++    <!-- top header phi S-->
++    <div>Top Header</div>
++    <!-- top header phi E-->
++    <div>
++        <div>
++            <!--left Menu phi S-->
++            좌측 메뉴입니다.
++            <!--left Menu phi E-->
++        </div>
++        <div>
++            <!-- contents phi S-->
++             안녕!!!
++            <!-- contents phi E-->
++        </div>
++    </div>
++</body>
++</html>
+\ No newline at end of file
+-- 
+2.51.0.windows.1
+
