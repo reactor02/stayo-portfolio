@@ -30,12 +30,18 @@
         $(() => {
             initMenu();
 
-            // console.log(getTopMenu());          // 대메뉴 전체
-            // console.log(getTopMenu(0));         // 대메뉴 0번째
-            // console.log(getMidMenu(0));         // 0번 대메뉴의 중메뉴 전체
-            // console.log(getMidMenu(0, 1));      // 0번 대메뉴의 중메뉴 1번째
-            // console.log(getSubMenu(0, 1));      // 0-1의 소메뉴 전체
-            // console.log(getSubMenu(0, 1, 2));   // 0-1의 소메뉴 2번째
+            //  console.log(getTopMenu());          // 대메뉴 전체
+            //  console.log(getTopMenu(0));         // 대메뉴 0번째
+            //  console.log(getLeftMenu(0));         // 0번 대메뉴의 중메뉴 전체
+            //  console.log(getLeftMenu(0, 1));      // 0번 대메뉴의 중메뉴 1번째
+            //  console.log(getSubMenu(0, 1));      // 0-1의 소메뉴 전체
+            //  console.log(getSubMenu(0, 1, 2));   // 0-1의 소메뉴 2번째
+
+            //모든 메뉴 div
+            renderTopMenuUI();
+
+            // 상단 0 선택했을때 menu div
+            renderLeftMenuUI(0);
         });
     </script>
 </head>
