@@ -20,6 +20,12 @@ function initQueryParams() {
 
 function initMenu() {
     const cached = loadMenuFromStorage();
+    /*
+    const d = $.Deferred(); // Promise 컨테이너 생성
+    d.resolve(cached);      // 성공 상태로 만듦
+    return d.promise();     // Promise 반환
+    호출하는 쪽은 .done()을 기대 함으로 가짜.done 를 만들어주는 객체
+    */
     if (cached) return $.Deferred().resolve(cached).promise();
 
     return $.getJSON("/storage/menu.json")
@@ -114,7 +120,7 @@ function renderTopMenuUI() {
         const $div = $("<div>")
         const $a = $("<a>")
             .text(menu.title)
-            .attr("href", "/view/wo/wo_main.html?top=" + index);
+            .attr("href", linkUrl(index));
         $div.append($a);
         $headerDiv.append($div);
     });
@@ -134,8 +140,34 @@ function renderLeftMenuUI(topIndex, leftIndex) {
         const $div = $("<div>")
         const $a = $("<a>")
             .text(menu.title)
-            .attr("href", "/view/wo/wo_main.html?top=" + topIndex + "&left=" + index);
+            .attr("href", linkUrl(topIndex,index));
         $div.append($a);
         $leftMenuDiv.append($div);
     });
+}
+
+//링크 url 
+function linkUrl(topIndex, leftIndex, subIndex) {
+
+  const topMenu = getTopMenu(topIndex);
+
+  if (!topMenu) {
+    alert("없는 경로입니다.");
+    return "#";
+  }
+
+  const key = topMenu.key; // wo / lot / eqp / evt
+
+  // 기본 경로 생성
+  let url = `/view/${key}/${key}_main.html?top=${topIndex}`;
+
+  if (leftIndex !== undefined && leftIndex !== null) {
+    url += `&left=${leftIndex}`;
+  }
+
+  if (subIndex !== undefined && subIndex !== null) {
+    url += `&sub=${subIndex}`;
+  }
+
+  return url;
 }
