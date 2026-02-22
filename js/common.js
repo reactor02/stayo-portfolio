@@ -1,6 +1,6 @@
 //UI관련된 공통 함수관련
 // mouserover click 등등
-
+//****************** 여기서 부터는 안보셔도 됩니다. ****************/
 // 1) 전역 상태
 window.AppState = window.AppState || { top: null, left: null, sub: null };
 
@@ -76,6 +76,8 @@ const AppState = {
     sub: null
 };
 
+//****************** 여기부터 보시면 됩니다. ****************/
+
 
 //대메뉴 뽑기 (index 없이 전체 / index 넣으면 하나)
 function getTopMenu(topIndex) {
@@ -105,8 +107,10 @@ function getSubMenu(topIndex, leftIndex, subIndex) {
 }
 
 
-//UI
 
+//UI 함수들은 여기부터 입니다.
+
+//대메뉴 UI
 function renderTopMenuUI() {
 
     const topMenus = getTopMenu(); // 전체 대메뉴
@@ -126,7 +130,7 @@ function renderTopMenuUI() {
     });
 }
 
-//Jquery 
+//중메뉴 UI
 function renderLeftMenuUI(topIndex, leftIndex) {
 
     const leftMenus = getLeftMenu(topIndex, leftIndex); //대메뉴와 중메뉴
