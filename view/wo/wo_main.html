@@ -13,35 +13,8 @@
     <link rel="stylesheet" href="/css/style.css">
     <!-- js import by phi E-->
     <script>
-        const MENU_KEY = "jungseoks_kids.menu";
-
-        // 초기 로드: menu.json 읽어서 storage에 저장
-        function initMenu() {
-            $.getJSON("/storage/menu.json")
-                .done(function (menuData) {
-                    saveMenuToStorage(menuData);
-                    console.log("menu saved");
-                })
-                .fail(function (xhr) {
-                    console.error("menu.json load failed", xhr.status);
-                });
-        }
-
         $(() => {
-            initMenu();
-
-            //  console.log(getTopMenu());          // 대메뉴 전체
-            //  console.log(getTopMenu(0));         // 대메뉴 0번째
-            //  console.log(getLeftMenu(0));         // 0번 대메뉴의 중메뉴 전체
-            //  console.log(getLeftMenu(0, 1));      // 0번 대메뉴의 중메뉴 1번째
-            //  console.log(getSubMenu(0, 1));      // 0-1의 소메뉴 전체
-            //  console.log(getSubMenu(0, 1, 2));   // 0-1의 소메뉴 2번째
-
-            //모든 메뉴 div
-            //renderTopMenuUI();
-
-            // 상단 0 선택했을때 menu div
-            //renderLeftMenuUI(0);
+        
         });
     </script>
 </head>

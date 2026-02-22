@@ -1,18 +1,41 @@
 //UI관련된 공통 함수관련
 // mouserover click 등등
 
-//topHeader 뽑기
+// 1) 전역 상태
+window.AppState = window.AppState || { top: null, left: null, sub: null };
 
+const MENU_KEY = "jungseoks_kids.menu";
 
-// 축약형 
-//$(document).ready(function(){});
-//$(function(){});
-$(() => {
+function initQueryParams() {
+    const params = new URLSearchParams(location.search);
 
-});
+    AppState.top = parseInt(params.get("top"), 10);
+    AppState.left = parseInt(params.get("left"), 10);
+    AppState.sub = parseInt(params.get("sub"), 10);
 
+    if (isNaN(AppState.top)) AppState.top = 0;
+    if (isNaN(AppState.left)) AppState.left = null;
+    if (isNaN(AppState.sub)) AppState.sub = null;
+}
 
+function initMenu() {
+    const cached = loadMenuFromStorage();
+    if (cached) return $.Deferred().resolve(cached).promise();
 
+    return $.getJSON("/storage/menu.json")
+        .done((menuData) => saveMenuToStorage(menuData));
+}
+
+function bootstrapCommonUI() {
+    // 헤더/메뉴 영역이 없는 페이지는 그냥 스킵
+    const hasHeader = $("#header").length > 0;
+    const hasMenu = $("#menu").length > 0;
+    //optional chaining 방식 왼쪽값이 있으면 실행 ?.
+    //if (hasHeader) renderTopMenuUI?.();              // 함수 있으면 호출
+    //if (hasMenu) renderLeftMenuUI?.(AppState.top); // 함수 있으면 호출
+}
+
+// 초기 로드: menu.json 읽어서 storage에 저장
 //웹스토리지에 JSON 등록 (로컬에 저장)
 function saveMenuToStorage(menuData) {
     localStorage.setItem(MENU_KEY, JSON.stringify(menuData));
@@ -29,6 +52,24 @@ function loadMenuFromStorage() {
         return null;
     }
 }
+
+// 축약형 
+//$(document).ready(function(){});
+//$(function(){});
+$(() => {
+    initQueryParams();
+
+    initMenu()
+        .done(() => bootstrapCommonUI())
+        .fail((xhr) => console.error("menu.json load failed", xhr.status));
+});
+//전역 변수용 상태 객체
+const AppState = {
+    top: null,
+    left: null,
+    sub: null
+};
+
 
 //대메뉴 뽑기 (index 없이 전체 / index 넣으면 하나)
 function getTopMenu(topIndex) {
@@ -58,63 +99,43 @@ function getSubMenu(topIndex, leftIndex, subIndex) {
 }
 
 
-//대메뉴 UI 만들기
-// function renderTopMenuUI() {
+//UI
 
-//   const topMenus = getTopMenu(); // 전체 대메뉴 가져오기
-//   if (!topMenus) return;
-
-//   const headerDiv = document.querySelector("#header div");
-//   headerDiv.innerHTML = ""; // 초기화
-
-//   topMenus.forEach((menu, index) => {
-
-//     const a = document.createElement("a");
-//     a.textContent = menu.title;
-
-//     // index만 넘기기
-//     a.href = `/view/wo/wo_main.html?top=${index}`;
-
-//     headerDiv.appendChild(a);
-//   });
-// }
-
-//Jquery 
 function renderTopMenuUI() {
 
-  const topMenus = getTopMenu(); // 전체 대메뉴
-  console.log(!topMenus);
-  if (!topMenus) return;
+    const topMenus = getTopMenu(); // 전체 대메뉴
+    console.log(!topMenus);
+    if (!topMenus) return;
 
-  const $headerDiv = $("#header");
-  $headerDiv.empty(); // 초기화
+    const $headerDiv = $("#header");
+    $headerDiv.empty(); // 초기화
 
-  $.each(topMenus, (index, menu) => {
-    const $div = $("<div>")
-    const $a = $("<a>")
-      .text(menu.title)
-      .attr("href", "/view/wo/wo_main.html?top=" + index);
-    $div.append($a);
-    $headerDiv.append($div);
-  });
+    $.each(topMenus, (index, menu) => {
+        const $div = $("<div>")
+        const $a = $("<a>")
+            .text(menu.title)
+            .attr("href", "/view/wo/wo_main.html?top=" + index);
+        $div.append($a);
+        $headerDiv.append($div);
+    });
 }
 
 //Jquery 
-function renderLeftMenuUI(topIndex , leftIndex) {
+function renderLeftMenuUI(topIndex, leftIndex) {
 
-  const leftMenus = getLeftMenu(topIndex , leftIndex); //대메뉴와 중메뉴
-  console.log(!leftMenus);
-  if (!leftMenus) return;
+    const leftMenus = getLeftMenu(topIndex, leftIndex); //대메뉴와 중메뉴
+    console.log(!leftMenus);
+    if (!leftMenus) return;
 
-  const $leftMenuDiv = $("#menu");
-  $leftMenuDiv.empty(); // 초기화
+    const $leftMenuDiv = $("#menu");
+    $leftMenuDiv.empty(); // 초기화
 
-  $.each(leftMenus, (index, menu) => {
-    const $div = $("<div>")
-    const $a = $("<a>")
-      .text(menu.title)
-      .attr("href", "/view/wo/wo_main.html?top=" + topIndex + "&left="+ index);
-    $div.append($a);
-    $leftMenuDiv.append($div);
-  });
+    $.each(leftMenus, (index, menu) => {
+        const $div = $("<div>")
+        const $a = $("<a>")
+            .text(menu.title)
+            .attr("href", "/view/wo/wo_main.html?top=" + topIndex + "&left=" + index);
+        $div.append($a);
+        $leftMenuDiv.append($div);
+    });
 }
