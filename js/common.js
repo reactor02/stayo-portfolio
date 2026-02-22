@@ -89,21 +89,23 @@ function getTopMenu(topIndex) {
 }
 
 //중메뉴 뽑기
-function getLeftMenu(topIndex, leftIndex) {
+function getLeftMenu(topIndex) {
     const top = getTopMenu(topIndex);
     if (!top || !top.children) return null;
 
-    if (leftIndex === undefined) return top.children; // 전체
-    return top.children[leftIndex] ?? null;           // 하나
+    // if (leftIndex === undefined) return top.children; // 전체
+    // return top.children[leftIndex] ?? null;           // 하나
+    return top.children;
 }
 
 //소메뉴 뽑기
-function getSubMenu(topIndex, leftIndex, subIndex) {
+function getSubMenu(topIndex, leftIndex) {
     const mid = getLeftMenu(topIndex, leftIndex);
     if (!mid || !mid.children) return null;
 
-    if (subIndex === undefined) return mid.children; // 전체
-    return mid.children[subIndex] ?? null;           // 하나
+    // if (subIndex === undefined) return mid.children; // 전체
+    // return mid.children[subIndex] ?? null;           // 하나
+    return mid.children; // 전체
 }
 
 
