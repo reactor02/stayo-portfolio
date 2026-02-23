@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- js import by phi S-->
+    <script src="/js/jquery-3.7.1.js"></script>
+    <script src="/js/main.js"></script>
+    <!-- js import by phi E-->
+     <script>
+        const MENU_KEY = "jungseoks_kids.menu";
+
+        $(function(){
+
+        $.getJSON("/storage/menu.json")
+            .done(function(menuData){
+
+            localStorage.setItem(MENU_KEY, JSON.stringify(menuData));
+
+            console.log("Menu loaded:", menuData.menus);
+
+            })
+            .fail(function(xhr){
+            console.error("menu.json load failed", xhr.status);
+            });
+
+        });
+        </script>
+</head>
+<body>
+    <!-- top header phi S-->
+    <div>Top Header</div>
+    <!-- top header phi E-->
+    <div>
+        <div>
+            <!--left Menu phi S-->
+            좌측 메뉴입니다.
+            <!--left Menu phi E-->
+        </div>
+        <div>
+            <!-- contents phi S-->
+             안녕!!!
+            <!-- contents phi E-->
+        </div>
+    </div>
+</body>
+</html>
