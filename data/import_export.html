@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>데이터 Import/Export</title>
+
+  <script src="/js/jquery-3.7.1.js"></script>
+  <script src="/js/common.js"></script>
+  <script src="/data/import_export.js"></script>
+
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; background:#fafafa; color:#111; }
+    .page { max-width: 1020px; margin: 0 auto; padding: 16px; }
+    .card { background:#fff; border:1px solid #eee; border-radius: 14px; padding: 14px; margin: 12px 0; box-shadow: 0 1px 2px rgba(0,0,0,.03); }
+    .row { display:flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .btn { border:1px solid #ddd; background:#fff; padding: 10px 12px; border-radius: 12px; cursor:pointer; }
+    .btn.primary { border-color:#111; }
+    .btn.danger { border-color:#c33; color:#c33; }
+    .btn.ghost { background:#fafafa; }
+    .muted { color:#666; font-size: 13px; line-height: 1.4; }
+    .grid2 { display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 860px) { .grid2 { grid-template-columns: 1fr; } }
+    table { width:100%; border-collapse: collapse; }
+    th, td { text-align:left; padding: 10px; border-bottom:1px solid #f0f0f0; font-size: 14px; vertical-align: top; }
+    th { background:#fafafa; font-weight: 600; }
+    code { background:#f3f3f3; padding: 2px 6px; border-radius: 8px; }
+    input[type=file] { border:1px dashed #ddd; padding: 10px; border-radius: 12px; background:#fff; }
+    select { border:1px solid #ddd; padding: 10px 12px; border-radius: 12px; background:#fff; }
+    .chip { display:inline-flex; gap:6px; align-items:center; padding: 6px 10px; border-radius: 999px; border:1px solid #eee; background:#fafafa; font-size: 12px; color:#333; }
+    .right { margin-left:auto; }
+    .kpi { font-weight:700; }
+
+    /* modal */
+    .modalBg { position: fixed; inset: 0; background: rgba(0,0,0,.45); display:none; align-items:center; justify-content:center; padding: 16px; z-index: 9999; }
+    .modal { width: min(960px, 100%); max-height: 86vh; overflow:auto; background:#fff; border-radius: 16px; border:1px solid #eee; box-shadow: 0 12px 40px rgba(0,0,0,.25); }
+    .modalHd { position: sticky; top:0; background:#fff; border-bottom:1px solid #f0f0f0; padding: 12px 14px; display:flex; gap:10px; align-items:center; }
+    .modalBd { padding: 14px; }
+    .pre { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size: 12px; white-space: pre; background:#0b1020; color:#e9eefc; padding: 12px; border-radius: 12px; overflow:auto; }
+    .closeX { width: 38px; height: 38px; border-radius: 12px; border:1px solid #ddd; background:#fff; cursor:pointer; display:grid; place-items:center; }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+
+  <div class="page">
+    <h2>데이터 Import / Export</h2>
+    <div class="muted">
+      웹스토리지(localStorage)를 <b>DB처럼</b> 쓰기 위한 툴 페이지입니다.<br/>
+      <span class="chip">전체 Import/Export (Bundle)</span>
+      <span class="chip">테이블별 Import/Export</span>
+      <span class="chip">현재 등록 건수 확인</span>
+      <span class="chip">데이터 미리보기</span>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3 style="margin:0 0 10px;">Seed Import (전체)</h3>
+        <div class="row">
+          <button class="btn primary" id="btnSeedFull">Seed Import (전체)</button>
+          <button class="btn danger" id="btnClearAll">Clear (전체 삭제)</button>
+        </div>
+        <div class="muted" style="margin-top:10px;">
+          Seed는 다음을 합쳐서 Import 합니다.<br/>
+          - 지역 전체 숙소/객실: <code>/storage/korea_lodging_payload_city50.json</code><br/>
+          - 멤버/리뷰/예약(+태그/검색어 seed): <code>/storage/db_seed_bundle.json</code>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="margin:0 0 10px;">전체 Import / Export (Bundle)</h3>
+        <div class="row">
+          <select id="selModeAll" title="Import mode">
+            <option value="merge">merge (추가/갱신)</option>
+            <option value="replace">replace (완전 교체)</option>
+          </select>
+          <input id="fileAll" type="file" accept=".json,application/json" multiple />
+          <button class="btn primary" id="btnImportAll">Import (선택 파일)</button>
+          <button class="btn" id="btnExportAll">Export (전체)</button>
+        </div>
+        <div class="muted" style="margin-top:10px;">
+          예: 오늘 데이터로 테스트하려면 오늘 백업 파일 Import → 화면 확인.<br/>
+          어제 데이터로 테스트하려면 어제 백업 파일 Import → 화면 확인.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin:0 0 10px;">현재 저장 현황</h3>
+      <div class="row" style="margin-bottom:10px;">
+        <span class="chip">키 프리픽스: <code>jungseoks_childs.db.*</code></span>
+        <button class="btn ghost right" id="btnRefresh">새로고침</button>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width:140px;">Table</th>
+            <th style="width:110px;">Count</th>
+            <th>Import</th>
+            <th style="width:260px;">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="statsBody"></tbody>
+      </table>
+
+      <div class="muted" style="margin-top:10px;">
+        Import는 파일 내용을 자동 판별해서 테이블에 넣습니다.<br/>
+        - 번들(JSON): <code>{ "tables": {...} }</code><br/>
+        - 테이블(JSON): <code>{ "meta": {"table":"reviews"}, "rows":[...] }</code><br/>
+        - 배열(JSON): <code>[ {...}, {...} ]</code> (내용 기반 추론)
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin:0 0 10px;">주의</h3>
+      <ul class="muted" style="margin:0; padding-left:18px;">
+        <li>localStorage 용량 제한(보통 약 5MB)이 있습니다. 데이터가 커지면 저장 실패(QuotaExceededError)가 날 수 있습니다.</li>
+        <li>이 페이지는 Import/Export 전용입니다. CRUD(리뷰/예약 수정 등)는 별도 화면에서 붙이는 구조로 확장하세요.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Data preview modal -->
+  <div class="modalBg" id="modalBg" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modalHd">
+        <button class="closeX" id="btnModalClose" aria-label="닫기">✕</button>
+        <div>
+          <div id="modalTitle" style="font-weight:700;">데이터 미리보기</div>
+          <div class="muted" id="modalSub">-</div>
+        </div>
+        <div class="right row">
+          <select id="selPreviewLimit" title="preview limit">
+            <option value="20">20 rows</option>
+            <option value="50" selected>50 rows</option>
+            <option value="100">100 rows</option>
+          </select>
+          <button class="btn" id="btnCopyJSON">Copy JSON</button>
+        </div>
+      </div>
+      <div class="modalBd">
+        <div class="pre" id="modalPre">...</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
