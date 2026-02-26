@@ -26,13 +26,16 @@
 
       <!-- 오른쪽 메뉴 -->
       <nav class="nav">
-        <a href="#">동행</a>
-        <a href="#">회원신청</a>
-        <a href="#" class="mypage">
-          <span class="user-icon">👤</span>
-          마이페이지
-        </a>
-      </nav>
+      <a href="#"></a>
+      <a href="#"><img src="#" alt="찜목록"></a>
+      <a href="#"><img src="#" alt="장바구니"></a>
+      <a href="#">회원가입</a>
+      <a href="#">로그인</a>
+      <a href="#" class="mypage">
+        <span class="user-icon">👤</span>
+        마이페이지/로그인 입력시 보여질 거
+      </a>
+    </nav>
 
     </div>
   </header>
@@ -43,12 +46,19 @@
     <h1 class="main-title">HELLOWORLD</h1>
 
     <!-- 검색 필터 -->
-    <div class="filter-box">
-      <input type="text" placeholder="목적지">
-      <input type="text" placeholder="날짜 (체크인-체크아웃)">
+    <form action="#" class="filter-box">
+      <input type="text" list="location">
+      <datalist id="location" placeholder="목적지">
+                <option value="가나"></option>
+                <option value="가봉"></option>
+                <option value="한국"></option>
+                <option value="스위스"></option>
+      </datalist><br>
+      <input type="text" placeholder="날짜 (체크인-체크아웃)" readonly="readonly">
+      <input type="date" value="2022-03-01"><br>
       <input type="number" placeholder="인원">
-      <button>검색</button>
-    </div>
+      <button type="submit">검색</button>
+    </form>
 
     <!-- 인기 숙소 -->
     <section>
@@ -133,10 +143,10 @@
   </main>
 
   <!-- 프로모션 배너 -->
-  <div class="floating-banner">
+  <a href="#" class="floating-banner">
     신규 가입<br>
     <strong>특지 10% 할인!</strong>
-  </div>
+  </a>
 
 </body>
 

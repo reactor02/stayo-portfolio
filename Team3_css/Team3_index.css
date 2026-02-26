@@ -1,5 +1,12 @@
 /* Team3_index.css (페이지 전용) */
 
+* {
+  border: 1px solid red;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 /* 제목 */
 .main-title {
   margin: 30px 0 20px;
@@ -88,6 +95,7 @@
   font-size: 14px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
+
 
 /* ========================= */
 /* 반응형 */
