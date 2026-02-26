@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NANOBANANA | 결제하기</title>
+
+  <link rel="stylesheet" href="../Team3_css/Team3_common.css">
+  <link rel="stylesheet" href="../Team3_css/Team3_payment.css">
+</head>
+<body>
+
+  <!-- ✅ 공통 헤더 (스타일은 common.css에서) -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">NANOBANANA</div>
+
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Search" />
+      </div>
+
+      <nav class="nav">
+        <a href="#">등록</a>
+        <a href="#">회원신청</a>
+        <a href="#" class="mypage">
+          <span class="user-icon">👤</span>
+          마이메리
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container pay-wrap">
+    <h1 class="pay-title">결제하기</h1>
+
+    <!-- 예약 정보 -->
+    <section class="section">
+      <div class="section-head">
+        <h2 class="section-title">예약 정보</h2>
+        <span class="section-right">예약 정보</span>
+      </div>
+
+      <div class="reserve-card">
+        <div class="reserve-left">
+          <img class="reserve-thumb"
+               src="https://picsum.photos/260/180?random=41"
+               alt="숙소 이미지" />
+          <div class="reserve-text">
+            <div class="hotel-name">Hotel Bemger</div>
+            <div class="hotel-stars">★★★★★</div>
+            <div class="hotel-sub">날개 (크림인-샹스요)</div>
+            <div class="hotel-rate">5.9 | 8.3</div>
+          </div>
+        </div>
+
+        <div class="reserve-right">
+          <div class="info-grid">
+            <div class="info-item">
+              <div class="info-label">예약기간</div>
+              <div class="info-value">2022.(수) - 2023.(월)</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">인원</div>
+              <div class="info-value">5룩 3</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 할인 혜택 -->
+    <section class="section">
+      <h2 class="section-title">할인 혜택</h2>
+
+      <div class="discount-row">
+        <div class="promo-card">
+          <div class="promo-text">신규 가입 10% 할인!</div>
+        </div>
+
+        <div class="coupon-box">
+          <input type="text" placeholder="쿠폰을 사용하기" aria-label="쿠폰 입력" />
+          <button type="button">적용</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 결제 수단 + 결제 금액 -->
+    <section class="section pay-grid">
+      <div class="pay-method">
+        <h2 class="section-title">결제 수단</h2>
+
+        <div class="method-tabs" role="radiogroup" aria-label="결제 수단 선택">
+          <label class="method-tab">
+            <input type="radio" name="paymethod" checked />
+            <span>신용카드</span>
+          </label>
+
+          <label class="method-tab">
+            <input type="radio" name="paymethod" />
+            <span>간편결제</span>
+          </label>
+
+          <label class="method-tab">
+            <input type="radio" name="paymethod" />
+            <span>현장 결제</span>
+          </label>
+
+          <label class="method-tab">
+            <input type="radio" name="paymethod" />
+            <span>마이카드</span>
+          </label>
+        </div>
+
+        <div class="card-form">
+          <div class="form-row">
+            <input type="text" placeholder="카드 번호" />
+            <input type="text" placeholder="유효 기간" />
+          </div>
+          <p class="help-text">카드 입력이 어렵습니다.</p>
+        </div>
+      </div>
+
+      <aside class="pay-amount">
+        <h2 class="section-title">결제 금액</h2>
+
+        <div class="amount-box">
+          <div class="amount-row">
+            <span>총 상품 금액</span>
+            <b>13,000원</b>
+          </div>
+          <div class="amount-row">
+            <span>할인 금액</span>
+            <b class="minus">-500원</b>
+          </div>
+          <div class="amount-row total">
+            <span>최종 결제 금액</span>
+            <b>15,000원</b>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <button class="pay-btn" type="button">결제하기</button>
+  </main>
+
+</body>
+</html>

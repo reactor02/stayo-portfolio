@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,33 +8,34 @@
   <link rel="stylesheet" href="../Team3_css/Team3_common.css">
   <link rel="stylesheet" href="../Team3_css/Team3_list.css">
 </head>
+
 <body>
 
   <!-- 공통 헤더 (1차 프로젝트 동일 스타일) -->
- <header class="header">
-  <div class="container header-inner">
+  <header class="header">
+    <div class="container header-inner">
 
-    <!-- 로고 -->
-    <div class="logo">NANOBANANA</div>
+      <!-- 로고 -->
+      <div class="logo">NANOBANANA</div>
 
-    <!-- 검색창 -->
-    <div class="search-wrapper">
-      <span class="search-icon">🔍</span>
-      <input type="text" placeholder="Search">
+      <!-- 검색창 -->
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Search">
+      </div>
+
+      <!-- 오른쪽 메뉴 -->
+      <nav class="nav">
+        <a href="#">동행</a>
+        <a href="#">회원신청</a>
+        <a href="#" class="mypage">
+          <span class="user-icon">👤</span>
+          마이페이지
+        </a>
+      </nav>
+
     </div>
-
-    <!-- 오른쪽 메뉴 -->
-    <nav class="nav">
-      <a href="#">동행</a>
-      <a href="#">회원신청</a>
-      <a href="#" class="mypage">
-        <span class="user-icon">👤</span>
-        마이페이지
-      </a>
-    </nav>
-
-  </div>
-</header>
+  </header>
 
   <!-- 상단 검색 정보 -->
   <div class="top-info">
@@ -67,8 +69,16 @@
       </div>
     </aside>
 
+
     <!-- 숙소 리스트 -->
     <section class="hotel-list">
+
+      <!-- ✅ 정렬 탭 -->
+      <div class="sort-bar">
+        <button class="sort-item active">추천순</button>
+        <button class="sort-item">요금 낮은 순</button>
+        <button class="sort-item">평점 높은 순</button>
+      </div>
 
       <!-- 카드 1 -->
       <div class="hotel-card">
@@ -125,4 +135,5 @@
   </div>
 
 </body>
+
 </html>

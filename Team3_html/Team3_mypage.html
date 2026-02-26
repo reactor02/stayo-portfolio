@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NANOBANANA | 마이페이지</title>
+
+  <link rel="stylesheet" href="../Team3_css/Team3_common.css">
+  <link rel="stylesheet" href="../Team3_css/Team3_mypage.css">
+</head>
+<body>
+
+  <!-- ✅ 공통 헤더 (스타일은 common.css) -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">NANOBANANA</div>
+
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Search" />
+      </div>
+
+      <nav class="nav">
+        <a href="#">동행</a>
+        <a href="#">회원신청</a>
+        <a href="#" class="mypage">
+          <span class="user-icon">👤</span>
+          마이메리
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container my-wrap">
+
+    <div class="my-title">
+      <h1>마이페이지 <span class="en">(My Page)</span></h1>
+    </div>
+
+    <section class="my-layout">
+      <!-- ✅ 왼쪽 사이드 메뉴 -->
+      <aside class="my-side" aria-label="마이페이지 메뉴">
+        <button class="side-item active" type="button">
+          <span class="ico">📅</span>
+          예약 내역
+        </button>
+
+        <button class="side-item" type="button">
+          <span class="ico">👤</span>
+          프로필 관리
+        </button>
+
+        <button class="side-item" type="button">
+          <span class="ico">🎫</span>
+          쿠폰/포인트
+        </button>
+
+        <button class="side-item" type="button">
+          <span class="ico">♡</span>
+          관심 숙소
+        </button>
+
+        <button class="side-item" type="button">
+          <span class="ico">❓</span>
+          고객센터
+        </button>
+      </aside>
+
+      <!-- ✅ 오른쪽 컨텐츠 -->
+      <section class="my-content">
+
+        <!-- 최근 예약 내역 -->
+        <div class="block">
+          <div class="block-head">
+            <h2>최근 예약 내역</h2>
+          </div>
+
+          <article class="book-card">
+            <img class="book-thumb" src="https://picsum.photos/400/260?random=81" alt="숙소 이미지" />
+            <div class="book-info">
+              <div class="book-top">
+                <div class="book-name">나노 호텔 서울</div>
+                <span class="badge green">예약 확정</span>
+              </div>
+              <div class="book-date">2026.02.25 - 2026.02.27</div>
+
+              <div class="book-actions">
+                <a class="btn outline" href="#">상세보기</a>
+                <a class="btn solid" href="#">후기 작성</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="book-card">
+            <img class="book-thumb" src="https://picsum.photos/400/260?random=82" alt="숙소 이미지" />
+            <div class="book-info">
+              <div class="book-top">
+                <div class="book-name">나노 호텔 서울</div>
+                <span class="badge green">예약 확정</span>
+              </div>
+              <div class="book-date">2026.02.25 - 2026.02.27</div>
+
+              <div class="book-actions">
+                <a class="btn outline" href="#">상세보기</a>
+                <a class="btn solid" href="#">후기 작성</a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- 쿠폰/포인트 -->
+        <div class="block">
+          <div class="block-head">
+            <h2>나의 쿠폰</h2>
+          </div>
+
+          <div class="mini-cards">
+            <div class="mini-card">
+              <div class="mini-title">나의 포인트</div>
+              <div class="mini-value">0 <span class="unit">P</span></div>
+            </div>
+
+            <div class="mini-card">
+              <div class="mini-title">보유 쿠폰</div>
+              <div class="mini-value">0 <span class="unit">장</span></div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </section>
+
+  </main>
+
+</body>
+</html>

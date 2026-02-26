@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NANOBANANA - 계정 찾기</title>
+
+  <!-- ✅ 1차 프로젝트 공통 -->
+  <link rel="stylesheet" href="../Team3_css/Team3_common.css" />
+  <!-- ✅ 페이지 전용 -->
+  <link rel="stylesheet" href="../Team3_css/Team3_find_account.css" />
+</head>
+<body>
+
+  <!-- ✅ 공통 헤더(스타일은 common.css) -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">NANOBANANA</div>
+
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Search" />
+      </div>
+
+      <nav class="nav">
+        <a href="#">동행</a>
+        <a href="#">회원신청</a>
+        <a href="#" class="mypage">
+          <span class="user-icon">👤</span> 마이페이지
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container find-wrap">
+    <h1 class="find-title">아이디/비밀번호 찾기</h1>
+
+    <div class="content-wrapper">
+      <!-- 사이드바 -->
+      <aside class="sidebar" aria-label="계정 메뉴">
+        <ul class="sidebar-menu">
+          <li class="active">계정 찾기</li>
+          <li>로그인</li>
+          <li>회원가입</li>
+          <li>고객센터</li>
+        </ul>
+      </aside>
+
+      <!-- 메인 -->
+      <section class="main-content">
+        <div class="tabs" role="tablist" aria-label="계정 찾기 탭">
+          <button class="tab-item active" type="button" role="tab" aria-selected="true">
+            아이디 찾기
+          </button>
+          <button class="tab-item" type="button" role="tab" aria-selected="false">
+            비밀번호 찾기
+          </button>
+        </div>
+
+        <form class="find-form">
+          <div class="form-group">
+            <label for="name">이름</label>
+            <input id="name" type="text" placeholder="이름을 입력해주세요" />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">휴대폰 번호</label>
+            <input id="phone" type="text" placeholder="'-' 없이 입력" />
+          </div>
+
+          <button class="find-btn" type="button">아이디 찾기</button>
+        </form>
+
+        <p class="help">
+          가입 시 입력한 정보로 계정을 찾을 수 있어요.
+        </p>
+      </section>
+    </div>
+  </main>
+
+</body>
+</html>
