@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NANOBANANA | 고객센터</title>
+
+  <!-- ✅ 공통 -->
+  <link rel="stylesheet" href="../Team3_css/Team3_common.css" />
+  <!-- ✅ 페이지 전용 -->
+  <link rel="stylesheet" href="../Team3_css/Team3_cs.css" />
+</head>
+<body>
+
+  <!-- ✅ 공통 헤더 (스타일은 common.css) -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">NANOBANANA</div>
+
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="검색, 여행 및 예약 찾기" />
+      </div>
+
+      <nav class="nav">
+        <a href="#">동행</a>
+        <a href="#">회원신청</a>
+        <a href="#" class="mypage">
+          <span class="user-icon">👤</span>
+          마이페이지
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container cs-wrap">
+    <div class="cs-layout">
+      <!-- ✅ 왼쪽 메뉴 -->
+      <aside class="cs-side" aria-label="고객센터 메뉴">
+        <div class="side-card">
+          <div class="side-title">1st Project</div>
+          <ul class="side-menu">
+            <li class="active"><a href="#">공지사항</a></li>
+            <li><a href="#">자주 묻는 질문</a></li>
+            <li><a href="#">1:1 문의</a></li>
+            <li><a href="#">무료환불 상세 구문</a></li>
+            <li class="divider"></li>
+            <li><a href="#">회원/사람</a></li>
+            <li><a href="#">공지사항</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- ✅ 메인 -->
+      <section class="cs-main">
+        <h1 class="cs-title">고객센터</h1>
+
+        <!-- 카테고리 아이콘 영역 -->
+        <section class="panel">
+          <h2 class="panel-title">고객센터</h2>
+
+          <div class="icon-grid">
+            <a class="icon-item" href="#">
+              <span class="icon-box" aria-hidden="true">📅</span>
+              <span class="icon-label">예약/결제</span>
+            </a>
+
+            <a class="icon-item" href="#">
+              <span class="icon-box" aria-hidden="true">↩️</span>
+              <span class="icon-label">취소/환불</span>
+            </a>
+
+            <a class="icon-item" href="#">
+              <span class="icon-box" aria-hidden="true">👤</span>
+              <span class="icon-label">회원정보</span>
+            </a>
+
+            <a class="icon-item" href="#">
+              <span class="icon-box" aria-hidden="true">🧾</span>
+              <span class="icon-label">처시정보</span>
+            </a>
+
+            <a class="icon-item" href="#">
+              <span class="icon-box" aria-hidden="true">🧭</span>
+              <span class="icon-label">예약/주문</span>
+            </a>
+
+            <a class="icon-item" href="#">
+              <span class="icon-box" aria-hidden="true">📄</span>
+              <span class="icon-label">상품/문제</span>
+            </a>
+
+            <a class="icon-item" href="#">
+              <span class="icon-box" aria-hidden="true">🛎️</span>
+              <span class="icon-label">취소/기본</span>
+            </a>
+
+            <a class="icon-item" href="#">
+              <span class="icon-box" aria-hidden="true">💬</span>
+              <span class="icon-label">예약/답글/정보</span>
+            </a>
+
+            <a class="icon-item" href="#">
+              <span class="icon-box" aria-hidden="true">❓</span>
+              <span class="icon-label">충법/환? 후기</span>
+            </a>
+
+            <a class="icon-item" href="#">
+              <span class="icon-box" aria-hidden="true">💭</span>
+              <span class="icon-label">오눌안내</span>
+            </a>
+          </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="panel">
+          <h2 class="panel-title">FAQ</h2>
+
+          <div class="faq">
+            <!-- details/summary 쓰면 JS 없이 아코디언 가능 -->
+            <details class="faq-item">
+              <summary>계정 연동이 예약할 수 있는 걸까요?</summary>
+              <div class="faq-body">
+                계정/연동 상태에 따라 예약 가능 여부가 달라질 수 있어요. 로그인 상태와 회원 정보를 확인해 주세요.
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>아기는 티켓 없이 탑승자 수에 포함될까요?</summary>
+              <div class="faq-body">
+                숙소/상품 정책에 따라 다릅니다. 예약 상세 조건에서 “인원 기준”을 확인해 주세요.
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>환급·대체·거실 등에 인원으로 갈까요?</summary>
+              <div class="faq-body">
+                환불/변경 조건은 상품/숙소마다 다릅니다. 취소/환불 메뉴에서 규정을 확인해 주세요.
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>사회를 예약이 아직할 수 있을까요?</summary>
+              <div class="faq-body">
+                예약 가능 여부는 날짜/재고/정책에 따라 달라요. 원하는 날짜로 다시 조회해 주세요.
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>아니는 어떤에 즉상할 수 있을까요?</summary>
+              <div class="faq-body">
+                결제/예약 관련 문의는 1:1 문의 또는 예약/결제 카테고리에서 확인해 주세요.
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>아파트는 할인인 현장이 보기까요?</summary>
+              <div class="faq-body">
+                쿠폰/포인트 적용 가능 여부는 결제 단계에서 표시됩니다. 쿠폰/포인트 메뉴도 확인해 주세요.
+              </div>
+            </details>
+          </div>
+        </section>
+      </section>
+    </div>
+  </main>
+
+</body>
+</html>
