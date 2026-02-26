@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>고객센터_게스트용</title>
+
+  <link rel="stylesheet" href="../Team3_css/Team3_common.css" />
+  <link rel="stylesheet" href="../Team3_css/Team3_cs.css" />
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">NANOBANANA</div>
+
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Search" />
+      </div>
+
+      <nav class="nav">
+        <a href="#">동행</a>
+        <a href="#">회원신청</a>
+        <a href="#" class="mypage">
+          <span class="user-icon">👤</span> 마이페이지
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container inquiry-wrap">
+
+    <div class="my-title">
+      <h1>고객센터 <span class="en"></span></h1>
+    </div>
+
+    <div class="layout">
+      <!-- 8 좌측 사이드 메뉴(비회원: 아이디찾기 사이드) -->
+      <!-- 사이드바 -->
+      <aside class="sidebar" aria-label="계정 메뉴">
+        <ul class="sidebar-menu">
+          <li>계정 찾기</li>
+          <li>로그인</li>
+          <li>회원가입</li>
+          <li class="active">고객센터</li>
+        </ul>
+      </aside>
+
+      <section class="content">
+        <h2 class="sub-title">자주 묻는 질문 (FAQ)</h2>
+
+        <!-- 10 FAQ 리스트(토글) -->
+        <div class="faq">
+          <details class="faq-item">
+            <summary>예약/결제는 어디서 확인하나요?</summary>
+            <div class="faq-body">
+              마이페이지 &gt; 예약 내역에서 확인할 수 있습니다. 결제 내역은 예약 상세에서 확인하세요.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>취소/환불 규정은 어떻게 되나요?</summary>
+            <div class="faq-body">
+              숙소별 취소 규정이 다를 수 있습니다. 예약 상세의 “취소/환불” 안내를 확인해주세요.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>쿠폰/포인트는 어떻게 사용하나요?</summary>
+            <div class="faq-body">
+              결제 페이지에서 보유 쿠폰/포인트를 적용할 수 있습니다. 일부 상품은 적용이 제한될 수 있어요.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>예약 정보(날짜/인원) 변경이 가능한가요?</summary>
+            <div class="faq-body">
+              변경 가능 여부는 숙소 정책에 따라 달라집니다. 변경이 어렵다면 1:1 문의로 접수해주세요.
+            </div>
+          </details>
+        </div>
+
+        <h2 class="sub-title second">1:1문의</h2>
+
+        <p class="question">
+          여전히 해결이 어려우신가요? 1:1 상담을 원하시면 클릭해 주세요
+        </p>
+
+        <a class="go-board-btn" href="./Team3_inquiry_board.html">1:1문의 바로가기</a>
+      </section>
+    </div>
+
+  </main>
+</body>
+</html>

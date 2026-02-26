@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NANOBANANA | 1:1 문의</title>
+
+    <link rel="stylesheet" href="../Team3_css/Team3_common.css">
+    <link rel="stylesheet" href="../Team3_css/Team3_inquiry.css">
+
+</head>
+
+<body>
+
+    <!-- ✅ 공통 헤더 -->
+    <header class="header">
+        <div class="container header-inner">
+            <div class="logo">NANOBANANA</div>
+
+            <div class="search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" placeholder="Search">
+            </div>
+
+            <nav class="nav">
+                <a href="#">동행</a>
+                <a href="#">회원신청</a>
+                <a href="#" class="mypage">
+                    <span class="user-icon">👤</span> 마이페이지
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ======================= -->
+
+    <main class="container inquiry-wrap">
+
+        <h1 class="page-title">1:1 문의 게시판</h1>
+
+        <div class="my-layout">
+
+            <!-- ✅ 왼쪽 사이드 메뉴 -->
+            <aside class="my-side" aria-label="마이페이지 메뉴">
+                <button class="side-item" type="button">
+                    <span class="ico">📅</span>
+                    예약 내역
+                </button>
+
+                <button class="side-item" type="button">
+                    <span class="ico">👤</span>
+                    프로필 관리
+                </button>
+
+                <button class="side-item" type="button">
+                    <span class="ico">🎫</span>
+                    쿠폰/포인트
+                </button>
+
+                <button class="side-item" type="button">
+                    <span class="ico">♡</span>
+                    관심 숙소
+                </button>
+
+                <button class="side-item active" type="button">
+                    <span class="ico">❓</span>
+                    고객센터
+                </button>
+            </aside>
+
+            <!-- ====================== -->
+
+            <!-- 문의 게시판 -->
+            <section class="my-content">
+
+                <!-- 문의 작성 -->
+                <div class="inquiry-card">
+                    <h2>문의 작성</h2>
+
+                    <div class="form-row">
+                        <input type="text" placeholder="제목을 입력하세요">
+                    </div>
+
+                    <div class="form-row">
+                        <select>
+                            <option>문의 유형 선택</option>
+                            <option>예약 문의</option>
+                            <option>결제 문의</option>
+                            <option>환불 문의</option>
+                            <option>기타 문의</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <textarea placeholder="문의 내용을 입력해주세요"></textarea>
+                    </div>
+
+                    <button class="submit-btn">문의 등록</button>
+                </div>
+
+                <!-- 문의 리스트 -->
+                <div class="inquiry-card">
+                    <h2>내 문의 내역</h2>
+
+                    <div class="inquiry-item">
+                        <div>
+                            <b>예약 취소 문의드립니다</b>
+                            <p>2026-03-01</p>
+                        </div>
+                        <span class="status done">답변완료</span>
+                    </div>
+
+                    <div class="inquiry-item">
+                        <div>
+                            <b>결제 오류가 발생합니다</b>
+                            <p>2026-02-25</p>
+                        </div>
+                        <span class="status wait">답변대기</span>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+
+</body>
+
+</html>

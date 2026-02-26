@@ -1,0 +1,382 @@
+/* =========================
+   search_result.css (통합검색 결과 페이지 전용)
+   ✅ reset/body/container/header는 common.css 사용
+========================= */
+
+.sr-wrap{
+  padding: 28px 0 60px;
+}
+
+/* 상단 */
+.sr-head{
+  padding: 10px 0 18px;
+  border-bottom: 1px solid #e9e9e9;
+  margin-bottom: 14px;
+}
+
+.sr-title{
+  font-size: 34px;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.sr-desc{
+  color: #666;
+  font-size: 14px;
+}
+
+.sr-desc b{
+  color: #1976d2;
+}
+
+/* 탭 */
+.sr-tabs{
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 14px 0 18px;
+}
+
+.sr-tab{
+  border: 1px solid #e6e6e6;
+  background: #fff;
+  padding: 10px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 800;
+  color: #666;
+}
+
+.sr-tab:hover{
+  background: #f7f9fc;
+}
+
+.sr-tab.active{
+  background: #1976d2;
+  border-color: #1976d2;
+  color: #fff;
+}
+
+/* 레이아웃 */
+.sr-layout{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  align-items: start; /* 사이드 늘어짐 방지 */
+}
+
+/* 콘텐츠 카드 */
+.sr-content{
+  min-width: 0;
+}
+
+/* 정렬바 */
+.sr-sort{
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.sort-left{
+  font-size: 13px;
+  color: #666;
+}
+
+.sort-right{
+  display: flex;
+  gap: 14px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 6px;
+}
+
+.sort-item{
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 800;
+  color: #888;
+  position: relative;
+  padding: 6px 2px;
+}
+
+.sort-item.active{
+  color: #1976d2;
+}
+
+.sort-item.active::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-8px;
+  width:100%;
+  height:3px;
+  background:#1976d2;
+  border-radius: 999px;
+}
+
+/* 섹션 공통 */
+.sr-section{
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+  margin-bottom: 16px;
+}
+
+.sec-head{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.sec-head h2{
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.more{
+  font-size: 13px;
+  color: #1976d2;
+  font-weight: 900;
+}
+
+/* 숙소 카드(list 느낌) */
+.hotel-card{
+  display: flex;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  border: 1px solid #eee;
+  transition: transform .2s;
+}
+
+.hotel-card:last-child{
+  margin-bottom: 0;
+}
+
+.hotel-card:hover{
+  transform: translateY(-3px);
+}
+
+.hotel-card img{
+  width: 240px;
+  object-fit: cover;
+}
+
+.hotel-info{
+  flex: 1;
+  padding: 16px;
+}
+
+.hotel-name{
+  font-size: 18px;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.hotel-meta{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.stars{ color: #f59e0b; }
+.rate{ font-weight: 900; color: #333; }
+
+.tags span{
+  background: #eee;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 999px;
+  margin-right: 6px;
+}
+
+/* 가격 박스 */
+.price-box{
+  width: 170px;
+  padding: 16px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.price{
+  font-size: 20px;
+  font-weight: 900;
+  color: #1976d2;
+}
+
+.price-box button{
+  padding: 10px;
+  border: none;
+  background: #1976d2;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.price-box button:hover{
+  background: #145ca3;
+}
+
+/* 공지사항 리스트 */
+.board-list{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.board-item{
+  display: grid;
+  grid-template-columns: 64px 1fr 90px;
+  gap: 10px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  background: #fbfcfe;
+}
+
+.badge{
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.badge.blue{ background: #eaf2ff; color: #1976d2; border: 1px solid #d7e7ff; }
+.badge.gray{ background: #f1f3f5; color: #666; border: 1px solid #e6e6e6; }
+
+.board-title{
+  font-weight: 800;
+  color: #333;
+}
+
+.board-date{
+  text-align: right;
+  font-size: 13px;
+  color: #888;
+}
+
+/* FAQ (토글) */
+.faq{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.faq-item{
+  border: 1px solid #eee;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.faq-item summary{
+  list-style: none;
+  cursor: pointer;
+  padding: 14px;
+  font-weight: 800;
+  padding-right: 42px;
+  position: relative;
+}
+
+.faq-item summary::-webkit-details-marker{ display:none; }
+
+.faq-item summary::after{
+  content:"▾";
+  position:absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color:#888;
+  transition: transform .15s;
+}
+
+.faq-item[open] summary{
+  background:#f7f9fc;
+}
+
+.faq-item[open] summary::after{
+  transform: translateY(-50%) rotate(180deg);
+  color:#1976d2;
+}
+
+.faq-body{
+  padding: 14px;
+  border-top: 1px solid #f1f1f1;
+  color:#666;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* 페이지네이션 */
+.pager{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.pg-btn, .pg-num{
+  border: 1px solid #e6e6e6;
+  background:#fff;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 10px;
+  cursor:pointer;
+  font-weight: 800;
+  color:#555;
+}
+
+.pg-num.active{
+  background:#1976d2;
+  border-color:#1976d2;
+  color:#fff;
+}
+
+/* 반응형 */
+@media (max-width: 980px){
+  .sr-layout{
+    grid-template-columns: 1fr;
+  }
+  .sort-right{
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+@media (max-width: 600px){
+  .sr-title{ font-size: 26px; }
+
+  .hotel-card{
+    flex-direction: column;
+  }
+  .hotel-card img{
+    width: 100%;
+    height: 170px;
+  }
+  .price-box{
+    width: 100%;
+    text-align: left;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
