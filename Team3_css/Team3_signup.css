@@ -1,0 +1,238 @@
+/* =========================
+   signup.css (회원가입 페이지 전용)
+   ✅ reset/body/container/header는 common.css 사용
+========================= */
+
+.join-wrap{
+  padding: 26px 0 60px;
+}
+
+.join-layout{
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 26px;
+  align-items: start;
+}
+
+/* =========================
+   좌측 메뉴
+========================= */
+.side-card{
+  background:#fff;
+  border:1px solid #eee;
+  border-radius:12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+  overflow:hidden;
+}
+
+.side-title{
+  padding: 16px 18px;
+  font-weight: 900;
+  border-bottom: 1px solid #f1f1f1;
+  background:#fbfcfe;
+}
+
+.side-menu{
+  list-style:none;
+  padding: 8px 0;
+}
+
+.side-menu li a{
+  display:block;
+  padding: 12px 18px;
+  font-size: 14px;
+  color:#333;
+  border-left: 4px solid transparent;
+}
+
+.side-menu li a:hover{
+  background:#f7f9fc;
+}
+
+.side-menu li.active a{
+  background:#1976d2;
+  color:#fff;
+  border-left-color:#1976d2;
+  font-weight: 900;
+  border-radius: 8px;
+  margin: 0 10px;
+  padding: 12px 14px;
+}
+
+.side-menu li.divider{
+  height: 1px;
+  background:#f1f1f1;
+  margin: 10px 0;
+}
+
+/* =========================
+   우측 카드
+========================= */
+.join-main{
+  display:flex;
+  justify-content:center;
+}
+
+.join-card{
+  width: min(520px, 100%);
+  background:#fff;
+  border:1px solid #eee;
+  border-radius: 14px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+  padding: 26px 26px 22px;
+}
+
+.join-title{
+  font-size: 22px;
+  font-weight: 900;
+  margin-bottom: 18px;
+}
+
+/* 폼 */
+.join-form{
+  display:flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.row.two{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.field{
+  display:flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label{
+  font-size: 13px;
+  color:#333;
+  font-weight: 800;
+}
+
+.field input{
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid #dedede;
+  border-radius: 10px;
+  outline: none;
+}
+
+.field input:focus{
+  border-color:#1976d2;
+  box-shadow: 0 0 0 4px rgba(25,118,210,0.10);
+}
+
+/* 휴대폰 */
+.phone-box{
+  display:flex;
+  gap: 10px;
+  align-items:center;
+}
+
+.phone-box select{
+  width: 92px;
+  height: 42px;
+  border: 1px solid #dedede;
+  border-radius: 10px;
+  padding: 0 10px;
+  background:#fff;
+  outline:none;
+}
+
+.phone-box select:focus{
+  border-color:#1976d2;
+  box-shadow: 0 0 0 4px rgba(25,118,210,0.10);
+}
+
+.phone-box input{
+  flex: 1;
+}
+
+/* 동의 */
+.agree{
+  margin-top: 4px;
+  display:flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  background:#fbfcfe;
+}
+
+.chk{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  font-size: 13px;
+  color:#444;
+}
+
+.chk input{
+  width: 16px;
+  height: 16px;
+  accent-color: #1976d2;
+}
+
+.chk b{
+  color:#1976d2;
+}
+
+.chk em{
+  color:#888;
+  font-style: normal;
+}
+
+/* 버튼 */
+.join-btn{
+  margin-top: 6px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  background:#1976d2;
+  color:#fff;
+  font-weight: 900;
+  font-size: 16px;
+  cursor:pointer;
+  box-shadow: 0 12px 18px rgba(25,118,210,0.18);
+}
+
+.join-btn:hover{
+  background:#145ca3;
+}
+
+/* 하단 문구 */
+.join-foot{
+  text-align:center;
+  margin-top: 10px;
+  font-size: 13px;
+  color:#666;
+}
+
+.join-foot a{
+  color:#1976d2;
+  font-weight: 900;
+}
+
+/* 반응형 */
+@media (max-width: 980px){
+  .join-layout{
+    grid-template-columns: 1fr;
+  }
+  .join-main{
+    justify-content:flex-start;
+  }
+}
+
+@media (max-width: 600px){
+  .join-card{
+    padding: 20px 16px;
+  }
+  .row.two{
+    grid-template-columns: 1fr;
+  }
+}
