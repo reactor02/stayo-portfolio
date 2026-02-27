@@ -1,0 +1,549 @@
+/* =========================================
+  index.css (메인 페이지 전용)
+  - hero(배경/검색바/카테고리)
+  - 인기 여행지 카드
+  - 인기 숙소 카드
+  - 프로모션 + 혜택
+========================================= */
+
+/* --------- HERO --------- */
+.hero {
+    /* 헤더가 sticky라 겹치는 느낌을 자연스럽게 */
+    padding-top: 0;
+}
+
+/* 히어로 배경 이미지 */
+.hero__overlay {
+    /* 캡처 느낌: 사진 위에 살짝 어둡게 + 따뜻한 톤 */
+    background:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.18) 55%, rgba(0, 0, 0, 0.10) 100%),
+        url("https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1800&q=80");
+    background-size: cover;
+    background-position: center;
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    padding: 72px 0 86px;
+}
+
+/* 히어로 내용 */
+.hero__content {
+    position: relative;
+}
+
+.hero__title {
+    margin: 0;
+    color: #fff;
+    font-family: "Nanum Myeongjo", serif;
+    font-weight: 800;
+    font-size: 64px;
+    line-height: 1.06;
+    letter-spacing: -1px;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.hero__desc {
+    margin: 16px 0 0;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 18px;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* --------- 검색바 --------- */
+.searchbar {
+    margin-top: 34px;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 18px;
+    padding: 16px;
+    display: grid;
+    grid-template-columns: 1.2fr 1.1fr 0.9fr 200px;
+    /* 마지막은 검색 버튼 */
+    gap: 12px;
+    align-items: center;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+}
+
+/* 항목 */
+.searchbar__item {
+    height: 62px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 14px;
+    background: rgba(245, 245, 245, 0.55);
+}
+
+.searchbar__icon {
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    opacity: 0.85;
+}
+
+.searchbar__icon svg {
+    width: 22px;
+    height: 22px;
+    fill: #222;
+}
+
+.searchbar__label {
+    display: block;
+    font-size: 12px;
+    color: #6d6d6d;
+    margin-bottom: 2px;
+}
+
+.searchbar__value {
+    display: block;
+    font-size: 14px;
+    color: #111;
+    font-weight: 600;
+}
+
+/* 검색 버튼(검정 큰 버튼) */
+.searchbar__submit {
+    height: 62px;
+    border-radius: 14px;
+    border: 0;
+    background: #111;
+    color: #fff;
+    cursor: pointer;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    font-weight: 700;
+}
+
+.searchbar__submit:hover {
+    filter: brightness(1.05);
+}
+
+.searchbar__submit-icon svg {
+    width: 18px;
+    height: 18px;
+    fill: #fff;
+}
+
+/* --------- 히어로 카테고리 --------- */
+.hero__categories {
+    background: #f7f5f2;
+    border-bottom: 1px solid #e7e2dc;
+}
+
+.categories {
+    height: 90px;
+    display: flex;
+    align-items: center;
+    gap: 34px;
+}
+
+/* 카테고리 기본 */
+.category {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    padding: 12px 6px;
+    color: #7a7a7a; /* 비활성 색 */
+    position: relative;
+}
+
+/* ===== 라인 아이콘 ===== */
+.category__icon {
+    width: 22px;
+    height: 22px;
+    display: grid;
+    place-items: center;
+}
+
+.category__icon svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5; /* 살짝 더 얇게 하면 더 고급스러움 */
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.75;
+}
+
+/* 활성 */
+.category--active {
+    color: #111;
+    font-weight: 700;
+}
+
+.category--active .category__icon svg {
+    opacity: 1;
+}
+
+/* 활성 밑줄 */
+.category--active::after {
+    content: "";
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 54px;
+    height: 2px;
+    background: #111;
+    border-radius: 999px;
+}
+
+/* --------- 인기 여행지(4개 카드) --------- */
+.grid-dest {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.dest-card {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    height: 340px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+}
+
+.dest-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.02);
+}
+
+.dest-card__overlay {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 18px 18px 16px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.70) 80%);
+    color: #fff;
+}
+
+.dest-card__name {
+    font-family: "Nanum Myeongjo", serif;
+    font-weight: 800;
+    font-size: 26px;
+    letter-spacing: -0.4px;
+}
+
+.dest-card__count {
+    margin-top: 4px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* --------- 인기 숙소 헤더(전체보기) --------- */
+.section-head {
+    margin-bottom: 22px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.section-head__more {
+    font-size: 14px;
+    color: #333;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+/* --------- 숙소 카드 그리드 --------- */
+.grid-stay {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+/* 카드 */
+.stay-card {
+    background: transparent;
+    /* 캡처는 카드 배경 거의 없음 */
+}
+
+.stay-card__media {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 240px;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.10);
+}
+
+.stay-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 배지 */
+.badge {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.badge--dark {
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+}
+
+/* 찜 버튼(오른쪽 위 하트 원형) */
+/* ✅ 찜 버튼(원형) - 찌그러짐 방지 강제 */
+.wish{
+  position: absolute;
+  top: 12px;
+  right: 12px;
+
+  width: 36px !important;
+  height: 36px !important;
+
+  min-width: 36px;
+  min-height: 36px;
+
+  padding: 0 !important;        /* 버튼 기본 패딩 제거 */
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.95);
+
+  display: flex;                /* grid 대신 flex도 OK */
+  align-items: center;
+  justify-content: center;
+
+  line-height: 0;               /* 텍스트 라인높이 영향 제거 */
+  flex: 0 0 36px;               /* flex 레이아웃에서도 크기 고정 */
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* ✅ SVG도 비율 고정 + 찌그러짐 방지 */
+.wish svg{
+  width: 20px !important;
+  height: 20px !important;
+  aspect-ratio: 1 / 1;          /* 최신 브라우저에서 강력 */
+  display: block;
+  fill: #e53935;
+}
+
+/* hover 효과 */
+.wish:hover svg {
+  transform: scale(1.1);
+}
+
+/* 카드 텍스트 영역 */
+.stay-card__body {
+    padding: 12px 2px 0;
+}
+
+.stay-card__title {
+    font-family: "Nanum Myeongjo", serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.2px;
+}
+
+.stay-card__meta {
+    margin-top: 6px;
+    color: #6b6b6b;
+    font-size: 13px;
+}
+
+.stay-card__price {
+    margin-top: 10px;
+    font-weight: 800;
+    font-size: 16px;
+}
+
+.stay-card__price span {
+    color: #6b6b6b;
+    font-weight: 500;
+}
+
+.stay-card__rating {
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.star {
+    color: #111;
+}
+
+.count {
+    font-weight: 600;
+    color: #6b6b6b;
+}
+
+/* --------- 프로모션 배너 --------- */
+.promo {
+    border-radius: 26px;
+    padding: 32px 34px;
+    background: radial-gradient(1200px 220px at 40% 10%, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0)),
+        linear-gradient(90deg, #0e0e0e 0%, #1b1b1b 55%, #0e0e0e 100%);
+    color: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+}
+
+.promo__tag {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.70);
+    margin-bottom: 10px;
+}
+
+.promo__title {
+    font-family: "Nanum Myeongjo", serif;
+    font-weight: 800;
+    font-size: 44px;
+    letter-spacing: -0.6px;
+}
+
+.promo__desc {
+    margin-top: 10px;
+    color: rgba(255, 255, 255, 0.70);
+    font-size: 14px;
+}
+
+.promo__btn {
+    background: rgba(255, 255, 255, 0.92);
+    color: #111;
+    font-weight: 800;
+    padding: 12px 18px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 138px;
+    justify-content: center;
+}
+
+.promo__btn:hover {
+    filter: brightness(0.98);
+}
+
+/* --------- 혜택 3개 --------- */
+.benefits {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.benefit {
+    border: 1px solid #e7e2dc;
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 18px;
+    padding: 18px;
+
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.benefit__icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: #111;
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-weight: 900;
+}
+
+.benefit__title {
+    font-weight: 800;
+}
+
+.benefit__desc {
+    margin-top: 6px;
+    color: #6b6b6b;
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+/* --------- 반응형(메인 전용) --------- */
+@media (max-width: 1100px) {
+    .hero__title {
+        font-size: 52px;
+    }
+
+    .searchbar {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .searchbar__submit {
+        grid-column: 1 / -1;
+    }
+
+    .grid-dest {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-stay {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .hero__overlay {
+        padding: 52px 0 66px;
+    }
+
+    .hero__title {
+        font-size: 40px;
+    }
+
+    .categories {
+        gap: 18px;
+        overflow-x: auto;
+    }
+
+    .category {
+        flex: 0 0 auto;
+    }
+
+    .grid-dest {
+        grid-template-columns: 1fr;
+    }
+
+    .dest-card {
+        height: 280px;
+    }
+
+    .grid-stay {
+        grid-template-columns: 1fr;
+    }
+
+    .promo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+    }
+
+    .promo__title {
+        font-size: 34px;
+    }
+
+    .benefits {
+        grid-template-columns: 1fr;
+    }
+}
