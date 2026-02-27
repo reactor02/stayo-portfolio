@@ -47,7 +47,7 @@ function bind(){
 
     //인풋 창에 적용
     confirmBtn.addEventListener("click", () => {
-        pNumber.value = `사람 ${count}명`
+        pNumber.value = `성인 ${count}명`
         realNumber.value= count
         popup.style.display = "none";
 

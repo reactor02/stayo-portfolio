@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const data = {
+            "contents": []
+        }
+        // AIzaSyBBUuaYGcGmL-r6gliUYwW7G33LTOCeH9w 제미나이 api key
+        // "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent" \
+
+        window.onload = function () {
+            document.querySelector('#ask').addEventListener('click', function () {
+                const prompt = document.querySelector('#prompt').value
+                console.log(prompt)
+
+                const key = 'AIzaSyDxsVRN2J_od8jbxNzdWeb_z7vXXQV8I5g'
+                const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent"
+
+                const xhr = new XMLHttpRequest()
+                xhr.open('post', url)
+
+                xhr.setRequestHeader('x-goog-api-key', key)
+                xhr.setRequestHeader('Content-Type', 'application/json')
+
+                const data = {
+                    "contents": [
+                        {
+                            "parts": [
+                                {
+                                    "text": prompt
+                                }
+                            ]
+                        }
+                    ]
+                }
+
+                xhr.send( JSON.stringify(data))
+
+                xhr.onload = function(){
+                    console.log(xhr.responseText)
+                    const b= JSON.parse(xhr.responseText)
+                    const aa = b.candidates[0].content.parts[0].text
+                    console.log(aa)
+                    document.querySelector('#answer').innerText = aa
+                }
+
+
+
+            })
+
+            document.querySelector('#ask2').addEventListener('click', function () {
+                const prompt = document.querySelector('#prompt').value
+                console.log(prompt)
+
+                const key = 'AIzaSyDxsVRN2J_od8jbxNzdWeb_z7vXXQV8I5g'
+                const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent"
+
+                const xhr = new XMLHttpRequest()
+                xhr.open('post', url)
+
+                xhr.setRequestHeader('x-goog-api-key', key)
+                xhr.setRequestHeader('Content-Type', 'application/json')
+
+                data.contents.push({
+                    "role" : 'user',
+                    "parts": [{
+                            "text": prompt
+                        }
+                    ]})
+
+                xhr.send( JSON.stringify(data))
+
+                xhr.onload = function(){
+                    console.log(xhr.responseText)
+
+                    data.contents.push({
+                    "role" : 'model',
+                    "parts": [{
+                            "text": xhr.responseText
+                        }
+                    ]})
+
+                    const b= JSON.parse(xhr.responseText)
+                    const aa = b.candidates[0].content.parts[0].text
+                    console.log(aa)
+                    document.querySelector('#answer').innerText = aa
+                }
+
+
+
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <textarea id="prompt"></textarea>
+    <br><input type="button" id="ask" value="질문하기">
+    <br><input type="button" id="ask2" value="mutiturn">
+    <div id="answer"></div>
+</body>
+
+</html>
