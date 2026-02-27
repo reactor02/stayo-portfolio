@@ -16,11 +16,11 @@ function bind(){
     
 
     pNumber.addEventListener("click", (e) => {
-    e.stopPropagation(); // 🔥 중요
+    e.stopPropagation(); 
     popup.style.display = "block";
     });
 
-    // 팝업 내부 클릭시 닫히는거 방지
+    // 팝업 클릭시 닫히는거 방지
     popup.addEventListener("click", (e) => {
     e.stopPropagation();
     });

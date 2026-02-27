@@ -2,23 +2,22 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>예약 시스템 날짜 선택</title>
     <link rel="stylesheet" href="wangjaeDate.css">
 </head>
 <body>
     <div class="booking-wrapper">
         <div class="date-box">
-            <input type="text" id="text1" name="checkin" placeholder="checkin" readonly>
-            <input type="date" id="date1" class="overlay-date">
+            <input type="text" id="text1" placeholder="checkin" disabled="disabled">
+            <input type="date" id="date1" class="hidden-date">
             <span class="tooltip">checkin</span>
         </div>
 
         <div class="divider"></div>
 
         <div class="date-box">
-            <input type="text" id="text2" name="checkout" placeholder="checkout" readonly>
-            <input type="date" id="date2" class="overlay-date">
+            <input type="text" id="text2" placeholder="checkout" disabled="disabled">
+            <input type="date" id="date2" class="hidden-date">
             <span class="tooltip">checkout</span>
         </div>
     </div>

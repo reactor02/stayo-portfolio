@@ -4,18 +4,24 @@ window.onload = function() {
     const date1 = document.getElementById("date1");
     const date2 = document.getElementById("date2");
 
-    // 오늘 날짜 이전 선택 방지
+    // 오늘 날짜 제한
     const today = new Date().toISOString().split('T')[0];
     date1.min = today;
     date2.min = today;
 
-    // 날짜 선택 시 텍스트 상자에 값 복사
+    // 체크인 날짜 선택 시 텍스트 업데이트 및 체크아웃 최소날짜 설정
     date1.addEventListener("input", function() {
-        text1.value = date1.value;
-        date2.min = date1.value; // 체크아웃 최소날짜 제한
+        text1.value = this.value;
+        date2.min = this.value;
+        text1.remove(); 
+        date1.style.color = 'black'
     });
 
+    // 체크아웃 날짜 선택 시 텍스트 업데이트
     date2.addEventListener("input", function() {
-        text2.value = date2.value;
+        text2.value = this.value;
+        text2.remove()
+        date2.style.color = 'black'
     });
 };
+
