@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="../Team3_css/Team3_common.css" />
   <!-- ✅ 페이지 전용 -->
   <link rel="stylesheet" href="../Team3_css/Team3_find_account.css" />
+  <script src="../Team3_js\Team3_find_account.js"></script>
 </head>
 <body>
 
@@ -40,26 +41,23 @@
       <aside class="sidebar" aria-label="계정 메뉴">
         <ul class="sidebar-menu">
           <li class="active">계정 찾기</li>
-          <li>로그인</li>
-          <li>회원가입</li>
-          <li>고객센터</li>
+          
+          <li id="user-service">고객센터</li>
         </ul>
       </aside>
 
       <!-- 메인 -->
       <section class="main-content">
         <div class="tabs" role="tablist" aria-label="계정 찾기 탭">
-          <button class="tab-item active" type="button" role="tab" aria-selected="true">
+          <button id="tab-id" class="tab-item active" type="button" role="tab" aria-selected="true">
             아이디 찾기
           </button>
-          <button class="tab-item" type="button" role="tab" aria-selected="false">
-            비밀번호 찾기
-          </button>
+          <a href="Team3_find_pw.html" id="tab-pw" class="tab-item" role="tab" aria-selected="false">비밀번호 찾기</a>
         </div>
 
         <form class="find-form">
           <div class="form-group">
-            <label for="name">이름</label>
+            <label for="name" id="name-label" >이름</label>
             <input id="name" type="text" placeholder="이름을 입력해주세요" />
           </div>
 
@@ -67,8 +65,10 @@
             <label for="phone">휴대폰 번호</label>
             <input id="phone" type="text" placeholder="'-' 없이 입력" />
           </div>
+          <div class="i-msg">휴대폰 번호는 '-'없이 10~11자리로 입력해주세요</div>
 
           <button class="find-btn" type="button">아이디 찾기</button>
+          <p class="error-msg hide"></p>
         </form>
 
         <p class="help">

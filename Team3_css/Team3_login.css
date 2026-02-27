@@ -81,7 +81,7 @@
 
 /* 소셜 버튼 */
 .social-btn {
-  width: 100%;
+  width: 200%;
   padding: 10px;
   border: none;
   border-radius: 6px;
@@ -109,6 +109,41 @@
 .signup-link a {
   color: #1976d2;
   text-decoration: none;
+}
+#error-msg {
+  color: red;
+}
+
+.hide {
+  display: none;
+}
+
+/* 모달 배경 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 모달 내용 */
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+}
+
+/* 숨김용 */
+.hide {
+  display: none;
 }
 
 /* 반응형 */

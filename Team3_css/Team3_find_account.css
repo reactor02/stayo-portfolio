@@ -172,6 +172,15 @@
   color: #8a8a8a;
   font-size: 13px;
 }
+.error-msg {
+  color: red;
+}
+.hide {
+  display: none;
+}
+.i-msg {     /* 휴대폰 번호 ㅁㅁㅁ 10~11자리 나오는 안내메시지를 위한 css*/
+  color: blue
+}
 
 /* 반응형 */
 @media (max-width: 980px){
