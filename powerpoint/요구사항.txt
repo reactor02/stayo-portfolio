@@ -1,0 +1,32 @@
+1페이지
+["객체 지향 프로젝트"]
+프로젝트명 숙박 예약사이트 구현
+
+2페이지
+팀 구성도 
+팀장 박민호, 
+팀원 이왕재, 이용상, 강정석, 이용상
+
+3페이지
+만든 동기
+적당히 채워줘
+
+4페이지
+개발환경
+ 
+
+OS : windows 10
+IDE : vscode
+형상관리 : git, github, source tree
+skill : 내 기술
+html, css, javascript, ajax, flex, 공공데이터, ai 연동, 메세지 발송(디스코드), jQuery
+
+그 외의 페이지
+
+스케줄
+
+
+UML 유스케이스
+
+스토리보드 sample
+화면 스크린샷 sample
