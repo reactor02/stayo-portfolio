@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NANOBANANA | 회원가입</title>
+
+  <link rel="stylesheet" href="../Team3_css/Team3_common.css">
+  <link rel="stylesheet" href="../Team3_css/Team3_signup.css">
+</head>
+<body>
+
+  <!-- ✅ 공통 헤더 (스타일은 common.css) -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">NANOBANANA</div>
+
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="검색, 여행 및 예약 찾기" />
+      </div>
+
+      <nav class="nav">
+        <a href="#">동행</a>
+        <a href="#">회원신청</a>
+        <a href="#" class="mypage">
+          <span class="user-icon">👤</span>
+          마이페이지
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container join-wrap">
+    <div class="join-layout">
+
+      <!-- ✅ 왼쪽 메뉴 -->
+      <aside class="join-side" aria-label="가입/로그인 메뉴">
+        <div class="side-card">
+          <div class="side-title">1st Project</div>
+
+          <ul class="side-menu">
+            <li class="active"><a href="#">회원가입</a></li>
+            <li><a href="#">로그인</a></li>
+            <li class="divider"></li>
+            <li><a href="#">고객센터</a></li>
+            <li><a href="#">회원가입</a></li>
+            <li><a href="#">비밀번호 확인</a></li>
+            <li><a href="#">휴대폰 번호</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- ✅ 회원가입 카드 -->
+      <section class="join-main">
+        <div class="join-card">
+          <h1 class="join-title">회원가입</h1>
+
+          <form class="join-form">
+            <div class="row two">
+              <label class="field">
+                <span class="label">성</span>
+                <input type="text" placeholder="성" />
+              </label>
+
+              <label class="field">
+                <span class="label">이름</span>
+                <input type="text" placeholder="이름" />
+              </label>
+            </div>
+
+            <label class="field">
+              <span class="label">아이디</span>
+              <input type="text" placeholder="아이디" />
+            </label>
+
+            <div class="row two">
+              <label class="field">
+                <span class="label">비밀번호</span>
+                <input type="password" placeholder="비밀번호" />
+              </label>
+
+              <label class="field">
+                <span class="label">비밀번호 확인</span>
+                <input type="password" placeholder="비밀번호 확인" />
+              </label>
+            </div>
+
+            <label class="field">
+              <span class="label">생년월일</span>
+              <input type="text" placeholder="YYYY-MM-DD" />
+            </label>
+
+            <div class="row phone">
+              <label class="field">
+                <span class="label">휴대폰 번호</span>
+                <div class="phone-box">
+                  <select aria-label="국가번호">
+                    <option>+82</option>
+                    <option>+81</option>
+                    <option>+1</option>
+                  </select>
+                  <input type="text" placeholder="휴대폰 번호" />
+                </div>
+              </label>
+            </div>
+
+            <label class="field">
+              <span class="label">이메일</span>
+              <input type="email" placeholder="이메일" />
+            </label>
+
+            <div class="agree">
+              <label class="chk">
+                <input type="checkbox" />
+                <span>서비스 이용약관 동의 <b>(필수)</b></span>
+              </label>
+              <label class="chk">
+                <input type="checkbox" />
+                <span>개인정보 수집 및 이용 동의 <b>(필수)</b></span>
+              </label>
+              <label class="chk">
+                <input type="checkbox" />
+                <span>만 14세 이상 확인 <b>(필수)</b></span>
+              </label>
+              <label class="chk">
+                <input type="checkbox" />
+                <span>마케팅 정보 수신 동의 <em>(선택)</em></span>
+              </label>
+            </div>
+
+            <button class="join-btn" type="button">가입하기</button>
+
+            <p class="join-foot">
+              이미 계정이 있으신가요?
+              <a href="#">로그인</a>
+            </p>
+          </form>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HELLOWORLD</title>
+  <link rel="stylesheet" href="../Team3_css/Team3_common.css">
+  <link rel="stylesheet" href="../Team3_css/Team3_index.css">
+</head>
+
+<body>
+
+  <!-- 공통 헤더 (1차 프로젝트 동일 스타일) -->
+  <header class="header">
+    <div class="container header-inner">
+
+      <!-- 로고 -->
+      <div class="logo">NANOBANANA</div>
+
+      <!-- 검색창 -->
+      <form action="" class="search-wrapper">
+        <input type="text" placeholder="Search">
+        <span class="search-icon">🔍</span>
+      </form>
+      
+
+      <!-- 오른쪽 메뉴 -->
+      <nav class="nav">
+      <a href="#"></a>
+      <a href="#"><img src="#" alt="찜목록"></a>
+      <a href="#"><img src="#" alt="장바구니"></a>
+      <a href="#">회원가입</a>
+      <a href="#">로그인</a>
+      <a href="#" class="mypage">
+        <span class="user-icon">👤</span>
+        마이페이지/로그인 입력시 보여질 거
+      </a>
+    </nav>
+
+    </div>
+  </header>
+
+  <!-- 메인 -->
+  <main class="container">
+
+    <h1 class="main-title">HELLOWORLD</h1>
+
+    <!-- 검색 필터 -->
+    <form action="#" class="filter-box">
+      <input type="text" list="location">
+      <datalist id="location" placeholder="목적지">
+                <option value="가나"></option>
+                <option value="가봉"></option>
+                <option value="한국"></option>
+                <option value="스위스"></option>
+      </datalist><br>
+      <input type="text" placeholder="날짜 (체크인-체크아웃)" readonly="readonly">
+      <input type="date" value="2022-03-01"><br>
+      <input type="number" placeholder="인원">
+      <button type="submit">검색</button>
+    </form>
+
+    <!-- 인기 숙소 -->
+    <section>
+      <h2>인기 숙소</h2>
+      <div class="card-grid">
+        <div class="card">
+          <img src="https://picsum.photos/400/250?1">
+          <div class="card-body">
+            <h3>Hotel Bemger</h3>
+            <div class="price">₩13,000</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="https://picsum.photos/400/250?2">
+          <div class="card-body">
+            <h3>Hotel Scomtian</h3>
+            <div class="price">₩12,000</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="https://picsum.photos/400/250?3">
+          <div class="card-body">
+            <h3>Hotel Scomtian</h3>
+            <div class="price">₩15,500</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="https://picsum.photos/400/250?4">
+          <div class="card-body">
+            <h3>Hotel Semitenl</h3>
+            <div class="price">₩22,000</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 세일 -->
+    <section>
+      <h2>세일 / 프로모션</h2>
+      <div class="card-grid">
+        <div class="card sale">
+          <span class="badge">SALE</span>
+          <img src="https://picsum.photos/400/250?5">
+          <div class="card-body">
+            <h3>Hotel Scomtian</h3>
+            <div class="price">₩10,000</div>
+          </div>
+        </div>
+
+        <div class="card sale">
+          <span class="badge">SALE</span>
+          <img src="https://picsum.photos/400/250?6">
+          <div class="card-body">
+            <h3>Hotel Scomtlan</h3>
+            <div class="price">₩9,500</div>
+          </div>
+        </div>
+
+        <div class="card sale">
+          <span class="badge">SALE</span>
+          <img src="https://picsum.photos/400/250?7">
+          <div class="card-body">
+            <h3>Hotel Scomtian</h3>
+            <div class="price">₩11,000</div>
+          </div>
+        </div>
+
+        <div class="card sale">
+          <span class="badge">SALE</span>
+          <img src="https://picsum.photos/400/250?8">
+          <div class="card-body">
+            <h3>Hotel Sccmtian</h3>
+            <div class="price">₩12,000</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 프로모션 배너 -->
+  <a href="#" class="floating-banner">
+    신규 가입<br>
+    <strong>특지 10% 할인!</strong>
+  </a>
+
+  <footer>
+    임시용입니다
+  </footer>
+
+</body>
+
+</html>

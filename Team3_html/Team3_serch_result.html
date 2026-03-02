@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NANOBANANA | 통합검색 결과</title>
+
+  <!-- ✅ 공통 -->
+  <link rel="stylesheet" href="../Team3_css/Team3_common.css" />
+  <!-- ✅ 페이지 전용 -->
+  <link rel="stylesheet" href="../Team3_css/Team3_serch_result.css" />
+</head>
+<body>
+
+  <!-- ✅ 공통 헤더 (스타일은 common.css) -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">NANOBANANA</div>
+
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" value="서울" placeholder="Search" />
+      </div>
+
+      <nav class="nav">
+        <a href="#">동행</a>
+        <a href="#">회원신청</a>
+        <a href="#" class="mypage">
+          <span class="user-icon">👤</span> 마이페이지
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container sr-wrap">
+    <!-- 상단 요약 -->
+    <div class="sr-head">
+      <h1 class="sr-title">통합검색 결과</h1>
+      <p class="sr-desc">
+        <b>“서울”</b> 검색 결과 <b>24</b>건
+      </p>
+    </div>
+
+    <!-- 탭 -->
+    <div class="sr-tabs" role="tablist" aria-label="통합검색 탭">
+      <button class="sr-tab active" type="button">전체</button>
+      <button class="sr-tab" type="button">숙소</button>
+      <button class="sr-tab" type="button">공지사항</button>
+      <button class="sr-tab" type="button">FAQ</button>
+    </div>
+
+    <div class="sr-layout">
+      <!-- 결과 -->
+      <section class="sr-content">
+        <!-- 정렬바 -->
+        <div class="sr-sort">
+          <div class="sort-left">숙소 <b>18</b> · 공지사항 <b>3</b> · FAQ <b>3</b></div>
+          <div class="sort-right">
+            <button class="sort-item active" type="button">추천순</button>
+            <button class="sort-item" type="button">요금 낮은 순</button>
+            <button class="sort-item" type="button">평점 높은 순</button>
+          </div>
+        </div>
+
+        <!-- 섹션: 숙소 결과 -->
+        <div class="sr-section">
+          <div class="sec-head">
+            <h2>숙소</h2>
+            <a href="#" class="more">더보기 &gt;</a>
+          </div>
+
+          <article class="hotel-card">
+            <img src="https://picsum.photos/360/240?random=301" alt="숙소" />
+            <div class="hotel-info">
+              <div class="hotel-name">서울 시티 호텔</div>
+              <div class="hotel-meta">
+                <span class="stars">★★★★★</span>
+                <span class="rate">4.8</span>
+                <span class="loc">서울 · 강남</span>
+              </div>
+              <div class="tags">
+                <span>#무료취소</span><span>#조식</span><span>#주차</span>
+              </div>
+            </div>
+            <div class="price-box">
+              <div class="price">89,000원</div>
+              <button type="button">예약하기</button>
+            </div>
+          </article>
+
+          <article class="hotel-card">
+            <img src="https://picsum.photos/360/240?random=302" alt="숙소" />
+            <div class="hotel-info">
+              <div class="hotel-name">나노 호텔 서울</div>
+              <div class="hotel-meta">
+                <span class="stars">★★★★☆</span>
+                <span class="rate">4.4</span>
+                <span class="loc">서울 · 홍대</span>
+              </div>
+              <div class="tags">
+                <span>#가성비</span><span>#역세권</span>
+              </div>
+            </div>
+            <div class="price-box">
+              <div class="price">59,000원</div>
+              <button type="button">예약하기</button>
+            </div>
+          </article>
+        </div>
+
+        <!-- 섹션: 공지사항 -->
+        <div class="sr-section">
+          <div class="sec-head">
+            <h2>공지사항</h2>
+            <a href="#" class="more">더보기 &gt;</a>
+          </div>
+
+          <div class="board-list">
+            <a class="board-item" href="#">
+              <span class="badge blue">공지</span>
+              <span class="board-title">[서울] 일부 지역 서비스 점검 안내</span>
+              <span class="board-date">2026-02-20</span>
+            </a>
+            <a class="board-item" href="#">
+              <span class="badge gray">안내</span>
+              <span class="board-title">예약/환불 규정 변경 안내</span>
+              <span class="board-date">2026-02-10</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 섹션: FAQ -->
+        <div class="sr-section">
+          <div class="sec-head">
+            <h2>FAQ</h2>
+            <a href="#" class="more">더보기 &gt;</a>
+          </div>
+
+          <div class="faq">
+            <details class="faq-item">
+              <summary>“서울” 지역 예약 가능한 숙소는 어떻게 찾나요?</summary>
+              <div class="faq-body">
+                검색어 입력 후 필터(가격/평점/유형)를 적용하면 원하는 조건으로 좁혀볼 수 있어요.
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>예약 후 날짜 변경이 가능한가요?</summary>
+              <div class="faq-body">
+                숙소 정책에 따라 달라요. 예약 상세에서 변경 가능 여부를 확인해주세요.
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <!-- 페이지네이션 -->
+        <div class="pager">
+          <button type="button" class="pg-btn">이전</button>
+          <button type="button" class="pg-num active">1</button>
+          <button type="button" class="pg-num">2</button>
+          <button type="button" class="pg-num">3</button>
+          <button type="button" class="pg-btn">다음</button>
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+</body>
+</html>

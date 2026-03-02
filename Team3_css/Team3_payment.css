@@ -1,0 +1,330 @@
+/* =========================
+   payment.css (결제 페이지 전용)
+   ✅ reset/body/container/header는 common.css가 처리
+========================= */
+
+.pay-wrap{
+  padding: 30px 0 50px;
+}
+
+.pay-title{
+  font-size: 34px;
+  font-weight: bold;
+  margin: 12px 0 22px;
+}
+
+/* 섹션 공통 */
+.section{
+  margin-bottom: 22px;
+}
+
+.section-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  margin-bottom: 10px;
+}
+
+.section-title{
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.section-right{
+  font-size: 13px;
+  color: #777;
+}
+
+/* 예약 정보 카드 */
+.reserve-card{
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 16px;
+  display:flex;
+  justify-content:space-between;
+  gap: 18px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+}
+
+.reserve-left{
+  display:flex;
+  gap: 14px;
+  min-width: 0;
+  flex: 1;
+}
+
+.reserve-thumb{
+  width: 150px;
+  height: 92px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.reserve-text{
+  min-width: 0;
+}
+
+.hotel-name{
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.hotel-stars{
+  color: #f59e0b;
+  letter-spacing: 1px;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.hotel-sub{
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+.hotel-rate{
+  font-size: 12px;
+  color: #888;
+}
+
+.reserve-right{
+  flex: 1;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+}
+
+.info-grid{
+  width: 100%;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-left: 1px solid #eee;
+  padding-left: 16px;
+}
+
+.info-item{
+  padding: 8px 10px;
+}
+
+.info-label{
+  font-size: 12px;
+  color:#777;
+  margin-bottom: 6px;
+}
+
+.info-value{
+  font-weight: bold;
+  color:#333;
+}
+
+/* 할인 혜택 */
+.discount-row{
+  display:flex;
+  gap: 14px;
+  align-items:center;
+}
+
+.promo-card{
+  flex: 1;
+  min-height: 58px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #f08a2f, #f0b15b);
+  display:flex;
+  align-items:center;
+  padding: 0 18px;
+  color:#fff;
+  font-weight: bold;
+}
+
+.coupon-box{
+  flex: 1.2;
+  display:flex;
+  gap: 10px;
+  padding: 10px;
+  border: 2px dashed #d8dde6;
+  border-radius: 10px;
+  background: #fafbfc;
+}
+
+.coupon-box input{
+  flex: 1;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+  padding: 10px 12px;
+  outline: none;
+  background:#fff;
+}
+
+.coupon-box button{
+  width: 90px;
+  border: none;
+  border-radius: 8px;
+  background: #6c757d;
+  color:#fff;
+  cursor:pointer;
+}
+
+.coupon-box button:hover{
+  background:#5a6168;
+}
+
+/* 결제 수단 + 결제 금액 */
+.pay-grid{
+  display:grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 18px;
+  align-items:start;
+}
+
+.pay-method,
+.pay-amount{
+  background:#fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+}
+
+/* 탭(라디오) */
+.method-tabs{
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  margin-bottom: 14px;
+}
+
+.method-tab{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  background:#f8fafc;
+  cursor:pointer;
+  user-select:none;
+}
+
+.method-tab input{
+  accent-color: #1976d2;
+}
+
+.method-tab:has(input:checked){
+  border-color:#1976d2;
+  background:#eaf2ff;
+}
+
+/* 카드 입력 */
+.card-form .form-row{
+  display:flex;
+  gap: 10px;
+}
+
+.card-form input{
+  flex: 1;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+  padding: 10px 12px;
+  outline:none;
+}
+
+.help-text{
+  margin-top: 10px;
+  font-size: 12px;
+  color:#9aa0a6;
+}
+
+/* 결제 금액 박스 */
+.amount-box{
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 14px;
+  margin-top: 12px;
+}
+
+.amount-row{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color:#444;
+}
+
+.amount-row.total{
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed #dcdcdc;
+  font-size: 16px;
+}
+
+.minus{
+  color:#d84a4a;
+}
+
+/* 하단 결제 버튼 */
+.pay-btn{
+  width: 100%;
+  margin-top: 10px;
+  height: 56px;
+  border: none;
+  border-radius: 10px;
+  background: #1976d2;
+  color:#fff;
+  font-size: 18px;
+  font-weight: bold;
+  cursor:pointer;
+  box-shadow: 0 10px 18px rgba(25,118,210,0.18);
+}
+
+.pay-btn:hover{
+  background:#145ca3;
+}
+
+/* 반응형 */
+@media (max-width: 980px){
+  .reserve-card{
+    flex-direction: column;
+  }
+  .reserve-right{
+    justify-content:flex-start;
+  }
+  .info-grid{
+    border-left: 0;
+    padding-left: 0;
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+  }
+
+  .pay-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px){
+  .pay-title{
+    font-size: 28px;
+  }
+  .reserve-thumb{
+    width: 120px;
+    height: 78px;
+  }
+  .discount-row{
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .coupon-box{
+    flex-direction: column;
+  }
+  .coupon-box button{
+    width: 100%;
+    height: 42px;
+  }
+  .card-form .form-row{
+    flex-direction: column;
+  }
+}

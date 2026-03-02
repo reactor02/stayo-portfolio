@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STAYO</title>
+
+    <!-- =========================================
+    폰트(캡처 느낌: 제목은 명조/세리프, 본문은 산세리프)
+    - 필요하면 바꿔도 됨
+  ========================================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- 공통 CSS -->
+    <link rel="stylesheet" href="../css/T3_2nd_common.css" />
+    <!-- 페이지 전용 CSS -->
+    <link rel="stylesheet" href="../css/T3_2nd_index.css" />
+</head>
+
+<body>
+    <!-- =========================================
+    1) 헤더(캡처 상단 고정 느낌)
+    - 왼쪽: 로고
+    - 가운데: 메뉴
+    - 오른쪽: 아이콘(지구, 하트) + 로그인 버튼
+  ========================================== -->
+    <header class="header">
+        <div class="container header__inner">
+            <!-- 로고 -->
+            <a href="#" class="logo" aria-label="STAYO 홈">STAYO</a>
+
+            <!-- 가운데 메뉴 -->
+            <nav class="gnb" aria-label="주요 메뉴">
+                <a href="#" class="gnb__link">숙소</a>
+                <a href="#" class="gnb__link">항공권</a>
+                <a href="#" class="gnb__link">패키지</a>
+                <a href="#" class="gnb__link">액티비티</a>
+                <a href="#" class="gnb__link">렌터카</a>
+            </nav>
+
+            <!-- 오른쪽 영역 -->
+            <div class="header__right">
+                <!-- 지구 아이콘 -->
+                <button class="icon-btn" type="button" aria-label="언어/지역">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.9 9h-3.2a15.8 15.8 0 00-1.2-6A8.1 8.1 0 0119.9 11zM12 4c.9 1.2 1.8 3.3 2.3 7H9.7C10.2 7.3 11.1 5.2 12 4zM4.1 13h3.2a15.8 15.8 0 001.2 6A8.1 8.1 0 014.1 13zm0-2a8.1 8.1 0 014.4-6 15.8 15.8 0 00-1.2 6H4.1zM12 20c-.9-1.2-1.8-3.3-2.3-7h4.6c-.5 3.7-1.4 5.8-2.3 7zm3.5-1a15.8 15.8 0 001.2-6h3.2a8.1 8.1 0 01-4.4 6z" />
+                    </svg>
+                </button>
+
+                <!-- 하트 아이콘 -->
+                <button class="icon-btn" type="button" aria-label="찜 목록">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+                                            2 6 4 4 6.5 4
+                                            8.04 4 9.54 4.81 10.4 6.09
+                                            11.26 4.81 12.76 4 14.3 4
+                                            16.8 4 18.8 6 18.8 8.5
+                                            c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                    </svg>
+                </button>
+
+                <!-- 로그인 버튼 -->
+                <a href="#" class="btn btn--login">
+                    <span class="btn__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 12a4.5 4.5 0 10-4.5-4.5A4.5 4.5 0 0012 12zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z" />
+                        </svg>
+                    </span>
+                    로그인
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- =========================================
+      2) 히어로(큰 배경 이미지 + 카피 + 검색바)
+      - 캡처처럼 왼쪽에 텍스트, 하단에 둥근 검색바
+    ========================================== -->
+        <section class="hero">
+            <!-- 배경 이미지는 CSS에서 넣었음 -->
+            <div class="hero__overlay">
+                <div class="container hero__content">
+                    <h1 class="hero__title">
+                        당신만의 완벽한<br />
+                        여행을 시작하세요
+                    </h1>
+                    <p class="hero__desc">
+                        전 세계 100만개 이상의 숙소에서 최고의 가격을 만나보세요
+                    </p>
+
+                    <!-- 검색바(실제 기능 없이 UI용) -->
+                    <form class="searchbar" action="#" method="get" aria-label="숙소 검색">
+                        <!-- 목적지 -->
+                        <div class="searchbar__item">
+                            <div class="searchbar__icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2a7 7 0 00-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 00-7-7zm0 9.3A2.3 2.3 0 119.7 9 2.3 2.3 0 0112 11.3z" />
+                                </svg>
+                            </div>
+                            <div class="searchbar__text">
+                                <span class="searchbar__label">목적지</span>
+                                <span class="searchbar__value">어디로 떠나시나요?</span>
+                            </div>
+                        </div>
+
+                        <!-- 체크인/체크아웃 -->
+                        <div class="searchbar__item">
+                            <div class="searchbar__icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M7 2h2v2h6V2h2v2h3v18H2V4h5V2zm15 8H2v10h20V10z" />
+                                </svg>
+                            </div>
+                            <div class="searchbar__text">
+                                <span class="searchbar__label">체크인 - 체크아웃</span>
+                                <span class="searchbar__value">날짜 선택</span>
+                            </div>
+                        </div>
+
+                        <!-- 인원 -->
+                        <div class="searchbar__item">
+                            <div class="searchbar__icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 12a4 4 0 10-4-4 4 4 0 004 4zm-7 9v-1c0-3 4-5 7-5s7 2 7 5v1z" />
+                                </svg>
+                            </div>
+                            <div class="searchbar__text">
+                                <span class="searchbar__label">인원</span>
+                                <span class="searchbar__value">성인 2명</span>
+                            </div>
+                        </div>
+
+                        <!-- 검색 버튼(캡처처럼 검정 큰 버튼) -->
+                        <button class="searchbar__submit" type="submit">
+                            <span class="searchbar__submit-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M10 2a8 8 0 105 14l5 5 2-2-5-5a8 8 0 00-7-12zm0 2a6 6 0 110 12 6 6 0 010-12z" />
+                                </svg>
+                            </span>
+                            검색
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- =========================================
+        3) 카테고리 탭(캡처 하단 아이콘 라인)
+      ========================================== -->
+            <div class="hero__categories">
+                <div class="container categories">
+                    <!-- 호텔 (active) -->
+                    <a class="category category--active" href="#">
+                        <span class="category__icon" aria-hidden="true">
+                            <!-- hotel -->
+                            <svg viewBox="0 0 24 24">
+                                <path d="M3 20V6a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v14" />
+                                <path d="M3 12h13" />
+                                <path d="M7 8h2" />
+                                <path d="M7 16h2" />
+                                <path d="M11 8h2" />
+                                <path d="M11 16h2" />
+                                <path d="M16 10h3a2 2 0 0 1 2 2v8" />
+                                <path d="M16 20h5" />
+                            </svg>
+                        </span>
+                        <span class="category__label">호텔</span>
+                    </a>
+
+                    <!-- 아파트 -->
+                    <a class="category" href="#">
+                        <span class="category__icon" aria-hidden="true">
+                            <!-- building -->
+                            <svg viewBox="0 0 24 24">
+                                <path d="M3 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16" />
+                                <path d="M7 7h2" />
+                                <path d="M7 11h2" />
+                                <path d="M7 15h2" />
+                                <path d="M11 7h2" />
+                                <path d="M11 11h2" />
+                                <path d="M11 15h2" />
+                                <path d="M17 9h2a2 2 0 0 1 2 2v10" />
+                                <path d="M17 21h4" />
+                            </svg>
+                        </span>
+                        <span class="category__label">아파트</span>
+                    </a>
+
+                    <!-- 해변 -->
+                    <a class="category" href="#">
+                        <span class="category__icon" aria-hidden="true">
+                            <!-- waves -->
+                            <svg viewBox="0 0 24 24">
+                                <path d="M3 15c1.5 1 3.5 1 5 0s3.5-1 5 0 3.5 1 5 0 3.5-1 5 0" />
+                                <path d="M3 19c1.5 1 3.5 1 5 0s3.5-1 5 0 3.5 1 5 0 3.5-1 5 0" />
+                                <path d="M3 11c1.5 1 3.5 1 5 0s3.5-1 5 0 3.5 1 5 0 3.5-1 5 0" />
+                            </svg>
+                        </span>
+                        <span class="category__label">해변</span>
+                    </a>
+
+                    <!-- 산 -->
+                    <a class="category" href="#">
+                        <span class="category__icon" aria-hidden="true">
+                            <!-- mountain -->
+                            <svg viewBox="0 0 24 24">
+                                <path d="M3 20l7-12 4 7 2-3 5 8H3z" />
+                                <path d="M10 8l2 2 2-2" />
+                            </svg>
+                        </span>
+                        <span class="category__label">산</span>
+                    </a>
+
+                    <!-- 전원주택 -->
+                    <a class="category" href="#">
+                        <span class="category__icon" aria-hidden="true">
+                            <!-- home -->
+                            <svg viewBox="0 0 24 24">
+                                <path d="M3 11l9-8 9 8" />
+                                <path d="M5 10v11h14V10" />
+                                <path d="M9 21v-6h6v6" />
+                            </svg>
+                        </span>
+                        <span class="category__label">전원주택</span>
+                    </a>
+
+                    <!-- 성 -->
+                    <a class="category" href="#">
+                        <span class="category__icon" aria-hidden="true">
+                            <!-- castle -->
+                            <svg viewBox="0 0 24 24">
+                                <path d="M4 21V7l2-2 2 2 2-2 2 2 2-2 2 2 2-2 2 2v14" />
+                                <path d="M8 21v-6h8v6" />
+                                <path d="M4 11h16" />
+                            </svg>
+                        </span>
+                        <span class="category__label">성</span>
+                    </a>
+
+                    <!-- 캠핑 -->
+                    <a class="category" href="#">
+                        <span class="category__icon" aria-hidden="true">
+                            <!-- tent -->
+                            <svg viewBox="0 0 24 24">
+                                <path d="M2 20L12 4l10 16H2z" />
+                                <path d="M12 4v16" />
+                                <path d="M7 20l5-8 5 8" />
+                            </svg>
+                        </span>
+                        <span class="category__label">캠핑</span>
+                    </a>
+
+                    <!-- 크루즈 -->
+                    <a class="category" href="#">
+                        <span class="category__icon" aria-hidden="true">
+                            <!-- ship -->
+                            <svg viewBox="0 0 24 24">
+                                <path d="M3 18l9 3 9-3" />
+                                <path d="M4 16h16l-2-7H6l-2 7z" />
+                                <path d="M10 9V5h4v4" />
+                                <path d="M8 5h8" />
+                                <path d="M2 18c1.5 1 3.5 1 5 0s3.5-1 5 0 3.5 1 5 0 3.5-1 5 0" />
+                            </svg>
+                        </span>
+                        <span class="category__label">크루즈</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================
+      4) 인기 여행지(캡처 4개 큰 카드)
+    ========================================== -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section__title">인기 여행지</h2>
+                <p class="section__sub">지금 가장 핫한 여행지를 만나보세요</p>
+
+                <div class="grid-dest">
+                    <!-- 카드 1 -->
+                    <a href="#" class="dest-card">
+                        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80"
+                            alt="서울" />
+                        <div class="dest-card__overlay">
+                            <div class="dest-card__name">서울</div>
+                            <div class="dest-card__count">12,340개 숙소</div>
+                        </div>
+                    </a>
+
+                    <!-- 카드 2 -->
+                    <a href="#" class="dest-card">
+                        <img src="https://images.unsplash.com/photo-1526481280695-3c687fd5432c?auto=format&fit=crop&w=1200&q=80"
+                            alt="도쿄" />
+                        <div class="dest-card__overlay">
+                            <div class="dest-card__name">도쿄</div>
+                            <div class="dest-card__count">9,821개 숙소</div>
+                        </div>
+                    </a>
+
+                    <!-- 카드 3 -->
+                    <a href="#" class="dest-card">
+                        <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80"
+                            alt="발리" />
+                        <div class="dest-card__overlay">
+                            <div class="dest-card__name">발리</div>
+                            <div class="dest-card__count">7,654개 숙소</div>
+                        </div>
+                    </a>
+
+                    <!-- 카드 4 -->
+                    <a href="#" class="dest-card">
+                        <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80"
+                            alt="다낭" />
+                        <div class="dest-card__overlay">
+                            <div class="dest-card__name">다낭</div>
+                            <div class="dest-card__count">5,432개 숙소</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================
+      5) 인기 숙소(캡처: 제목 + 전체보기 + 카드 그리드)
+    ========================================== -->
+        <section class="section section--tight">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2 class="section__title">인기 숙소</h2>
+                        <p class="section__sub">전 세계 여행자들이 선택한 숙소</p>
+                    </div>
+                    <a class="section-head__more" href="#">전체 보기</a>
+                </div>
+
+                <div class="grid-stay">
+                    <!-- 카드 1 -->
+                    <article class="stay-card">
+                        <div class="stay-card__media">
+                            <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1400&q=80"
+                                alt="오션뷰 빌라 인피니티 풀" />
+                            <span class="badge badge--dark">슈퍼호스트</span>
+                            <button class="wish" type="button" aria-label="찜하기">
+                                <svg viewBox="0 0 24 24" class="heart">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+                                            2 6 4 4 6.5 4
+                                            8.04 4 9.54 4.81 10.4 6.09
+                                            11.26 4.81 12.76 4 14.3 4
+                                            16.8 4 18.8 6 18.8 8.5
+                                            c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="stay-card__body">
+                            <div class="stay-card__title">오션뷰 빌라 인피니티 풀</div>
+                            <div class="stay-card__meta">발리, 인도네시아</div>
+                            <div class="stay-card__price">₩245,000 <span>/ 박</span></div>
+                            <div class="stay-card__rating">
+                                <span class="star">★</span> 4.9 <span class="count">(328)</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 카드 2 -->
+                    <article class="stay-card">
+                        <div class="stay-card__media">
+                            <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1400&q=80"
+                                alt="모던 부티크 호텔" />
+                            <button class="wish" type="button" aria-label="찜하기">
+                                <svg viewBox="0 0 24 24" class="heart">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+                                            2 6 4 4 6.5 4
+                                            8.04 4 9.54 4.81 10.4 6.09
+                                            11.26 4.81 12.76 4 14.3 4
+                                            16.8 4 18.8 6 18.8 8.5
+                                            c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="stay-card__body">
+                            <div class="stay-card__title">모던 부티크 호텔</div>
+                            <div class="stay-card__meta">서울, 대한민국</div>
+                            <div class="stay-card__price">₩189,000 <span>/ 박</span></div>
+                            <div class="stay-card__rating">
+                                <span class="star">★</span> 4.8 <span class="count">(512)</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 카드 3 -->
+                    <article class="stay-card">
+                        <div class="stay-card__media">
+                            <img src="https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?auto=format&fit=crop&w=1400&q=80"
+                                alt="마운틴뷰 펜트하우스" />
+                            <span class="badge badge--dark">할인 중</span>
+                            <button class="wish" type="button" aria-label="찜하기">
+                                <svg viewBox="0 0 24 24" class="heart">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+                                            2 6 4 4 6.5 4
+                                            8.04 4 9.54 4.81 10.4 6.09
+                                            11.26 4.81 12.76 4 14.3 4
+                                            16.8 4 18.8 6 18.8 8.5
+                                            c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="stay-card__body">
+                            <div class="stay-card__title">마운틴뷰 펜트하우스</div>
+                            <div class="stay-card__meta">다낭, 베트남</div>
+                            <div class="stay-card__price">₩132,000 <span>/ 박</span></div>
+                            <div class="stay-card__rating">
+                                <span class="star">★</span> 4.7 <span class="count">(156)</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 카드 4 -->
+                    <article class="stay-card">
+                        <div class="stay-card__media">
+                            <img src="https://images.unsplash.com/photo-1526481280695-3c687fd5432c?auto=format&fit=crop&w=1400&q=80"
+                                alt="전통 료칸 스테이" />
+                            <button class="wish" type="button" aria-label="찜하기">
+                                <svg viewBox="0 0 24 24" class="heart">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+                                            2 6 4 4 6.5 4
+                                            8.04 4 9.54 4.81 10.4 6.09
+                                            11.26 4.81 12.76 4 14.3 4
+                                            16.8 4 18.8 6 18.8 8.5
+                                            c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="stay-card__body">
+                            <div class="stay-card__title">전통 료칸 스테이</div>
+                            <div class="stay-card__meta">도쿄, 일본</div>
+                            <div class="stay-card__price">₩210,000 <span>/ 박</span></div>
+                            <div class="stay-card__rating">
+                                <span class="star">★</span> 4.9 <span class="count">(201)</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 카드 5 -->
+                    <article class="stay-card">
+                        <div class="stay-card__media">
+                            <img src="https://images.unsplash.com/photo-1501117716987-c8e1ecb210d3?auto=format&fit=crop&w=1400&q=80"
+                                alt="라벤더 가든 하우스" />
+                            <span class="badge badge--dark">인기</span>
+                            <button class="wish" type="button" aria-label="찜하기">
+                                <svg viewBox="0 0 24 24" class="heart">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+                                            2 6 4 4 6.5 4
+                                            8.04 4 9.54 4.81 10.4 6.09
+                                            11.26 4.81 12.76 4 14.3 4
+                                            16.8 4 18.8 6 18.8 8.5
+                                            c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="stay-card__body">
+                            <div class="stay-card__title">라벤더 가든 하우스</div>
+                            <div class="stay-card__meta">프로방스, 프랑스</div>
+                            <div class="stay-card__price">₩175,000 <span>/ 박</span></div>
+                            <div class="stay-card__rating">
+                                <span class="star">★</span> 4.8 <span class="count">(98)</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 카드 6 -->
+                    <article class="stay-card">
+                        <div class="stay-card__media">
+                            <img src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1400&q=80"
+                                alt="시티뷰 럭셔리 스위트" />
+                            <button class="wish" type="button" aria-label="찜하기">
+                                <svg viewBox="0 0 24 24" class="heart">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+                                            2 6 4 4 6.5 4
+                                            8.04 4 9.54 4.81 10.4 6.09
+                                            11.26 4.81 12.76 4 14.3 4
+                                            16.8 4 18.8 6 18.8 8.5
+                                            c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="stay-card__body">
+                            <div class="stay-card__title">시티뷰 럭셔리 스위트</div>
+                            <div class="stay-card__meta">서울, 대한민국</div>
+                            <div class="stay-card__price">₩260,000 <span>/ 박</span></div>
+                            <div class="stay-card__rating">
+                                <span class="star">★</span> 4.7 <span class="count">(166)</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================
+      6) 프로모션 배너 + 혜택 3개
+      - 캡처3 상단(검정 큰 배너) + 아래 3개 카드
+    ========================================== -->
+        <section class="section">
+            <div class="container">
+                <div class="promo">
+                    <div class="promo__text">
+                        <div class="promo__tag">한정 프로모션</div>
+                        <div class="promo__title">첫 예약 시 20% 할인</div>
+                        <div class="promo__desc">지금 가입하고 특별 할인 혜택을 받아보세요</div>
+                    </div>
+
+                    <a href="#" class="promo__btn">
+                        할인 받기
+                        <span aria-hidden="true">→</span>
+                    </a>
+                </div>
+
+                <div class="benefits">
+                    <article class="benefit">
+                        <div class="benefit__icon" aria-hidden="true">%</div>
+                        <div class="benefit__text">
+                            <div class="benefit__title">최저가 보장</div>
+                            <div class="benefit__desc">타 사이트 대비 최저가를 보장합니다</div>
+                        </div>
+                    </article>
+
+                    <article class="benefit">
+                        <div class="benefit__icon" aria-hidden="true">🕒</div>
+                        <div class="benefit__text">
+                            <div class="benefit__title">무료 취소</div>
+                            <div class="benefit__desc">대부분의 숙소 무료 취소 가능</div>
+                        </div>
+                    </article>
+
+                    <article class="benefit">
+                        <div class="benefit__icon" aria-hidden="true">🛡️</div>
+                        <div class="benefit__text">
+                            <div class="benefit__title">안전한 결제</div>
+                            <div class="benefit__desc">검증된 보안 시스템으로 안전하게</div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- =========================================
+    7) 푸터(캡처3 하단)
+  ========================================== -->
+    <footer class="footer">
+        <div class="container footer__top">
+            <div class="footer__brand">
+                <div class="footer__logo">STAYO</div>
+                <p class="footer__desc">전 세계 최고의 숙소를<br />최저가로 만나보세요.</p>
+            </div>
+
+            <div class="footer__cols">
+                <div class="footer__col">
+                    <div class="footer__col-title">서비스</div>
+                    <a href="#" class="footer__link">숙소 예약</a>
+                    <a href="#" class="footer__link">항공권</a>
+                    <a href="#" class="footer__link">패키지 여행</a>
+                    <a href="#" class="footer__link">액티비티</a>
+                    <a href="#" class="footer__link">렌터카</a>
+                </div>
+
+                <div class="footer__col">
+                    <div class="footer__col-title">고객 지원</div>
+                    <a href="#" class="footer__link">고객센터</a>
+                    <a href="#" class="footer__link">자주 묻는 질문</a>
+                    <a href="#" class="footer__link">취소 및 환불</a>
+                    <a href="#" class="footer__link">이용약관</a>
+                    <a href="#" class="footer__link">개인정보처리방침</a>
+                </div>
+
+                <div class="footer__col">
+                    <div class="footer__col-title">파트너</div>
+                    <a href="#" class="footer__link">숙소 등록</a>
+                    <a href="#" class="footer__link">제휴 프로그램</a>
+                    <a href="#" class="footer__link">광고 문의</a>
+                    <a href="#" class="footer__link">API</a>
+                </div>
+
+                <div class="footer__col">
+                    <div class="footer__col-title">회사</div>
+                    <a href="#" class="footer__link">소개</a>
+                    <a href="#" class="footer__link">채용</a>
+                    <a href="#" class="footer__link">보도자료</a>
+                    <a href="#" class="footer__link">투자자 정보</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container footer__bottom">
+            <div class="footer__copyright">
+                © 2026 STAYO. All rights reserved.
+            </div>
+            <div class="footer__bottom-links">
+                <a href="#" class="footer__bottom-link">이용약관</a>
+                <a href="#" class="footer__bottom-link">개인정보처리방침</a>
+                <a href="#" class="footer__bottom-link">쿠키 설정</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

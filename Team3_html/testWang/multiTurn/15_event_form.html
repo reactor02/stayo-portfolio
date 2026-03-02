@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src=".\asset\15_event_form.js"></script>
+
+    <style>
+        #cat1 {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            vertical-align: text-top;
+            border: 1px solid red;
+        }
+        .cat2 {
+            border: 1px solid red;
+            position: absolute;
+            top: 200px;
+            left: 200px;
+        }    
+        .ib {
+            border: 1px solid red;
+        }
+       
+        .todo {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div id="log"></div>
+    <form id="form" action="https://search.naver.com/search.naver">
+        검색 : <input type="text" id="id" name="query"> <br>
+        사이트 : <select  id="site">
+            <option value="1">네이버</option>
+            <option value="2">구글</option>
+        </select>
+        <br>
+        <input type="submit" value="검색">
+    </form>
+
+    <div id="parent" >
+        부모
+        <div id="child1">자식1</div>
+        <div id="child2">자식2</div>
+    </div>
+    <table id="board" border='1'>
+        <tr>
+            <td>
+                <input type="checkbox" class="chk" value="1">
+            </td>
+            <td class="title">제목1</td>
+            <td>작성자1</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" class="chk" value="2">
+            </td>
+            <td class="title">제목2</td>
+            <td>작성자2</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" class="chk" value="3">
+            </td>
+            <td class="title">제목3</td>
+            <td>작성자3</td>
+        </tr>
+    </table>
+    <input type="text" id="id2"><br>
+    <input type="password" id="pw2"><br>
+    <div id="log2"></div>
+    <button id="login">login</button><br>
+     <!--문제2  -->
+    <select name="pizza" id="pizza">
+        <option class="pizza" value="1">치즈피자</option>
+        <option class="pizza" value="2">불고기피자</option>
+        <option class="pizza" value="3">페퍼로니피자</option>
+        <option class="pizza" value="4">콤비네이션피자</option>
+    </select><br>
+    <input type="radio" name="size" value="18000" class="small">small
+    <input type="radio" name="size" value="20000" class="medium">medium
+    <input type="radio" name="size" value="22000" class="large">large <br>
+    <input type="radio" name="dou" value="0" class="thin">thin
+    <input type="radio" name="dou" value="0" class="치즈">치즈
+    <input type="radio" name="dou" value="0" class="고구마">고구마
+    <input type="radio" name="dou" value="0" class="에그타르트">에그타르트
+    <input type="radio" name="dou" value="0" class="소보로">소보로 <br>
+    <input type="checkbox" name="topping" value="2000" class="감자">감자
+    <input type="checkbox" name="topping" value="500"class="올리브">올리브
+    <input type="checkbox" name="topping" value="1000" class="페퍼로니">페퍼로니
+    <input type="checkbox" name="topping" value="2000" class="고구마">고구마
+    <input type="checkbox" name="topping" value="5000" class="새우">새우
+    <input type="checkbox" name="topping" value="3000" class="베이컨">베이컨
+    <input type="checkbox" name="topping" value="500" class="파인애플">파인애플<br>
+    <button id="total">확인</button>
+    
+    <!-- 문제 3 -->
+
+     <input type="text" id="order1"><br>   
+     <input type="text" id="address1"><br>   
+
+     <input type="text" id="order2"><br>   
+     <input type="text" id="address2"><br>   
+
+
+    
+    <!-- 문제4 -->
+    <ul>
+        <li>인기상품순</li>
+        <li>낮은 가격순</li>
+        <li>높은 가격순</li>
+        <li>신상품순</li>
+    </ul>
+
+    <!-- // 문제5
+// 썸네일이 있는 쇼핑몰
+// 썸네일에 마우스 올리면 
+// 썸네일의 이미지를 오른쪽에 크게 보여준다 -->
+
+    
+
+    <img id="cat1" src="http://www.foodnmed.com/news/photo/201903/18296_3834_4319.jpg" alt="cat">
+    
+    <!--문제6-->
+    <div id="parent" class="parent">
+        <div class="ib" id="todoList">할 일 리스트</div>
+        <div>
+            <input type="checkbox" id="all" class="all">전체 선택
+        </div>
+        <button id="delete" class="delete">선택삭제</button><br>
+        <input type="text" id="todo">
+        <button id="bt">추가</button><br>
+        
+    </div>
+    
+    <script>
+        window.opener.document.body.style.background = 'yellow'
+    </script>
+
+
+</body>
+</html>
+
+

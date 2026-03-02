@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NANOBANANA | 장바구니</title>
+
+  <!-- ✅ 공통 -->
+  <link rel="stylesheet" href="../Team3_css/Team3_common.css" />
+  <!-- ✅ 페이지 전용 -->
+  <link rel="stylesheet" href="../Team3_css/Team3_cart.css" />
+  <script src="../js/Team3_cart.js"></script>
+</head>
+<body>
+
+  <!-- ✅ 공통 헤더 (모든 페이지 동일하게 복붙) -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">NANOBANANA</div>
+
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Search" />
+      </div>
+
+      <nav class="nav">
+        <a href="#">동행</a>
+        <a href="#">회원신청</a>
+        <a href="#" class="mypage">
+          <span class="user-icon">👤</span>
+          마이페이지
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ✅ 본문 -->
+  <main class="container cart-wrap">
+    <h1 class="cart-title">장바구니</h1>
+
+    <section class="cart-box">
+
+      <!-- 아이템 1 -->
+      <article class="cart-item">
+        <label class="check">
+          <input type="checkbox" checked />
+          <span class="check-ui"></span>
+        </label>
+
+        <img class="thumb" src="https://picsum.photos/300/200?random=31" alt="숙소 이미지" />
+
+        <div class="info">
+          <div class="name">Hotel Bemger</div>
+          <div class="meta">
+            <span class="stars">★★★★★</span>
+            <span class="badge">5.0,6.3</span>
+          </div>
+        </div>
+
+        <div class="price">137,000원</div>
+
+        <div class="qty">
+          <button type="button" class="qty-btn">−</button>
+          <span class="qty-val">1</span>
+          <button type="button" class="qty-btn">+</button>
+        </div>
+      </article>
+
+      <!-- 아이템 2 -->
+      <article class="cart-item">
+        <label class="check">
+          <input type="checkbox" checked />
+          <span class="check-ui"></span>
+        </label>
+
+        <img class="thumb" src="https://picsum.photos/300/200?random=32" alt="숙소 이미지" />
+
+        <div class="info">
+          <div class="name">Hotel Scomtian</div>
+          <div class="meta">
+            <span class="stars">★★★★★</span>
+            <span class="badge">5.x.83</span>
+          </div>
+        </div>
+
+        <div class="price">12,000원</div>
+
+        <div class="qty">
+          <button type="button" class="qty-btn">−</button>
+          <span class="qty-val">1</span>
+          <button type="button" class="qty-btn">+</button>
+        </div>
+      </article>
+
+      <!-- 아이템 3 -->
+      <article class="cart-item">
+        <label class="check">
+          <input type="checkbox" checked />
+          <span class="check-ui"></span>
+        </label>
+
+        <img class="thumb" src="https://picsum.photos/300/200?random=33" alt="숙소 이미지" />
+
+        <div class="info">
+          <div class="name">Hotel Senitanl</div>
+          <div class="meta">
+            <span class="stars">★★★★★</span>
+            <span class="badge">5.0,8.3</span>
+          </div>
+        </div>
+
+        <div class="price">22,000원</div>
+
+        <div class="qty">
+          <button type="button" class="qty-btn">−</button>
+          <span class="qty-val">1</span>
+          <button type="button" class="qty-btn">+</button>
+        </div>
+      </article>
+
+      <!-- 합계 -->
+      <div class="summary">
+        <div class="row">
+          <span>총 상품 금액</span>
+          <b>171,000원</b>
+        </div>
+        <div class="row">
+          <span>할인 금액</span>
+          <b class="discount">-17,000원</b>
+        </div>
+        <div class="row total">
+          <span>최종 결제 금액</span>
+          <b>154,000원</b>
+        </div>
+      </div>
+
+      <button class="pay-btn" type="button">결제하기</button>
+    </section>
+  </main>
+
+</body>
+</html>

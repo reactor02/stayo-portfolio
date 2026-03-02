@@ -1,0 +1,521 @@
+/* =========================================
+  T3_2nd_list.css (리스트 페이지 전용)
+  - 상단 요약 바 + 필터 칩 + 정렬 툴바
+  - 좌측 사이드필터 / 우측 결과 카드
+  - 반응형(태블릿/모바일)
+========================================= */
+
+/* 리스트 페이지 전체 여백(헤더 아래로 조금 띄움) */
+.list{
+  padding-bottom: 40px;
+}
+
+/* =========================
+  상단(검색 요약/필터/정렬)
+========================= */
+.list-top{
+  padding: 28px 0 18px;
+  border-bottom: 1px solid #e7e2dc;
+  background: #f7f5f2; /* 메인 카테고리 바와 같은 톤 */
+}
+
+/* 검색 요약 박스 */
+.summary{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  background: rgba(255,255,255,0.65);
+  border: 1px solid #e7e2dc;
+  border-radius: 18px;
+  padding: 16px 18px;
+}
+
+.summary__title{
+  font-weight: 800;
+  font-size: 15px;
+  color: #111;
+}
+
+.summary__desc{
+  margin-top: 6px;
+  font-size: 13px;
+  color: #6b6b6b;
+}
+
+.summary__btn{
+  border: 0;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: #111;
+  color: #fff;
+  font-weight: 800;
+}
+.summary__btn:hover{ filter: brightness(1.05); }
+
+/* 필터 칩들 */
+.chips{
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.chip{
+  border: 1px solid #e1dbd4;
+  background: rgba(255,255,255,0.6);
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 13px;
+  color: #444;
+}
+.chip:hover{ background: rgba(255,255,255,0.9); }
+
+.chip--active{
+  background: #111;
+  border-color: #111;
+  color: #fff;
+}
+
+/* 정렬 툴바 */
+.toolbar{
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.toolbar__label{
+  font-size: 13px;
+  color: #6b6b6b;
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+/* select 스타일(기본 select를 톤 맞게) */
+.select{
+  height: 36px;
+  border-radius: 12px;
+  border: 1px solid #e1dbd4;
+  background: rgba(255,255,255,0.75);
+  padding: 0 10px;
+  outline: none;
+}
+
+/* range UI */
+/* =========================
+  예산 박스 안 가격 슬라이더(STAYO 톤)
+========================= */
+
+/* 슬라이더 블록 */
+.side-range{
+  margin-top: 10px;
+  padding-top: 12px;
+  border-top: 1px solid #e7e2dc; /* 따뜻한 라인 */
+}
+
+/* 라벨/값 한 줄 */
+.side-range__top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.side-range__label{
+  font-size: 13px;
+  color: #6b6b6b;
+  font-weight: 800;
+}
+
+.side-range__value{
+  font-size: 13px;
+  color: #111;
+  font-weight: 900;
+}
+
+/* ✅ range 자체 */
+.price-range{
+  width: 100%;
+  height: 18px;
+  background: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* 트랙(Chrome/Safari) */
+.price-range::-webkit-slider-runnable-track{
+  height: 6px;
+  background: #e7e2dc;     /* 베이지 라인 */
+  border-radius: 999px;
+}
+
+/* 핸들(Chrome/Safari) */
+.price-range::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #111;        /* 블랙 포인트 */
+  border: 3px solid #f7f5f2; /* 배경톤과 자연스럽게 */
+  margin-top: -6px;        /* 트랙 가운데로 정렬 */
+  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+  cursor: pointer;
+}
+
+/* 트랙(Firefox) */
+.price-range::-moz-range-track{
+  height: 6px;
+  background: #e7e2dc;
+  border-radius: 999px;
+}
+
+/* 핸들(Firefox) */
+.price-range::-moz-range-thumb{
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #111;
+  border: 3px solid #f7f5f2;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+  cursor: pointer;
+}
+
+/* =========================
+  본문(사이드 + 결과)
+========================= */
+.list-body{
+  padding: 26px 0;
+}
+
+/* 2컬럼 레이아웃 */
+.list-grid{
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 22px;
+  align-items: start;
+}
+
+/* ---- 사이드바 ---- */
+.sidebar{
+  position: sticky;         /* 스크롤 시 필터 고정 느낌 */
+  top: 92px;                /* 헤더 높이 고려 */
+}
+
+.side-box{
+  border: 1px solid #e7e2dc;
+  background: rgba(255,255,255,0.55);
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.side-box__title{
+  font-weight: 900;
+  margin-bottom: 12px;
+  color: #111;
+}
+
+.side-row{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.side-label{
+  width: 40px;
+  font-size: 13px;
+  color: #6b6b6b;
+  font-weight: 700;
+}
+
+.input{
+  width: 100%;
+  height: 36px;
+  border-radius: 12px;
+  border: 1px solid #e1dbd4;
+  background: rgba(255,255,255,0.8);
+  padding: 0 10px;
+  outline: none;
+}
+
+.side-apply{
+  width: 100%;
+  height: 38px;
+  border: 0;
+  border-radius: 12px;
+  background: #111;
+  color: #fff;
+  font-weight: 900;
+  cursor: pointer;
+  margin-top: 6px;
+}
+
+.check{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+  font-size: 14px;
+  color: #444;
+}
+.check input{
+  width: 16px;
+  height: 16px;
+}
+
+/* ---- 결과 영역 ---- */
+.results{
+  min-width: 0;
+}
+
+.results-head{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.results-head__title{
+  font-family: "Nanum Myeongjo", serif;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.results-head__meta{
+  color: #6b6b6b;
+  font-size: 14px;
+}
+
+/* 결과 카드 그리드 */
+.result-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+/* 카드(메인 숙소카드 느낌 + 리스트용 버튼 추가) */
+.card{
+  background: transparent;
+}
+
+.card__media{
+  position: relative;
+  height: 210px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 16px 36px rgba(0,0,0,0.10);
+}
+
+.card__media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 메인에서 쓰던 배지 재사용(공통에 없으면 그대로 유지 가능) */
+.badge{
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+}
+.badge--dark{
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+}
+
+/* 찜 하트(통일 + 빨강 + 절대 안 찌그러지게) */
+.wish{
+  position: absolute;
+  right: 12px;
+  top: 12px;
+
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.95);
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.wish .heart{
+  width: 20px;
+  height: 20px;
+  display: block;
+  fill: #e53935;
+  transition: 0.2s ease;
+}
+
+.wish:hover .heart{
+  transform: scale(1.08);
+}
+
+/* 카드 본문 */
+.card__body{
+  padding: 12px 2px 0;
+}
+
+.card__title{
+  font-family: "Nanum Myeongjo", serif;
+  font-weight: 900;
+  font-size: 18px;
+}
+
+.card__meta{
+  margin-top: 6px;
+  color: #6b6b6b;
+  font-size: 13px;
+}
+
+/* 평점/가격 한 줄 */
+.card__row{
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.card__rating{
+  font-size: 14px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.star{ color: #111; }
+.count{
+  font-weight: 600;
+  color: #6b6b6b;
+}
+
+.card__price{
+  font-weight: 900;
+  font-size: 15px;
+}
+.card__price span{
+  font-weight: 600;
+  color: #6b6b6b;
+}
+
+/* 태그 */
+.card__tags{
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.tag{
+  font-size: 12px;
+  font-weight: 800;
+  color: #444;
+  border: 1px solid #e1dbd4;
+  background: rgba(255,255,255,0.6);
+  padding: 6px 10px;
+  border-radius: 999px;
+}
+
+/* 버튼 */
+.card__btn{
+  margin-top: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  width: 100%;
+  border-radius: 14px;
+  background: #111;
+  color: #fff;
+  font-weight: 900;
+}
+.card__btn:hover{ filter: brightness(1.05); }
+
+/* 페이지네이션 */
+.pagination{
+  margin-top: 26px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+.page{
+  border: 1px solid #e1dbd4;
+  background: rgba(255,255,255,0.65);
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 13px;
+  color: #444;
+}
+.page--active{
+  background: #111;
+  border-color: #111;
+  color: #fff;
+}
+.page--disabled{
+  opacity: 0.5;
+  pointer-events: none;
+}
+.page--dots{
+  border: 0;
+  background: transparent;
+}
+
+/* =========================
+  반응형
+========================= */
+@media (max-width: 1100px){
+  .list-grid{
+    grid-template-columns: 1fr;  /* 사이드 아래로 */
+  }
+
+  .sidebar{
+    position: static;           /* 모바일에서는 고정 해제 */
+    top: auto;
+  }
+
+  .result-grid{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px){
+  .summary{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .summary__btn{
+    width: 100%;
+  }
+
+  .toolbar{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  /* .range input[type="range"]{
+    width: 220px;
+  } */
+
+  .result-grid{
+    grid-template-columns: 1fr;
+  }
+}

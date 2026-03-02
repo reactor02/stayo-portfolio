@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HELLOWORLD - 로그인</title>
+  <link rel="stylesheet" href="../Team3_css/Team3_common.css">
+  <link rel="stylesheet" href="../Team3_css/Team3_login.css">
+  <script src="../Team3_js\Team3_login.js"></script>
+</head>
+
+<body>
+
+  <!-- 공통 헤더 (1차 프로젝트 동일 스타일) -->
+  <header class="header">
+    <div class="container header-inner">
+
+      <!-- 로고 -->
+      <div class="logo">NANOBANANA</div>
+
+      <!-- 검색창 -->
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Search">
+      </div>
+
+      <!-- 오른쪽 메뉴 -->
+      <nav class="nav">
+        <a href="#">동행</a>
+        <a href="#">회원신청</a>
+        <a href="#" class="mypage">
+          <span class="user-icon">👤</span>
+          마이페이지
+        </a>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- 로그인 영역 -->
+  <div class="login-wrapper">
+    <div class="login-box">
+      <h2>로그인</h2>
+
+      <form>
+        <div class="input-group">
+          <label>이메일</label>
+          <input type="email" id="email" placeholder="example@email.com" required>
+        </div>
+
+        <div class="input-group">
+          <label>비밀번호</label>
+          <input type="password" id="password" placeholder="비밀번호 입력" required>
+        </div>
+
+        <p id="error-msg" class="error hide"></p>
+
+        <div class="login-options">
+          <label>
+            <input type="checkbox"> 로그인 상태 유지
+          </label>
+          <a href="Team3_find_account.html">아이디/비밀번호 찾기</a>
+        </div>
+
+        <button type="submit" class="login-btn">로그인</button>
+      </form>
+
+      <div class="divider">또는</div>
+
+      <a href="#" class="social-btn google">Google로 로그인></a> <br><br>
+      <a href="#" class="social-btn kakao">Kakao로 로그인</a>
+
+      <p class="signup-link">
+        아직 회원이 아니신가요?
+        <a href="Team3_signup.html">회원가입</a> 
+      </p>
+    </div>
+  </div>
+  <!--모달 창 -->
+  <div id="modal" class="modal hide">
+    <div class="modal-content">
+      <p id="modal-text">메시지</p>
+      <button id="modal-close">확인</button>
+    </div>
+  </div>
+</body>
+
+</html>
