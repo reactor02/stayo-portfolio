@@ -217,6 +217,29 @@
   color:#1976d2;
   font-weight: 900;
 }
+#passwordError {
+  color: red;
+}
+
+#passwordCheckError {
+  color: red;
+}
+
+#birthError {
+  color: red;
+}
+
+#phoneError {
+  color: red;
+}
+
+#emailError {
+  color: red;
+}
+
+#agreeError {
+  color: red;
+}
 
 /* 반응형 */
 @media (max-width: 980px){

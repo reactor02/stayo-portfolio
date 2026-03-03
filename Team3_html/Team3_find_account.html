@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,8 +10,9 @@
   <link rel="stylesheet" href="../Team3_css/Team3_common.css" />
   <!-- ✅ 페이지 전용 -->
   <link rel="stylesheet" href="../Team3_css/Team3_find_account.css" />
-  <script src="../Team3_js\Team3_find_account.js"></script>
+  <script src="../Team3_js/Team3_find_account.js"></script>
 </head>
+
 <body>
 
   <!-- ✅ 공통 헤더(스타일은 common.css) -->
@@ -40,8 +42,8 @@
       <!-- 사이드바 -->
       <aside class="sidebar" aria-label="계정 메뉴">
         <ul class="sidebar-menu">
-          <li class="active">계정 찾기</li>
-          
+          <li class="active"><a href="Team3_find_account.html">계정 찾기</a></li>
+
           <li id="user-service">고객센터</li>
         </ul>
       </aside>
@@ -52,12 +54,16 @@
           <button id="tab-id" class="tab-item active" type="button" role="tab" aria-selected="true">
             아이디 찾기
           </button>
-          <a href="Team3_find_pw.html" id="tab-pw" class="tab-item" role="tab" aria-selected="false">비밀번호 찾기</a>
+
+          <button id="tab-pw" class="tab-item" type="button" role="tab" aria-selected="false">
+            비밀번호 찾기
+          </button>
+
         </div>
 
-        <form class="find-form">
+        <form id="form-id" class="find-form">
           <div class="form-group">
-            <label for="name" id="name-label" >이름</label>
+            <label for="name">이름</label>
             <input id="name" type="text" placeholder="이름을 입력해주세요" />
           </div>
 
@@ -71,6 +77,16 @@
           <p class="error-msg hide"></p>
         </form>
 
+        <form id="form-pw" class="find-form hide">
+          <div class="form-group">
+            <label for="email">이메일</label>
+            <input id="email" type="text" placeholder="이메일을 입력해주세요" />
+          </div>
+
+          <button class="find-btn" type="button">비밀번호 찾기</button>
+          <p class="error-msg hide"></p>
+        </form>
+
         <p class="help">
           가입 시 입력한 정보로 계정을 찾을 수 있어요.
         </p>
@@ -79,4 +95,5 @@
   </main>
 
 </body>
+
 </html>

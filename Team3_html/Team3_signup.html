@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,7 +8,10 @@
 
   <link rel="stylesheet" href="../Team3_css/Team3_common.css">
   <link rel="stylesheet" href="../Team3_css/Team3_signup.css">
+  <script src="../Team3_js/Team3_signup.js"></script>
+
 </head>
+
 <body>
 
   <!-- ✅ 공통 헤더 (스타일은 common.css) -->
@@ -77,18 +81,21 @@
             <div class="row two">
               <label class="field">
                 <span class="label">비밀번호</span>
-                <input type="password" placeholder="비밀번호" />
+                <input type="password" id="password" placeholder="비밀번호" />
+                <div class="error" id="passwordError"></div> <!--에러 메시지창-->
               </label>
 
               <label class="field">
                 <span class="label">비밀번호 확인</span>
-                <input type="password" placeholder="비밀번호 확인" />
+                <input type="password" id="passwordcheck" placeholder="비밀번호 확인" />
+                <div class="error" id="passwordCheckError"></div> <!--에러 메시지창-->
               </label>
             </div>
 
             <label class="field">
               <span class="label">생년월일</span>
-              <input type="text" placeholder="YYYY-MM-DD" />
+              <input type="text" id="birth" placeholder="YYYY-MM-DD" />
+              <div class="error" id="birthError"></div> <!--에러 메시지창-->
             </label>
 
             <div class="row phone">
@@ -100,36 +107,42 @@
                     <option>+81</option>
                     <option>+1</option>
                   </select>
-                  <input type="text" placeholder="휴대폰 번호" />
+                  <input type="text" id="phone" placeholder="휴대폰 번호" />
+                  <div class="error" id="phoneError"></div> <!--에러 메시지창-->
                 </div>
               </label>
             </div>
 
             <label class="field">
               <span class="label">이메일</span>
-              <input type="email" placeholder="이메일" />
+              <input type="email" id="email" placeholder="이메일" />
+              <div class="error" id="emailError"></div> <!--에러 메시지창-->
+
             </label>
 
             <div class="agree">
               <label class="chk">
-                <input type="checkbox" />
+                <input type="checkbox" id="agree1" />
                 <span>서비스 이용약관 동의 <b>(필수)</b></span>
               </label>
               <label class="chk">
-                <input type="checkbox" />
+                <input type="checkbox" id="agree2" />
                 <span>개인정보 수집 및 이용 동의 <b>(필수)</b></span>
               </label>
               <label class="chk">
-                <input type="checkbox" />
+                <input type="checkbox" id="agree3" />
                 <span>만 14세 이상 확인 <b>(필수)</b></span>
               </label>
+              <!-- 체크박스 전체 에러메시지 출력용-->
+              <div class="error" id="agreeError"></div>
+
               <label class="chk">
                 <input type="checkbox" />
                 <span>마케팅 정보 수신 동의 <em>(선택)</em></span>
               </label>
             </div>
 
-            <button class="join-btn" type="button">가입하기</button>
+            <button class="join-btn" id="joinBtn" type="button">가입하기</button>
 
             <p class="join-foot">
               이미 계정이 있으신가요?
@@ -143,4 +156,5 @@
   </main>
 
 </body>
+
 </html>
