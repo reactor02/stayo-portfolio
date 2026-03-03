@@ -140,8 +140,8 @@
             <form class="form" action="#" method="post" aria-label="예약자 정보">
               <div class="form-grid">
                 <label class="field">
-                  <span class="field__label">예약자 이름</span>
-                  <input class="field__input" type="text" placeholder="이름을 입력하세요" />
+                  <span  class="field__label">예약자 이름</span>
+                  <input id="userName" class="field__input" type="text" placeholder="이름을 입력하세요" />
                 </label>
 
                 <label class="field">
@@ -288,7 +288,7 @@
 
           <!-- 모바일에서만 보이는 결제 버튼(우측 요약이 아래로 내려오면 중복 방지 가능) -->
           <div class="mobile-pay">
-            <button class="btn-main btn-main--big" type="button">₩653,000 결제하기</button>
+            <button id="paid-btn" class="btn-main btn-main--big" type="button">₩653,000 결제하기</button>
             <p class="muted mobile-pay__note">결제 버튼을 누르면 예약이 완료됩니다 (UI)</p>
           </div>
         </section>

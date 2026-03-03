@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="../css/T3_2nd_common.css" />
     <!-- 페이지 전용 CSS -->
     <link rel="stylesheet" href="../css/T3_2nd_index.css" />
+    <script src="../js/index.js"></script>
 </head>
 
 <body>
@@ -46,12 +47,10 @@
             <!-- 오른쪽 영역 -->
             <div class="header__right">
                 <!-- 지구 아이콘 -->
-                <button class="icon-btn" type="button" aria-label="언어/지역">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path
-                            d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.9 9h-3.2a15.8 15.8 0 00-1.2-6A8.1 8.1 0 0119.9 11zM12 4c.9 1.2 1.8 3.3 2.3 7H9.7C10.2 7.3 11.1 5.2 12 4zM4.1 13h3.2a15.8 15.8 0 001.2 6A8.1 8.1 0 014.1 13zm0-2a8.1 8.1 0 014.4-6 15.8 15.8 0 00-1.2 6H4.1zM12 20c-.9-1.2-1.8-3.3-2.3-7h4.6c-.5 3.7-1.4 5.8-2.3 7zm3.5-1a15.8 15.8 0 001.2-6h3.2a8.1 8.1 0 01-4.4 6z" />
-                    </svg>
-                </button>
+                <a href="#" class="parentCart">
+                    <img class="shoppingCart" src=".\..\..\Team3_html\testWang\wishlistMark\Gemini_Generated_Image_jn1jqmjn1jqmjn1j.png" alt="장바구니 이미지">
+                    <spna class="listNumber">2</span>
+                </a>
 
                 <!-- 하트 아이콘 -->
                 <button class="icon-btn" type="button" aria-label="찜 목록">
@@ -63,6 +62,7 @@
                                             16.8 4 18.8 6 18.8 8.5
                                             c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                     </svg>
+                    <spna class="listNumber2">2</span>
                 </button>
 
                 <!-- 로그인 버튼 -->
@@ -108,7 +108,18 @@
                             </div>
                             <div class="searchbar__text">
                                 <span class="searchbar__label">목적지</span>
-                                <span class="searchbar__value">어디로 떠나시나요?</span>
+                                <!-- <span class="searchbar__value">어디로 떠나시나요?</span> -->
+                                <input list="location" placeholder="어디로 떠나시나요?" class="search1">
+                                <datalist id="location">
+                                    <option value="가나"></option>
+                                    <option value="가봉"></option>
+                                    <option value="대한민국"></option>
+                                    <option value="스위스"></option>
+                                    <option value="도시"></option>
+                                    <option value="친구"></option>
+                                    <option value="우정"></option>
+                                    <option value="한강"></option>
+                                </datalist>
                             </div>
                         </div>
 
@@ -121,7 +132,23 @@
                             </div>
                             <div class="searchbar__text">
                                 <span class="searchbar__label">체크인 - 체크아웃</span>
-                                <span class="searchbar__value">날짜 선택</span>
+                                <!-- <span class="searchbar__value">날짜 선택</span> -->
+                                <div class="booking-wrapper">
+                                    <div class="date-box">
+                                        <input type="text" id="text1" placeholder="checkin" disabled="disabled">
+                                        <input type="date" id="date1" class="hidden-date">
+                                        <span class="tooltip">checkin</span>
+                                    </div>
+
+                                    <div class="divider"></div>
+
+                                    <div class="date-box">
+                                        <input type="text" id="text2" placeholder="checkout" disabled="disabled">
+                                        <input type="date" id="date2" class="hidden-date">
+                                        <span class="tooltip">checkout</span>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
 
@@ -134,9 +161,23 @@
                             </div>
                             <div class="searchbar__text">
                                 <span class="searchbar__label">인원</span>
-                                <span class="searchbar__value">성인 2명</span>
+                                <div class="wrapper">
+                                    <input type="text" placeholder="인원" id="pNumber" readonly="readonly" value="성인 2명">
+                                    <input type="hidden" name="total_people" id="realNumber" value="0">
+                                    <div id="popup" class="popup">
+                                        <p>인원 선택</p>
+                                        <!-- 팝업창 -->
+                                        인원
+                                        <button id="minusBtn" type="button">-</button>
+                                        <span id="pCount">0</span>
+                                        <button id="plusBtn" type="button">+</button>
+                                        <br><br>
+                                        <button id="confirmBtn" type="button">적용</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
 
                         <!-- 검색 버튼(캡처처럼 검정 큰 버튼) -->
                         <button class="searchbar__submit" type="submit">
