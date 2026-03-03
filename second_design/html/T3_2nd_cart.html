@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STAYO | 장바구니</title>
+
+  <!-- 폰트(프로젝트 동일) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- 공통 CSS -->
+  <link rel="stylesheet" href="../css/T3_2nd_common.css" />
+  <!-- 페이지 전용 CSS -->
+  <link rel="stylesheet" href="../css/T3_2nd_cart.css" />
+</head>
+
+<body>
+  <!-- ==========================
+    공통 헤더(메인과 동일)
+  =========================== -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="./index.html" class="logo" aria-label="STAYO 홈">STAYO</a>
+
+      <nav class="gnb" aria-label="주요 메뉴">
+        <a href="#" class="gnb__link">숙소</a>
+        <a href="#" class="gnb__link">항공권</a>
+        <a href="#" class="gnb__link">패키지</a>
+        <a href="#" class="gnb__link">액티비티</a>
+        <a href="#" class="gnb__link">렌터카</a>
+      </nav>
+
+      <div class="header__right">
+        <button class="icon-btn" type="button" aria-label="언어/지역">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.9 9h-3.2a15.8 15.8 0 00-1.2-6A8.1 8.1 0 0119.9 11zM12 4c.9 1.2 1.8 3.3 2.3 7H9.7C10.2 7.3 11.1 5.2 12 4zM4.1 13h3.2a15.8 15.8 0 001.2 6A8.1 8.1 0 014.1 13zm0-2a8.1 8.1 0 014.4-6 15.8 15.8 0 00-1.2 6H4.1zM12 20c-.9-1.2-1.8-3.3-2.3-7h4.6c-.5 3.7-1.4 5.8-2.3 7zm3.5-1a15.8 15.8 0 001.2-6h3.2a8.1 8.1 0 01-4.4 6z"/>
+          </svg>
+        </button>
+
+        <button class="icon-btn" type="button" aria-label="찜 목록">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+                     2 6 4 4 6.5 4
+                     8.04 4 9.54 4.81 10.4 6.09
+                     11.26 4.81 12.76 4 14.3 4
+                     16.8 4 18.8 6 18.8 8.5
+                     c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </button>
+
+        <a href="#" class="btn btn--login">
+          <span class="btn__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 12a4.5 4.5 0 10-4.5-4.5A4.5 4.5 0 0012 12zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/>
+            </svg>
+          </span>
+          로그인
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="cart">
+    <!-- ==========================
+      상단 타이틀/경로
+    =========================== -->
+    <section class="cart-top">
+      <div class="container">
+        <nav class="crumb" aria-label="현재 위치">
+          <a href="./index.html">홈</a>
+          <span class="crumb__sep">/</span>
+          <span class="crumb__current">장바구니</span>
+        </nav>
+
+        <div class="cart-title">
+          <h1>장바구니</h1>
+          <p class="muted">선택한 숙소/객실 정보를 확인하고 결제를 진행하세요.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================
+      본문 2열 레이아웃
+      - 좌: 장바구니 리스트
+      - 우: 결제 요약(Sticky)
+    =========================== -->
+    <section class="cart-body">
+      <div class="container cart-grid">
+
+        <!-- ==========================
+          LEFT: 장바구니 아이템
+        =========================== -->
+        <section class="cart-left" aria-label="장바구니 목록">
+
+          <!-- 안내 배너(선택) -->
+          <div class="notice">
+            <div class="notice__icon" aria-hidden="true">💡</div>
+            <div class="notice__text">
+              <b>무료 취소</b> 가능 숙소는 체크인 24시간 전까지 취소할 수 있어요.
+            </div>
+          </div>
+
+          <!-- 장바구니 아이템 카드 1 -->
+          <article class="cart-item">
+            <!-- 숙소 이미지 -->
+            <div class="cart-item__media">
+              <img
+                src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1400&q=80"
+                alt="모던 부티크 호텔"
+              />
+              <span class="badge badge--dark">슈퍼호스트</span>
+            </div>
+
+            <!-- 숙소 정보 -->
+            <div class="cart-item__body">
+              <div class="cart-item__title">모던 부티크 호텔</div>
+              <div class="cart-item__meta muted">서울, 대한민국 · 강남구</div>
+
+              <div class="cart-item__sub">
+                <span class="pill">디럭스 더블</span>
+                <span class="dot">·</span>
+                <span class="pill">성인 2명</span>
+                <span class="dot">·</span>
+                <span class="pill">2박</span>
+              </div>
+
+              <!-- 체크인/아웃 -->
+              <div class="cart-dates">
+                <div class="date-box">
+                  <span class="date-box__label muted">체크인</span>
+                  <span class="date-box__value">2026.03.10</span>
+                </div>
+                <div class="date-box">
+                  <span class="date-box__label muted">체크아웃</span>
+                  <span class="date-box__value">2026.03.12</span>
+                </div>
+              </div>
+
+              <!-- 옵션/혜택 -->
+              <div class="cart-tags">
+                <span class="tag">무료 취소</span>
+                <span class="tag">조식 옵션</span>
+                <span class="tag">시티뷰</span>
+              </div>
+            </div>
+
+            <!-- 가격/액션 -->
+            <div class="cart-item__side">
+              <div class="cart-item__price">
+                <b>₩189,000</b><span class="muted"> / 박</span>
+              </div>
+
+              <div class="cart-item__sum muted">
+                ₩189,000 × 2박 = <b>₩378,000</b>
+              </div>
+
+              <div class="cart-item__actions">
+                <button class="btn-outline" type="button">수정</button>
+                <button class="btn-ghost" type="button">삭제</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 장바구니 아이템 카드 2 (예시) -->
+          <article class="cart-item">
+            <div class="cart-item__media">
+              <img
+                src="https://images.unsplash.com/photo-1501117716987-c8e1ecb210d3?auto=format&fit=crop&w=1400&q=80"
+                alt="시티뷰 럭셔리 스위트"
+              />
+              <span class="badge badge--dark">할인 중</span>
+            </div>
+
+            <div class="cart-item__body">
+              <div class="cart-item__title">시티뷰 럭셔리 스위트</div>
+              <div class="cart-item__meta muted">서울, 대한민국 · 중구</div>
+
+              <div class="cart-item__sub">
+                <span class="pill">프리미엄 스위트</span>
+                <span class="dot">·</span>
+                <span class="pill">성인 2명</span>
+                <span class="dot">·</span>
+                <span class="pill">1박</span>
+              </div>
+
+              <div class="cart-dates">
+                <div class="date-box">
+                  <span class="date-box__label muted">체크인</span>
+                  <span class="date-box__value">2026.03.15</span>
+                </div>
+                <div class="date-box">
+                  <span class="date-box__label muted">체크아웃</span>
+                  <span class="date-box__value">2026.03.16</span>
+                </div>
+              </div>
+
+              <div class="cart-tags">
+                <span class="tag">무료 취소</span>
+                <span class="tag">조식 포함</span>
+              </div>
+            </div>
+
+            <div class="cart-item__side">
+              <div class="cart-item__price">
+                <b>₩260,000</b><span class="muted"> / 박</span>
+              </div>
+
+              <div class="cart-item__sum muted">
+                ₩260,000 × 1박 = <b>₩260,000</b>
+              </div>
+
+              <div class="cart-item__actions">
+                <button class="btn-outline" type="button">수정</button>
+                <button class="btn-ghost" type="button">삭제</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 장바구니 비었을 때 UI(필요하면 사용)
+          <div class="empty">
+            <div class="empty__icon">🧺</div>
+            <div class="empty__title">장바구니가 비어있어요</div>
+            <div class="empty__desc muted">원하는 숙소를 찾아 담아보세요.</div>
+            <a class="btn-main" href="./list.html">숙소 보러가기</a>
+          </div>
+          -->
+
+        </section>
+
+        <!-- ==========================
+          RIGHT: 결제 요약 카드 (sticky)
+        =========================== -->
+        <aside class="cart-right" aria-label="결제 요약">
+          <div class="summary">
+            <h2 class="summary__title">결제 요약</h2>
+
+            <!-- 쿠폰/포인트(UI) -->
+            <div class="summary-box">
+              <div class="summary-box__row">
+                <span class="muted">쿠폰</span>
+                <button class="mini-btn" type="button">선택</button>
+              </div>
+              <div class="summary-box__row">
+                <span class="muted">포인트</span>
+                <button class="mini-btn" type="button">사용</button>
+              </div>
+            </div>
+
+            <!-- 가격 합계 -->
+            <div class="summary-price">
+              <div class="sum-row">
+                <span class="muted">숙박 요금</span>
+                <b>₩638,000</b>
+              </div>
+              <div class="sum-row">
+                <span class="muted">세금 및 수수료</span>
+                <b>₩35,000</b>
+              </div>
+              <div class="sum-row">
+                <span class="muted">할인</span>
+                <b>-₩20,000</b>
+              </div>
+
+              <div class="sum-line"></div>
+
+              <div class="sum-row sum-row--total">
+                <span>총 결제 금액</span>
+                <b>₩653,000</b>
+              </div>
+            </div>
+
+            <!-- 결제 진행 -->
+            <a class="btn-main btn-main--big" href="./pay.html">결제하기</a>
+
+            <p class="summary-note muted">
+              결제하기를 누르면 예약 및 결제 화면으로 이동합니다.
+            </p>
+          </div>
+
+          <!-- 안전/정책 안내 -->
+          <div class="safe">
+            <div class="safe__item">
+              <span class="safe__icon" aria-hidden="true">🛡</span>
+              <div>
+                <div class="safe__title">안전한 결제</div>
+                <div class="safe__desc muted">검증된 보안 시스템으로 안전하게</div>
+              </div>
+            </div>
+
+            <div class="safe__item">
+              <span class="safe__icon" aria-hidden="true">↩</span>
+              <div>
+                <div class="safe__title">무료 취소</div>
+                <div class="safe__desc muted">숙소 정책에 따라 무료 취소 가능</div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================
+    공통 푸터
+  =========================== -->
+  <footer class="footer">
+    <div class="container footer__top">
+      <div class="footer__brand">
+        <div class="footer__logo">STAYO</div>
+        <p class="footer__desc">전 세계 최고의 숙소를<br />최저가로 만나보세요.</p>
+      </div>
+
+      <div class="footer__cols">
+        <div class="footer__col">
+          <div class="footer__col-title">서비스</div>
+          <a href="#" class="footer__link">숙소 예약</a>
+          <a href="#" class="footer__link">항공권</a>
+          <a href="#" class="footer__link">패키지 여행</a>
+          <a href="#" class="footer__link">액티비티</a>
+          <a href="#" class="footer__link">렌터카</a>
+        </div>
+
+        <div class="footer__col">
+          <div class="footer__col-title">고객 지원</div>
+          <a href="#" class="footer__link">고객센터</a>
+          <a href="#" class="footer__link">자주 묻는 질문</a>
+          <a href="#" class="footer__link">취소 및 환불</a>
+          <a href="#" class="footer__link">이용약관</a>
+          <a href="#" class="footer__link">개인정보처리방침</a>
+        </div>
+
+        <div class="footer__col">
+          <div class="footer__col-title">파트너</div>
+          <a href="#" class="footer__link">숙소 등록</a>
+          <a href="#" class="footer__link">제휴 프로그램</a>
+          <a href="#" class="footer__link">광고 문의</a>
+          <a href="#" class="footer__link">API</a>
+        </div>
+
+        <div class="footer__col">
+          <div class="footer__col-title">회사</div>
+          <a href="#" class="footer__link">소개</a>
+          <a href="#" class="footer__link">채용</a>
+          <a href="#" class="footer__link">보도자료</a>
+          <a href="#" class="footer__link">투자자 정보</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer__bottom">
+      <div class="footer__copyright">© 2026 STAYO. All rights reserved.</div>
+      <div class="footer__bottom-links">
+        <a href="#" class="footer__bottom-link">이용약관</a>
+        <a href="#" class="footer__bottom-link">개인정보처리방침</a>
+        <a href="#" class="footer__bottom-link">쿠키 설정</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

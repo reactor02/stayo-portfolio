@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STAYO | 비밀번호 찾기</title>
+
+    <!-- 폰트(프로젝트 동일) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- 공통 CSS -->
+    <link rel="stylesheet" href="../css/T3_2nd_common.css" />
+    <!-- 페이지 전용 CSS(아이디/비번찾기 공용) -->
+    <link rel="stylesheet" href="../css/T3_2nd_find.css" />
+</head>
+
+<body>
+    <!-- 공통 헤더 -->
+    <header class="header">
+        <div class="container header__inner">
+            <a href="./index.html" class="logo" aria-label="STAYO 홈">STAYO</a>
+
+            <nav class="gnb" aria-label="주요 메뉴">
+                <a href="#" class="gnb__link">숙소</a>
+                <a href="#" class="gnb__link">항공권</a>
+                <a href="#" class="gnb__link">패키지</a>
+                <a href="#" class="gnb__link">액티비티</a>
+                <a href="#" class="gnb__link">렌터카</a>
+            </nav>
+
+            <div class="header__right">
+                <a href="./login.html" class="btn btn--login">
+                    <span class="btn__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 12a4.5 4.5 0 10-4.5-4.5A4.5 4.5 0 0012 12zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z" />
+                        </svg>
+                    </span>
+                    로그인
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="find">
+        <!-- 상단 -->
+        <section class="find-top">
+            <div class="container">
+                <nav class="crumb" aria-label="현재 위치">
+                    <a href="./index.html">홈</a>
+                    <span class="crumb__sep">/</span>
+                    <a href="./login.html">로그인</a>
+                    <span class="crumb__sep">/</span>
+                    <span class="crumb__current">비밀번호 찾기</span>
+                </nav>
+
+                <div class="find-title">
+                    <h1>비밀번호 찾기</h1>
+                    <p class="muted">가입한 이메일을 입력하면 비밀번호 재설정 안내를 진행할 수 있어요.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 본문 -->
+        <section class="find-body">
+            <div class="container">
+                <div class="find-card">
+
+                    <!-- 탭 -->
+                    <div class="find-tabs" role="tablist" aria-label="찾기 탭">
+                        <a class="find-tab" href="./find_id.html" role="tab" aria-selected="false">
+                            아이디 찾기
+                        </a>
+                        <a class="find-tab find-tab--active" href="./find_pw.html" role="tab" aria-selected="true">
+                            비밀번호 찾기
+                        </a>
+                    </div>
+
+                    <!-- 안내 -->
+                    <div class="hint">
+                        <!-- <div class="hint__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <rect x="5" y="10" width="14" height="10" rx="2"></rect>
+                                <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+                            </svg>
+                        </div> -->
+                        <div class="hint__text">
+                            <b>비밀번호 재설정</b>
+                            <div class="muted">이메일 인증 후 새 비밀번호를 설정하는 화면(UI)입니다.</div>
+                        </div>
+                    </div>
+
+                    <form class="find-form" action="#" method="post" aria-label="비밀번호 찾기 폼">
+                        <div class="form-grid">
+                            <label class="field field--full">
+                                <span class="field__label">이메일(아이디)</span>
+                                <input class="field__input" type="email" placeholder="example@stayo.com" required />
+                            </label>
+
+                            <label class="field">
+                                <span class="field__label">이름</span>
+                                <input class="field__input" type="text" placeholder="이름을 입력하세요" required />
+                            </label>
+
+                            <label class="field">
+                                <span class="field__label">휴대폰 번호</span>
+                                <input class="field__input" type="tel" placeholder="010-0000-0000" required />
+                            </label>
+                        </div>
+
+                        <!-- 인증 -->
+                        <div class="verify">
+                            <label class="field field--full">
+                                <span class="field__label">인증번호</span>
+                                <div class="verify__row">
+                                    <input class="field__input" type="text" placeholder="인증번호 6자리" />
+                                    <button class="btn-outline" type="button">인증요청</button>
+                                </div>
+                            </label>
+                            <p class="muted verify__note">* 실제 전송 기능은 없고 UI만 구성되어 있습니다.</p>
+                        </div>
+
+                        <!-- 새 비밀번호 설정(UI) -->
+                        <div class="reset">
+                            <div class="reset__title">새 비밀번호 설정</div>
+
+                            <label class="field field--full">
+                                <span class="field__label">새 비밀번호</span>
+                                <input class="field__input" type="password" placeholder="8자 이상, 영문/숫자 조합 권장" />
+                            </label>
+
+                            <label class="field field--full">
+                                <span class="field__label">새 비밀번호 확인</span>
+                                <input class="field__input" type="password" placeholder="비밀번호를 다시 입력하세요" />
+                            </label>
+
+                            <p class="muted reset__hint">* UI 예시: 실제 검증 로직은 JS/서버에서 처리</p>
+                        </div>
+
+                        <button class="btn-main btn-main--big" type="submit">비밀번호 재설정</button>
+
+                        <div class="result">
+                            <div class="result__title">안내</div>
+                            <div class="result__box">
+                                <b>재설정이 완료되었습니다.</b>
+                                <div class="muted">로그인 페이지로 돌아가 로그인해 주세요.</div>
+                            </div>
+                            <div class="result__actions">
+                                <a href="./login.html" class="btn-main">로그인 하러가기</a>
+                                <a href="./find_id.html" class="btn-outline">아이디 찾기</a>
+                            </div>
+                        </div>
+
+                        <p class="bottom-links">
+                            <a class="link" href="./login.html">로그인</a>
+                            <span class="sep">·</span>
+                            <a class="link" href="./signup.html">회원가입</a>
+                            <span class="sep">·</span>
+                            <a class="link" href="#">고객센터</a>
+                        </p>
+                    </form>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 공통 푸터 -->
+    <footer class="footer">
+        <div class="container footer__top">
+            <div class="footer__brand">
+                <div class="footer__logo">STAYO</div>
+                <p class="footer__desc">전 세계 최고의 숙소를<br />최저가로 만나보세요.</p>
+            </div>
+
+            <div class="footer__cols">
+                <div class="footer__col">
+                    <div class="footer__col-title">서비스</div>
+                    <a href="#" class="footer__link">숙소 예약</a>
+                    <a href="#" class="footer__link">항공권</a>
+                    <a href="#" class="footer__link">패키지 여행</a>
+                    <a href="#" class="footer__link">액티비티</a>
+                    <a href="#" class="footer__link">렌터카</a>
+                </div>
+
+                <div class="footer__col">
+                    <div class="footer__col-title">고객 지원</div>
+                    <a href="#" class="footer__link">고객센터</a>
+                    <a href="#" class="footer__link">자주 묻는 질문</a>
+                    <a href="#" class="footer__link">취소 및 환불</a>
+                    <a href="#" class="footer__link">이용약관</a>
+                    <a href="#" class="footer__link">개인정보처리방침</a>
+                </div>
+
+                <div class="footer__col">
+                    <div class="footer__col-title">파트너</div>
+                    <a href="#" class="footer__link">숙소 등록</a>
+                    <a href="#" class="footer__link">제휴 프로그램</a>
+                    <a href="#" class="footer__link">광고 문의</a>
+                    <a href="#" class="footer__link">API</a>
+                </div>
+
+                <div class="footer__col">
+                    <div class="footer__col-title">회사</div>
+                    <a href="#" class="footer__link">소개</a>
+                    <a href="#" class="footer__link">채용</a>
+                    <a href="#" class="footer__link">보도자료</a>
+                    <a href="#" class="footer__link">투자자 정보</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container footer__bottom">
+            <div class="footer__copyright">© 2026 STAYO. All rights reserved.</div>
+            <div class="footer__bottom-links">
+                <a href="#" class="footer__bottom-link">이용약관</a>
+                <a href="#" class="footer__bottom-link">개인정보처리방침</a>
+                <a href="#" class="footer__bottom-link">쿠키 설정</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

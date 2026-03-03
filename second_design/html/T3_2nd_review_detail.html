@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STAYO | 리뷰 상세</title>
+
+  <!-- 폰트(프로젝트 동일) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- 공통 CSS -->
+  <link rel="stylesheet" href="../css/T3_2nd_common.css" />
+  <!-- 페이지 전용 CSS -->
+  <link rel="stylesheet" href="../css/T3_2nd_review_detail.css" />
+</head>
+
+<body>
+  <!-- ===================================================
+    공통 헤더(메인과 동일 톤)
+  =================================================== -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="./index.html" class="logo" aria-label="STAYO 홈">STAYO</a>
+
+      <nav class="gnb" aria-label="주요 메뉴">
+        <a href="#" class="gnb__link">숙소</a>
+        <a href="#" class="gnb__link">항공권</a>
+        <a href="#" class="gnb__link">패키지</a>
+        <a href="#" class="gnb__link">액티비티</a>
+        <a href="#" class="gnb__link">렌터카</a>
+      </nav>
+
+      <div class="header__right">
+        <button class="icon-btn" type="button" aria-label="언어/지역">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.9 9h-3.2a15.8 15.8 0 00-1.2-6A8.1 8.1 0 0119.9 11zM12 4c.9 1.2 1.8 3.3 2.3 7H9.7C10.2 7.3 11.1 5.2 12 4zM4.1 13h3.2a15.8 15.8 0 001.2 6A8.1 8.1 0 014.1 13zm0-2a8.1 8.1 0 014.4-6 15.8 15.8 0 00-1.2 6H4.1zM12 20c-.9-1.2-1.8-3.3-2.3-7h4.6c-.5 3.7-1.4 5.8-2.3 7zm3.5-1a15.8 15.8 0 001.2-6h3.2a8.1 8.1 0 01-4.4 6z" />
+          </svg>
+        </button>
+
+        <button class="icon-btn" type="button" aria-label="찜 목록">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+                 2 6 4 4 6.5 4
+                 8.04 4 9.54 4.81 10.4 6.09
+                 11.26 4.81 12.76 4 14.3 4
+                 16.8 4 18.8 6 18.8 8.5
+                 c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+          </svg>
+        </button>
+
+        <a href="./login.html" class="btn btn--login">
+          <span class="btn__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 12a4.5 4.5 0 10-4.5-4.5A4.5 4.5 0 0012 12zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z" />
+            </svg>
+          </span>
+          로그인
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="rev-detail-page">
+    <!-- ===================================================
+      상단: 브레드크럼 + 뒤로가기
+      - 흐름상 review.html로 돌아가야 함
+    =================================================== -->
+    <section class="rev-top">
+      <div class="container">
+        <nav class="crumb" aria-label="현재 위치">
+          <a href="./T3_2nd_detail.html">상세</a>
+          <span class="crumb__sep">/</span>
+          <a href="./T3_2nd_review.html">리뷰</a>
+          <span class="crumb__sep">/</span>
+          <span class="crumb__current">리뷰 상세</span>
+        </nav>
+
+        <div class="rev-top__row">
+          <a href="./T3_2nd_review.html" class="back">
+            <span class="back__icon" aria-hidden="true">←</span>
+            리뷰 목록으로
+          </a>
+
+          <!-- (UI) 신고/공유 버튼 -->
+          <div class="rev-top__actions">
+            <button class="btn-outline btn-outline--sm" type="button">신고</button>
+            <button class="btn-outline btn-outline--sm" type="button">공유</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================
+      메인 레이아웃: 좌(리뷰 본문) / 우(숙소 요약 사이드 카드)
+    =================================================== -->
+    <section class="rev-body">
+      <div class="container rev-layout">
+
+        <!-- ==========================
+          좌측: 리뷰 상세 카드
+        =========================== -->
+        <article class="card rev-card">
+          <!-- 작성자/평점 헤더 -->
+          <header class="rev-card__head">
+            <div class="user">
+              <div class="avatar" aria-hidden="true">MH</div>
+              <div class="user__info">
+                <div class="user__name">박민호</div>
+                <div class="user__meta">
+                  오션뷰 빌라 인피니티 풀 · 2026-03-01
+                </div>
+              </div>
+            </div>
+
+            <div class="rate">
+              <div class="stars" aria-label="별점 5점">★★★★★</div>
+              <div class="score">5.0</div>
+            </div>
+          </header>
+
+          <!-- 리뷰 본문 -->
+          <div class="rev-card__content">
+            <h1 class="rev-title">사진 그대로 뷰가 미쳤어요!</h1>
+
+            <p class="rev-text">
+              사진에서 보던 것보다 실제가 더 좋았어요. 객실에서 보는 바다 뷰가 정말 압도적이고,
+              직원분들도 친절해서 체크인부터 기분 좋았습니다.
+              조식도 퀄리티가 높고 메뉴가 다양해서 만족했어요.
+              다음에 가족과 함께 재방문 의사 100%입니다.
+            </p>
+
+            <!-- 키워드 태그 -->
+            <div class="tags" aria-label="리뷰 키워드">
+              <span class="tag">청결</span>
+              <span class="tag">친절</span>
+              <span class="tag">뷰맛집</span>
+              <span class="tag">가성비</span>
+            </div>
+
+            <!-- 사진 갤러리 -->
+            <div class="photos" aria-label="리뷰 사진">
+              <figure class="photo">
+                <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1400&q=80" alt="리뷰 사진 1">
+              </figure>
+              <figure class="photo">
+                <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1400&q=80" alt="리뷰 사진 2">
+              </figure>
+              <figure class="photo">
+                <img src="https://images.unsplash.com/photo-1501117716987-c8e1ecb210d3?auto=format&fit=crop&w=1400&q=80" alt="리뷰 사진 3">
+              </figure>
+              <figure class="photo">
+                <img src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1400&q=80" alt="리뷰 사진 4">
+              </figure>
+            </div>
+
+            <!-- (선택) 숙소 항목별 평점 UI -->
+            <div class="scores">
+              <h2 class="scores__title">항목별 평점</h2>
+              <div class="scores__grid">
+                <div class="srow">
+                  <span class="srow__label">청결</span>
+                  <div class="srow__bar"><span style="width:96%"></span></div>
+                  <span class="srow__val">4.8</span>
+                </div>
+                <div class="srow">
+                  <span class="srow__label">위치</span>
+                  <div class="srow__bar"><span style="width:92%"></span></div>
+                  <span class="srow__val">4.6</span>
+                </div>
+                <div class="srow">
+                  <span class="srow__label">친절</span>
+                  <div class="srow__bar"><span style="width:98%"></span></div>
+                  <span class="srow__val">4.9</span>
+                </div>
+                <div class="srow">
+                  <span class="srow__label">가성비</span>
+                  <div class="srow__bar"><span style="width:90%"></span></div>
+                  <span class="srow__val">4.5</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 하단 액션(UI) -->
+            <div class="rev-actions">
+              <button class="btn-main" type="button">도움돼요 12</button>
+              <button class="btn-outline" type="button">댓글 보기(3)</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ==========================
+          우측: 숙소 요약 카드(사이드)
+          - 리뷰에서 숙소 상세로 돌아가는 흐름 제공
+        =========================== -->
+        <aside class="card stay-card">
+          <div class="stay-card__thumb">
+            <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1400&q=80" alt="오션뷰 빌라 인피니티 풀">
+          </div>
+
+          <div class="stay-card__body">
+            <div class="stay-card__title">오션뷰 빌라 인피니티 풀</div>
+            <div class="stay-card__meta">발리, 인도네시아</div>
+
+            <div class="stay-card__rate">
+              <span class="stars">★★★★★</span>
+              <b>4.9</b>
+              <span class="muted">(328)</span>
+            </div>
+
+            <div class="stay-card__price">
+              ₩245,000 <span>/ 박</span>
+            </div>
+
+            <div class="stay-card__btns">
+              <!-- 상세페이지로 돌아가기 -->
+              <a href="./T3_2nd_detail.html" class="btn-main">숙소 상세 보기</a>
+              <!-- 리뷰 목록으로 -->
+              <a href="./T3_2nd_review.html" class="btn-outline">리뷰 더 보기</a>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+
+    <!-- ===================================================
+      하단: 다음/이전 리뷰 네비게이션(UI)
+    =================================================== -->
+    <section class="rev-nav">
+      <div class="container nav-row">
+        <a class="nav-card" href="./T3_2nd_review_detail.html">
+          <div class="nav-card__cap">이전 리뷰</div>
+          <div class="nav-card__title">위치가 좋아요!</div>
+          <div class="nav-card__meta">모던 부티크 호텔 · 2026-02-26</div>
+        </a>
+
+        <a class="nav-card" href="./T3_2nd_review_detail.html">
+          <div class="nav-card__cap">다음 리뷰</div>
+          <div class="nav-card__title">온천이 최고였어요</div>
+          <div class="nav-card__meta">전통 료칸 스테이 · 2026-02-20</div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================================================
+    공통 푸터
+  =================================================== -->
+  <footer class="footer">
+    <div class="container footer__top">
+      <div class="footer__brand">
+        <div class="footer__logo">STAYO</div>
+        <p class="footer__desc">전 세계 최고의 숙소를<br />최저가로 만나보세요.</p>
+      </div>
+
+      <div class="footer__cols">
+        <div class="footer__col">
+          <div class="footer__col-title">서비스</div>
+          <a href="#" class="footer__link">숙소 예약</a>
+          <a href="#" class="footer__link">항공권</a>
+          <a href="#" class="footer__link">패키지 여행</a>
+          <a href="#" class="footer__link">액티비티</a>
+          <a href="#" class="footer__link">렌터카</a>
+        </div>
+
+        <div class="footer__col">
+          <div class="footer__col-title">고객 지원</div>
+          <a href="#" class="footer__link">고객센터</a>
+          <a href="#" class="footer__link">자주 묻는 질문</a>
+          <a href="#" class="footer__link">취소 및 환불</a>
+          <a href="#" class="footer__link">이용약관</a>
+          <a href="#" class="footer__link">개인정보처리방침</a>
+        </div>
+
+        <div class="footer__col">
+          <div class="footer__col-title">파트너</div>
+          <a href="#" class="footer__link">숙소 등록</a>
+          <a href="#" class="footer__link">제휴 프로그램</a>
+          <a href="#" class="footer__link">광고 문의</a>
+          <a href="#" class="footer__link">API</a>
+        </div>
+
+        <div class="footer__col">
+          <div class="footer__col-title">회사</div>
+          <a href="#" class="footer__link">소개</a>
+          <a href="#" class="footer__link">채용</a>
+          <a href="#" class="footer__link">보도자료</a>
+          <a href="#" class="footer__link">투자자 정보</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer__bottom">
+      <div class="footer__copyright">
+        © 2026 STAYO. All rights reserved.
+      </div>
+      <div class="footer__bottom-links">
+        <a href="#" class="footer__bottom-link">이용약관</a>
+        <a href="#" class="footer__bottom-link">개인정보처리방침</a>
+        <a href="#" class="footer__bottom-link">쿠키 설정</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
