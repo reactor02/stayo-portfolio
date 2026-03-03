@@ -1,0 +1,1027 @@
+/* =========================================
+  T3_2nd_mypage.css (마이페이지 전용)
+  - STAYO 컨셉 유지: 베이지 배경 + 블랙 포인트
+  - 상단 프로필/요약 + 탭(좌 메뉴 / 우 콘텐츠)
+  - 반응형 포함
+========================================= */
+
+.my {
+    background: #f7f5f2;
+    padding-bottom: 42px;
+}
+
+/* 상단 */
+.my-top {
+    padding: 18px 0 12px;
+}
+
+/* 브레드크럼 */
+.crumb {
+    font-size: 13px;
+    color: #6b6b6b;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.crumb a {
+    color: #6b6b6b;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.crumb__sep {
+    opacity: .7;
+}
+
+.crumb__current {
+    color: #111;
+    font-weight: 900;
+}
+
+.my-title {
+    margin-top: 12px;
+}
+
+.my-title h1 {
+    font-family: "Nanum Myeongjo", serif;
+    font-size: 34px;
+    font-weight: 900;
+    color: #111;
+}
+
+.muted {
+    color: #6b6b6b;
+    font-weight: 700;
+}
+
+/* 본문 */
+.my-body {
+    padding: 10px 0 30px;
+}
+
+.my-grid {
+    display: grid;
+    gap: 16px;
+}
+
+/* =========================
+  프로필 카드
+========================= */
+.profile-card {
+    border: 1px solid #e7e2dc;
+    background: rgba(255, 255, 255, 0.72);
+    border-radius: 24px;
+    padding: 16px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.profile-card__left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 22px;
+    display: grid;
+    place-items: center;
+    background: rgba(0, 0, 0, 0.08);
+    color: #111;
+    font-weight: 900;
+}
+
+.profile-name {
+    font-weight: 900;
+    color: #111;
+    font-size: 18px;
+}
+
+.profile-email {
+    margin-top: 6px;
+    font-size: 13px;
+}
+
+.profile-badges {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* chip */
+.chip {
+    display: inline-flex;
+    align-items: center;
+    height: 30px;
+    padding: 0 12px;
+    border-radius: 999px;
+    border: 1px solid #e1dbd4;
+    background: rgba(255, 255, 255, 0.7);
+    font-weight: 900;
+    font-size: 12px;
+    color: #444;
+}
+
+.chip--dark {
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    border-color: rgba(0, 0, 0, 0.85);
+}
+
+.profile-card__right {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* 버튼(페이지 내부용) */
+.btn-main {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border: 0;
+    border-radius: 16px;
+    height: 42px;
+    padding: 0 16px;
+    background: #111;
+    color: #fff;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.btn-main:hover {
+    filter: brightness(1.05);
+}
+
+.btn-outline {
+    border: 1px solid #111;
+    background: transparent;
+    color: #111;
+    border-radius: 16px;
+    height: 42px;
+    padding: 0 16px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.btn-outline:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+/* .btn-ghost {
+    border: 1px solid #e1dbd4;
+    background: rgba(255, 255, 255, 0.7);
+    color: #111;
+    border-radius: 16px;
+    height: 42px;
+    padding: 0 16px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.95);
+} */
+
+/* 요약 3개 */
+.summary-cards {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.sum {
+    border: 1px solid #e7e2dc;
+    background: rgba(255, 255, 255, 0.65);
+    border-radius: 24px;
+    padding: 14px 16px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.07);
+}
+
+.sum__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 16px;
+    background: rgba(0, 0, 0, 0.06);
+    display: grid;
+    place-items: center;
+}
+
+.sum__title {
+    font-weight: 900;
+    color: #111;
+    font-size: 13px;
+}
+
+.sum__value {
+    margin-top: 4px;
+    font-weight: 900;
+    color: #111;
+    font-size: 18px;
+}
+
+/* =========================
+  탭 레이아웃(좌 메뉴 / 우 컨텐츠)
+========================= */
+.tabs {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 16px;
+    align-items: start;
+}
+
+/* 좌측 메뉴 */
+.tab-menu {
+    border: 1px solid #e7e2dc;
+    background: rgba(255, 255, 255, 0.72);
+    border-radius: 24px;
+    padding: 10px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 92px;
+}
+
+.tab-menu__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 12px;
+    border-radius: 18px;
+    color: #111;
+    text-decoration: none;
+    font-weight: 900;
+}
+
+.tab-menu__icon {
+    width: 26px;
+    display: inline-flex;
+    justify-content: center;
+}
+
+.tab-menu__item:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.tab-menu__item--active {
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+}
+
+/* 우측 컨텐츠 */
+.tab-content {
+    display: grid;
+    gap: 12px;
+}
+
+/* 패널 */
+.panel {
+    border: 1px solid #e7e2dc;
+    background: rgba(255, 255, 255, 0.72);
+    border-radius: 24px;
+    padding: 16px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+}
+
+.panel--soft {
+    background: rgba(255, 255, 255, 0.62);
+}
+
+.panel__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.panel__title {
+    font-family: "Nanum Myeongjo", serif;
+    font-weight: 900;
+    font-size: 20px;
+    color: #111;
+}
+
+.link-mini {
+    font-size: 12px;
+    font-weight: 900;
+    color: #111;
+    text-decoration: underline;
+}
+
+/* select */
+.select {
+    border: 1px solid #eee7e0;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 14px;
+    padding: 10px 12px;
+    font-weight: 900;
+    outline: none;
+}
+
+/* 예약 리스트 */
+.booking-list {
+    display: grid;
+    gap: 12px;
+}
+
+.booking-card {
+    border: 1px solid #eee7e0;
+    background: rgba(255, 255, 255, 0.72);
+    border-radius: 24px;
+    padding: 12px;
+    display: grid;
+    grid-template-columns: 220px 1fr 180px;
+    gap: 14px;
+}
+
+.booking-card__media {
+    border-radius: 18px;
+    overflow: hidden;
+    height: 150px;
+    position: relative;
+}
+
+.booking-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* =========================================
+  예약내역 - 이용 완료 상태 스타일
+  booking-card--completed
+========================================= */
+
+/* 카드 전체 톤 다운 */
+.booking-card__completed{
+  opacity: 0.72;
+  background: rgba(255,255,255,0.6);
+}
+
+/* 이미지 흑백 처리 */
+.booking-card__completed .booking-card__media img{
+  filter: grayscale(100%);
+}
+
+/* 제목/텍스트 살짝 연하게 */
+.booking-card__completed .booking-card__title{
+  color: #555;
+}
+
+.booking-card__completed .booking-card__meta,
+.booking-card__completed .booking-card__price{
+  color: #777;
+}
+
+/* 이용완료 뱃지 살짝 부드럽게 */
+.booking-card__completed .badge{
+  background: rgba(0,0,0,0.6);
+}
+
+/* 버튼 기본은 연하게 */
+.booking-card--completed .btn-outline{
+  border-color: #dcd6cf;
+  color: #555;
+}
+
+/* hover는 정상 동작 (너무 죽지 않게) */
+.booking-card--completed .btn-outline:hover{
+  background: rgba(17,17,17,0.05);
+  color: #111;
+  opacity: 1;
+}
+
+/* 배지 */
+.badge {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    display: inline-flex;
+    align-items: center;
+    height: 28px;
+    padding: 0 12px;
+    border-radius: 999px;
+    font-weight: 900;
+    font-size: 12px;
+}
+
+.badge--dark {
+    background: rgba(0, 0, 0, 0.78);
+    color: #fff;
+}
+
+.booking-card__title {
+    font-family: "Nanum Myeongjo", serif;
+    font-weight: 900;
+    font-size: 20px;
+    color: #111;
+}
+
+.booking-card__meta {
+    margin-top: 6px;
+    font-size: 13px;
+}
+
+.booking-card__dates {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.pill {
+    display: inline-flex;
+    align-items: center;
+    height: 28px;
+    padding: 0 12px;
+    border-radius: 999px;
+    border: 1px solid #e1dbd4;
+    background: rgba(255, 255, 255, 0.7);
+    font-weight: 900;
+    font-size: 12px;
+    color: #444;
+}
+
+.dot {
+    color: #b7b0a8;
+    font-weight: 900;
+}
+
+.booking-card__price {
+    margin-top: 10px;
+    font-weight: 900;
+    color: #111;
+}
+
+.booking-card__price b {
+    font-size: 18px;
+}
+
+.booking-card__side {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+    justify-content: center;
+}
+
+/* 찜 미리보기 */
+.wish-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.wish-card {
+    border: 1px solid #eee7e0;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 22px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+}
+
+.wish-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    display: block;
+}
+
+.wish-card__body {
+    padding: 12px;
+}
+
+.wish-card__title {
+    font-weight: 900;
+    color: #111;
+}
+
+.wish-card__meta {
+    margin-top: 6px;
+    font-size: 13px;
+}
+
+/* 쿠폰 */
+.coupon-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.coupon {
+    border: 1px solid #eee7e0;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 22px;
+    padding: 14px;
+}
+
+.coupon__tag {
+    display: inline-flex;
+    align-items: center;
+    height: 28px;
+    padding: 0 12px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    font-weight: 900;
+    font-size: 12px;
+}
+
+.coupon__title {
+    margin-top: 10px;
+    font-weight: 900;
+    color: #111;
+    font-size: 16px;
+}
+
+.coupon__desc {
+    margin-top: 6px;
+}
+
+.coupon__date {
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+/* 포인트 박스 */
+.point-box {
+    margin-top: 12px;
+    border: 1px solid #eee7e0;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 22px;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.point-box__title {
+    font-weight: 900;
+    color: #111;
+}
+
+.point-box__value {
+    font-weight: 900;
+    color: #111;
+    font-size: 22px;
+}
+
+/* =========================
+  마이페이지 사이드메뉴 아이콘: 메인페이지(라인아이콘) 톤으로 통일
+========================= */
+.tab-menu__icon {
+    width: 22px;
+    height: 22px;
+    display: grid;
+    place-items: center;
+}
+
+/* 라인 아이콘 공통 */
+.tab-menu__icon svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    /* 라인 아이콘 */
+    stroke: currentColor;
+    /* 텍스트 색상 따라감 */
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.75;
+    /* 비활성은 살짝 연하게 */
+}
+
+/* 기본 메뉴 글자 컬러(메인 느낌) */
+.tab-menu__item {
+    color: #7a7a7a;
+    /* 메인페이지 카테고리와 비슷 */
+}
+
+/* hover */
+.tab-menu__item:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+/* 활성 메뉴(검정 배경에 흰색 텍스트/아이콘) */
+.tab-menu__item--active {
+    background: rgba(0, 0, 0, 0.88);
+    color: #fff;
+}
+
+.tab-menu__item--active .tab-menu__icon svg {
+    opacity: 1;
+}
+
+/* =======================================================
+  STAYO 2차 프로젝트 마이페이지 사이드메뉴 Fix
+  1) 활성 메뉴 hover 시 연해지는 현상 방지
+  2) 전체 톤: 블랙/베이지 + 라인 아이콘(currentColor)
+  ※ 맨 아래에 붙여서 기존 스타일을 덮어쓰기
+======================================================= */
+
+/* 사이드 메뉴 아이템(기본) */
+.tab-menu__item{
+  color: #7a7a7a;
+  border-radius: 16px;
+  transition: background-color .15s ease, color .15s ease, transform .15s ease;
+}
+
+/* 일반 hover: 너무 하얗게 뜨지 않게(베이지 배경에서 자연스럽게) */
+.tab-menu__item:hover{
+  background: rgba(17,17,17,0.05);
+  color: #111;
+}
+
+/* 라인 아이콘: 텍스트 컬러 따라가게 */
+.tab-menu__icon svg{
+  stroke: currentColor;
+  opacity: .75;
+  transition: opacity .15s ease, transform .15s ease;
+}
+
+/* hover 시 아이콘 살짝 선명하게 */
+.tab-menu__item:hover .tab-menu__icon svg{
+  opacity: .95;
+}
+
+/* ✅ 활성 메뉴: (메인페이지처럼) 진하게 고정 */
+.tab-menu__item--active{
+  background: rgba(17,17,17,0.88);
+  color: #fff;
+  font-weight: 900;
+  position: relative;
+}
+
+/* 활성 메뉴 hover 시에도 절대 색 바뀌지 않게 고정(핵심) */
+.tab-menu__item--active:hover{
+  background: rgba(17,17,17,0.88);
+  color: #fff;
+  transform: none; /* 필요시 살짝 떠오르는 효과 방지 */
+}
+
+/* 활성 아이콘도 선명하게 */
+.tab-menu__item--active .tab-menu__icon svg{
+  opacity: 1;
+}
+
+/* (선택) 활성 표시용 얇은 라인 — 원하면 메인 카테고리 느낌 */
+.tab-menu__item--active::after{
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 8px;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.92);
+}
+
+/* =========================
+  섹션 공통(마이페이지 본문)
+========================= */
+.mysec{
+  scroll-margin-top: 110px; /* ✅ 앵커 이동 시 헤더에 가리지 않게(대략값) */
+  padding: 18px 0;
+  border-bottom: 1px solid #e7e2dc;
+}
+.mysec__title{
+  font-family: "Nanum Myeongjo", serif;
+  font-weight: 900;
+  font-size: 22px;
+  color: #111;
+  margin-bottom: 8px;
+}
+.mysec__sub{
+  color: #6b6b6b;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+/* =========================
+  고객센터 UI (STAYO 톤)
+========================= */
+.support__block{
+  border: 1px solid #eee7e0;
+  background: rgba(255,255,255,0.75);
+  border-radius: 22px;
+  padding: 14px;
+  margin: 14px 0;
+}
+.support__title{
+  font-weight: 900;
+  color: #111;
+  margin-bottom: 12px;
+}
+
+/* FAQ */
+.faq{
+  display: grid;
+  gap: 10px;
+}
+.faq__q{
+  width: 100%;
+  text-align: left;
+  border: 1px solid #eee7e0;
+  background: rgba(255,255,255,0.9);
+  border-radius: 18px;
+  padding: 12px 14px;
+  cursor: pointer;
+  font-weight: 900;
+  color: #111;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.faq__q:hover{
+  background: rgba(17,17,17,0.04);
+}
+.faq__chev{
+  opacity: .7;
+  transition: transform .15s ease;
+}
+.faq__q[aria-expanded="true"] .faq__chev{
+  transform: rotate(180deg);
+}
+.faq__a{
+  border: 1px solid #eee7e0;
+  background: rgba(255,255,255,0.75);
+  border-radius: 18px;
+  padding: 12px 14px;
+  color: #444;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
+/* 1:1 문의 */
+.inquiry__grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.field{ display: grid; gap: 8px; }
+.field--full{ grid-column: 1 / -1; }
+.field__label{ font-size: 13px; font-weight: 900; color: #111; }
+
+.field__input{
+  width: 100%;
+  border: 1px solid #eee7e0;
+  background: rgba(255,255,255,0.95);
+  border-radius: 16px;
+  padding: 12px 12px;
+  font-weight: 800;
+  outline: none;
+}
+.field__input:focus{
+  border-color: rgba(17,17,17,0.55);
+  box-shadow: 0 0 0 4px rgba(17,17,17,0.08);
+}
+.field__textarea{
+  resize: vertical;
+  min-height: 140px;
+}
+
+.inquiry__actions{
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.inquiry__note{
+  margin-top: 10px;
+  color: #6b6b6b;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+/* 버튼(없으면 마이페이지에 맞춰 추가) */
+.btn-main{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  border-radius: 16px;
+  border: 0;
+  background: #111;
+  color: #fff;
+  font-weight: 900;
+  cursor: pointer;
+}
+.btn-main:hover{ filter: brightness(1.05); }
+
+.btn-outline{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  border-radius: 16px;
+  border: 1px solid #111;
+  background: transparent;
+  color: #111;
+  font-weight: 900;
+  cursor: pointer;
+}
+.btn-outline:hover{ background: rgba(0,0,0,0.05); }
+
+/* =========================
+  나의 문의 내역
+========================= */
+.inquiry-list{
+  display: grid;
+  gap: 14px;
+}
+
+.inq-card{
+  border: 1px solid #eee7e0;
+  background: rgba(255,255,255,0.9);
+  border-radius: 22px;
+  padding: 14px;
+}
+
+.inq-top{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.inq-title{
+  font-weight: 900;
+  color: #111;
+}
+
+.inq-meta{
+  font-size: 13px;
+  color: #6b6b6b;
+  margin: 6px 0;
+  font-weight: 700;
+}
+
+.inq-preview{
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 8px;
+}
+
+.inq-toggle{
+  border: none;
+  background: transparent;
+  color: #111;
+  font-weight: 900;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+/* 상태 뱃지 */
+.inq-badge{
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 900;
+}
+
+.inq-badge--done{
+  background: rgba(17,17,17,0.08);
+  color: #111;
+}
+
+.inq-badge--wait{
+  background: rgba(17,17,17,0.05);
+  color: #666;
+}
+
+/* 상세 답변 */
+.inq-detail{
+  margin-top: 12px;
+  border-top: 1px solid #e7e2dc;
+  padding-top: 12px;
+}
+
+.inq-answer-title{
+  font-weight: 900;
+  margin-bottom: 6px;
+  color: #111;
+}
+
+.inq-answer{
+  color: #444;
+  line-height: 1.7;
+}
+
+/* =========================
+  프로필 관리 레이아웃
+========================= */
+.profile-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* 버튼 영역 */
+.profile-actions{
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* 반응형 */
+@media (max-width: 720px){
+  .inquiry__grid{ grid-template-columns: 1fr; }
+  .inquiry__actions{ grid-template-columns: 1fr; }
+}
+
+/* 모바일(그리드 메뉴)에서도 아이콘 크기 유지 */
+@media (max-width: 1100px) {
+    .tab-menu__icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .tab-menu__icon svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* =========================
+  반응형
+========================= */
+@media (max-width: 1100px) {
+    .tabs {
+        grid-template-columns: 1fr;
+    }
+
+    .tab-menu {
+        position: static;
+        top: auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+
+    .tab-menu__item {
+        justify-content: center;
+    }
+
+    .booking-card {
+        grid-template-columns: 220px 1fr;
+    }
+
+    .booking-card__side {
+        grid-column: 1 / -1;
+        flex-direction: row;
+    }
+}
+
+@media (max-width: 720px) {
+    .my-title h1 {
+        font-size: 28px;
+    }
+
+    .profile-card {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .profile-card__right {
+        justify-content: flex-end;
+    }
+
+    .summary-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .booking-card {
+        grid-template-columns: 1fr;
+    }
+
+    .booking-card__media {
+        height: 180px;
+    }
+
+    .wish-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .coupon-grid {
+        grid-template-columns: 1fr;
+    }
+}
