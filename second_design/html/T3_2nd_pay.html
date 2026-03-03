@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="../css/T3_2nd_common.css" />
   <!-- 페이지 전용 CSS -->
   <link rel="stylesheet" href="../css/T3_2nd_pay.css" />
+  <script src="../js/T3_2nd_pay.js"></script>
 </head>
 
 <body>
@@ -142,23 +143,38 @@
                 <label class="field">
                   <span  class="field__label">예약자 이름</span>
                   <input id="userName" class="field__input" type="text" placeholder="이름을 입력하세요" />
+                  <div id="userNameError" class="field__error" aria-live="polite" style="display:none;color:red;font-size:12px;margin-top:4px;"></div>
                 </label>
 
                 <label class="field">
                   <span class="field__label">연락처</span>
-                  <input class="field__input" type="tel" placeholder="010-0000-0000" />
+                  <input id="userPhone" class="field__input" type="tel" maxlength="11" placeholder="010-0000-0000(-를 제외한 숫자만 입력해주세요)" />
+                  <div id="userPhoneError" class="field__error" aria-live="polite" style="display:none;color:red;font-size:12px;margin-top:4px;"></div>
                 </label>
 
-                <label class="field field--full">
+                <label class="field field--full email-field">
                   <span class="field__label">이메일</span>
-                  <input class="field__input" type="email" placeholder="example@stayo.com" />
+                  <div class="email-row">
+                    <input id="emailLocal" class="field__input email__local" type="text" placeholder="example" />
+                    <span class="email__at">@</span>
+                    <select id="emailSelect" class="email__select">
+                      <option value="">선택</option>
+                      <option value="naver.com">naver.com</option>
+                      <option value="gmail.com">gmail.com</option>
+                      <option value="daum.net">daum.net</option>
+                      <option value="hotmail.com">hotmail.com</option>
+                      <option value="icloud.com">icloud.com</option>
+                      <option value="custom">직접입력</option>
+                    </select>
+                    <input id="emailDomain" class="field__input email__domain" type="text" placeholder="직접입력" disabled />
+                  </div>
                 </label>
               </div>
 
               <!-- 체크인 요청사항 -->
               <label class="field field--full">
                 <span class="field__label">요청사항 (선택)</span>
-                <textarea class="field__textarea" rows="3" placeholder="예) 조용한 객실로 부탁드려요"></textarea>
+                <textarea class="field__textarea" rows="3" placeholder="예시) 조용한 객실로 부탁드려요"></textarea>
               </label>
             </form>
           </article>
@@ -231,7 +247,13 @@
               <div class="form-grid">
                 <label class="field field--full">
                   <span class="field__label">카드 번호</span>
-                  <input class="field__input" type="text" placeholder="0000 - 0000 - 0000 - 0000" />
+                  <div class="card-number-row">
+                    <input id="cardPart1" class="field__input card__part" type="text" inputmode="numeric" maxlength="4" placeholder="0000" />
+                    <input id="cardPart2" class="field__input card__part" type="text" inputmode="numeric" maxlength="4" placeholder="0000" />
+                    <input id="cardPart3" class="field__input card__part" type="text" inputmode="numeric" maxlength="4" placeholder="0000" />
+                    <input id="cardPart4" class="field__input card__part" type="text" inputmode="numeric" maxlength="4" placeholder="0000" />
+                    <input type="hidden" id="cardNumberFull" name="cardNumber" />
+                  </div>
                 </label>
 
                 <label class="field">
@@ -256,27 +278,27 @@
 
             <div class="agree">
               <label class="check">
-                <input type="checkbox" />
+                <input id="agreeAll" type="checkbox" />
                 <span>전체 동의</span>
               </label>
 
               <div class="agree__list">
                 <label class="check">
-                  <input type="checkbox" />
+                  <input id="agree_terms" type="checkbox" data-required="true" />
                   <span>[필수] 이용약관 동의</span>
-                  <a href="#" class="agree__link">보기</a>
+                  <a href="#" class="agree__link" data-type="terms">보기</a>
                 </label>
 
                 <label class="check">
-                  <input type="checkbox" />
+                  <input id="agree_privacy" type="checkbox" data-required="true" />
                   <span>[필수] 개인정보 처리방침 동의</span>
-                  <a href="#" class="agree__link">보기</a>
+                  <a href="#" class="agree__link" data-type="privacy">보기</a>
                 </label>
 
                 <label class="check">
-                  <input type="checkbox" />
+                  <input id="agree_marketing" type="checkbox" data-required="false" />
                   <span>[선택] 마케팅 수신 동의</span>
-                  <a href="#" class="agree__link">보기</a>
+                  <a href="#" class="agree__link" data-type="marketing">보기</a>
                 </label>
               </div>
 
@@ -308,7 +330,7 @@
                 <span class="muted">세금 및 수수료</span>
                 <b>₩35,000</b>
               </div>
-              <div class="sum-row">
+              <div class="sum-row sum-row--discount">
                 <span class="muted">할인</span>
                 <b>-₩20,000</b>
               </div>
@@ -353,6 +375,22 @@
       </div>
     </section>
   </main>
+  <!-- 약관 모달 (공통) -->
+  <div id="termsModal" class="terms-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="terms-modal__overlay" data-action="close"></div>
+    <div class="terms-modal__panel" role="document">
+      <header class="terms-modal__head">
+        <h3 class="terms-modal__title">약관</h3>
+        <button class="terms-modal__close" aria-label="닫기" data-action="close">✕</button>
+      </header>
+      <div id="termsModalContent" class="terms-modal__content" tabindex="0" aria-label="약관 내용">
+        <!-- 내용은 JS에서 삽입 -->
+      </div>
+      <footer class="terms-modal__foot">
+        <button class="btn-small" type="button" data-action="close">닫기</button>
+      </footer>
+    </div>
+  </div>
 
   <!-- 공통 푸터 -->
   <footer class="footer">
