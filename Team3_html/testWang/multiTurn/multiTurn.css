@@ -14,7 +14,6 @@ body {
     font-family: 'Pretendard', -apple-system, sans-serif;
 }
 
-/* 전체 컨테이너 */
 .chat-container { 
     width: 400px; 
     height: 600px; 
@@ -23,10 +22,9 @@ body {
     box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
     display: flex; 
     flex-direction: column; 
-    overflow: hidden; /* 컨테이너 밖으로 내용 안 삐져나가게 함 */
+    overflow: hidden;
 }
 
-/* 헤더 */
 .chat-header { 
     background: #007bff; 
     color: white; 
@@ -34,68 +32,43 @@ body {
     font-weight: bold;
     display: flex;
     justify-content: space-between;
-    z-index: 10;
 }
 
-/* [핵심] 메시지 리스트 영역 (스크롤이 생기는 유일한 곳) */
 .chat-box { 
     flex: 1; 
     padding: 20px; 
-    overflow-y: auto;   /* 내용이 많아지면 자동 스크롤 */
-    overflow-x: hidden; /* 가로 스크롤 방지 */
     display: flex; 
     flex-direction: column; 
     background: #f8f9fa; 
+    overflow-y: auto;
 }
 
-/* 스크롤바 디자인 (선택 사항) */
-.chat-box::-webkit-scrollbar {
-    width: 6px;
-}
-.chat-box::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 10px;
-}
-
-/* [핵심] 메시지 객체 간격 설정 */
 .message { 
     display: flex; 
     width: 100%; 
-    margin-bottom: 18px; /* 메시지 간의 세로 간격 (겹침 방지) */
-    flex-shrink: 0;      /* 메시지가 압축되지 않도록 설정 */
+    margin-bottom: 15px; 
+    flex-shrink: 0;
 }
 
-.message:last-child {
-    margin-bottom: 0;    /* 마지막 메시지는 마진 제거 */
-}
-
-/* 말풍선 공통 */
 .bubble { 
     max-width: 80%; 
     padding: 12px 16px; 
     border-radius: 18px; 
     font-size: 14px; 
     line-height: 1.5; 
-    word-break: break-all; /* 긴 단어도 자동으로 줄바꿈 */
-    white-space: pre-wrap; /* 줄바꿈 기호 유지 */
-    overflow: visible;     /* 말풍선 내부에 스크롤 생기지 않게 함 */
+    word-break: break-all;
+    white-space: pre-wrap;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-/* 사용자 메시지 (오른쪽 정렬) */
-.message.user { 
-    justify-content: flex-end; 
-}
+.message.user { justify-content: flex-end; }
 .message.user .bubble { 
     background: #007bff; 
     color: white; 
-    border-bottom-right-radius: 2px; /* 카톡 느낌의 뾰족한 모서리 */
+    border-bottom-right-radius: 2px;
 }
 
-/* 모델 메시지 (왼쪽 정렬) */
-.message.model { 
-    justify-content: flex-start; 
-}
+.message.model { justify-content: flex-start; }
 .message.model .bubble { 
     background: #ffffff; 
     color: #333; 
@@ -103,7 +76,6 @@ body {
     border: 1px solid #e0e0e0;
 }
 
-/* 입력 영역 */
 .chat-input-area { 
     padding: 15px; 
     background: #fff;
@@ -119,8 +91,7 @@ body {
     padding: 12px; 
     outline: none; 
     resize: none; 
-    max-height: 100px;
-    font-size: 14px;
+    height: 45px;
 }
 
 #ask-btn { 
@@ -131,14 +102,4 @@ body {
     border-radius: 10px; 
     cursor: pointer; 
     font-weight: bold;
-    transition: background 0.2s;
-}
-
-#ask-btn:hover {
-    background: #0056b3;
-}
-
-#ask-btn:disabled {
-    background: #ccc;
-    cursor: not-allowed;
 }

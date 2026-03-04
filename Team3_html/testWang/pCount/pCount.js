@@ -52,9 +52,6 @@ function bind(){
         popup.style.display = "none";
 
     });
-
-    
-
 }
 
 

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STAYO | 관리자</title>
+
+    <!-- 폰트(프로젝트 동일) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- 공통 CSS -->
+    <link rel="stylesheet" href="../css/T3_2nd_common.css" />
+    <!-- 페이지 전용 CSS -->
+    <link rel="stylesheet" href="../css/T3_2nd_admin.css" />
+</head>
+
+<body>
+    <!-- ===================================================
+    공통 헤더(기존 STAYO 스타일 유지)
+  =================================================== -->
+    <header class="header">
+        <div class="container header__inner">
+            <a href="./index.html" class="logo" aria-label="STAYO 홈">STAYO</a>
+
+            <nav class="gnb" aria-label="주요 메뉴">
+                <a href="#" class="gnb__link">숙소</a>
+                <a href="#" class="gnb__link">항공권</a>
+                <a href="#" class="gnb__link">패키지</a>
+                <a href="#" class="gnb__link">액티비티</a>
+                <a href="#" class="gnb__link">렌터카</a>
+            </nav>
+
+            <div class="header__right">
+                <div class="admin-chip" aria-label="관리자 표시">
+                    <span class="admin-chip__dot" aria-hidden="true"></span>
+                    관리자
+                </div>
+                <a href="./mypage.html" class="btn btn--login">마이페이지</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===================================================
+    관리자 레이아웃
+    - 좌측: 사이드바
+    - 우측: 메인 콘텐츠
+  =================================================== -->
+    <main class="admin">
+        <div class="container admin__layout">
+
+            <!-- ==========================
+        1) 사이드바
+      =========================== -->
+            <aside class="admin-side" aria-label="관리자 메뉴">
+                <div class="admin-side__title">
+                    <div class="admin-side__logo">관리자 센터</div>
+                    <div class="admin-side__sub muted">STAYO 운영/관리</div>
+                </div>
+
+                <nav class="admin-nav">
+                    <!-- active: 현재 메뉴 강조 -->
+                    <a class="admin-nav__item admin-nav__item--active" href="#sec-dashboard">
+                        <span class="admin-nav__icon" aria-hidden="true">
+                            <!-- dashboard -->
+                            <svg viewBox="0 0 24 24">
+                                <path d="M3 13h8V3H3v10zM13 21h8V11h-8v10zM13 3v6h8V3h-8zM3 21h8v-6H3v6z" />
+                            </svg>
+                        </span>
+                        대시보드
+                    </a>
+
+                    <a class="admin-nav__item" href="#sec-bookings">
+                        <span class="admin-nav__icon" aria-hidden="true">
+                            <!-- bookings -->
+                            <svg viewBox="0 0 24 24">
+                                <path d="M7 2h2v2h6V2h2v2h3v18H2V4h5V2zm15 8H2v10h20V10z" />
+                            </svg>
+                        </span>
+                        예약 관리
+                    </a>
+
+                    <a class="admin-nav__item" href="#sec-stays">
+                        <span class="admin-nav__icon" aria-hidden="true">
+                            <!-- hotel -->
+                            <svg viewBox="0 0 24 24">
+                                <path d="M3 20V6a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v14" />
+                                <path d="M3 12h13" />
+                                <path d="M16 10h3a2 2 0 0 1 2 2v8" />
+                                <path d="M16 20h5" />
+                            </svg>
+                        </span>
+                        숙소 승인/등록
+                    </a>
+
+                    <a class="admin-nav__item" href="#sec-users">
+                        <span class="admin-nav__icon" aria-hidden="true">
+                            <!-- users -->
+                            <svg viewBox="0 0 24 24">
+                                <path d="M16 11a4 4 0 1 0-8 0 4 4 0 0 0 8 0z" />
+                                <path d="M4 21v-1c0-3.3 3.6-6 8-6s8 2.7 8 6v1" />
+                            </svg>
+                        </span>
+                        회원 관리
+                    </a>
+
+                    <a class="admin-nav__item" href="#sec-reviews">
+                        <span class="admin-nav__icon" aria-hidden="true">
+                            <!-- reviews -->
+                            <svg viewBox="0 0 24 24">
+                                <path d="M4 4h16v12H7l-3 3V4z" />
+                                <path d="M8 8h8" />
+                                <path d="M8 12h6" />
+                            </svg>
+                        </span>
+                        리뷰/신고
+                    </a>
+
+                    <a class="admin-nav__item" href="#sec-promos">
+                        <span class="admin-nav__icon" aria-hidden="true">
+                            <!-- coupon -->
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3a2 2 0 0 0 0-4V7z" />
+                                <path d="M9 9h.01M9 15h.01" />
+                                <path d="M10 14l4-4" />
+                            </svg>
+                        </span>
+                        쿠폰/프로모션
+                    </a>
+
+                    <a class="admin-nav__item" href="#sec-settings">
+                        <span class="admin-nav__icon" aria-hidden="true">
+                            <!-- settings -->
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                                <path
+                                    d="M19.4 15a8 8 0 0 0 .1-2l2-1.2-2-3.5-2.2.6a8 8 0 0 0-1.7-1l-.3-2.3H9.7l-.3 2.3a8 8 0 0 0-1.7 1L5.5 8.3l-2 3.5L5.5 13a8 8 0 0 0 .1 2l-2 1.2 2 3.5 2.2-.6a8 8 0 0 0 1.7 1l.3 2.3h4.6l.3-2.3a8 8 0 0 0 1.7-1l2.2.6 2-3.5-2-1.2z" />
+                            </svg>
+                        </span>
+                        설정
+                    </a>
+                </nav>
+
+                <div class="admin-side__footer">
+                    <div class="muted">© 2026 STAYO Admin</div>
+                </div>
+            </aside>
+
+            <!-- ==========================
+        2) 메인 콘텐츠
+      =========================== -->
+            <section class="admin-main">
+                <!-- 상단 헤더(페이지 타이틀 + 검색/필터) -->
+                <div class="admin-head">
+                    <div>
+                        <h1 class="admin-head__title">대시보드</h1>
+                        <p class="admin-head__sub muted">예약/숙소/리뷰 현황을 한눈에 확인하세요.</p>
+                    </div>
+
+                    <div class="admin-head__tools">
+                        <div class="tool-search">
+                            <input type="text" placeholder="예약번호/숙소명/회원 검색" />
+                            <button type="button" aria-label="검색">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path
+                                        d="M10 2a8 8 0 105 14l5 5 2-2-5-5a8 8 0 00-7-12zm0 2a6 6 0 110 12 6 6 0 010-12z" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <label class="tool-select">
+                            <span class="tool-select__label">기간</span>
+                            <select>
+                                <option>최근 7일</option>
+                                <option>최근 30일</option>
+                                <option>이번 달</option>
+                                <option>올해</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- KPI 카드 -->
+                <div class="kpi">
+                    <article class="kpi-card">
+                        <div class="kpi-card__top">
+                            <span class="kpi-card__cap">오늘 예약</span>
+                            <span class="kpi-card__pill">+12%</span>
+                        </div>
+                        <div class="kpi-card__val">128</div>
+                        <div class="kpi-card__desc muted">전일 대비 증가</div>
+                    </article>
+
+                    <article class="kpi-card">
+                        <div class="kpi-card__top">
+                            <span class="kpi-card__cap">오늘 매출</span>
+                            <span class="kpi-card__pill">+8%</span>
+                        </div>
+                        <div class="kpi-card__val">₩18,740,000</div>
+                        <div class="kpi-card__desc muted">결제 완료 기준</div>
+                    </article>
+
+                    <article class="kpi-card">
+                        <div class="kpi-card__top">
+                            <span class="kpi-card__cap">승인 대기 숙소</span>
+                            <span class="kpi-card__pill kpi-card__pill--warn">23</span>
+                        </div>
+                        <div class="kpi-card__val">23</div>
+                        <div class="kpi-card__desc muted">등록/수정 요청 포함</div>
+                    </article>
+
+                    <article class="kpi-card">
+                        <div class="kpi-card__top">
+                            <span class="kpi-card__cap">리뷰 신고</span>
+                            <span class="kpi-card__pill kpi-card__pill--warn">6</span>
+                        </div>
+                        <div class="kpi-card__val">6</div>
+                        <div class="kpi-card__desc muted">검토 필요</div>
+                    </article>
+                </div>
+
+                <div class="admin-grid">
+
+                    <!-- =========================
+    좌측: 메인 컬럼
+  ========================= -->
+                    <div class="main-col">
+
+                        <!-- (A) 대시보드 섹션 시작 -->
+                        <section id="sec-dashboard" class="panel anchor">
+                            <div class="panel__head">
+                                <div>
+                                    <h2 class="panel__title">최근 예약</h2>
+                                    <p class="panel__sub muted">최근 생성된 예약 목록</p>
+                                </div>
+                                <div class="panel__actions">
+                                    <button class="btn-outline btn-outline--sm" type="button">엑셀 다운로드</button>
+                                    <button class="btn-main btn-main--sm" type="button">예약 등록</button>
+                                </div>
+                            </div>
+
+                            <!-- 테이블 -->
+                            <div class="table-wrap">
+                                <!-- 기존 table 그대로 -->
+                            </div>
+
+                            <div class="panel__foot">
+                                <!-- 기존 페이지네이션 그대로 -->
+                            </div>
+                        </section>
+
+                        <!-- ✅ (B) 예약 관리 섹션(좌측 메뉴용) -->
+                        <section id="sec-bookings" class="panel anchor">
+                            <div class="panel__head">
+                                <div>
+                                    <h2 class="panel__title">예약 관리</h2>
+                                    <p class="panel__sub muted">예약 변경/취소/상세 조회 UI</p>
+                                </div>
+                                <button class="btn-main btn-main--sm" type="button">필터 적용</button>
+                            </div>
+
+                        </section>
+                        <!-- ✅ (C) 숙소 승인 대기: 최근 예약 아래로 이동 -->
+                        <section id="sec-stays" class="panel anchor">
+                            <div class="panel__head">
+                                <div>
+                                    <h2 class="panel__title">숙소 승인 대기</h2>
+                                    <p class="panel__sub muted">등록/수정 요청</p>
+                                </div>
+                                <button class="btn-outline btn-outline--sm" type="button">전체보기</button>
+                            </div>
+
+                            <div class="list">
+                                <!-- 기존 숙소 승인 item 3개 그대로 -->
+                            </div>
+
+
+                            <!-- 간단 필터 UI(표현용) -->
+                            <div class="admin-form">
+                                <label class="f">
+                                    <span class="f__label">상태</span>
+                                    <select class="f__control">
+                                        <option>전체</option>
+                                        <option>결제완료</option>
+                                        <option>이용예정</option>
+                                        <option>이용완료</option>
+                                        <option>취소</option>
+                                    </select>
+                                </label>
+
+                                <label class="f">
+                                    <span class="f__label">기간</span>
+                                    <input class="f__control" type="text" placeholder="예) 2026.03.01 ~ 2026.03.31" />
+                                </label>
+
+                                <label class="f f--wide">
+                                    <span class="f__label">검색</span>
+                                    <input class="f__control" type="text" placeholder="예약번호/숙소명/이메일" />
+                                </label>
+                            </div>
+                            <div class="hint muted">※ 실제 검색/필터 기능은 JS/백엔드 연동 파트입니다.</div>
+                        </section>
+
+
+                        <!-- ✅ (D) 회원 관리 -->
+                        <section id="sec-users" class="panel anchor">
+                            <div class="panel__head">
+                                <div>
+                                    <h2 class="panel__title">회원 관리</h2>
+                                    <p class="panel__sub muted">회원 조회/정지/탈퇴 UI</p>
+                                </div>
+                                <button class="btn-outline btn-outline--sm" type="button">내보내기</button>
+                            </div>
+
+                            <div class="table-wrap">
+                                <table class="tbl" aria-label="회원 목록">
+                                    <thead>
+                                        <tr>
+                                            <th>회원ID</th>
+                                            <th>이메일</th>
+                                            <th>가입일</th>
+                                            <th>상태</th>
+                                            <th>관리</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>#U-1023</td>
+                                            <td>min****@stayo.com</td>
+                                            <td>2026.02.11</td>
+                                            <td><span class="st st--ok">정상</span></td>
+                                            <td class="td-actions">
+                                                <button class="mini" type="button">상세</button>
+                                                <button class="mini" type="button">정지</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>#U-0988</td>
+                                            <td>jh****@stayo.com</td>
+                                            <td>2026.01.28</td>
+                                            <td><span class="st st--wait">주의</span></td>
+                                            <td class="td-actions">
+                                                <button class="mini" type="button">상세</button>
+                                                <button class="mini" type="button">정지</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+
+                        <!-- ✅ (E) 리뷰/신고 -->
+                        <section id="sec-reviews" class="panel anchor">
+                            <div class="panel__head">
+                                <div>
+                                    <h2 class="panel__title">리뷰/신고 관리</h2>
+                                    <p class="panel__sub muted">신고 리뷰 검토 및 숨김 처리</p>
+                                </div>
+                                <button class="btn-outline btn-outline--sm" type="button">전체보기</button>
+                            </div>
+
+                            <div class="list">
+                                <!-- 기존 신고 item들 그대로 복사해서 여기로 넣어도 됨 -->
+                                <article class="item item--warn">
+                                    <div class="item__left">
+                                        <div class="item__title">“욕설/비방 포함” 신고</div>
+                                        <div class="item__meta muted">#RV-8821 · 모던 부티크 호텔</div>
+                                    </div>
+                                    <div class="item__right">
+                                        <button class="mini mini--ok" type="button">숨김</button>
+                                        <button class="mini" type="button">유지</button>
+                                    </div>
+                                </article>
+                            </div>
+                        </section>
+
+                        <!-- ✅ (F) 쿠폰/프로모션 -->
+                        <section id="sec-promos" class="panel anchor">
+                            <div class="panel__head">
+                                <div>
+                                    <h2 class="panel__title">쿠폰/프로모션</h2>
+                                    <p class="panel__sub muted">쿠폰 생성/배포 UI</p>
+                                </div>
+                                <button class="btn-main btn-main--sm" type="button">쿠폰 생성</button>
+                            </div>
+
+                            <div class="admin-form">
+                                <label class="f">
+                                    <span class="f__label">쿠폰명</span>
+                                    <input class="f__control" type="text" placeholder="예) 신규가입 20% 할인" />
+                                </label>
+                                <label class="f">
+                                    <span class="f__label">할인율</span>
+                                    <select class="f__control">
+                                        <option>10%</option>
+                                        <option>15%</option>
+                                        <option selected>20%</option>
+                                        <option>30%</option>
+                                    </select>
+                                </label>
+                                <label class="f f--wide">
+                                    <span class="f__label">유효기간</span>
+                                    <input class="f__control" type="text" placeholder="예) 2026.03.01 ~ 2026.03.31" />
+                                </label>
+                            </div>
+                        </section>
+
+                        <!-- ✅ (G) 설정 -->
+                        <section id="sec-settings" class="panel anchor">
+                            <div class="panel__head">
+                                <h2 class="panel__title">설정</h2>
+                            </div>
+
+                            <div class="settings">
+
+                                <label class="check">
+                                    <input type="checkbox" checked>
+                                    <span class="check__box"></span>
+                                    <span class="check__text">숙소 등록 시 자동 승인 끄기</span>
+                                </label>
+
+                                <label class="check">
+                                    <input type="checkbox">
+                                    <span class="check__box"></span>
+                                    <span class="check__text">리뷰 신고 3회 이상 자동 숨김</span>
+                                </label>
+
+                            </div>
+                        </section>
+
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 공통 푸터(선택: 관리자 페이지에서는 생략해도 OK) -->
+</body>
+
+</html>
