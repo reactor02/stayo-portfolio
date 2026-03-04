@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>STAYO | 리뷰</title>
+  <script src="../js/T3_2nd_review.js"></script>
 
   <!-- 폰트(프로젝트 동일) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +25,7 @@
   =================================================== -->
   <header class="header">
     <div class="container header__inner">
-      <a href="./index.html" class="logo" aria-label="STAYO 홈">STAYO</a>
+      <a href="./T3_2nd_index.html" class="logo" aria-label="STAYO 홈">STAYO</a>
 
       <nav class="gnb" aria-label="주요 메뉴">
         <a href="#" class="gnb__link">숙소</a>
@@ -56,7 +57,7 @@
           </svg>
         </button>
 
-        <a href="./login.html" class="btn btn--login">
+        <a href="./T3_2nd_login.html" class="btn btn--login">
           <span class="btn__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24">
               <path
@@ -76,7 +77,7 @@
     <section class="review-top">
       <div class="container">
         <nav class="crumb" aria-label="현재 위치">
-          <a href="./index.html">홈</a>
+          <a href="./T3_2nd_index.html">홈</a>
           <span class="crumb__sep">/</span>
           <span class="crumb__current">리뷰</span>
         </nav>
@@ -108,14 +109,14 @@
 
             <!-- 키워드 칩 -->
             <div class="chips" aria-label="리뷰 키워드">
-              <button class="chip chip--active" type="button">전체</button>
-              <button class="chip" type="button">청결</button>
-              <button class="chip" type="button">위치</button>
-              <button class="chip" type="button">가성비</button>
-              <button class="chip" type="button">친절</button>
-              <button class="chip" type="button">시설</button>
+               <button class="chip chip--active whole" type="button">전체</button>
+              <button class="chip clean" type="button">청결</button>
+              <button class="chip loc" type="button">위치</button>
+              <button class="chip cheap" type="button">가성비</button>
+              <button class="chip kind" type="button">친절</button>
+              <button class="chip acco" type="button">시설</button>
             </div>
-          </div>
+          </div> 
 
           <!-- 오른쪽: 평점 분포(막대) -->
           <div class="summary-right">
@@ -188,17 +189,17 @@
           </label>
         </div>
 
-        <div class="toolbar__right">
-          <div class="search">
-            <input type="text" placeholder="숙소명/키워드 검색" />
-            <button type="button" aria-label="검색">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
+        <!-- <div class="toolbar__right"> -->
+          <!-- <div class="search"> -->
+            <!-- <input type="text" placeholder="숙소명/키워드 검색" /> -->
+            <!-- <button type="button" aria-label="검색"> -->
+              <!-- <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path
                   d="M10 2a8 8 0 105 14l5 5 2-2-5-5a8 8 0 00-7-12zm0 2a6 6 0 110 12 6 6 0 010-12z" />
-              </svg>
-            </button>
-          </div>
-        </div>
+              </svg> -->
+            <!-- </button>
+          </div> -->
+        <!-- </div> -->
       </div>
     </section>
 
@@ -211,12 +212,14 @@
 
           <!-- 리뷰 카드 -->
           <article class="rev">
+            <a href="./T3_2nd_review_detail.html">
             <div class="rev__head">
               <div class="rev__user">
                 <div class="avatar" aria-hidden="true">MH</div>
                 <div>
                   <div class="rev__name">박민호</div>
-                  <div class="rev__meta">오션뷰 빌라 인피니티 풀 · 2026-03-01</div>
+                  <!-- <div class="rev__meta">오션뷰 빌라 인피니티 풀 · 2026-03-01</div> -->
+                  <div class="rev__meta">2026-03-01</div>
                 </div>
               </div>
 
@@ -225,29 +228,30 @@
                 <span class="score">5.0</span>
               </div>
             </div>
-
+            
             <p class="rev__text">
               사진 그대로 뷰가 미쳤고, 직원분들도 정말 친절했어요. 조식 퀄리티도 만족!
             </p>
-
+            
             <!-- 사진(선택) -->
             <div class="rev__photos">
               <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=80" alt="리뷰 사진 1">
               <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=900&q=80" alt="리뷰 사진 2">
-              <img src="https://images.unsplash.com/photo-1501117716987-c8e1ecb210d3?auto=format&fit=crop&w=900&q=80" alt="리뷰 사진 3">
+              <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80" alt="리뷰 사진 3">
             </div>
-
+            
             <!-- 태그 -->
             <div class="rev__tags">
               <span class="tag">청결</span>
               <span class="tag">친절</span>
               <span class="tag">뷰맛집</span>
             </div>
-
+            
+          </a>
             <!-- 하단 액션(UI) -->
             <div class="rev__actions">
-              <button class="like" type="button" aria-label="도움이 돼요">
-                <span aria-hidden="true">👍</span> 도움돼요 <b>12</b>
+              <button class="like like1" type="button" aria-label="도움이 돼요">
+                <span aria-hidden="true">👍</span> 도움돼요 <b class="PMH">12</b>
               </button>
               <button class="report" type="button">신고</button>
             </div>
@@ -255,12 +259,14 @@
 
           <!-- 리뷰 카드 -->
           <article class="rev">
+            <a href="./T3_2nd_review_detail.html">
             <div class="rev__head">
               <div class="rev__user">
-                <div class="avatar" aria-hidden="true">JH</div>
+                <div class="avatar" aria-hidden="true">YS</div>
                 <div>
-                  <div class="rev__name">이지훈</div>
-                  <div class="rev__meta">모던 부티크 호텔 · 2026-02-26</div>
+                  <div class="rev__name">이용상</div>
+                  <!-- <div class="rev__meta">모던 부티크 호텔 · 2026-02-26</div> -->
+                  <div class="rev__meta">2026-02-26</div>
                 </div>
               </div>
 
@@ -278,10 +284,11 @@
               <span class="tag">위치</span>
               <span class="tag">청결</span>
             </div>
+            </a>
 
             <div class="rev__actions">
-              <button class="like" type="button" aria-label="도움이 돼요">
-                <span aria-hidden="true">👍</span> 도움돼요 <b>7</b>
+              <button class="like like2" type="button" aria-label="도움이 돼요">
+                <span aria-hidden="true">👍</span> 도움돼요 <b class="LYS">7</b>
               </button>
               <button class="report" type="button">신고</button>
             </div>
@@ -289,12 +296,14 @@
 
           <!-- 리뷰 카드 -->
           <article class="rev">
+            <a href="./T3_2nd_review_detail.html">
             <div class="rev__head">
               <div class="rev__user">
-                <div class="avatar" aria-hidden="true">SJ</div>
+                <div class="avatar" aria-hidden="true">JS</div>
                 <div>
-                  <div class="rev__name">박수진</div>
-                  <div class="rev__meta">전통 료칸 스테이 · 2026-02-20</div>
+                  <div class="rev__name">강정석</div>
+                  <!-- <div class="rev__meta">전통 료칸 스테이 · 2026-02-20</div> -->
+                  <div class="rev__meta">2026-02-20</div>
                 </div>
               </div>
 
@@ -312,10 +321,11 @@
               <span class="tag">시설</span>
               <span class="tag">조용함</span>
             </div>
+            </a>
 
             <div class="rev__actions">
-              <button class="like" type="button" aria-label="도움이 돼요">
-                <span aria-hidden="true">👍</span> 도움돼요 <b>21</b>
+              <button class="like like3" type="button" aria-label="도움이 돼요">
+                <span aria-hidden="true">👍</span> 도움돼요 <b class="KJS">21</b>
               </button>
               <button class="report" type="button">신고</button>
             </div>
@@ -324,7 +334,7 @@
         </div>
 
         <!-- 페이지네이션(UI) -->
-        <nav class="pager" aria-label="페이지 이동">
+        <!-- <nav class="pager" aria-label="페이지 이동">
           <button class="pager__btn" type="button" aria-label="이전">‹</button>
           <button class="pager__num pager__num--active" type="button">1</button>
           <button class="pager__num" type="button">2</button>
@@ -332,7 +342,7 @@
           <span class="pager__dot">…</span>
           <button class="pager__num" type="button">10</button>
           <button class="pager__btn" type="button" aria-label="다음">›</button>
-        </nav>
+        </nav> -->
       </div>
     </section>
 
@@ -374,7 +384,7 @@
 
           <div class="write__actions">
             <button class="btn-outline" type="button" data-close-modal>취소</button>
-            <button class="btn-main" type="submit">등록하기</button>
+            <button class="btn-main btn-modal" type="button">등록하기</button>
           </div>
 
           <p class="muted write__note">* 실제 저장 기능은 추후 JS/서버 연동으로 구현</p>
@@ -446,33 +456,33 @@
     JS: 모달 열기/닫기 (UI)
   =================================================== -->
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const modal = document.querySelector("[data-modal]");
-      const openBtn = document.querySelector("[data-open-modal]");
-      const closeBtns = document.querySelectorAll("[data-close-modal]");
+    // document.addEventListener("DOMContentLoaded", () => {
+    //   const modal = document.querySelector("[data-modal]");
+    //   const openBtn = document.querySelector("[data-open-modal]");
+    //   const closeBtns = document.querySelectorAll("[data-close-modal]");
 
-      if (!modal || !openBtn) return;
+    //   if (!modal || !openBtn) return;
 
-      const open = () => {
-        modal.hidden = false;
-        modal.setAttribute("aria-hidden", "false");
-        document.body.style.overflow = "hidden";
-      };
+    //   const open = () => {
+    //     modal.hidden = false;
+    //     modal.setAttribute("aria-hidden", "false");
+    //     document.body.style.overflow = "hidden";
+    //   };
 
-      const close = () => {
-        modal.hidden = true;
-        modal.setAttribute("aria-hidden", "true");
-        document.body.style.overflow = "";
-      };
+    //   const close = () => {
+    //     modal.hidden = true;
+    //     modal.setAttribute("aria-hidden", "true");
+    //     document.body.style.overflow = "";
+    //   };
 
-      openBtn.addEventListener("click", open);
-      closeBtns.forEach(b => b.addEventListener("click", close));
+    //   openBtn.addEventListener("click", open);
+    //   closeBtns.forEach(b => b.addEventListener("click", close));
 
-      // ESC로 닫기
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && !modal.hidden) close();
-      });
-    });
+    //   // ESC로 닫기
+    //   document.addEventListener("keydown", (e) => {
+    //     if (e.key === "Escape" && !modal.hidden) close();
+    //   });
+    // });
   </script>
 </body>
 </html>

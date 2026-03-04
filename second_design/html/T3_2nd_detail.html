@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>STAYO | 숙소 상세</title>
   <script src="../js/jquery-3.7.1.js"></script>
-  <script src="../phi/js/dd.api.v1.js"></script>
+  <script src="../api_test/js/tb.api.v1.tb.js"></script>
   <script src="../js/T3_2nd_detail.js"></script>
 
   <!-- 폰트(메인과 동일) -->
@@ -28,7 +28,7 @@
   =========================== -->
   <header class="header">
     <div class="container header__inner">
-      <a href="./index.html" class="logo" aria-label="STAYO 홈">STAYO</a>
+      <a href="./T3_2nd_index.html" class="logo" aria-label="STAYO 홈">STAYO</a>
 
       <!-- <nav class="gnb" aria-label="주요 메뉴">
         <a href="#" class="gnb__link">숙소</a>
@@ -57,7 +57,7 @@
           </svg>
         </button>
 
-        <a href="#" class="btn btn--login">
+        <a href="./T3_2nd_login.html" class="btn btn--login">
           <span class="btn__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24">
               <path d="M12 12a4.5 4.5 0 10-4.5-4.5A4.5 4.5 0 0012 12zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z" />
@@ -76,7 +76,7 @@
     <section class="detail-top">
       <div class="container">
         <nav class="crumb" aria-label="현재 위치">
-          <a href="./index.html">홈</a>
+          <a href="./T3_2nd_index.html">홈</a>
           <span class="crumb__sep">/</span>
           <a href="./T3_2nd_list.html">숙소 리스트</a>
           <span class="crumb__sep">/</span>
@@ -115,8 +115,7 @@
               alt="숙소 사진 5" />
           </a>
           <a class="gallery-item" href="#" aria-label="사진 크게 보기" data-modal="photo">
-            <img src="https://images.unsplash.com/photo-1501117716987-c8e1ecb210d3?auto=format&fit=crop&w=1200&q=80"
-              alt="숙소 사진이 준비중입니다" />
+            <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461" alt="숙소 사진이 준비중입니다" />
           </a>
 
           <!-- 우측 상단: 사진 전체보기 버튼(예시) -->
@@ -371,55 +370,64 @@
           <!-- 후기(리뷰) -->
           <section class="panel" id="reviews">
             <div class="panel-head">
-              <h2 class="panel__title">후기</h2>
+              <h2 class="panel__title">리뷰</h2>
               <div class="review-score">
                 <span class="star">★</span> <b>4.8</b> <span class="muted">(512)</span>
               </div>
             </div>
 
+            <a href="./T3_2nd_review_detail.html">
             <div class="review-grid">
               <article class="review">
                 <div class="review__top">
-                  <div class="review__name">김민지</div>
+                  <div class="review__name">박민호</div>
                   <div class="review__rate"><span class="star">★</span> 5.0</div>
                 </div>
                 <p class="review__text muted">
-                  위치가 정말 좋고 객실이 깨끗해요. 침구가 너무 편해서 꿀잠 잤습니다!
+                  사진 그대로 뷰가 미쳤어요!
                 </p>
               </article>
+              </a>
 
-              <article class="review">
-                <div class="review__top">
-                  <div class="review__name">박준호</div>
-                  <div class="review__rate"><span class="star">★</span> 4.7</div>
-                </div>
-                <p class="review__text muted">
-                  체크인이 편했고 직원분들이 친절했어요. 조식도 만족!
-                </p>
-              </article>
+              <a href="./T3_2nd_review_detail.html">
+                <article class="review">
+                  <div class="review__top">
+                    <div class="review__name">박준호</div>
+                    <div class="review__rate"><span class="star">★</span> 4.7</div>
+                  </div>
+                  <p class="review__text muted">
+                    체크인이 편했고 직원분들이 친절했어요. 조식도 만족!
+                  </p>
+                </article>
+              </a>
 
-              <article class="review">
-                <div class="review__top">
-                  <div class="review__name">이서연</div>
-                  <div class="review__rate"><span class="star">★</span> 4.8</div>
-                </div>
-                <p class="review__text muted">
-                  사진 그대로 분위기 좋고, 주변에 맛집이 많아서 여행하기 편했어요.
-                </p>
-              </article>
+              <a href="./T3_2nd_review_detail.html">
+                <article class="review">
+                  <div class="review__top">
+                    <div class="review__name">이서연</div>
+                    <div class="review__rate"><span class="star">★</span> 4.8</div>
+                  </div>
+                  <p class="review__text muted">
+                    사진 그대로 분위기 좋고, 주변에 맛집이 많아서 여행하기 편했어요.
+                  </p>
+                </article>
+              </a>
 
-              <article class="review">
-                <div class="review__top">
-                  <div class="review__name">정현우</div>
-                  <div class="review__rate"><span class="star">★</span> 4.9</div>
-                </div>
-                <p class="review__text muted">
-                  방음도 괜찮고 뷰가 좋았습니다. 재방문 의사 있어요!
-                </p>
-              </article>
+              <a href="./T3_2nd_review_detail.html">
+                <article class="review">
+                  <div class="review__top">
+                    <div class="review__name">정현우</div>
+                    <div class="review__rate"><span class="star">★</span> 4.9</div>
+                  </div>
+                  <p class="review__text muted">
+                    방음도 괜찮고 뷰가 좋았습니다. 재방문 의사 있어요!
+                  </p>
+
+                </article>
+              </a>
             </div>
 
-            <a href="#"><button class="btn-outline" type="button">후기 더보기</button></a>
+            <a href="./T3_2nd_review.html"><button class="btn-outline" type="button">리뷰 더보기</button></a>
           </section>
 
           <!-- 이용 규정 -->
@@ -487,7 +495,8 @@
         <aside class="booking" aria-label="예약 영역">
           <div class="book-card">
             <div class="book-price">
-              <b>₩ 275000</b> <span class="muted">/ 박</span>
+              <b>₩ 275,000</b>
+              <!-- <span class="muted">/ 박</span> -->
             </div>
 
             <div class="book-rating muted">
@@ -528,7 +537,7 @@
                 </div>
               </div>
 
-              <a href="#">
+              <a href="./T3_2nd_pay.html">
                 <button class="btn-main btn-main--big" type="button">
                   예약하기
                 </button>

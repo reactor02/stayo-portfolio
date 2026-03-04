@@ -85,6 +85,11 @@
   border-color: rgba(17,17,17,0.88);
   color: #fff;
 }
+.chip--active:hover{
+  background: rgba(17,17,17,0.88);
+  border-color: rgba(17,17,17,0.88);
+  color: #fff;
+}
 
 /* 분포 */
 .dist{ display: grid; gap: 8px; }

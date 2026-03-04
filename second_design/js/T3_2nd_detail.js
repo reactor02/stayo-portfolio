@@ -1,10 +1,11 @@
 window.addEventListener('load', bind)
 async function bind() {
 
-    const q = { city: '서울', page: 1, pageSize: 50 };
+    // const q = { city: '서울', page: 1, pageSize: 50 };
     let listRes;
 
-    listRes = await DD.V1.TB.Lodging.list(q);
+    listRes = await API.V1.TB.Lodging.properties({ city: '서울', page: 1, pageSize: 50 });
+   
     items = listRes.items;
 
     // console.log(items[0].name)
@@ -78,48 +79,62 @@ async function bind() {
         });
     }
 
-    const logCall = (label, method, url, body) => {
-        // console.log(`[CALL] ${label} :: ${method} ${url}`);
-        if (body !== undefined) console.log(`[BODY] ${label}`, body);
-    };
+    // const logCall = (label, method, url, body) => {
+    //     // console.log(`[CALL] ${label} :: ${method} ${url}`);
+    //     if (body !== undefined) console.log(`[BODY] ${label}`, body);
+    // };
 
-    const logRes = (label, res) => console.log(`[RES] ${label}`, res);
-    const logErr = (label, xhr) => {
-        const rj = xhr?.responseJSON;
-        const status = xhr?.status;
-        const msg = rj?.message || rj?.error || xhr?.statusText || "요청 실패";
-        console.log(`[ERR] ${label} :: status=${status}`, rj || msg);
-    };
+    // const logRes = (label, res) => console.log(`[RES] ${label}`, res);
+    // const logErr = (label, xhr) => {
+    //     const rj = xhr?.responseJSON;
+    //     const status = xhr?.status;
+    //     const msg = rj?.message || rj?.error || xhr?.statusText || "요청 실패";
+    //     console.log(`[ERR] ${label} :: status=${status}`, rj || msg);
+    // };
 
-    const first = Array.isArray(items) ? items[0] : null;
-    const propertyId = first?.propertyId || first?.id || first?.property_id;
-    const rurl = DD.V1.url(DD.V1.API.TB_LODG_PROPERTIES_ROOMS, { propertyId });
-    logCall("TB-LOD-3 PROPERTIES_ROOMS", "GET", rurl);
+    // const first = Array.isArray(items) ? items[0] : null;
+    // const propertyId = first?.propertyId || first?.id || first?.property_id;
+    // const rurl = API.V1.url(API.V1.API.TB_LODG_PROPERTIES_ROOMS, { propertyId });
+    // logCall("TB-LOD-3 PROPERTIES_ROOMS", "GET", rurl);
     // DD.V1.TB.Lodging.rooms(propertyId).then(r => logRes("TB-LOD-3 PROPERTIES_ROOMS", r)).catch(e => logErr("TB-LOD-3 PROPERTIES_ROOMS", e));
     // if (!propertyId) {
     //     console.log("[SKIP] TB-LOD-2~4: propertyId 못 찾음");
     //     return;
     // }
-    DD.V1.TB.Lodging.rooms(propertyId)
+    const propertyId = items[0].propertyId;
+    
+    API.V1.TB.Lodging.rooms(propertyId)
         .then((res) => {
             render1(res.rooms);   // ✅ 여기!
         })
         .catch((e) => logErr("TB-LOD-3 PROPERTIES_ROOMS", e));
 
 
-    
+    const hotelImages = [
+        "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+        "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267",
+        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b",
+        "https://images.unsplash.com/photo-1590490360182-c33d57733427",
+        "https://images.unsplash.com/photo-1578683010236-d716f9a3f461"
+    ];
+
+    function getRandomImage() {
+        const index = Math.floor(Math.random() * hotelImages.length);
+        return hotelImages[index];
+    }
+
 
 
 
     function render1(list = []) {
         list.forEach((r) => {
 
-            
+
             room_list.innerHTML += `
             <article class="room">
                         <div class="room__media">
-                          <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80"
-                            alt="디럭스 더블" />
+                          <img src="${getRandomImage()}"
+                            />
                         </div>
         
                         <div class="room__body">
@@ -143,13 +158,6 @@ async function bind() {
             `
         })
     }
-
-    // const btn_main = document.querySelector('.btn-main')
-    // const book_price = document.querySelector('.book-price')
-    // const room__price = document.querySelector('.room__price')
-    // btn_main.addEventListener('click', function(){
-    //     book_price.innerHTML +=  room__price.innerHTML;
-    // })
 
     const room_list = document.querySelector('.room-list');
     const book_price = document.querySelector('.book-price');

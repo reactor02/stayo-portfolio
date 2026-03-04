@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API 테스트 (DD / TB / SJ 분리)</title>
+
+  <script src="./js/jquery-3.7.1.js"></script>
+
+  <script src="./js/dd.api.v1.dd.js" defer></script>
+  <script src="./js/tb.api.v1.tb.js" defer></script>
+  <script src="./js/sj.api.v1.sj.js" defer></script>
+
+  <script defer>
+    $(() => {
+
+
+    /* ================================================================
+      FULL API PARAMETER NOTES
+      Static Page : http://127.0.0.1:5500
+      API Server  : http://127.0.0.1:15180
+
+      API.V1.setURI("http://127.0.0.1:15180");
+
+    ================================================================
+    DD GROUP  (Emotion Map / Doodle)
+    Base : /api/v1/dd
+    ================================================================
+
+    [DD-AUTH]
+
+    GET  /auth/check-login-id
+    Query
+    - loginId
+
+    POST /auth/signup
+    Body
+    - loginId
+    - password
+    - displayName
+
+    POST /auth/login
+    Body
+    - loginId
+    - password
+
+
+    ------------------------------------------------
+    [DD POSTS]
+    ------------------------------------------------
+
+    GET /posts
+    Query
+    - q
+    - minLat
+    - maxLat
+    - minLng
+    - maxLng
+    - page
+    - pageSize
+
+    Example
+    /posts?q=흡연구역&minLat=35.8&maxLat=35.9&minLng=128.5&maxLng=128.7&page=1&pageSize=20
+
+
+    GET /posts/:postNo
+
+    Path
+    - postNo
+
+
+    POST /posts
+
+    Body
+    - authorNo
+    - title
+    - content
+    - latitude
+    - longitude
+    - tags (optional)
+
+
+    ------------------------------------------------
+    [DD COMMENTS]
+    ------------------------------------------------
+
+    GET /posts/:postNo/comments
+
+    Path
+    - postNo
+
+
+    POST /posts/:postNo/comments
+
+    Path
+    - postNo
+
+    Body
+    - authorNo
+    - content
+    - parentCommentNo (optional)
+
+
+    ------------------------------------------------
+    [DD TAG]
+    ------------------------------------------------
+
+    GET /tags/top
+
+    Query
+    - limit
+    - days
+
+
+
+    ================================================================
+    TB GROUP (Travel / Lodging / Features)
+    Base : /api/v1
+    ================================================================
+
+
+    ------------------------------------------------
+    [TB AUTH]
+    ------------------------------------------------
+
+    GET /auth/check-login-id
+
+    Query
+    - loginId
+
+
+    POST /auth/signup
+
+    Body
+    - loginId
+    - password
+    - displayName
+    - email
+
+
+    POST /auth/login
+
+    Body
+    - loginId
+    - password
+
+
+
+    ------------------------------------------------
+    [TB WISHLIST]
+    ------------------------------------------------
+
+    POST /wishlist/toggle
+
+    Body
+    - memberId
+    - propertyId
+
+
+    GET /wishlist
+
+    Query
+    - memberId
+    - page
+    - pageSize
+
+
+
+    ------------------------------------------------
+    [TB SEARCH HISTORY]
+    ------------------------------------------------
+
+    POST /searches
+
+    Body
+    - memberId (optional)
+    - keyword
+    - city (optional)
+
+
+    GET /searches
+
+    Query
+    - memberId
+    - keyword
+    - page
+    - pageSize
+
+
+
+    ------------------------------------------------
+    [TB LODGING]
+    ------------------------------------------------
+
+    Base
+    /api/v1/lodging
+
+
+
+    GET /lodging/properties
+
+    Query
+    - city
+    - district
+    - q
+    - minPrice
+    - maxPrice
+    - amenities
+    - hasPool
+    - hasWifi
+    - hasParking
+    - hasBbq
+    - hasPets
+    - hasBreakfast
+    - sort
+    - order
+    - limit
+    - offset
+    - page
+    - pageSize
+
+    Example
+
+    /lodging/properties
+    ?city=부산
+    &minPrice=50000
+    &maxPrice=200000
+    &hasWifi=1
+    &sort=price
+    &order=asc
+    &page=1
+    &pageSize=20
+
+
+
+    GET /lodging/cities
+
+
+
+    GET /lodging/districts
+
+    Query
+    - city
+
+
+
+    GET /lodging/city-counts
+
+
+
+    GET /lodging/properties/:propertyId
+
+    Path
+    - propertyId
+
+
+
+    GET /lodging/properties/:propertyId/rating-summary
+
+    Path
+    - propertyId
+
+
+
+    GET /lodging/properties/:propertyId/rooms
+
+    Path
+    - propertyId
+
+
+
+    GET /lodging/properties/:propertyId/reviews
+
+    Path
+    - propertyId
+
+    Query
+    - limit
+    - offset
+
+
+
+    GET /lodging/payload
+
+    Query
+    - city
+
+
+
+    ================================================================
+    SJ GROUP (Board / Community)
+    Base : /api/v1/sj
+    ================================================================
+
+
+    ------------------------------------------------
+    [SJ USER]
+    ------------------------------------------------
+
+    POST /sj/users/register
+
+    Body
+    - loginId
+    - password
+    - nickName
+
+
+    POST /sj/users/login
+
+    Body
+    - loginId
+    - password
+
+
+
+    ------------------------------------------------
+    [SJ POSTS]
+    ------------------------------------------------
+
+    GET /sj/posts
+
+    Query
+    - page
+    - pageSize
+    - keyword
+    - userNo
+
+
+
+    GET /sj/posts/:postNo
+
+    Path
+    - postNo
+
+
+
+    POST /sj/posts
+
+    Body
+    - userNo
+    - title
+    - content
+
+
+
+    PUT /sj/posts/:postNo
+
+    Path
+    - postNo
+
+    Body
+    - title
+    - content
+
+
+
+    DELETE /sj/posts/:postNo
+
+    Path
+    - postNo
+
+
+
+    ------------------------------------------------
+    [SJ COMMENTS]
+    ------------------------------------------------
+
+    GET /sj/posts/:postNo/comments
+
+    Path
+    - postNo
+
+
+
+    POST /sj/posts/:postNo/comments
+
+    Path
+    - postNo
+
+    Body
+    - userNo
+    - content
+    - parentCommentNo
+
+
+
+    DELETE /sj/comments/:commentNo
+
+    Path
+    - commentNo
+
+
+
+    ================================================================
+    UTILITY
+    ================================================================
+
+    GET /health
+    GET /catalog
+
+    ================================================================
+    */
+      // 서버가 다른 호스트면:
+       API.V1.setURI("http://116.36.205.25:15180");
+
+      // TB lodging base: "v1"(default) | "legacy"
+      // API.V1.TB.setLodgingBaseMode("legacy");
+
+      const RUN = {
+        DD: { authFlow: false, postsFlow: true, tagsTop10: true },
+        TB: { authFlow: true, lodgingChain: true, wishlistDemo: true, searchLogDemo: true },
+        SJ: { authFlow: false, postsAndComments: false }
+      };
+
+      const logCall = (label) => console.log(`[CALL] ${label}`);
+      const logRes  = (label, res) => console.log(`[RES] ${label}`, res);
+      const logErr  = (label, e) => console.log(`[ERR] ${label}`, e?.responseJSON || e);
+
+      (async () => {
+        try {
+          if (RUN.DD.authFlow) { logCall("DD authFlow"); logRes("DD authFlow", await API.V1.DD.Examples.authFlow()); }
+          if (RUN.DD.postsFlow) { logCall("DD postsFlow"); logRes("DD postsFlow", await API.V1.DD.Examples.postsFlow()); }
+          if (RUN.DD.tagsTop10) { logCall("DD tagsTop10"); logRes("DD tagsTop10", await API.V1.DD.Examples.tagsTop10()); }
+
+          if (RUN.TB.authFlow) { logCall("TB authFlow"); logRes("TB authFlow", await API.V1.TB.Examples.authFlow()); }
+          if (RUN.TB.lodgingChain) { logCall("TB lodgingChain"); logRes("TB lodgingChain", await API.V1.TB.Examples.lodgingChain()); }
+          if (RUN.TB.wishlistDemo) { logCall("TB wishlistDemo"); logRes("TB wishlistDemo", await API.V1.TB.Examples.wishlistDemo({ memberId: "U000000001" })); }
+          if (RUN.TB.searchLogDemo) { logCall("TB searchLogDemo"); logRes("TB searchLogDemo", await API.V1.TB.Examples.searchLogDemo({ memberId: "U000000001" })); }
+
+          if (RUN.SJ.authFlow) { logCall("SJ authFlow"); logRes("SJ authFlow", await API.V1.SJ.Examples.authFlow()); }
+          if (RUN.SJ.postsAndComments) { logCall("SJ postsAndComments"); logRes("SJ postsAndComments", await API.V1.SJ.Examples.postsAndComments()); }
+        } catch (e) {
+          logErr("RUNNER", e);
+        }
+      })();
+    });
+  </script>
+</head>
+<body>
+  <div style="padding:16px; font-family:system-ui;">
+    <h3>API 테스트 (DD / TB / SJ 분리)</h3>
+    <p>Console에서 확인.</p>
+  </div>
+</body>
+</html>

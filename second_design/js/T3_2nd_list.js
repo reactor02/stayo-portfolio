@@ -78,7 +78,7 @@ async function bind() {
 
 
     // DD.V1.TB.Lodging.list(q)
-    const q = { city: '서울', page: 1, pageSize: 50 };
+    // const q = { city: '서울', page: 1, pageSize: 50 };
     let listRes;
     // try {
     //     listRes = await DD.V1.TB.Lodging.list(q);
@@ -87,12 +87,14 @@ async function bind() {
     //     logErr("TB-LOD-1 PROPERTIES_LIST", e);
     //     return;
     // }
-    listRes = await DD.V1.TB.Lodging.list(q);
+    listRes = await API.V1.TB.Lodging.properties({ city: '서울', page: 1, pageSize: 50 });
+    // console.log(q)
     items = listRes.items;
-    // render1(items);
-
+    console.log(listRes.items)
+    render1(items);
+    
     r = listRes;
-    console.log(items)
+    
 
     // console.log(items[0], Object.keys(items[0]));
     // console.log('rating=', items[0]?.rating);
@@ -152,7 +154,7 @@ async function bind() {
 
     render1(items);
 
-    
+
 
 
 

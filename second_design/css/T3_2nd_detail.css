@@ -420,6 +420,7 @@
   background: rgba(255,255,255,0.55);
   border-radius: 18px;
   padding: 14px;
+  height: 150px;
 }
 
 .review__top{
@@ -683,10 +684,6 @@
   overflow-y: auto;
 }
 .modal-body{
-  max-height: 70vh;
-  overflow-y: auto;
-}
-#modalBody{
   max-height: 70vh;
   overflow-y: auto;
 }
