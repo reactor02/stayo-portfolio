@@ -519,3 +519,8 @@
     grid-template-columns: 1fr;
   }
 }
+.results-head__left{
+  display: flex;
+  align-items: baseline;
+  gap: 12px;   /* 제목과 개수 간격 */
+}

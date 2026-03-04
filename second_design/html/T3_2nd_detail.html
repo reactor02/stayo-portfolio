@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>STAYO | 숙소 상세</title>
+  <script src="../js/jquery-3.7.1.js"></script>
+  <script src="../phi/js/dd.api.v1.js"></script>
+  <script src="../js/T3_2nd_detail.js"></script>
 
   <!-- 폰트(메인과 동일) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,18 +30,19 @@
     <div class="container header__inner">
       <a href="./index.html" class="logo" aria-label="STAYO 홈">STAYO</a>
 
-      <nav class="gnb" aria-label="주요 메뉴">
+      <!-- <nav class="gnb" aria-label="주요 메뉴">
         <a href="#" class="gnb__link">숙소</a>
         <a href="#" class="gnb__link">항공권</a>
         <a href="#" class="gnb__link">패키지</a>
         <a href="#" class="gnb__link">액티비티</a>
         <a href="#" class="gnb__link">렌터카</a>
-      </nav>
+      </nav> -->
 
       <div class="header__right">
         <button class="icon-btn" type="button" aria-label="언어/지역">
           <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.9 9h-3.2a15.8 15.8 0 00-1.2-6A8.1 8.1 0 0119.9 11zM12 4c.9 1.2 1.8 3.3 2.3 7H9.7C10.2 7.3 11.1 5.2 12 4zM4.1 13h3.2a15.8 15.8 0 001.2 6A8.1 8.1 0 014.1 13zm0-2a8.1 8.1 0 014.4-6 15.8 15.8 0 00-1.2 6H4.1zM12 20c-.9-1.2-1.8-3.3-2.3-7h4.6c-.5 3.7-1.4 5.8-2.3 7zm3.5-1a15.8 15.8 0 001.2-6h3.2a8.1 8.1 0 01-4.4 6z"/>
+            <path
+              d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.9 9h-3.2a15.8 15.8 0 00-1.2-6A8.1 8.1 0 0119.9 11zM12 4c.9 1.2 1.8 3.3 2.3 7H9.7C10.2 7.3 11.1 5.2 12 4zM4.1 13h3.2a15.8 15.8 0 001.2 6A8.1 8.1 0 014.1 13zm0-2a8.1 8.1 0 014.4-6 15.8 15.8 0 00-1.2 6H4.1zM12 20c-.9-1.2-1.8-3.3-2.3-7h4.6c-.5 3.7-1.4 5.8-2.3 7zm3.5-1a15.8 15.8 0 001.2-6h3.2a8.1 8.1 0 01-4.4 6z" />
           </svg>
         </button>
 
@@ -48,14 +53,14 @@
                      8.04 4 9.54 4.81 10.4 6.09
                      11.26 4.81 12.76 4 14.3 4
                      16.8 4 18.8 6 18.8 8.5
-                     c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                     c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
           </svg>
         </button>
 
         <a href="#" class="btn btn--login">
           <span class="btn__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24">
-              <path d="M12 12a4.5 4.5 0 10-4.5-4.5A4.5 4.5 0 0012 12zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/>
+              <path d="M12 12a4.5 4.5 0 10-4.5-4.5A4.5 4.5 0 0012 12zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z" />
             </svg>
           </span>
           로그인
@@ -73,7 +78,7 @@
         <nav class="crumb" aria-label="현재 위치">
           <a href="./index.html">홈</a>
           <span class="crumb__sep">/</span>
-          <a href="./list.html">숙소 리스트</a>
+          <a href="./T3_2nd_list.html">숙소 리스트</a>
           <span class="crumb__sep">/</span>
           <span class="crumb__current">숙소 상세</span>
         </nav>
@@ -88,40 +93,30 @@
       <div class="container">
         <div class="gallery-grid">
           <!-- 메인 이미지 -->
-          <a class="gallery-item gallery-item--main" href="#" aria-label="사진 크게 보기">
-            <img
-              src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1600&q=80"
-              alt="숙소 메인 사진"
-            />
+          <a class="gallery-item gallery-item--main" href="#" aria-label="사진 크게 보기" data-modal="photo">
+            <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1600&q=80"
+              alt="숙소 메인 사진" />
           </a>
 
           <!-- 서브 이미지 4장 -->
-          <a class="gallery-item" href="#" aria-label="사진 크게 보기">
-            <img
-              src="https://images.unsplash.com/photo-1501117716987-c8e1ecb210d3?auto=format&fit=crop&w=1200&q=80"
-              alt="숙소 사진 2"
-            />
+
+          <a class="gallery-item" href="#" aria-label="사진 크게 보기" data-modal="photo">
+            <img src="https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?auto=format&fit=crop&w=1200&q=80"
+              alt="숙소 사진 3" />
           </a>
 
-          <a class="gallery-item" href="#" aria-label="사진 크게 보기">
-            <img
-              src="https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?auto=format&fit=crop&w=1200&q=80"
-              alt="숙소 사진 3"
-            />
+          <a class="gallery-item" href="#" aria-label="사진 크게 보기" data-modal="photo">
+            <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80"
+              alt="숙소 사진 4" />
           </a>
 
-          <a class="gallery-item" href="#" aria-label="사진 크게 보기">
-            <img
-              src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80"
-              alt="숙소 사진 4"
-            />
+          <a class="gallery-item" href="#" aria-label="사진 크게 보기" data-modal="photo">
+            <img src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1200&q=80"
+              alt="숙소 사진 5" />
           </a>
-
-          <a class="gallery-item" href="#" aria-label="사진 크게 보기">
-            <img
-              src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1200&q=80"
-              alt="숙소 사진 5"
-            />
+          <a class="gallery-item" href="#" aria-label="사진 크게 보기" data-modal="photo">
+            <img src="https://images.unsplash.com/photo-1501117716987-c8e1ecb210d3?auto=format&fit=crop&w=1200&q=80"
+              alt="숙소 사진이 준비중입니다" />
           </a>
 
           <!-- 우측 상단: 사진 전체보기 버튼(예시) -->
@@ -152,19 +147,19 @@
                 <span class="pill">할인 중</span>
               </div>
 
-              <h1 class="property-title">모던 부티크 호텔</h1>
+              <h1 class="property-title"></h1>
 
               <div class="property-meta">
                 <div class="meta-item">
                   <span class="star">★</span>
-                  <b>4.8</b>
-                  <span class="muted">(512)</span>
+                  <b></b>
+                  <span class="muted"></span>
                 </div>
 
                 <span class="dot">·</span>
 
                 <div class="meta-item muted">
-                  서울, 대한민국 · 강남구
+
                 </div>
               </div>
             </div>
@@ -174,11 +169,11 @@
               <button class="ghost-btn" type="button" aria-label="공유하기">
                 <span class="ghost-btn__icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24">
-                    <path d="M18 8a3 3 0 10-2.8-4H15a3 3 0 003 4z"/>
-                    <path d="M6 14a3 3 0 10-2.8-4H3a3 3 0 003 4z"/>
-                    <path d="M18 20a3 3 0 10-2.8-4H15a3 3 0 003 4z"/>
-                    <path d="M8 12l8-4"/>
-                    <path d="M8 12l8 4"/>
+                    <path d="M18 8a3 3 0 10-2.8-4H15a3 3 0 003 4z" />
+                    <path d="M6 14a3 3 0 10-2.8-4H3a3 3 0 003 4z" />
+                    <path d="M18 20a3 3 0 10-2.8-4H15a3 3 0 003 4z" />
+                    <path d="M8 12l8-4" />
+                    <path d="M8 12l8 4" />
                   </svg>
                 </span>
                 공유
@@ -192,7 +187,7 @@
                              8.04 4 9.54 4.81 10.4 6.09
                              11.26 4.81 12.76 4 14.3 4
                              16.8 4 18.8 6 18.8 8.5
-                             c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                             c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                   </svg>
                 </span>
                 찜
@@ -262,12 +257,10 @@
 
             <div class="room-list">
               <!-- 객실 1 -->
-              <article class="room">
+              <!-- <article class="room">
                 <div class="room__media">
-                  <img
-                    src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80"
-                    alt="디럭스 더블"
-                  />
+                  <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80"
+                    alt="디럭스 더블" />
                 </div>
 
                 <div class="room__body">
@@ -287,15 +280,14 @@
                   </div>
                   <button class="btn-main" type="button">선택</button>
                 </div>
-              </article>
+              </article> -->
 
               <!-- 객실 2 -->
-              <article class="room">
+              <!-- <article class="room">
                 <div class="room__media">
                   <img
                     src="https://images.unsplash.com/photo-1501117716987-c8e1ecb210d3?auto=format&fit=crop&w=1200&q=80"
-                    alt="프리미엄 스위트"
-                  />
+                    alt="프리미엄 스위트" />
                 </div>
 
                 <div class="room__body">
@@ -316,6 +308,31 @@
                   <button class="btn-main" type="button">선택</button>
                 </div>
               </article>
+              <article class="room">
+                <div class="room__media">
+                  <img
+                    src="https://images.unsplash.com/photo-1501117716987-c8e1ecb210d3?auto=format&fit=crop&w=1200&q=80"
+                    alt="프리미엄 스위트" />
+                </div>
+
+                <div class="room__body">
+                  <div class="room__title">프리미엄 스위트</div>
+                  <div class="room__meta muted">3인 · 퀸베드 1 + 싱글 1 · 42m²</div>
+
+                  <div class="room__tags">
+                    <span class="tag">조식 포함</span>
+                    <span class="tag">무료 취소</span>
+                    <span class="tag">라운지</span>
+                  </div>
+                </div>
+
+                <div class="room__side">
+                  <div class="room__price">
+                    ₩260,000 <span>/ 박</span>
+                  </div>
+                  <button class="btn-main" type="button">선택</button>
+                </div>
+              </article> -->
             </div>
           </section>
 
@@ -402,7 +419,7 @@
               </article>
             </div>
 
-            <button class="btn-outline" type="button">후기 더보기</button>
+            <a href="#"><button class="btn-outline" type="button">후기 더보기</button></a>
           </section>
 
           <!-- 이용 규정 -->
@@ -435,9 +452,29 @@
             <div class="map">
               <!-- 실제 지도 API 대신, UI용 박스 -->
               <div class="map__box">
-                <div class="map__pin" aria-hidden="true">📍</div>
+                <!-- <div class="map__pin" aria-hidden="true">📍</div> -->
                 <div class="map__text">
-                  서울특별시 강남구 테헤란로 (예시)
+                  <!-- * 카카오맵 - 지도퍼가기 -->
+                  <!-- 1. 지도 노드 -->
+                  <div id="daumRoughmapContainer1772524490681" class="root_daum_roughmap root_daum_roughmap_landing">
+                  </div>
+
+                  <!--
+	2. 설치 스크립트
+	* 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
+-->
+                  <script charset="UTF-8" class="daum_roughmap_loader_script"
+                    src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+
+                  <!-- 3. 실행 스크립트 -->
+                  <script charset="UTF-8">
+                    new daum.roughmap.Lander({
+                      "timestamp": "1772524490681",
+                      "key": "ipbwpt3q2z7",
+                      "mapWidth": "640",
+                      "mapHeight": "160"
+                    }).render();
+                  </script>
                 </div>
               </div>
             </div>
@@ -450,7 +487,7 @@
         <aside class="booking" aria-label="예약 영역">
           <div class="book-card">
             <div class="book-price">
-              <b>₩189,000</b> <span class="muted">/ 박</span>
+              <b>₩ 275000</b> <span class="muted">/ 박</span>
             </div>
 
             <div class="book-rating muted">
@@ -477,13 +514,13 @@
               <!-- 가격 요약 -->
               <div class="book-summary">
                 <div class="sum-row">
-                  <span class="muted">₩189,000 × 2박</span>
-                  <b>₩378,000</b>
+                  <span class="muted"></span>
+                  <!-- <b>₩378,000</b> -->
                 </div>
-                <div class="sum-row">
+                <!-- <div class="sum-row">
                   <span class="muted">세금 및 수수료</span>
                   <b>₩22,000</b>
-                </div>
+                </div> -->
                 <div class="sum-line"></div>
                 <div class="sum-row sum-row--total">
                   <span>총 합계</span>
@@ -491,9 +528,11 @@
                 </div>
               </div>
 
-              <button class="btn-main btn-main--big" type="button">
-                예약하기
-              </button>
+              <a href="#">
+                <button class="btn-main btn-main--big" type="button">
+                  예약하기
+                </button>
+              </a>
 
               <div class="book-note muted">
                 결제 전까지 예약이 확정되지 않습니다.
@@ -571,5 +610,17 @@
       </div>
     </div>
   </footer>
+
+  <div class="modal-bg" id="modalBg">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" id="modalClose" type="button">×</button>
+      <h3 id="modalTitle">제목</h3>
+      <p id="modalBody">내용</p>
+    </div>
+  </div>
+
+
+
 </body>
+
 </html>

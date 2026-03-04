@@ -663,3 +663,30 @@
     grid-template-columns: 1fr;
   }
 }
+.modal-bg{
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.5);
+  display: none;              /* 기본은 숨김 */
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.modal-bg.on{ display: flex; }
+
+.modal{
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  min-width: 280px;
+  max-width: 900px;
+  max-height: 80vh;     /* 화면 높이의 80%까지만 */
+  overflow-y: auto;
+}
+.modal-body{
+  max-height: 70vh;
+  overflow-y: auto;
+}
+#modalBody{
+  max-height: 70vh;
+  overflow-y: auto;
+}

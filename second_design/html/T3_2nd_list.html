@@ -5,6 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>STAYO | 숙소 리스트</title>
+    <script src="../js/jquery-3.7.1.js"></script>
+    <script src="../phi/js/dd.api.v1.js"></script>
+    <script src="../js/T3_2nd_list.js"></script>
 
     <!-- 폰트(메인과 동일) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,15 +28,15 @@
   =========================== -->
     <header class="header">
         <div class="container header__inner">
-            <a href="./index.html" class="logo" aria-label="STAYO 홈">STAYO</a>
+            <a href="#" class="logo" aria-label="STAYO 홈">STAYO</a>
 
-            <nav class="gnb" aria-label="주요 메뉴">
+            <!-- <nav class="gnb" aria-label="주요 메뉴">
                 <a href="#" class="gnb__link">숙소</a>
                 <a href="#" class="gnb__link">항공권</a>
                 <a href="#" class="gnb__link">패키지</a>
                 <a href="#" class="gnb__link">액티비티</a>
                 <a href="#" class="gnb__link">렌터카</a>
-            </nav>
+            </nav> -->
 
             <div class="header__right">
                 <button class="icon-btn" type="button" aria-label="언어/지역">
@@ -43,16 +46,18 @@
                     </svg>
                 </button>
 
-                <button class="icon-btn" type="button" aria-label="찜 목록">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
-                     2 6 4 4 6.5 4
-                     8.04 4 9.54 4.81 10.4 6.09
-                     11.26 4.81 12.76 4 14.3 4
-                     16.8 4 18.8 6 18.8 8.5
-                     c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                    </svg>
-                </button>
+                <a href="#">
+                    <button class="icon-btn" type="button" aria-label="찜 목록">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+                         2 6 4 4 6.5 4
+                         8.04 4 9.54 4.81 10.4 6.09
+                         11.26 4.81 12.76 4 14.3 4
+                         16.8 4 18.8 6 18.8 8.5
+                         c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                        </svg>
+                    </button>
+                </a>
 
                 <a href="#" class="btn btn--login">
                     <span class="btn__icon" aria-hidden="true">
@@ -84,7 +89,7 @@
                 </div>
 
                 <!-- 필터 칩(버튼처럼 보이는 태그) -->
-                <div class="chips" aria-label="필터">
+                <!-- <div class="chips" aria-label="필터">
                     <button class="chip chip--active" type="button">전체</button>
                     <button class="chip" type="button">무료 취소</button>
                     <button class="chip" type="button">조식 포함</button>
@@ -92,55 +97,43 @@
                     <button class="chip" type="button">주차</button>
                     <button class="chip" type="button">4.8+ 평점</button>
                     <button class="chip" type="button">할인 중</button>
-                </div>
+                </div> -->
 
                 <!-- 정렬 + 가격 범위(간단 UI) -->
-                <div class="toolbar">
-                    <div class="toolbar__left">
-                        <span class="toolbar__label">정렬</span>
-                        <select class="select">
-                            <option>추천순</option>
-                            <option>가격 낮은순</option>
-                            <option>가격 높은순</option>
-                            <option>평점 높은순</option>
-                            <option>후기 많은순</option>
-                        </select>
-                    </div>
-                </div>
             </div>
         </section>
 
         <!-- ==========================
-      본문: 좌측 필터 사이드 + 우측 리스트
-      - 데스크톱: 2컬럼
-      - 태블릿/모바일: 사이드 아래로 내려감
-    =========================== -->
+        본문: 좌측 필터 사이드 + 우측 리스트
+        - 데스크톱: 2컬럼
+        - 태블릿/모바일: 사이드 아래로 내려감
+        =========================== -->
         <section class="list-body">
             <div class="container list-grid">
                 <!-- ===== 왼쪽: 사이드 필터 ===== -->
                 <aside class="sidebar" aria-label="상세 필터">
                     <!-- 카드(박스) -->
                     <div class="side-box">
-                        <div class="side-box__title">예산</div>
+                        <div class="side-box__title">필터</div>
 
-                        <div class="side-row">
+                        <!-- <div class="side-row">
                             <label class="side-label">최소</label>
                             <input class="input" type="text" placeholder="₩0" />
                         </div>
-
+                        
                         <div class="side-row">
                             <label class="side-label">최대</label>
                             <input class="input" type="text" placeholder="₩300,000" />
-                        </div>
+                        </div> -->
 
                         <!-- ✅ 예산 박스 안에 추가(최소/최대 입력 아래) -->
                         <div class="side-range">
                             <div class="side-range__top">
                                 <span class="side-range__label">가격</span>
-                                <span class="side-range__value">최대 ₩280,000</span>
+                                <span class="side-range__value">₩ 250,000</span>
                             </div>
 
-                            <input class="price-range" type="range" min="50000" max="500000" value="280000" />
+                            <input class="price-range" type="range" min="0" max="500000" value="250000" />
                         </div>
 
                         <button class="side-apply" type="button">적용</button>
@@ -164,8 +157,8 @@
                         <label class="check"><input type="checkbox" /> 피트니스</label>
                     </div>
 
+                    <div class="side-box__title">평점</div>
                     <div class="side-box">
-                        <div class="side-box__title">평점</div>
                         <label class="check"><input type="radio" name="rate" /> 전체</label>
                         <label class="check"><input type="radio" name="rate" /> 4.5+</label>
                         <label class="check"><input type="radio" name="rate" /> 4.8+</label>
@@ -177,23 +170,39 @@
                 <section class="results" aria-label="검색 결과">
                     <!-- 상단 결과 안내 -->
                     <div class="results-head">
-                        <div class="results-head__title">검색 결과</div>
-                        <div class="results-head__meta">총 <b>245</b>개</div>
+
+                        <div class="results-head__left">
+                            <div class="results-head__title">검색 결과</div>
+                            <div class="results-head__meta">총 <b>245</b>개</div>
+                        </div>
+
+                        <div class="toolbar">
+                            <div class="toolbar__left">
+                                <span class="toolbar__label">정렬</span>
+                                <select class="select">
+                                    <option class="recomand">추천순</option>
+                                    <option class="low">가격 낮은 순</option>
+                                    <option class="high">평점 높은 순</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
+
                     </div>
 
                     <!-- 카드 리스트(그리드) -->
                     <div class="result-grid">
                         <!-- 카드 1 -->
-                        <article class="card">
+                        <!-- <article class="card">
                             <div class="card__media">
                                 <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1400&q=80"
                                     alt="시티뷰 럭셔리 호텔" />
 
-                                <!-- 왼쪽 상단 배지 -->
-                                <span class="badge badge--dark">할인 중</span>
+                                왼쪽 상단 배지 -->
+                                <!-- <span class="badge badge--dark">할인 중</span> -->
 
                                 <!-- 오른쪽 상단 찜(하트) -->
-                                <button class="wish" type="button" aria-label="찜하기">
+                                <!-- <button class="wish" type="button" aria-label="찜하기">
                                     <svg viewBox="0 0 24 24" class="heart" aria-hidden="true">
                                         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
                              2 6 4 4 6.5 4
@@ -226,10 +235,10 @@
 
                                 <a href="#" class="card__btn">객실 보기</a>
                             </div>
-                        </article>
+                        </article> -->
 
                         <!-- 카드 2 -->
-                        <article class="card">
+                        <!-- <article class="card">
                             <div class="card__media">
                                 <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1400&q=80"
                                     alt="부티크 호텔" />
@@ -268,10 +277,10 @@
 
                                 <a href="#" class="card__btn">객실 보기</a>
                             </div>
-                        </article>
+                        </article> -->
 
                         <!-- 카드 3 -->
-                        <article class="card">
+                        <!-- <article class="card">
                             <div class="card__media">
                                 <img src="https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?auto=format&fit=crop&w=1400&q=80"
                                     alt="스카이뷰 펜트하우스" />
@@ -310,7 +319,7 @@
 
                                 <a href="#" class="card__btn">객실 보기</a>
                             </div>
-                        </article>
+                        </article> -->
 
                         <!-- 필요한 만큼 카드 추가 -->
                     </div>
