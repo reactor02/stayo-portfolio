@@ -164,6 +164,11 @@
   .email__select{ width: 100%; }
 }
 
+/* 전화번호 3분할 */
+.phone-row{ display: flex; gap: 6px; align-items: center; }
+.phone__part{ flex: 1; text-align: center; padding: 12px 8px; font-weight: 900; letter-spacing: 2px; min-width: 0; }
+.phone__sep{ color: #6b6b6b; font-weight: 900; flex-shrink: 0; }
+
 /* 카드 번호 4칸 배치 */
 .card-number-row{ display: flex; gap: 8px; align-items: center; }
 .card__part{ width: 4.8rem; text-align: center; padding: 12px 8px; font-weight: 900; letter-spacing: 2px; }
@@ -199,12 +204,30 @@
   font-weight: 900;
   cursor: pointer;
 }
-.btn-small:hover{ background: rgba(0,0,0,0.05); }
+/* .btn-small:hover{ background: rgba(0,0,0,0.05); } */
 .btn-small--dark{
   background: #111;
   color: #fff;
 }
 .btn-small--dark:hover{ filter: brightness(1.05); }
+
+/* 필수 입력 * */
+.field__required{ color: #d32f2f; font-weight: 900; margin-left: 1px; }
+
+/* 포인트 wrap */
+.point__wrap{ display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.point__input-row{ display: flex; gap: 8px; align-items: center; }
+.point__all-check{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 900;
+  color: #111;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.point__all-check input{ width: 14px; height: 14px; cursor: pointer; }
 
 /* 포인트 입력 */
 .point{
@@ -220,6 +243,12 @@
   background: rgba(255,255,255,0.85);
   padding: 0 12px;
   font-weight: 900;
+  -moz-appearance: textfield;
+}
+.point__input::-webkit-outer-spin-button,
+.point__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 /* 결제수단 */

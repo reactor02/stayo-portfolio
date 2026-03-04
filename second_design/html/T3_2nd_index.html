@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../css/T3_2nd_common.css" />
     <!-- 페이지 전용 CSS -->
     <link rel="stylesheet" href="../css/T3_2nd_index.css" />
-    <script src="../js/index.js"></script>
+    <script src="../js/T3_2nd_index.js"></script>
 </head>
 
 <body>
@@ -48,8 +48,10 @@
             <div class="header__right">
                 <!-- 지구 아이콘 -->
                 <a href="#" class="parentCart">
-                    <img class="shoppingCart" src=".\..\..\Team3_html\testWang\wishlistMark\Gemini_Generated_Image_jn1jqmjn1jqmjn1j.png" alt="장바구니 이미지">
-                    <spna class="listNumber">2</span>
+                    <img class="shoppingCart"
+                        src=".\..\..\Team3_html\testWang\wishlistMark\Gemini_Generated_Image_jn1jqmjn1jqmjn1j.png"
+                        alt="장바구니 이미지">
+                    <span class="listNumber">2</span>
                 </a>
 
                 <!-- 하트 아이콘 -->
@@ -591,7 +593,29 @@
                 </div>
             </div>
         </section>
+
     </main>
+    <div id="ai-trigger" class="ai-trigger">
+        <span>AI<br>상담사</span>
+    </div>
+
+    <div id="ai-chat-container" class="ai-chat-container" style="display: none;">
+        <div class="ai-chat-header">
+            <span class="title">STAYO AI 상담원</span>
+            <button id="ai-close-btn" class="ai-close-btn">×</button>
+        </div>
+
+        <div id="ai-chat-box" class="ai-chat-box">
+            <div class="message model">
+                <div class="bubble">안녕하세요! STAYO 숙박 예약 상담원입니다. 무엇을 도와드릴까요?</div>
+            </div>
+        </div>
+
+        <div class="ai-chat-input-area">
+            <textarea id="ai-prompt" placeholder="메시지 입력..." rows="1"></textarea>
+            <button id="ai-ask-btn">전송</button>
+        </div>
+    </div>
 
     <!-- =========================================
     7) 푸터(캡처3 하단)

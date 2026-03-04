@@ -55,16 +55,19 @@
 
 /* --------- 검색바 --------- */
 .searchbar {
-    margin-top: 34px;
+   margin-top: 34px;
     background: rgba(255, 255, 255, 0.92);
     border-radius: 18px;
     padding: 16px;
     display: grid;
-    grid-template-columns: 1.2fr 1.1fr 0.9fr 200px;
-    /* 마지막은 검색 버튼 */
+    /* 고정된 200px 대신 1fr 비율을 섞어 유연하게 조절 */
+    grid-template-columns: 1.2fr 1.1fr 0.9fr 0.8fr; 
     gap: 12px;
     align-items: center;
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+    /* 내용물이 넘치지 않도록 방지 */
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* 항목 */
@@ -489,8 +492,33 @@
 /* 여기부터 삽입 */
 /* 검색창 */
 .search1 {
-    width: 150px;
+   height: 35px;
+    width: 110%; /* 고정 150px 대신 100%로 변경 */
+    min-width: 0; /* flex/grid 안에서 요소가 줄어들 수 있게 함 */
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 0 8px;
 }
+#pNumber{
+    height: 35px;
+    width: 110%; /* 고정 150px 대신 100%로 변경 */
+    min-width: 0; /* flex/grid 안에서 요소가 줄어들 수 있게 함 */
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 0 8px;
+}
+
+.searchbar__item {
+    height: 62px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 14px;
+    background: rgba(245, 245, 245, 0.55);
+    min-width: 0; /* 내부 요소가 넘쳐서 부모가 커지는 것 방지 */
+}
+
 
 
 /* 체크인 체크아웃 */
@@ -507,8 +535,8 @@
 
 .date-box {
     position: relative;
-    width: 150px;
-    height: 45px;
+    width: 110px;
+    height: 35px;
     display: flex;
     align-items: center;
 }
@@ -605,6 +633,7 @@
     height: 40px;
     width:  40px;
 }
+
 .listNumber, .listNumber2 {
     font-size: 10px;
     text-align: center;
@@ -624,6 +653,138 @@
 .hidden {
     display: none;
 }
+/* heart 색변환 */
+svg.heart {
+    fill: rgb(107, 107, 107);
+    transition: fill 0.3s ease; /* 색 변할 때 부드럽게 */
+    cursor: pointer;
+}
+
+/* 클릭되어 active 클래스가 붙었을 때 (빨간색) */
+svg.heart.active {
+    fill: rgb(229, 57, 53);
+}
+
+/* ai 상담사, 멀티턴 */
+/* AI 상담사 트리거 버튼 */
+.ai-trigger {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px; /* 글자가 들어가야 하므로 30px보다는 50px 정도를 추천하지만, 30px 고집하신다면 아래 폰트 크기를 더 줄여야 합니다. */
+    height: 50px;
+    background-color: #111;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.2s;
+    
+    /* 글자 스타일 추가 */
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    line-height: 1.1;
+}
+
+.ai-trigger span {
+    font-size: 10px; /* 30px 원일 경우 아주 작게 설정해야 합니다. */
+}
+
+.ai-trigger:hover { transform: scale(1.1); }
+
+/* AI 상담창 컨테이너 */
+.ai-chat-container {
+    position: fixed;
+    bottom: 60px; /* 버튼보다 약간 위에 위치 */
+    right: 20px;
+    width: 320px;
+    height: 450px;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1001;
+    border: 1px solid #ddd;
+}
+
+.ai-chat-header {
+    background: #111;
+    color: white;
+    padding: 12px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ai-chat-header .title { font-size: 14px; font-weight: bold; }
+
+.ai-close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* 채팅창 내부 박스 */
+.ai-chat-box {
+    flex: 1;
+    padding: 15px;
+    background: #f8f9fa;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.ai-chat-input-area {
+    padding: 10px;
+    background: #fff;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 8px;
+}
+
+#ai-prompt {
+    flex: 1;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 8px;
+    outline: none;
+    resize: none;
+    font-size: 13px;
+}
+
+#ai-ask-btn {
+    background: #111;
+    color: white;
+    border: none;
+    padding: 0 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+/* 메시지 버블 (기존 스타일 유지/응용) */
+.message { display: flex; margin-bottom: 10px; }
+.message.user { justify-content: flex-end; }
+.message.model { justify-content: flex-start; }
+.bubble { 
+    max-width: 85%; 
+    padding: 8px 12px; 
+    border-radius: 12px; 
+    font-size: 13px; 
+    line-height: 1.4;
+}
+.message.user .bubble { background: #111; color: white; border-bottom-right-radius: 2px; }
+.message.model .bubble { background: #eee; color: #333; border-bottom-left-radius: 2px; }
+
 
 
 /* --------- 반응형(메인 전용) --------- */
@@ -634,10 +795,12 @@
 
     .searchbar {
         grid-template-columns: 1fr 1fr;
+        gap: 15px;
     }
 
     .searchbar__submit {
-        grid-column: 1 / -1;
+        grid-column: 1 / -1; 
+        width: 100%;
     }
 
     .grid-dest {
@@ -650,8 +813,30 @@
 }
 
 @media (max-width: 640px) {
+    .searchbar {
+        padding-left: 16px !important; /* 원래 패딩으로 복구 */
+    }
+
+    /* 2. 검색 항목들만 오른쪽으로 30px 이동 */
+    .searchbar__item {
+        margin-left: 30px;
+        /* 항목이 밀리면서 검색바를 벗어나지 않도록 너비 자동 조절 */
+        width: calc(100% - 30px); 
+    }
+
+    /* 3. 검색 버튼은 원래 위치 유지 */
+    .searchbar__submit {
+        margin-left: 0; /* 마진 없음 */
+        width: 100%;    /* 버튼은 꽉 차게 유지 */
+    }
+    .searchbar {
+        /* 모바일에서는 모두 한 줄씩 세로 배치 */
+        grid-template-columns: 1fr;
+        padding: 12px;
+    }
     .hero__overlay {
-        padding: 52px 0 66px;
+        min-height: auto; /* 모바일에서 배경 높이 조절 */
+        padding: 40px 0;
     }
 
     .hero__title {

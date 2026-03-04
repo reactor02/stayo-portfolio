@@ -91,14 +91,15 @@ function bind() {
                 const name = (userNameEl && userNameEl.value) ? userNameEl.value.trim() : '';
                 const korean = /^[가-힣]+$/;
                 // 예약자 이름이 비어있으면 에러메세지 노출
+                const nameErrorEl = document.getElementById('userNameError');
                 if (name.length === 0) {
-                    alert('예약자 이름을 입력해주세요.');
+                    if (nameErrorEl) { nameErrorEl.textContent = '예약자 이름을 입력해주세요.'; nameErrorEl.style.display = 'block'; }
                     if (userNameEl) userNameEl.focus();
                     return;
                 }
 
                 if (!korean.test(name)) {
-                    alert('이름은 한글만 됩니다.');
+                    if (nameErrorEl) { nameErrorEl.textContent = '이름은 한글만 됩니다.'; nameErrorEl.style.display = 'block'; }
                     if (userNameEl) userNameEl.focus();
                     return;
                 }
@@ -110,48 +111,197 @@ function bind() {
     }
 
 
-    // 연락처(전화번호) 입력 제약: 숫자만, maxlength 11, 반드시 010으로 시작
-    const phoneEl = document.querySelector('#userPhone');
-    if (phoneEl) {
-        // 에러 엘리먼트는 HTML에 미리 배치되어 있다고 가정
-        let phoneErr = document.getElementById('userPhoneError');
+    // 연락처 3분할 입력: phoneP1(3자리) / phoneP2(4자리) / phoneP3(4자리)
+    // hidden input #userPhone에 하이픈 포함 전체 번호를 조합해 저장
+    (function setupPhoneParts() {
+        const p1 = document.getElementById('phoneP1');
+        const p2 = document.getElementById('phoneP2');
+        const p3 = document.getElementById('phoneP3');
+        const phoneHidden = document.getElementById('userPhone');
+        const phoneErr = document.getElementById('userPhoneError');
+        const parts = [p1, p2, p3];
+        const maxLens = [3, 4, 4]; // 각 칸의 최대 자릿수
 
-        // 입력은 숫자만 허용
-        phoneEl.addEventListener('input', function () {
-            // \D는 숫자가 아닌 문자, g는 전체에서 모두 찾기. 입력값에서 숫자가 아닌 문자를 제거한 후 maxlength 11로 자르기
-            const digits = this.value.replace(/\D/g, '');
-            this.value = digits.slice(0, 11);
-            // 입력 중 유효하면 에러 숨김
-            // ^010 010으로 시작하는 {8}8자리 숫자를 허용하는 정규식
-            // 조건 맞으면 에러 숨김
-            if (phoneErr && /^010\d{8}$/.test(this.value)) {
-                phoneErr.style.display = 'none';
-                phoneErr.textContent = '';
-            }
-        });
+        if (!p1 || !p2 || !p3) return;
 
-        // blur 시 엄격 검증: 빈값, 형식 체크
-        phoneEl.addEventListener('blur', function () {
-            const val = this.value.trim();
-            // 에러메시지 돔 존재시에는 여기서 종료
-            if (!phoneErr) return;
-            // 빈값 체크
-            if (val.length == 0) {
+        // hidden input에 조합된 전화번호(000-0000-0000) 갱신
+        const updateHidden = () => {
+            if (phoneHidden) phoneHidden.value = [p1.value, p2.value, p3.value].join('-');
+        };
+
+        // 에러 숨기기
+        const clearErr = () => {
+            if (phoneErr) { phoneErr.style.display = 'none'; phoneErr.textContent = ''; }
+        };
+
+        // 전체 번호 유효성 검사
+        const validate = () => {
+            if (!phoneErr) return true;
+            const v1 = p1.value, v2 = p2.value, v3 = p3.value;
+            // 세 칸 모두 비어있으면 빈값 에러
+            if (!v1 && !v2 && !v3) {
                 phoneErr.textContent = '연락처를 입력해주세요.';
                 phoneErr.style.display = 'block';
-                return;
+                return false;
             }
-            // 형식 체크: 010으로 시작하는 11자리 숫자여야 함
-            if (!/^010\d{8}$/.test(val)) {
-                phoneErr.textContent = '전화번호는 010으로 시작하는 11자리 숫자여야 합니다.';
+            // p1이 010이 아닌 경우
+            if (v1 !== '010') {
+                phoneErr.textContent = '전화번호는 010으로 시작해야 합니다.';
                 phoneErr.style.display = 'block';
-                return;
+                return false;
             }
-            // 검증 통과 시 에러 메시지 숨김
-            phoneErr.style.display = 'none';
-            phoneErr.textContent = '';
+            // p2가 4자리 미만
+            if (v2.length < 4) {
+                phoneErr.textContent = '전화번호 형식이 올바르지 않습니다.';
+                phoneErr.style.display = 'block';
+                return false;
+            }
+            // p3가 4자리 미만
+            if (v3.length < 4) {
+                phoneErr.textContent = '전화번호 형식이 올바르지 않습니다.';
+                phoneErr.style.display = 'block';
+                return false;
+            }
+            clearErr();
+            return true;
+        };
+
+        parts.forEach(function(el, idx) {
+            // input: 숫자만 허용, 최대 자릿수 제한, 다 채우면 다음 칸으로 이동
+            el.addEventListener('input', function() {
+                // 숫자 외 제거
+                this.value = this.value.replace(/\D/g, '').slice(0, maxLens[idx]);
+                updateHidden();
+                // 현재 칸이 가득 차면 다음 칸으로 포커스 이동
+                if (this.value.length === maxLens[idx]) {
+                    const next = parts[idx + 1];
+                    if (next) next.focus();
+                }
+                // 완성 상태면 에러 숨김
+                if (p1.value === '010' && p2.value.length === 4 && p3.value.length === 4) clearErr();
+            });
+
+            // keydown: Backspace로 빈 칸에서 이전 칸으로 이동
+            el.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace' && this.value.length === 0) {
+                    const prev = parts[idx - 1];
+                    if (prev) { prev.focus(); prev.selectionStart = prev.value.length; }
+                }
+            });
+
+            // blur: 포커스가 phone-row 밖으로 나갈 때 전체 검증
+            el.addEventListener('blur', function() {
+                setTimeout(function() {
+                    const focused = document.activeElement;
+                    if (!parts.includes(focused)) validate();
+                }, 100);
+            });
+
+            // paste: 전체 번호 붙여넣기 지원 — 숫자만 추출 후 3-4-4 분배
+            el.addEventListener('paste', function(e) {
+                e.preventDefault();
+                const raw = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '');
+                if (!raw) return;
+                p1.value = raw.slice(0, 3);
+                p2.value = raw.slice(3, 7);
+                p3.value = raw.slice(7, 11);
+                updateHidden();
+                if (p3.value.length > 0) p3.focus();
+                else if (p2.value.length > 0) p2.focus();
+                else p1.focus();
+            });
         });
-    }
+    })();
+
+    // ===== 포인트 로직 =====
+    (function setupPoint() {
+        // 금액 상수 (숙박요금 + 세금 및 수수료)
+        const ROOM_PRICE  = 638000;
+        const TAX_FEE     = 35000;
+        const BASE_DISC   = 20000;   // 기존 할인 고정값
+        const MAX_USABLE  = ROOM_PRICE + TAX_FEE; // 포인트 사용 상한
+        const OWNED_POINT = 12000;   // 보유 포인트
+
+        let usedPoint = 0; // 현재 적용된 포인트
+
+        const pointInput   = document.getElementById('pointInput');
+        const pointUseBtn  = document.getElementById('pointUseBtn');
+        const pointUseAll  = document.getElementById('pointUseAll');
+        const ownedEl      = document.getElementById('pointOwned');
+        const usedDisplay  = document.getElementById('pointUsedDisplay');
+        const usedAmtEl    = document.getElementById('pointUsedAmt');
+        const sumPointRow  = document.getElementById('sumPointRow');
+        const sumPointAmt  = document.getElementById('sumPointAmt');
+        const sumTotal     = document.getElementById('sumTotal');
+        const sumBtnText   = document.getElementById('sumBtnText');
+        const sumBtnTextM  = document.getElementById('sumBtnTextMobile');
+
+        if (!pointInput || !pointUseBtn) return;
+
+        // 금액 포맷 (천단위 쉼표)
+        const fmt = (n) => '₩' + n.toLocaleString('ko-KR');
+
+        // 총 결제 금액 / 버튼 텍스트 갱신
+        const updateTotal = () => {
+            const total = ROOM_PRICE + TAX_FEE - BASE_DISC - usedPoint;
+            const totalStr = fmt(total);
+            if (sumTotal)    sumTotal.textContent    = totalStr;
+            if (sumBtnText)  sumBtnText.textContent  = totalStr;
+            if (sumBtnTextM) sumBtnTextM.textContent = totalStr;
+        };
+
+        // 포인트 적용 UI 갱신
+        const applyPoint = (pts) => {
+            // 범위 클램프: 0 ~ min(보유포인트, MAX_USABLE)
+            const cap = Math.min(OWNED_POINT, MAX_USABLE);
+            pts = Math.max(0, Math.min(pts, cap));
+            usedPoint = pts;
+
+            // 보유 포인트 잔액 표시
+            const remain = OWNED_POINT - usedPoint;
+            if (ownedEl) ownedEl.textContent = '보유 포인트: ' + remain.toLocaleString('ko-KR') + 'P';
+
+            // 사용 포인트 표시 (항시 노출)
+            if (usedAmtEl) usedAmtEl.textContent = usedPoint.toLocaleString('ko-KR');
+
+            // summary 포인트 행 표시/숨김
+            if (usedPoint > 0) {
+                if (sumPointRow) sumPointRow.style.display = 'flex';
+                if (sumPointAmt) sumPointAmt.textContent = '-' + fmt(usedPoint);
+            } else {
+                if (sumPointRow) sumPointRow.style.display = 'none';
+            }
+
+            // 총액 갱신
+            updateTotal();
+
+            // input 값 동기화
+            if (pointInput) pointInput.value = usedPoint > 0 ? usedPoint : '';
+
+            // 전액사용 체크박스 동기화
+            if (pointUseAll) pointUseAll.checked = (usedPoint === Math.min(OWNED_POINT, MAX_USABLE));
+        };
+
+        // 사용 버튼 클릭
+        pointUseBtn.addEventListener('click', function() {
+            const val = parseInt(pointInput.value, 10) || 0;
+            applyPoint(val);
+        });
+
+        // 전액사용 체크박스
+        pointUseAll.addEventListener('change', function() {
+            if (this.checked) {
+                applyPoint(Math.min(OWNED_POINT, MAX_USABLE));
+            } else {
+                applyPoint(0);
+            }
+        });
+
+        // input에서 직접 수정 시 전액사용 체크 해제
+        pointInput.addEventListener('input', function() {
+            if (pointUseAll) pointUseAll.checked = false;
+        });
+    })();
 
     // 이메일 3단 UI 동작: select 선택에 따라 도메인 입력 활성화/비활성화
     const emailLocal = document.getElementById('emailLocal');
@@ -177,24 +327,42 @@ function bind() {
         // 간단한 UI 보정: local 입력이 비었을 때 포커스 아웃 검증은 별도 처리 가능합니다.
     }
 
-    // 이메일 입력 규칙: 한글이 포함되면 한글만 허용(한글 입력 허용하되, 한글 사용 시에는 한글만 남김)
-    (function setupEmailKoreanMode() {
-        const keepKoreanOrTrim = (el) => {
-            if (!el) return;
-            el.addEventListener('input', function () {
-                const v = this.value || '';
-                if (/[가-힣]/.test(v)) {
-                    // 한글이 하나라도 있으면 한글만 남김
-                    this.value = v.replace(/[^가-힣]/g, '');
-                } else {
-                    // 한글이 없으면 공백만 제거(기본 이메일 문법 체크는 별도 처리)
-                    this.value = v.replace(/\s+/g, '');
-                }
-            });
-        };
+    // 이메일 로컬 파트 검증: 영문·숫자·이메일 허용 특수문자(._+-%)만 허용
+    // 한글 또는 그 외 특수문자 입력 시 붉은 에러 메시지 노출
+    (function setupEmailLocalValidation() {
+        const el  = document.getElementById('emailLocal');
+        const err = document.getElementById('emailLocalError');
+        if (!el || !err) return;
 
-        keepKoreanOrTrim(emailLocal);
-        keepKoreanOrTrim(emailDomain);
+        // 허용 문자: 영문 대소문자, 숫자, . _ + - %
+        const allowed = /^[a-zA-Z0-9._+\-%]*$/;
+
+        const showErr = (msg) => { err.textContent = msg; err.style.display = 'block'; };
+        const hideErr = () => { err.textContent = ''; err.style.display = 'none'; };
+
+        el.addEventListener('input', function () {
+            const v = this.value;
+            if (v.length === 0) { hideErr(); return; }
+            if (/[가-힣ㄱ-ㅎㅏ-ㅣ]/.test(v)) {
+                showErr('이메일에 한글은 입력할 수 없습니다.');
+            } else if (!allowed.test(v)) {
+                showErr('사용할 수 없는 특수문자가 포함되어 있습니다.');
+            } else {
+                hideErr();
+            }
+        });
+
+        el.addEventListener('blur', function () {
+            const v = this.value.trim();
+            if (v.length === 0) { hideErr(); return; }
+            if (/[가-힣ㄱ-ㅎㅏ-ㅣ]/.test(v)) {
+                showErr('이메일에 한글은 입력할 수 없습니다.');
+            } else if (!allowed.test(v)) {
+                showErr('사용할 수 없는 특수문자가 포함되어 있습니다.');
+            } else {
+                hideErr();
+            }
+        });
     })();
 
     // 카드번호 4분할 입력: 숫자만 허용, 각 칸 maxlength=4, 채우면 다음 칸으로 자동 이동
@@ -285,9 +453,13 @@ function bind() {
                 }
                 if (missing) {
                     e.preventDefault();
-                    alert('약관동의에 동의해주세요.');
+                    const agreeErr = document.getElementById('agreeError');
+                    if (agreeErr) { agreeErr.textContent = '필수 약관에 동의해주세요.'; agreeErr.style.display = 'block'; }
                     return false;
                 }
+                // 통과 시 agreeError 숨김
+                const agreeErr = document.getElementById('agreeError');
+                if (agreeErr) { agreeErr.style.display = 'none'; agreeErr.textContent = ''; }
                 // 통과 시 정상 흐름(현재는 UI 버튼이므로 추가 동작 없음)
             });
         }
@@ -299,27 +471,12 @@ function bind() {
         const contentEl = document.getElementById('termsModalContent');
         if (!modal || !contentEl) return;
 
-        const templates = {
-            terms: `
-<h4>이용약관 (샘플)</h4>
-<p>1. 본 서비스는 예약 및 결제를 지원합니다. 사용자는 정확한 정보 제공에 동의합니다.</p>
-<p>2. 예약 취소 및 환불 정책은 숙소 정책에 따릅니다. 부정확한 정보로 인한 불이익은 사용자 책임입니다.</p>
-<p>3. 서비스 이용 중 발생하는 분쟁은 관련 법령 및 회사 이용약관에 따릅니다.</p>
-`,
-
-            privacy: `
-<h4>개인정보 처리방침 (샘플)</h4>
-<p>당사는 이용자의 개인정보를 서비스 제공 목적 범위 내에서만 처리합니다.</p>
-<p>수집 항목: 이름, 연락처, 이메일, 결제 정보 등. 보유기간 및 파기는 관련 법령에 따릅니다.</p>
-<p>이용자는 개인정보 처리에 대한 권리를 행사할 수 있습니다. 자세한 내용은 고객센터로 문의해주세요.</p>
-`,
-
-            marketing: `
-<h4>마케팅 수신동의 (샘플)</h4>
-<p>이벤트, 프로모션, 추천 콘텐츠 등의 정보를 이메일/SMS로 발송할 수 있습니다.</p>
-<p>선택 동의 항목으로, 동의하지 않아도 서비스 이용에 제한이 없습니다.</p>
-`
+        // HTML의 <template> 태그에서 약관 내용을 읽어옴
+        const getTemplate = (type) => {
+            const tmpl = document.getElementById('tmpl-' + type);
+            return tmpl ? tmpl.innerHTML : '';
         };
+
         // 모달 엳기/닫기 함수
         const open = (html) => {
             contentEl.innerHTML = html;
@@ -340,7 +497,7 @@ function bind() {
             a.addEventListener('click', function (e) {
                 e.preventDefault();
                 const type = this.dataset.type || 'terms';
-                open(templates[type] || templates.terms);
+                open(getTemplate(type) || getTemplate('terms'));
             });
         }
 
