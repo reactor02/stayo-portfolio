@@ -227,6 +227,7 @@
 
 #birthError {
   color: red;
+  font-size: 15px;
 }
 
 #phoneError {

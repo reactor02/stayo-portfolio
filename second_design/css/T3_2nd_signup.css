@@ -329,6 +329,11 @@
   border-radius: 999px;
 }
 
+.error-msg {
+  color :red;
+  font-size:10px;
+}
+
 /* 반응형 */
 @media (max-width: 640px){
   .row-2{ grid-template-columns: 1fr; }

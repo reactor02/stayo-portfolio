@@ -44,7 +44,7 @@
               <path d="M12 12a4.5 4.5 0 10-4.5-4.5A4.5 4.5 0 0012 12zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z" />
             </svg>
           </span>
-          로그인
+          아이디/비밀번호 찾기
         </a>
       </div>
     </div>
@@ -128,12 +128,13 @@
               <label class="field field--full">
                 <span class="field__label">인증번호</span>
                 <div class="verify__row">
-                  <input class="field__input" type="text" placeholder="인증번호 6자리" />
-                  <button class="btn-outline verify-btn" type="button">인증요청</button>
-                  <p class="verify__timer hide"></p>
+                  <input id="id-verify" class="field__input" type="text" placeholder="인증번호 6자리" />
+                  <button id="id-verify-btn" class="btn-outline verify-btn" type="button">인증요청</button>
+                  <p  id="id-verify-error" class="verify__timer hide"></p>
                 </div>
                
               </label>
+               <p class="error-msg hide"></p>
               <p class="muted verify__note">* 실제 기능 없이 UI로만 구성되어 있습니다.</p>
             </div>
 
@@ -188,7 +189,7 @@
 
           <label class="field">
             <span class="field__label">휴대폰 번호</span>
-            <input id="pw-phone" class="field__input" type="tel" placeholder="010-0000-0000" required />
+            <input id="pw-phone" class="field__input" type="tel" placeholder="01000000000" required />
           <p id="phone-error" class="error-msg hide"></p>
           </label>
         </div>
@@ -198,13 +199,13 @@
           <label class="field field--full">
             <span class="field__label">인증번호</span>
             <div class="verify__row">
-              <input class="field__input" type="text" placeholder="인증번호 6자리" />
-              <button class="btn-outline verify-btn" type="button">인증요청</button>
+              <input id="pw-verify" class="field__input" type="text" placeholder="인증번호 6자리" />
+              <button id="pw-verify-btn" class="btn-outline verify-btn" type="button">인증요청</button>
               <p class="verify__timer hide"></p>
             </div>
           </label>
           <p class="muted verify__note">* 실제 전송 기능은 없고 UI만 구성되어 있습니다.</p>
-          <p class="error-msg hide"></p>
+          <p id="pw-verify-error" class="error-msg hide"></p>
         </div>
 
         <!-- 새 비밀번호 설정(UI) -->
@@ -227,7 +228,7 @@
         </div>
 
         <button class="btn-main btn-main--big" id="pw-btn" type="submit">비밀번호 재설정</button>
-
+아아아
         <div class="result">
           <div class="result__title">안내</div>
           <div class="result__box">
@@ -239,13 +240,13 @@
             <a href="./T3_2nd_find_account.html" class="btn-outline">아이디 찾기</a>
           </div>
         </div>
+      </form>
         </div>
-        </form>
       </div>
          <p class="bottom-links">
               <a class="link" href="T3_2nd_login.html">로그인</a>
               <span class="sep">·</span>
-              <a class="link" href="./signup.html">회원가입</a>
+              <a class="link" href="T3_2nd_signup.html">회원가입</a>
               <span class="sep">·</span>
               <a class="link" href="#">고객센터</a>
             </p>

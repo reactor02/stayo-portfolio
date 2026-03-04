@@ -4,6 +4,7 @@ window.onload = function () {
     const email = document.getElementById("email");
     const password = document.getElementById("password");
     const error = document.querySelector("#error-msg");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     form.addEventListener("submit", function (e) {
         console.log(error)
@@ -23,11 +24,7 @@ window.onload = function () {
             error.textContent = "이메일을 입력해주세요.";
             error.classList.remove("hide");
         }
-        else if (
-            emailValue.indexOf("@") === -1 ||
-            emailValue.indexOf(".") === -1 ||
-            emailValue.length < 6
-        ) {
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) { // 이메일 정규식 버전 
             error.textContent = "이메일 형식이 올바르지 않습니다.";
             error.classList.remove("hide");
         }
@@ -37,6 +34,7 @@ window.onload = function () {
         }
         else {
             alert("로그인 완료");
+            window.location.href = "T3_2nd_index.html"
         }
 
     });

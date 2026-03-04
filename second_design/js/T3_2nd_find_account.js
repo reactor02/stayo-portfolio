@@ -1,143 +1,151 @@
 window.onload = function () {
 
-    const tabId = document.getElementById("tab-id"); // 아이디 찾기 탭 버튼
-    const tabPw = document.getElementById("tab-pw"); // 비밀번호 찾기 탭버튼
 
-    const formId = document.getElementById("form-id"); // 아이디 찾기 form
-    const formPw = document.getElementById("form-pw"); // 비밀번호 찾기 form
-    const pageTitle = document.querySelector('#page-title') // 상단 제목 
-    const pageDesc = document.querySelector('#page-desc')   // 상단 설명 문구
-    const hintBox = document.getElementById("hint-box");    // 아이디 찾기 안내 박스 
+    // 1 DOM 전부 위로 정리
+    //  탭 & 레이아웃
+    const tabId = document.getElementById("tab-id");
+    const tabPw = document.getElementById("tab-pw");
+    const formId = document.getElementById("form-id");
+    const formPw = document.getElementById("form-pw");
+    const pageTitle = document.getElementById("page-title");
+    const pageDesc = document.getElementById("page-desc");
+    const hintBox = document.getElementById("hint-box");
+    const idSection = document.getElementById("id-section");
+    const pwSection = document.getElementById("pw-section");
 
-    // 아이디 찾기 요소들 
-    const idName = document.getElementById("id-name");  // 이름 input
-    const idPhone = document.getElementById("id-phone"); // 휴대폰 번호 input
-    const idForm = document.getElementById("form-id");  // 아이디 form
-    const idBtn = idForm.querySelector(".find-btn");    // 아이디 찾기 버튼 
-    const idError = idForm.querySelector(".error-msg"); // 아이디 에러 메시지 영역 
+    // 아이디 찾기 input
+    const idName = document.getElementById("id-name");
+    const idPhone = document.getElementById("id-phone");
+    const idVerifyInput = document.getElementById("id-verify");
 
-    // 비밀번호 찾기 요소
-    const pwEmail = document.getElementById("pw-email");    // 이메일 input
-    // const pwForm = document.getElementById("form-pw");      // 비밀번호 form
-    const pwBtn = document.getElementById("pw-btn");        // 비밀번호 재설정 버튼
-    
+    //  아이디 찾기 에러
+    const idError = formId.querySelector(".error-msg");
+    const idVerifyError = document.getElementById("id-verify-error");
 
-    // pwForm 즉 id="form-pw" 아래에 있는 class= error-msg
+    //  아이디 버튼
+    const idBtn = formId.querySelector(".find-btn");
 
-    const pwSection = document.getElementById("pw-section"); // 비밀번호 영역 전체
-    const idSection = document.getElementById("id-section"); // 아이디 영역 전체 
-    const password = document.querySelector("#password")
-    const passwordcheck = document.querySelector("#passwordcheck")
-    const pwName = document.querySelector('#pw-name')
-    const pwPhone = document.querySelector('#pw-phone')
+    //  비밀번호 찾기 input
+    const pwEmail = document.getElementById("pw-email");
+    const pwName = document.getElementById("pw-name");
+    const pwPhone = document.getElementById("pw-phone");
+    const password = document.getElementById("password");
+    const passwordcheck = document.getElementById("passwordcheck");
+    const pwVerifyInput = document.getElementById("pw-verify");
 
+    //  비밀번호 에러
+    const emailError = document.getElementById("email-error");
+    const nameError = document.getElementById("name-error");
+    const phoneError = document.getElementById("phone-error");
+    const passwordError = document.getElementById("password-error");
+    const passwordcheckError = document.getElementById("passwordcheck-error");
+    const pwVerifyError = document.getElementById("pw-verify-error");
 
+    //  버튼
+    const pwBtn = document.getElementById("pw-btn");
 
+    // 아이디찾기/ 비밀번호찾기인증  요청 버튼들
+    const idverifyBtn = document.querySelector("#id-verify-btn");
+    const pwverifyBtn = document.querySelector("#pw-verify-btn");
 
+    // 정규식
+    const verifyRegex = /^\d{6}$/; // 인증번호 6자리 숫자 검사식 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 이메일 검사식
 
-
-
-
-    // =========================
-    // 아이디 찾기 클릭 이벤트 
-    // =========================
+    // 아이디 찾기
     idBtn.addEventListener("click", function (e) {
 
-        e.preventDefault(); // form 기본 제출 막음 
+        e.preventDefault();
 
-        // 입력값 가져오기 + 앞뒤 공백 제거 
+        let isValid = true;
+
         const nameValue = idName.value.trim();
         const phoneValue = idPhone.value.trim();
-        // const cleanPhone = phoneValue.replaceAll("-", ""); //
+        const verifyValue = idVerifyInput.value.trim();
 
-        // 에러메시지 먼저 숨김 
         idError.classList.add("hide");
+        idVerifyError.classList.add("hide");
 
         if (nameValue === "" && phoneValue === "") {
             idError.textContent = "이름과 휴대폰 번호를 입력해주세요.";
             idError.classList.remove("hide");
+            isValid = false;
 
         } else if (nameValue === "") {
             idError.textContent = "이름을 입력해주세요.";
             idError.classList.remove("hide");
+            isValid = false;
 
         } else if (phoneValue === "") {
             idError.textContent = "휴대폰 번호를 입력해주세요.";
             idError.classList.remove("hide");
+            isValid = false;
 
-            // 전화번호가 숫자가 아닐 때 
-        } else if (isNaN(phoneValue)) {
+        } else if (isNaN(phoneValue)) { // 숫자가 아니라면 
             idError.textContent = "휴대폰 번호는 숫자만 입력해주세요.";
             idError.classList.remove("hide");
+            isValid = false;
 
         } else if (phoneValue.length < 10 || phoneValue.length > 11) {
             idError.textContent = "휴대폰 번호는 10~11자리로 입력해주세요.";
             idError.classList.remove("hide");
+            isValid = false;
+        }
 
-            // 모든 조건 통과 
-        } else {
+        if (verifyValue === "") {
+            idVerifyError.textContent = "인증번호를 입력해주세요.";
+            idVerifyError.classList.remove("hide");
+            isValid = false;
+
+        } else if (!verifyRegex.test(verifyValue)) {
+            idVerifyError.textContent = "인증번호가 6자리가 아닙니다.";
+            idVerifyError.classList.remove("hide");
+            isValid = false;
+        }
+
+        if (isValid) {
             alert("아이디 찾기 요청이 완료되었습니다.");
         }
     });
 
-    // =========================
-    // 비밀번호 찾기
-    // =========================
+    //  비밀번호 찾기
     pwBtn.addEventListener("click", function (e) {
 
-        e.preventDefault(); // 기본 제출 막음 
-        pwSection.style.display = "block"; // 혹시 모르니 보여주기 없어도 될듯 
+        e.preventDefault();
 
-        const emailValue = pwEmail.value.trim(); // 이메일 값 가져오기 
-        const passwordValue = password.value.trim();
-        const passwordcheckValue = passwordcheck.value.trim();
+        let isValid = true;
+
+        const emailValue = pwEmail.value.trim();
         const nameValue = pwName.value.trim();
         const phoneValue = pwPhone.value.trim();
+        const passwordValue = password.value.trim();
+        const passwordcheckValue = passwordcheck.value.trim();
+        const verifyValue = pwVerifyInput.value.trim();
 
-        const emailError = document.querySelector("#email-error");
-        const nameError = document.querySelector("#name-error");
-        const phoneError = document.querySelector("#phone-error");
-        const passwordError = document.querySelector('#password-error')
-        const passwordcheckError = document.querySelector('#passwordcheck-error')
-
-
-        // 모든 에러 초기화 
         emailError.classList.add("hide");
         nameError.classList.add("hide");
         phoneError.classList.add("hide");
         passwordError.classList.add("hide");
         passwordcheckError.classList.add("hide");
+        pwVerifyError.classList.add("hide");
 
-        let isValid = true;
-        
-        if (emailValue === "") {
-            emailError.textContent = "이메일을 입력해주세요.";
+        if (!emailRegex.test(emailValue)) {
+            emailError.textContent = "올바른 이메일 형식이 아닙니다.";
             emailError.classList.remove("hide");
             isValid = false;
-
-        } else if (
-            emailValue.indexOf("@") === -1 ||
-            emailValue.indexOf(".") === -1 ||
-            emailValue.length <= 6
-
-        ) {
-            emailError.textContent = "이메일 형식이 올바르지 않습니다.";
-            emailError.classList.remove("hide");
-            isValid = false;
-
         }
 
-        // 이름 검사
         if (nameValue === "") {
             nameError.textContent = "이름을 입력해주세요.";
             nameError.classList.remove("hide");
             isValid = false;
         }
-        // 휴대폰 검사
+
         if (phoneValue === "") {
             phoneError.textContent = "휴대폰 번호를 입력해주세요.";
             phoneError.classList.remove("hide");
             isValid = false;
+
         } else if (isNaN(phoneValue)) {
             phoneError.textContent = "휴대폰 번호는 숫자만 입력해주세요.";
             phoneError.classList.remove("hide");
@@ -148,8 +156,6 @@ window.onload = function () {
             phoneError.classList.remove("hide");
             isValid = false;
         }
-
-        // 비밀번호 검사 
 
         if (passwordValue === "") {
             passwordError.textContent = "새 비밀번호를 입력해주세요.";
@@ -167,15 +173,23 @@ window.onload = function () {
             isValid = false;
         }
 
-        // 모두 다 통과했다면 
+        if (verifyValue === "") {
+            pwVerifyError.textContent = "인증번호를 입력해주세요.";
+            pwVerifyError.classList.remove("hide");
+            isValid = false;
+
+        } else if (!verifyRegex.test(verifyValue)) {
+            pwVerifyError.textContent = "인증번호가 6자리가 아닙니다.";
+            pwVerifyError.classList.remove("hide");
+            isValid = false;
+        }
 
         if (isValid) {
             alert("비밀번호 재설정이 완료되었습니다.");
         }
     });
 
-
-
+    // 탭 전환
     tabId.addEventListener("click", function () {
 
         tabId.classList.add("find-tab--active");
@@ -186,33 +200,103 @@ window.onload = function () {
         hintBox.classList.remove("hide");
 
         idSection.style.display = "block";
-        pwSection.style.display = "none"; // 이거 주석해도 상관없음 
+        pwSection.style.display = "none";
 
-        // 텍스트 변경
         pageTitle.textContent = "아이디 찾기";
         pageDesc.textContent =
             "가입 시 입력한 정보로 아이디(이메일)를 확인할 수 있어요.";
     });
-
     tabPw.addEventListener("click", function () {
 
-
-        tabPw.classList.add("find-tab--active"); //
+        tabPw.classList.add("find-tab--active");
         tabId.classList.remove("find-tab--active");
 
         formPw.classList.remove("hide");
         formId.classList.add("hide");
         hintBox.classList.add("hide");
 
-        idSection.style.display = "none"; // 이거 주석해도 가능
+        idSection.style.display = "none";
         pwSection.style.display = "block";
 
         pageTitle.textContent = "비밀번호 찾기";
         pageDesc.textContent =
             "가입한 이메일을 입력하면 비밀번호 재설정을 진행할 수 있어요.";
     });
-    
-    
-    
+    // 5.인증 요청 버튼
 
-}
+    idverifyBtn.addEventListener("click", function () {
+
+        const nameValue = idName.value.trim();
+        const phoneValue = idPhone.value.trim();
+
+        idError.classList.add("hide");
+
+        if (nameValue === "" && phoneValue === "") {
+            idError.textContent = "이름과 휴대폰 번호를 입력해주세요.";
+            idError.classList.remove("hide");
+
+        } else if (nameValue === "") {
+            idError.textContent = "이름을 입력해주세요.";
+            idError.classList.remove("hide");
+
+        } else if (phoneValue === "") {
+            idError.textContent = "휴대폰 번호를 입력해주세요.";
+            idError.classList.remove("hide");
+
+        } else if (isNaN(phoneValue)) {
+            idError.textContent = "휴대폰 번호는 숫자만 입력해주세요.";
+            idError.classList.remove("hide");
+
+        } else if (phoneValue.length < 10 || phoneValue.length > 11) {
+            idError.textContent = "휴대폰 번호는 10~11자리로 입력해주세요.";
+            idError.classList.remove("hide");
+
+        } else {
+            alert("인증번호가 발송되었습니다.");
+        }
+
+    });
+
+        
+    pwverifyBtn.addEventListener("click", function () {
+
+        const emailValue = pwEmail.value.trim();
+        const nameValue = pwName.value.trim();
+        const phoneValue = pwPhone.value.trim();
+
+        emailError.classList.add("hide");
+        nameError.classList.add("hide");
+        phoneError.classList.add("hide");
+
+        if (emailValue === "" && nameValue === "" && phoneValue === "") {
+            pwError.textContent = "이메일, 이름, 휴대폰 번호를 입력해주세요.";
+            pwError.classList.remove("hide");
+
+        } else if (emailValue === "") {
+            pwError.textContent = "이메일을 입력해주세요.";
+            pwError.classList.remove("hide");
+
+        } else if (nameValue === "") {
+            pwError.textContent = "이름을 입력해주세요.";
+            pwError.classList.remove("hide");
+
+        } else if (phoneValue === "") {
+            pwError.textContent = "휴대폰 번호를 입력해주세요.";
+            pwError.classList.remove("hide");
+
+        } else if (isNaN(phoneValue)) {
+            pwError.textContent = "휴대폰 번호는 숫자만 입력해주세요.";
+            pwError.classList.remove("hide");
+
+        } else if (phoneValue.length < 10 || phoneValue.length > 11) {
+            pwError.textContent = "휴대폰 번호는 10~11자리로 입력해주세요.";
+            pwError.classList.remove("hide");
+
+        } else {
+            alert("인증번호가 발송되었습니다.");
+        }
+
+    });
+
+
+};

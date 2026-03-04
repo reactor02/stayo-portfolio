@@ -58,11 +58,32 @@
 .find-tab{
   text-decoration: none;
   color: #7a7a7a;
+  /* border-radius: 18px; */
   font-weight: 900;
   padding: 12px 10px;
   text-align: center;
 }
-.find-tab:hover{ background: rgba(0,0,0,0.04); }
+#tab-pw {
+  /* border-radius: 15px ; */
+  border-top-right-radius: 18px;
+  border-bottom-right-radius: 18px;
+}
+#tab-id {
+  border-top-left-radius: 18px;
+  border-bottom-left-radius: 18px;
+}
+#tab-pw:hover{
+  /* background: rgba(0,0,0,0.04); */
+  border-top-right-radius: 18px;
+  border-bottom-right-radius: 18px;
+  /* border-radius: 18px; */
+}
+#tab-id:hover{ 
+  /* background: rgba(0,0,0,0.04); */
+  border-top-left-radius: 18px;
+  border-bottom-left-radius: 18px;
+  /* border-radius: 18px; */
+}
 .find-tab--active{
   background: rgba(0,0,0,0.88);
   color: #fff;
@@ -292,6 +313,10 @@
   color: red;
   font-size :10px;
 }
+#id-verify-error {
+  color: red;
+}
+
 
 
 /* 모바일에서는 1열로 자연스럽게 */
