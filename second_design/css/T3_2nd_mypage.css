@@ -697,7 +697,7 @@
 ========================= */
 .mysec{
   scroll-margin-top: 110px; /* ✅ 앵커 이동 시 헤더에 가리지 않게(대략값) */
-  padding: 18px 0;
+  /* padding: 18px 0; */
   border-bottom: 1px solid #e7e2dc;
 }
 .mysec__title{
