@@ -26,8 +26,9 @@ window.onload = function () {
             error.classList.remove("hide");
         }
 
-        else if (emailValue.indexOf("@") === -1 || emailValue.indexOf(".") === -1) {
-            error.textContent = "이메일 형식에는 @와 . 가 포함되어야합니다";
+        else if (emailValue.indexOf("@") === -1 || emailValue.indexOf(".") === -1 
+            || emailValue.length <6) {
+            error.textContent = "이메일 형식이 올바르지 않습니다";
             error.classList.remove("hide");
         }
         else if (passwordValue === "") {

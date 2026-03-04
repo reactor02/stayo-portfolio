@@ -295,6 +295,16 @@
   color: #111;
 }
 
+#error-msg {
+  font-size: 13px;
+  font-weight: 700;
+  color: red;
+}
+
+.hide {
+    display: none;
+}
+
 /* =========================
   반응형
 ========================= */

@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="../css/T3_2nd_common.css" />
   <!-- 페이지 전용 CSS(아이디/비번찾기 공용) -->
   <link rel="stylesheet" href="../css/T3_2nd_find.css" />
+  <script src="../js/T3_2nd_find_account.js"></script>
+
 </head>
 
 <body>
@@ -63,8 +65,8 @@
         </nav>
 
         <div class="find-title">
-          <h1>아이디 찾기</h1>
-          <p class="muted">가입 시 입력한 정보로 아이디(이메일)를 확인할 수 있어요.</p>
+          <h1 id="page-title">아이디 찾기</h1>
+          <p id="page-desc" class="muted">가입 시 입력한 정보로 아이디(이메일)를 확인할 수 있어요.</p>
         </div>
       </div>
     </section>
@@ -80,17 +82,17 @@
         <div class="find-card">
 
           <!-- 탭 -->
-          <div class="find-tabs" role="tablist" aria-label="찾기 탭">
-            <a class="find-tab find-tab--active" href="./find_id.html" role="tab" aria-selected="true">
+          <div class="find-tabs">
+            <button type="button" id="tab-id" class="find-tab find-tab--active">
               아이디 찾기
-            </a>
-            <a class="find-tab" href="./find_pw.html" role="tab" aria-selected="false">
+            </button>
+            <button type="button" id="tab-pw" class="find-tab">
               비밀번호 찾기
-            </a>
+            </button>
           </div>
 
           <!-- 안내 박스 -->
-          <div class="hint">
+          <div class="hint" id="hint-box">
             <!-- <div class="hint__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="9"></circle>
@@ -98,42 +100,47 @@
                 <circle cx="12" cy="7.5" r="1"></circle>
               </svg>
             </div> -->
+            
+            <!-- 폼 -->
             <div class="hint__text">
               <b>아이디는 이메일 주소입니다.</b>
               <div class="muted">이름 + 휴대폰 번호로 본인 확인 후 일부 마스킹된 이메일을 보여줍니다.</div>
             </div>
           </div>
-
-          <!-- 폼 -->
-          <form class="find-form" action="#" method="post" aria-label="아이디 찾기 폼">
+          
+          <div id="id-section">
+          <form id="form-id" class="find-form" action="#" method="post" aria-label="아이디 찾기 폼">
             <div class="form-grid">
               <label class="field">
                 <span class="field__label">이름</span>
-                <input class="field__input" type="text" placeholder="이름을 입력하세요" required />
+                <input id="id-name" class="field__input" type="text" placeholder="이름을 입력하세요" required />
               </label>
 
               <label class="field">
                 <span class="field__label">휴대폰 번호</span>
-                <input class="field__input" type="tel" placeholder="010-0000-0000" required />
+                <input id="id-phone" class="field__input" type="tel" placeholder="010-0000-0000" required />
               </label>
+               <p class="error-msg hide"></p>
             </div>
 
-            <!-- 인증번호(선택 UI) -->
-            <div class="verify">
+           <!-- 인증번호(선택 UI) -->
+             <div class="verify">
               <label class="field field--full">
                 <span class="field__label">인증번호</span>
                 <div class="verify__row">
                   <input class="field__input" type="text" placeholder="인증번호 6자리" />
-                  <button class="btn-outline" type="button">인증요청</button>
+                  <button class="btn-outline verify-btn" type="button">인증요청</button>
+                  <p class="verify__timer hide"></p>
                 </div>
+               
               </label>
               <p class="muted verify__note">* 실제 기능 없이 UI로만 구성되어 있습니다.</p>
             </div>
 
-            <button class="btn-main btn-main--big" type="submit">아이디 찾기</button>
+            <button class="btn-main btn-main--big find-btn" type="submit">아이디 찾기</button>
 
-            <!-- 결과(예시 UI) -->
-            <div class="result" aria-live="polite">
+            <!-- 결과(예시 UI)  -->
+            <div class="result hide" aria-live="polite">
               <div class="result__title">조회 결과</div>
               <div class="result__box">
                 <span class="muted">아이디(이메일):</span>
@@ -145,16 +152,103 @@
               </div>
             </div>
 
-            <p class="bottom-links">
-              <a class="link" href="./login.html">로그인</a>
+            <!-- <p class="bottom-links">
+              <a class="link" href="T3_2nd_login.html">로그인</a>
+              <span class="sep">·</span>
+              <a class="link" href="./signup.html">회원가입</a>
+              <span class="sep">·</span>
+              <a class="link" href="#">고객센터</a>
+            </p> -->
+            
+          </form>
+          </div>
+
+
+          <!-- 비밀번호 찾기 form-->
+           <div id="pw-section" style="display: none;">
+          <form id="form-pw" class="find-form" action="#" method="post" aria-label="비밀번호 찾기 폼">
+
+            <div class="hint__text">
+              <b>비밀번호 재설정</b>
+              <div class="muted">이메일 인증 후 새 비밀번호를 설정하는 화면(UI)입니다.</div>
+            </div>
+        
+        <div class="form-grid">
+          <label class="field field--full">
+            <span class="field__label">이메일(아이디)</span>
+            <input id="pw-email" class="field__input" type="email" placeholder="example@stayo.com" required />
+          <p id="email-error" class="error-msg hide"></p>
+          </label>
+
+          <label class="field">
+            <span class="field__label">이름</span>
+            <input id="pw-name" class="field__input" type="text" placeholder="이름을 입력하세요" required />
+          <p id="name-error" class="error-msg hide"></p>
+          </label>
+
+          <label class="field">
+            <span class="field__label">휴대폰 번호</span>
+            <input id="pw-phone" class="field__input" type="tel" placeholder="010-0000-0000" required />
+          <p id="phone-error" class="error-msg hide"></p>
+          </label>
+        </div>
+
+        <!-- 인증 -->
+        <div class="verify">
+          <label class="field field--full">
+            <span class="field__label">인증번호</span>
+            <div class="verify__row">
+              <input class="field__input" type="text" placeholder="인증번호 6자리" />
+              <button class="btn-outline verify-btn" type="button">인증요청</button>
+              <p class="verify__timer hide"></p>
+            </div>
+          </label>
+          <p class="muted verify__note">* 실제 전송 기능은 없고 UI만 구성되어 있습니다.</p>
+          <p class="error-msg hide"></p>
+        </div>
+
+        <!-- 새 비밀번호 설정(UI) -->
+        <div class="reset">
+          <div class="reset__title">새 비밀번호 설정</div>
+
+          <label class="field field--full">
+            <span class="field__label">새 비밀번호</span>
+            <input id="password" class="field__input" type="password" placeholder="8자 이상, 영문/숫자 조합 권장" />
+            <p id="password-error" class="error-msg hide"></p>
+          </label>
+          
+          <label class="field field--full">
+            <span class="field__label">새 비밀번호 확인</span>
+            <input id="passwordcheck" class="field__input" type="password" placeholder="비밀번호를 다시 입력하세요" />
+            <p id="passwordcheck-error" class="error-msg hide"></p>
+          </label>
+
+          <p class="muted reset__hint">* UI 예시: 실제 검증 로직은 JS/서버에서 처리</p>
+        </div>
+
+        <button class="btn-main btn-main--big" id="pw-btn" type="submit">비밀번호 재설정</button>
+
+        <div class="result">
+          <div class="result__title">안내</div>
+          <div class="result__box">
+            <b>재설정이 완료되었습니다.</b>
+            <div class="muted">로그인 페이지로 돌아가 로그인해 주세요.</div>
+          </div>
+          <div class="result__actions">
+            <!-- <a href="./login.html" class="btn-main">로그인 하러가기</a> -->
+            <a href="./T3_2nd_find_account.html" class="btn-outline">아이디 찾기</a>
+          </div>
+        </div>
+        </div>
+        </form>
+      </div>
+         <p class="bottom-links">
+              <a class="link" href="T3_2nd_login.html">로그인</a>
               <span class="sep">·</span>
               <a class="link" href="./signup.html">회원가입</a>
               <span class="sep">·</span>
               <a class="link" href="#">고객센터</a>
             </p>
-          </form>
-
-        </div>
       </div>
     </section>
   </main>

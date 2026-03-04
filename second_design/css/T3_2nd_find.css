@@ -284,6 +284,16 @@
   justify-content: center;
 }
 
+.hide {
+  display: none;
+}
+
+.error-msg {
+  color: red;
+  font-size :10px;
+}
+
+
 /* 모바일에서는 1열로 자연스럽게 */
 @media (max-width: 720px){
   .result__actions{

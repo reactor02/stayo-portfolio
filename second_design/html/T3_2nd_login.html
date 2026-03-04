@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="../css/T3_2nd_common.css" />
     <!-- 페이지 전용 CSS -->
     <link rel="stylesheet" href="../css/T3_2nd_login.css" />
+    <script src="../js/T3_2nd_login.js"></script>
 </head>
 
 <body>
@@ -130,18 +131,23 @@
                     <div class="login-form-wrap">
                         <h2 class="form-title">STAYO 계정으로 로그인</h2>
 
-                        <form class="login-form" action="#" method="post">
+                        <form class="login-form" action="#" method="post" novalidate>
                             <!-- 아이디(이메일) -->
                             <label class="field">
                                 <span class="field__label">이메일</span>
-                                <input class="field__input" type="email" placeholder="example@stayo.com" required />
+                                <input class="field__input" type="email" id="email" placeholder="example@stayo.com"
+                                    required />
                             </label>
 
                             <!-- 비밀번호 -->
                             <label class="field">
                                 <span class="field__label">비밀번호</span>
-                                <input class="field__input" type="password" placeholder="비밀번호를 입력하세요" required />
+                                <input class="field__input" type="password" id="password" placeholder="비밀번호를 입력하세요"
+                                    required />
                             </label>
+
+                            <!-- 에러 메시지 출력 창-->
+                            <p id="error-msg" class="hide"></p>
 
                             <!-- 옵션 -->
                             <div class="form-options">
@@ -150,7 +156,7 @@
                                     <span>로그인 상태 유지</span>
                                 </label>
 
-                                <a href="#" class="link">비밀번호 찾기</a>
+                                <a href="T3_2nd_find_account.html" class="link">비밀번호 찾기</a>
                             </div>
 
                             <!-- 로그인 버튼 -->
@@ -167,7 +173,8 @@
                             <div class="social">
 
                                 <!-- 카카오 -->
-                                <button class="social-btn social-btn--kakao" type="button" aria-label="카카오로 시작하기">
+                                <button id="kakao-btn" class="social-btn social-btn--kakao" type="button"
+                                    aria-label="카카오로 시작하기">
                                     <span class="social-ico" aria-hidden="true">
                                         <!-- KakaoTalk Official Style Bubble -->
                                         <svg viewBox="0 0 24 24">
@@ -179,7 +186,8 @@
                                 </button>
 
                                 <!-- 네이버 -->
-                                <button class="social-btn social-btn--naver" type="button" aria-label="네이버로 시작하기">
+                                <button id="naver-btn" class="social-btn social-btn--naver" type="button"
+                                    aria-label="네이버로 시작하기">
                                     <span class="social-ico" aria-hidden="true">
                                         <!-- Naver N Logo -->
                                         <svg viewBox="0 0 24 24">

@@ -1,11 +1,13 @@
 window.onload = function () {
+    const email = document.querySelector('#email')
     const password = document.querySelector('#password')
     const passwordcheck = document.querySelector('#passwordcheck')
+    const name = document.querySelector('#name')
     const birth = document.querySelector('#birth')
     const phone = document.querySelector('#phone')
-    const email = document.querySelector('#email')
     const joinBtn = document.querySelector('#joinBtn')
 
+    const nameError = document.querySelector('#nameError')
     const passwordError = document.querySelector('#passwordError');
     const passwordCheckError = document.querySelector('#passwordCheckError');
     const birthError = document.querySelector('#birthError');
@@ -21,7 +23,9 @@ window.onload = function () {
     joinBtn.addEventListener('click', function () {
 
         // 입력값 가져오기
+
         const passwordValue = password.value.trim();
+        const nameValue = name.value.trim();
         const passwordCheckValue = passwordcheck.value.trim();
         const birthValue = birth.value.trim();
         const phoneValue = phone.value.trim();
@@ -36,6 +40,13 @@ window.onload = function () {
         agreeError.textContent = "";
 
         let isValid = true;
+
+        // 이름 입력했는지 
+        if (nameValue === "") {
+            nameError.textContent = "이름을 입력해주세요.";
+            isValid = false;
+        }
+
 
         // 비밀번호 검사
         if (passwordValue.length < 8) {
@@ -74,7 +85,7 @@ window.onload = function () {
         if (!agree1.checked || !agree2.checked || !agree3.checked) {
             agreeError.textContent = "필수 약관에 모두 동의해주세요.";
             isValid = false;
-        } 
+        }
 
         // 모든 검사 통과
         if (isValid) {
