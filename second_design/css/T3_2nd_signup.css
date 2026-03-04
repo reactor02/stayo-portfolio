@@ -281,6 +281,60 @@
   color: #111;
 }
 
+/* 2열 / 3열 폼 그리드 */
+.row-2{
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 12px;
+}
+.row-3{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+
+/* select 스타일(기존 input 톤 맞춤) */
+.field__select{
+  width: 100%;
+  border: 1px solid #eee7e0;
+  background: rgba(255,255,255,0.95);
+  border-radius: 16px;
+  padding: 12px 12px;
+  font-weight: 800;
+  outline: none;
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #111 50%),
+    linear-gradient(135deg, #111 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) 50%,
+    calc(100% - 12px) 50%;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+.field__select:focus{
+  border-color: rgba(17,17,17,0.55);
+  box-shadow: 0 0 0 4px rgba(17,17,17,0.08);
+}
+
+/* 약관 박스 디테일 */
+.check__text{ font-weight: 900; }
+.check--all{
+  padding: 6px 0 2px;
+}
+.agree-line{
+  height: 1px;
+  background: #e7e2dc;
+  margin: 6px 0 8px;
+  border-radius: 999px;
+}
+
+/* 반응형 */
+@media (max-width: 640px){
+  .row-2{ grid-template-columns: 1fr; }
+  .row-3{ grid-template-columns: 1fr; }
+}
+
 /* =========================
   반응형
 ========================= */

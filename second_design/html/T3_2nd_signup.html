@@ -2,282 +2,343 @@
 <html lang="ko">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>STAYO | 회원가입</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STAYO | 회원가입</title>
 
-  <!-- 폰트(프로젝트 동일) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap"
-    rel="stylesheet">
+    <!-- 폰트(프로젝트 동일) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap"
+        rel="stylesheet">
 
-  <!-- 공통 CSS -->
-  <link rel="stylesheet" href="../css/T3_2nd_common.css" />
-  <!-- 페이지 전용 CSS -->
-  <link rel="stylesheet" href="../css/T3_2nd_signup.css" />
+    <!-- 공통 CSS -->
+    <link rel="stylesheet" href="../css/T3_2nd_common.css" />
+    <!-- 페이지 전용 CSS -->
+    <link rel="stylesheet" href="../css/T3_2nd_signup.css" />
 </head>
 
 <body>
-  <!-- ==========================
+    <!-- ==========================
     공통 헤더(로그인과 동일)
   =========================== -->
-  <header class="header">
-    <div class="container header__inner">
-      <a href="./index.html" class="logo" aria-label="STAYO 홈">STAYO</a>
+    <header class="header">
+        <div class="container header__inner">
+            <a href="./index.html" class="logo" aria-label="STAYO 홈">STAYO</a>
 
-      <nav class="gnb" aria-label="주요 메뉴">
-        <a href="#" class="gnb__link">숙소</a>
-        <a href="#" class="gnb__link">항공권</a>
-        <a href="#" class="gnb__link">패키지</a>
-        <a href="#" class="gnb__link">액티비티</a>
-        <a href="#" class="gnb__link">렌터카</a>
-      </nav>
+            <nav class="gnb" aria-label="주요 메뉴">
+                <a href="#" class="gnb__link">숙소</a>
+                <a href="#" class="gnb__link">항공권</a>
+                <a href="#" class="gnb__link">패키지</a>
+                <a href="#" class="gnb__link">액티비티</a>
+                <a href="#" class="gnb__link">렌터카</a>
+            </nav>
 
-      <div class="header__right">
-        <button class="icon-btn" type="button" aria-label="언어/지역">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.9 9h-3.2a15.8 15.8 0 00-1.2-6A8.1 8.1 0 0119.9 11zM12 4c.9 1.2 1.8 3.3 2.3 7H9.7C10.2 7.3 11.1 5.2 12 4zM4.1 13h3.2a15.8 15.8 0 001.2 6A8.1 8.1 0 014.1 13zm0-2a8.1 8.1 0 014.4-6 15.8 15.8 0 00-1.2 6H4.1zM12 20c-.9-1.2-1.8-3.3-2.3-7h4.6c-.5 3.7-1.4 5.8-2.3 7zm3.5-1a15.8 15.8 0 001.2-6h3.2a8.1 8.1 0 01-4.4 6z" />
-          </svg>
-        </button>
+            <div class="header__right">
+                <button class="icon-btn" type="button" aria-label="언어/지역">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.9 9h-3.2a15.8 15.8 0 00-1.2-6A8.1 8.1 0 0119.9 11zM12 4c.9 1.2 1.8 3.3 2.3 7H9.7C10.2 7.3 11.1 5.2 12 4zM4.1 13h3.2a15.8 15.8 0 001.2 6A8.1 8.1 0 014.1 13zm0-2a8.1 8.1 0 014.4-6 15.8 15.8 0 00-1.2 6H4.1zM12 20c-.9-1.2-1.8-3.3-2.3-7h4.6c-.5 3.7-1.4 5.8-2.3 7zm3.5-1a15.8 15.8 0 001.2-6h3.2a8.1 8.1 0 01-4.4 6z" />
+                    </svg>
+                </button>
 
-        <button class="icon-btn" type="button" aria-label="찜 목록">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+                <button class="icon-btn" type="button" aria-label="찜 목록">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
                      2 6 4 4 6.5 4
                      8.04 4 9.54 4.81 10.4 6.09
                      11.26 4.81 12.76 4 14.3 4
                      16.8 4 18.8 6 18.8 8.5
                      c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-          </svg>
-        </button>
+                    </svg>
+                </button>
 
-        <!-- 현재 페이지가 회원가입 -->
-        <span class="signup-now">회원가입</span>
-      </div>
-    </div>
-  </header>
+                <!-- 현재 페이지가 회원가입 -->
+                <span class="signup-now">회원가입</span>
+            </div>
+        </div>
+    </header>
 
-  <main class="signup">
-    <!-- ==========================
+    <main class="signup">
+        <!-- ==========================
       상단 타이틀/경로
     =========================== -->
-    <section class="signup-top">
-      <div class="container">
-        <nav class="crumb" aria-label="현재 위치">
-          <a href="./index.html">홈</a>
-          <span class="crumb__sep">/</span>
-          <span class="crumb__current">회원가입</span>
-        </nav>
+        <section class="signup-top">
+            <div class="container">
+                <nav class="crumb" aria-label="현재 위치">
+                    <a href="./index.html">홈</a>
+                    <span class="crumb__sep">/</span>
+                    <span class="crumb__current">회원가입</span>
+                </nav>
 
-        <div class="signup-title">
-          <h1>회원가입</h1>
-          <p class="muted">STAYO 회원 전용 혜택을 지금 바로 받아보세요.</p>
-        </div>
-      </div>
-    </section>
+                <div class="signup-title">
+                    <h1>회원가입</h1>
+                    <p class="muted">STAYO 회원 전용 혜택을 지금 바로 받아보세요.</p>
+                </div>
+            </div>
+        </section>
 
-    <!-- ==========================
+        <!-- ==========================
       회원가입 카드(2열)
       - 좌: 브랜딩/혜택
       - 우: 회원가입 폼
     =========================== -->
-    <section class="signup-body">
-      <div class="container">
-        <div class="signup-card">
+        <section class="signup-body">
+            <div class="container">
+                <div class="signup-card">
 
-          <!-- LEFT: 브랜딩 패널 -->
-          <div class="signup-brand">
-            <div class="signup-brand__logo">STAYO</div>
-            <h2 class="signup-brand__title">
-              여행 준비는<br />
-              가입부터 완벽하게
-            </h2>
-            <p class="signup-brand__desc">
-              가입하면 쿠폰/포인트, 찜 목록,<br />
-              예약내역 관리까지 한 번에 가능해요.
-            </p>
+                    <!-- LEFT: 브랜딩 패널 -->
+                    <div class="signup-brand">
+                        <div class="signup-brand__logo">STAYO</div>
+                        <h2 class="signup-brand__title">
+                            여행 준비는<br />
+                            가입부터 완벽하게
+                        </h2>
+                        <p class="signup-brand__desc">
+                            가입하면 쿠폰/포인트, 찜 목록,<br />
+                            예약내역 관리까지 한 번에 가능해요.
+                        </p>
 
-            <ul class="benefit-list">
-              <li>
-                <span class="benefit-ico" aria-hidden="true">🎁</span>
-                <div>
-                  <b>웰컴 쿠폰</b>
-                  <span class="muted">가입 즉시 지급</span>
+                        <ul class="benefit-list">
+                            <li>
+                                <span class="benefit-ico" aria-hidden="true">🎁</span>
+                                <div>
+                                    <b>웰컴 쿠폰</b>
+                                    <span class="muted">가입 즉시 지급</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="benefit-ico" aria-hidden="true">❤</span>
+                                <div>
+                                    <b>찜 & 예약내역</b>
+                                    <span class="muted">내 여행을 한눈에</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="benefit-ico" aria-hidden="true">⚡</span>
+                                <div>
+                                    <b>빠른 예약</b>
+                                    <span class="muted">정보 자동 입력</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- RIGHT: 폼 -->
+                    <div class="signup-form-wrap">
+                        <h2 class="form-title">STAYO 계정 만들기</h2>
+
+                        <form class="signup-form" action="#" method="post">
+                            <!-- 이름 -->
+                            <label class="field">
+                                <span class="field__label">이름</span>
+                                <input class="field__input" type="text" placeholder="이름을 입력하세요" required />
+                            </label>
+
+                            <!-- 이메일 -->
+                            <label class="field">
+                                <span class="field__label">이메일</span>
+                                <input class="field__input" type="email" placeholder="example@stayo.com" required />
+                            </label>
+
+                            <!-- 비밀번호 -->
+                            <label class="field">
+                                <span class="field__label">비밀번호</span>
+                                <input class="field__input" type="password" placeholder="비밀번호를 입력하세요" required />
+                                <span class="field__help">영문/숫자/특수문자 조합 8자 이상을 권장해요.</span>
+                            </label>
+
+                            <!-- 비밀번호 확인 -->
+                            <label class="field">
+                                <span class="field__label">비밀번호 확인</span>
+                                <input class="field__input" type="password" placeholder="비밀번호를 한 번 더 입력하세요" required />
+                            </label>
+
+                            <!-- 휴대폰 -->
+                            <div class="row-2">
+                                <label class="field">
+                                    <span class="field__label">통신사</span>
+                                    <select class="field__select" required>
+                                        <option value="" selected disabled>통신사 선택</option>
+                                        <option value="SKT">SKT</option>
+                                        <option value="KT">KT</option>
+                                        <option value="LGU+">LG U+</option>
+                                        <option value="알뜰폰">알뜰폰</option>
+                                    </select>
+                                </label>
+
+                                <label class="field">
+                                    <span class="field__label">휴대폰 번호</span>
+                                    <input class="field__input" type="tel" placeholder="010-1234-5678" required />
+                                </label>
+                            </div>
+
+                            <!-- 생년월일 -->
+                            <div class="row-3">
+                                <label class="field">
+                                    <span class="field__label">생년(YYYY)</span>
+                                    <input class="field__input" type="text" inputmode="numeric" maxlength="4"
+                                        placeholder="예) 2002" required />
+                                </label>
+
+                                <label class="field">
+                                    <span class="field__label">월(MM)</span>
+                                    <select class="field__select" required>
+                                        <option value="" selected disabled>월</option>
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select>
+                                </label>
+
+                                <label class="field">
+                                    <span class="field__label">일(DD)</span>
+                                    <input class="field__input" type="text" inputmode="numeric" maxlength="2"
+                                        placeholder="예) 09" required />
+                                </label>
+                            </div>
+
+                            <!-- 약관 -->
+                            <div class="agree-box" role="group" aria-label="약관 동의">
+                                <label class="check check--all">
+                                    <input type="checkbox" id="agreeAll" />
+                                    <span class="check__text"><b>약관 전체 동의</b></span>
+                                </label>
+
+                                <div class="agree-line"></div>
+
+                                <label class="check">
+                                    <input type="checkbox" class="agreeItem" required />
+                                    <span class="check__text">[필수] 이용약관 동의</span>
+                                </label>
+
+                                <label class="check">
+                                    <input type="checkbox" class="agreeItem" required />
+                                    <span class="check__text">[필수] 개인정보처리방침 동의</span>
+                                </label>
+
+                                <label class="check">
+                                    <input type="checkbox" class="agreeItem" required />
+                                    <span class="check__text">[필수] 만 14세 이상입니다</span>
+                                </label>
+
+                                <label class="check">
+                                    <input type="checkbox" class="agreeItem" />
+                                    <span class="check__text">[선택] 마케팅 정보 수신 동의</span>
+                                </label>
+                            </div>
+
+                            <!-- 가입 버튼 -->
+                            <button class="btn-main btn-main--big" type="submit">
+                                회원가입
+                            </button>
+
+                            <!-- 구분선 -->
+                            <div class="divider">
+                                <span>또는</span>
+                            </div>
+
+                            <!-- 소셜 가입(UI) -->
+                            <div class="social">
+                                <button class="social-btn social-btn--kakao" type="button" aria-label="카카오로 시작하기">
+                                    <span class="social-ico" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24">
+                                            <path fill="#000000"
+                                                d="M12 3C6.48 3 2 6.73 2 11.04c0 2.73 1.8 5.13 4.53 6.53L5.5 21c-.1.37.28.67.62.49l4.3-2.35c.51.07 1.03.11 1.58.11 5.52 0 10-3.73 10-8.21S17.52 3 12 3z" />
+                                        </svg>
+                                    </span>
+                                    카카오로 시작하기
+                                </button>
+
+                                <button class="social-btn social-btn--naver" type="button" aria-label="네이버로 시작하기">
+                                    <span class="social-ico" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24">
+                                            <path fill="#ffffff" d="M6 6h4l4 6V6h4v12h-4l-4-6v6H6z" />
+                                        </svg>
+                                    </span>
+                                    네이버로 시작하기
+                                </button>
+                            </div>
+
+                            <!-- 로그인 이동 -->
+                            <p class="join">
+                                이미 계정이 있나요?
+                                <a href="./login.html" class="link link--bold">로그인</a>
+                            </p>
+                        </form>
+                    </div>
+
                 </div>
-              </li>
-              <li>
-                <span class="benefit-ico" aria-hidden="true">❤</span>
-                <div>
-                  <b>찜 & 예약내역</b>
-                  <span class="muted">내 여행을 한눈에</span>
-                </div>
-              </li>
-              <li>
-                <span class="benefit-ico" aria-hidden="true">⚡</span>
-                <div>
-                  <b>빠른 예약</b>
-                  <span class="muted">정보 자동 입력</span>
-                </div>
-              </li>
-            </ul>
-          </div>
+            </div>
+        </section>
+    </main>
 
-          <!-- RIGHT: 폼 -->
-          <div class="signup-form-wrap">
-            <h2 class="form-title">STAYO 계정 만들기</h2>
-
-            <form class="signup-form" action="#" method="post">
-              <!-- 이름 -->
-              <label class="field">
-                <span class="field__label">이름</span>
-                <input class="field__input" type="text" placeholder="이름을 입력하세요" required />
-              </label>
-
-              <!-- 이메일 -->
-              <label class="field">
-                <span class="field__label">이메일</span>
-                <input class="field__input" type="email" placeholder="example@stayo.com" required />
-              </label>
-
-              <!-- 비밀번호 -->
-              <label class="field">
-                <span class="field__label">비밀번호</span>
-                <input class="field__input" type="password" placeholder="비밀번호를 입력하세요" required />
-                <span class="field__help">영문/숫자/특수문자 조합 8자 이상을 권장해요.</span>
-              </label>
-
-              <!-- 비밀번호 확인 -->
-              <label class="field">
-                <span class="field__label">비밀번호 확인</span>
-                <input class="field__input" type="password" placeholder="비밀번호를 한 번 더 입력하세요" required />
-              </label>
-
-              <!-- 휴대폰 -->
-              <label class="field">
-                <span class="field__label">휴대폰 번호(선택)</span>
-                <input class="field__input" type="tel" placeholder="010-1234-5678" />
-              </label>
-
-              <!-- 약관 -->
-              <div class="agree-box" role="group" aria-label="약관 동의">
-                <label class="check">
-                  <input type="checkbox" required />
-                  <span>[필수] 이용약관 동의</span>
-                </label>
-                <label class="check">
-                  <input type="checkbox" required />
-                  <span>[필수] 개인정보처리방침 동의</span>
-                </label>
-                <label class="check">
-                  <input type="checkbox" />
-                  <span>[선택] 마케팅 정보 수신 동의</span>
-                </label>
-              </div>
-
-              <!-- 가입 버튼 -->
-              <button class="btn-main btn-main--big" type="submit">
-                회원가입
-              </button>
-
-              <!-- 구분선 -->
-              <div class="divider">
-                <span>또는</span>
-              </div>
-
-              <!-- 소셜 가입(UI) -->
-              <div class="social">
-                <button class="social-btn social-btn--kakao" type="button" aria-label="카카오로 시작하기">
-                  <span class="social-ico" aria-hidden="true">
-                    <svg viewBox="0 0 24 24">
-                      <path fill="#000000"
-                        d="M12 3C6.48 3 2 6.73 2 11.04c0 2.73 1.8 5.13 4.53 6.53L5.5 21c-.1.37.28.67.62.49l4.3-2.35c.51.07 1.03.11 1.58.11 5.52 0 10-3.73 10-8.21S17.52 3 12 3z" />
-                    </svg>
-                  </span>
-                  카카오로 시작하기
-                </button>
-
-                <button class="social-btn social-btn--naver" type="button" aria-label="네이버로 시작하기">
-                  <span class="social-ico" aria-hidden="true">
-                    <svg viewBox="0 0 24 24">
-                      <path fill="#ffffff" d="M6 6h4l4 6V6h4v12h-4l-4-6v6H6z" />
-                    </svg>
-                  </span>
-                  네이버로 시작하기
-                </button>
-              </div>
-
-              <!-- 로그인 이동 -->
-              <p class="join">
-                이미 계정이 있나요?
-                <a href="./login.html" class="link link--bold">로그인</a>
-              </p>
-            </form>
-          </div>
-
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ==========================
+    <!-- ==========================
     공통 푸터(로그인과 동일)
   =========================== -->
-  <footer class="footer">
-    <div class="container footer__top">
-      <div class="footer__brand">
-        <div class="footer__logo">STAYO</div>
-        <p class="footer__desc">전 세계 최고의 숙소를<br />최저가로 만나보세요.</p>
-      </div>
+    <footer class="footer">
+        <div class="container footer__top">
+            <div class="footer__brand">
+                <div class="footer__logo">STAYO</div>
+                <p class="footer__desc">전 세계 최고의 숙소를<br />최저가로 만나보세요.</p>
+            </div>
 
-      <div class="footer__cols">
-        <div class="footer__col">
-          <div class="footer__col-title">서비스</div>
-          <a href="#" class="footer__link">숙소 예약</a>
-          <a href="#" class="footer__link">항공권</a>
-          <a href="#" class="footer__link">패키지 여행</a>
-          <a href="#" class="footer__link">액티비티</a>
-          <a href="#" class="footer__link">렌터카</a>
+            <div class="footer__cols">
+                <div class="footer__col">
+                    <div class="footer__col-title">서비스</div>
+                    <a href="#" class="footer__link">숙소 예약</a>
+                    <a href="#" class="footer__link">항공권</a>
+                    <a href="#" class="footer__link">패키지 여행</a>
+                    <a href="#" class="footer__link">액티비티</a>
+                    <a href="#" class="footer__link">렌터카</a>
+                </div>
+
+                <div class="footer__col">
+                    <div class="footer__col-title">고객 지원</div>
+                    <a href="#" class="footer__link">고객센터</a>
+                    <a href="#" class="footer__link">자주 묻는 질문</a>
+                    <a href="#" class="footer__link">취소 및 환불</a>
+                    <a href="#" class="footer__link">이용약관</a>
+                    <a href="#" class="footer__link">개인정보처리방침</a>
+                </div>
+
+                <div class="footer__col">
+                    <div class="footer__col-title">파트너</div>
+                    <a href="#" class="footer__link">숙소 등록</a>
+                    <a href="#" class="footer__link">제휴 프로그램</a>
+                    <a href="#" class="footer__link">제휴 프로그램</a>
+                    <a href="#" class="footer__link">API</a>
+                </div>
+
+                <div class="footer__col">
+                    <div class="footer__col-title">회사</div>
+                    <a href="#" class="footer__link">소개</a>
+                    <a href="#" class="footer__link">채용</a>
+                    <a href="#" class="footer__link">보도자료</a>
+                    <a href="#" class="footer__link">투자자 정보</a>
+                </div>
+            </div>
         </div>
 
-        <div class="footer__col">
-          <div class="footer__col-title">고객 지원</div>
-          <a href="#" class="footer__link">고객센터</a>
-          <a href="#" class="footer__link">자주 묻는 질문</a>
-          <a href="#" class="footer__link">취소 및 환불</a>
-          <a href="#" class="footer__link">이용약관</a>
-          <a href="#" class="footer__link">개인정보처리방침</a>
+        <div class="container footer__bottom">
+            <div class="footer__copyright">© 2026 STAYO. All rights reserved.</div>
+            <div class="footer__bottom-links">
+                <a href="#" class="footer__bottom-link">이용약관</a>
+                <a href="#" class="footer__bottom-link">개인정보처리방침</a>
+                <a href="#" class="footer__bottom-link">쿠키 설정</a>
+            </div>
         </div>
-
-        <div class="footer__col">
-          <div class="footer__col-title">파트너</div>
-          <a href="#" class="footer__link">숙소 등록</a>
-          <a href="#" class="footer__link">제휴 프로그램</a>
-          <a href="#" class="footer__link">제휴 프로그램</a>
-          <a href="#" class="footer__link">API</a>
-        </div>
-
-        <div class="footer__col">
-          <div class="footer__col-title">회사</div>
-          <a href="#" class="footer__link">소개</a>
-          <a href="#" class="footer__link">채용</a>
-          <a href="#" class="footer__link">보도자료</a>
-          <a href="#" class="footer__link">투자자 정보</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="container footer__bottom">
-      <div class="footer__copyright">© 2026 STAYO. All rights reserved.</div>
-      <div class="footer__bottom-links">
-        <a href="#" class="footer__bottom-link">이용약관</a>
-        <a href="#" class="footer__bottom-link">개인정보처리방침</a>
-        <a href="#" class="footer__bottom-link">쿠키 설정</a>
-      </div>
-    </div>
-  </footer>
+    </footer>
 </body>
 
 </html>
