@@ -137,6 +137,7 @@ window.onload = function () {
     for (let i = 0; i < hide.length; i++) {
         hide[i].addEventListener('click', function () {
             alert('해당 리뷰가 숨김처리 되었습니다.')
+            item[i].style.display ='none'
 
         })
     }

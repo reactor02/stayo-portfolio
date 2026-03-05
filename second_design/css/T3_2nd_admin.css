@@ -380,7 +380,7 @@
   height: 34px;
   padding: 0 10px;
   border-radius: 12px;
-  border: 1px solid #e7e2dc;
+  border-color: #111;
   background: rgba(255,255,255,0.9);
   font-weight: 900;
   cursor: pointer;

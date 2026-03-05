@@ -4,53 +4,74 @@
   - 베이지 배경 + 블랙 포인트 + 둥근 카드
 ========================================= */
 
-.signup{
+.signup {
   background: #f7f5f2;
   padding-bottom: 42px;
 }
 
 /* 헤더 우측 "현재 회원가입" 표기 */
-.signup-now{
+.signup-now {
   font-weight: 900;
   color: #111;
   padding: 10px 12px;
 }
 
 /* 상단 */
-.signup-top{ padding: 18px 0 12px; }
+.signup-top {
+  padding: 18px 0 12px;
+}
 
 /* 브레드크럼 (로그인과 동일 톤) */
-.crumb{
+.crumb {
   font-size: 13px;
   color: #6b6b6b;
   display: flex;
   align-items: center;
   gap: 8px;
 }
-.crumb a{ color: #6b6b6b; font-weight: 800; text-decoration: none; }
-.crumb__sep{ opacity: .7; }
-.crumb__current{ color: #111; font-weight: 900; }
 
-.signup-title{ margin-top: 12px; }
-.signup-title h1{
+.crumb a {
+  color: #6b6b6b;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.crumb__sep {
+  opacity: .7;
+}
+
+.crumb__current {
+  color: #111;
+  font-weight: 900;
+}
+
+.signup-title {
+  margin-top: 12px;
+}
+
+.signup-title h1 {
   font-family: "Nanum Myeongjo", serif;
   font-size: 34px;
   font-weight: 900;
   color: #111;
 }
-.muted{ color: #6b6b6b; font-weight: 700; }
+
+.muted {
+  color: #6b6b6b;
+  font-weight: 700;
+}
 
 /* 본문 */
-.signup-body{
+.signup-body {
   padding: 10px 0 30px;
 }
 
 /* 회원가입 카드(2열) */
-.signup-card{
+.signup-card {
   border: 1px solid #e7e2dc;
-  background: rgba(255,255,255,0.72);
+  background: rgba(255, 255, 255, 0.72);
   border-radius: 28px;
-  box-shadow: 0 22px 46px rgba(0,0,0,0.10);
+  box-shadow: 0 22px 46px rgba(0, 0, 0, 0.10);
   overflow: hidden;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -58,118 +79,142 @@
 }
 
 /* LEFT: 브랜드 패널 */
-.signup-brand{
+.signup-brand {
   padding: 26px 26px;
   background:
-    linear-gradient(135deg, rgba(0,0,0,0.88), rgba(0,0,0,0.72)),
+    linear-gradient(135deg, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.72)),
     url("https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1400&q=80");
   background-size: cover;
   background-position: center;
   color: #fff;
 }
-.signup-brand__logo{
+
+.signup-brand__logo {
   font-weight: 900;
   letter-spacing: .6px;
   font-size: 20px;
 }
-.signup-brand__title{
+
+.signup-brand__title {
   margin-top: 16px;
   font-family: "Nanum Myeongjo", serif;
   font-weight: 900;
   font-size: 34px;
   line-height: 1.15;
 }
-.signup-brand__desc{
+
+.signup-brand__desc {
   margin-top: 12px;
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
   font-weight: 700;
   line-height: 1.7;
 }
 
 /* 혜택 리스트 (로그인과 동일) */
-.benefit-list{
+.benefit-list {
   margin-top: 20px;
   display: grid;
   gap: 12px;
   padding: 0;
   list-style: none;
 }
-.benefit-list li{
+
+.benefit-list li {
   display: flex;
   gap: 10px;
   align-items: center;
-  background: rgba(255,255,255,0.10);
-  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   padding: 12px;
   border-radius: 18px;
 }
-.benefit-ico{
+
+.benefit-ico {
   width: 36px;
   height: 36px;
   border-radius: 14px;
   display: grid;
   place-items: center;
-  background: rgba(255,255,255,0.12);
+  background: rgba(255, 255, 255, 0.12);
   font-weight: 900;
 }
-.benefit-list b{ display:block; font-weight: 900; }
-.benefit-list .muted{
-  color: rgba(255,255,255,0.75);
+
+.benefit-list b {
+  display: block;
+  font-weight: 900;
+}
+
+.benefit-list .muted {
+  color: rgba(255, 255, 255, 0.75);
   font-weight: 700;
-  display:block;
+  display: block;
   margin-top: 4px;
   font-size: 13px;
 }
 
 /* RIGHT: 폼 */
-.signup-form-wrap{
+.signup-form-wrap {
   padding: 26px 26px;
-  background: rgba(255,255,255,0.85);
+  background: rgba(255, 255, 255, 0.85);
 }
-.form-title{
+
+.form-title {
   font-family: "Nanum Myeongjo", serif;
   font-weight: 900;
   color: #111;
   font-size: 22px;
 }
-.signup-form{
+
+.signup-form {
   margin-top: 16px;
   display: grid;
   gap: 12px;
 }
 
 /* 입력 필드 */
-.field{ display: grid; gap: 8px; }
-.field__label{ font-size: 13px; font-weight: 900; color: #111; }
-.field__input{
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field__label {
+  font-size: 13px;
+  font-weight: 900;
+  color: #111;
+}
+
+.field__input {
   width: 100%;
   border: 1px solid #eee7e0;
-  background: rgba(255,255,255,0.95);
+  background: rgba(255, 255, 255, 0.95);
   border-radius: 16px;
   padding: 12px 12px;
   font-weight: 800;
   outline: none;
 }
-.field__input:focus{
-  border-color: rgba(17,17,17,0.55);
-  box-shadow: 0 0 0 4px rgba(17,17,17,0.08);
+
+.field__input:focus {
+  border-color: rgba(17, 17, 17, 0.55);
+  box-shadow: 0 0 0 4px rgba(17, 17, 17, 0.08);
 }
-.field__help{
+
+.field__help {
   font-size: 12px;
   font-weight: 800;
   color: #6b6b6b;
 }
 
 /* 약관 박스 */
-.agree-box{
+.agree-box {
   border: 1px solid #e7e2dc;
-  background: rgba(255,255,255,0.72);
+  background: rgba(255, 255, 255, 0.72);
   border-radius: 18px;
   padding: 12px 12px;
   display: grid;
   gap: 10px;
 }
-.check{
+
+.check {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -177,19 +222,26 @@
   color: #111;
   font-size: 13px;
 }
-.check input{ width: 16px; height: 16px; }
+
+.check input {
+  width: 16px;
+  height: 16px;
+}
 
 /* 링크 */
-.link{
+.link {
   font-weight: 900;
   color: #111;
   text-decoration: underline;
   font-size: 13px;
 }
-.link--bold{ font-weight: 900; }
+
+.link--bold {
+  font-weight: 900;
+}
 
 /* 메인 버튼 (로그인과 동일) */
-.btn-main{
+.btn-main {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -202,30 +254,37 @@
   font-weight: 900;
   cursor: pointer;
 }
-.btn-main:hover{ filter: brightness(1.05); }
-.btn-main--big{
+
+.btn-main:hover {
+  filter: brightness(1.05);
+}
+
+.btn-main--big {
   width: 100%;
   height: 46px;
   margin-top: 4px;
 }
 
 /* 구분선 */
-.divider{
+.divider {
   position: relative;
   text-align: center;
   margin: 8px 0;
 }
-.divider::before{
-  content:"";
-  position:absolute;
-  left: 0; right: 0;
+
+.divider::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
   top: 50%;
   height: 1px;
   background: #e7e2dc;
 }
-.divider span{
+
+.divider span {
   position: relative;
-  background: rgba(255,255,255,0.85);
+  background: rgba(255, 255, 255, 0.85);
   padding: 0 10px;
   font-weight: 900;
   color: #6b6b6b;
@@ -233,11 +292,12 @@
 }
 
 /* 소셜 버튼(UI) */
-.social{
+.social {
   display: grid;
   gap: 12px;
 }
-.social-btn{
+
+.social-btn {
   height: 50px;
   border-radius: 16px;
   border: none;
@@ -249,11 +309,13 @@
   gap: 12px;
   transition: transform .18s ease, box-shadow .18s ease;
 }
-.social-btn:hover{
+
+.social-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 18px 30px rgba(0,0,0,0.15);
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.15);
 }
-.social-ico{
+
+.social-ico {
   width: 28px;
   height: 28px;
   display: grid;
@@ -261,20 +323,26 @@
 }
 
 /* 카카오 / 네이버 */
-.social-btn--kakao{
+.social-btn--kakao {
   background: #FEE500;
   color: #000;
 }
-.social-btn--kakao:hover{ filter: brightness(0.97); }
 
-.social-btn--naver{
+.social-btn--kakao:hover {
+  filter: brightness(0.97);
+}
+
+.social-btn--naver {
   background: #03C75A;
   color: #ffffff;
 }
-.social-btn--naver:hover{ filter: brightness(0.95); }
+
+.social-btn--naver:hover {
+  filter: brightness(0.95);
+}
 
 /* 하단 안내 */
-.join{
+.join {
   text-align: center;
   margin-top: 6px;
   font-weight: 800;
@@ -282,22 +350,25 @@
 }
 
 /* 2열 / 3열 폼 그리드 */
-.row-2{
+.row-2 {
   display: grid;
   grid-template-columns: 160px 1fr;
   gap: 12px;
 }
-.row-3{
+
+.row-3 {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 12px;
 }
 
 /* select 스타일(기존 input 톤 맞춤) */
-.field__select{
+.field__select {
+  margin-bottom: 5px;
+  height: 45px;
   width: 100%;
   border: 1px solid #eee7e0;
-  background: rgba(255,255,255,0.95);
+  background: rgba(255, 255, 255, 0.95);
   border-radius: 16px;
   padding: 12px 12px;
   font-weight: 800;
@@ -312,17 +383,22 @@
   background-size: 6px 6px, 6px 6px;
   background-repeat: no-repeat;
 }
-.field__select:focus{
-  border-color: rgba(17,17,17,0.55);
-  box-shadow: 0 0 0 4px rgba(17,17,17,0.08);
+
+.field__select:focus {
+  border-color: rgba(17, 17, 17, 0.55);
+  box-shadow: 0 0 0 4px rgba(17, 17, 17, 0.08);
 }
 
 /* 약관 박스 디테일 */
-.check__text{ font-weight: 900; }
-.check--all{
+.check__text {
+  font-weight: 900;
+}
+
+.check--all {
   padding: 6px 0 2px;
 }
-.agree-line{
+
+.agree-line {
   height: 1px;
   background: #e7e2dc;
   margin: 6px 0 8px;
@@ -330,29 +406,41 @@
 }
 
 .error-msg {
-  color :red;
-  font-size:10px;
+  color: red;
+  font-size: 10px;
 }
 
 /* 반응형 */
-@media (max-width: 640px){
-  .row-2{ grid-template-columns: 1fr; }
-  .row-3{ grid-template-columns: 1fr; }
+@media (max-width: 640px) {
+  .row-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .row-3 {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* =========================
   반응형
 ========================= */
-@media (max-width: 980px){
-  .signup-card{
-    grid-template-columns: 1fr; /* 1열 */
+@media (max-width: 980px) {
+  .signup-card {
+    grid-template-columns: 1fr;
+    /* 1열 */
   }
-  .signup-brand{
+
+  .signup-brand {
     min-height: 260px;
   }
 }
 
-@media (max-width: 640px){
-  .signup-title h1{ font-size: 28px; }
-  .signup-brand__title{ font-size: 28px; }
+@media (max-width: 640px) {
+  .signup-title h1 {
+    font-size: 28px;
+  }
+
+  .signup-brand__title {
+    font-size: 28px;
+  }
 }
