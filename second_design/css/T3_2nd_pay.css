@@ -399,6 +399,9 @@
   font-size: 12px;
   text-align: center;
 }
+.red {
+  color: red;
+}
 
 /* 신뢰 안내 */
 .safe{
@@ -431,6 +434,37 @@
 /* 모바일 결제 버튼(기본은 숨김) */
 .mobile-pay{ display: none; }
 .mobile-pay__note{ text-align: center; margin-top: 8px; font-size: 12px; }
+
+/* 에러 메시지 공통 스타일 */
+.field__error, 
+#userNameError, 
+#userPhoneError, 
+#emailLocalError, 
+#agreeError {
+  color: #d32f2f !important; /* 강제 적용 */
+  font-size: 12px;
+  font-weight: 900;
+  margin-top: 4px;
+  display: none; /* 기본 숨김 */
+}
+
+/* 약관 에러 특별 여백 */
+#agreeError {
+  margin-top: 8px;
+}
+/* 쿠폰 모달 */
+.coupon-list { display: grid; gap: 12px; padding: 10px 0; }
+.coupon-item { 
+  display: flex; align-items: center; gap: 15px; padding: 16px; 
+  border: 1px solid #eee7e0; border-radius: 16px; cursor: pointer; transition: background 0.2s;
+}
+.coupon-item:hover { background: #fdfaf7; }
+.coupon-item input[type="radio"] { width: 20px; height: 20px; accent-color: #111; }
+.coupon-name { font-weight: 900; color: #111; font-size: 16px; }
+.coupon-val { color: #d32f2f; font-size: 14px; font-weight: 800; margin-top: 4px; }
+
+/* 요약창 쿠폰 할인 행 스타일 */
+#sumCouponRow b { color: #d32f2f; }
 
 /* =========================
   반응형

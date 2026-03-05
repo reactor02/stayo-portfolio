@@ -785,6 +785,22 @@ svg.heart.active {
 .message.user .bubble { background: #111; color: white; border-bottom-right-radius: 2px; }
 .message.model .bubble { background: #eee; color: #333; border-bottom-left-radius: 2px; }
 
+.category-btn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: #999;   /* 기본 연한 색 */
+    font-weight: 400;
+    cursor: pointer;
+    padding: 8px 12px;
+}
+
+/* 진한 상태 */
+.category-btn.active {
+    color: #111;   /* 호텔과 동일한 진한 색 */
+    font-weight: 700;
+}
+
 
 
 /* --------- 반응형(메인 전용) --------- */

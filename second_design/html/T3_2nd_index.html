@@ -21,6 +21,8 @@
     <!-- 페이지 전용 CSS -->
     <link rel="stylesheet" href="../css/T3_2nd_index.css" />
     <script src="../js/T3_2nd_index.js"></script>
+    <script src="..\api_test\main.split.html"></script>
+    <script src="..\js\jquery-3.7.1.js"></script>
 </head>
 
 <body>
@@ -201,7 +203,7 @@
             <div class="hero__categories">
                 <div class="container categories">
                     <!-- 호텔 (active) -->
-                    <a class="category category--active" href="#">
+                    <button class="category-btn active">
                         <span class="category__icon" aria-hidden="true">
                             <!-- hotel -->
                             <svg viewBox="0 0 24 24">
@@ -216,10 +218,10 @@
                             </svg>
                         </span>
                         <span class="category__label">호텔</span>
-                    </a>
+                    </button>
 
                     <!-- 아파트 -->
-                    <a class="category" href="#">
+                    <button class="category-btn">
                         <span class="category__icon" aria-hidden="true">
                             <!-- building -->
                             <svg viewBox="0 0 24 24">
@@ -235,10 +237,10 @@
                             </svg>
                         </span>
                         <span class="category__label">아파트</span>
-                    </a>
+                    </button>
 
                     <!-- 해변 -->
-                    <a class="category" href="#">
+                    <button class="category-btn">
                         <span class="category__icon" aria-hidden="true">
                             <!-- waves -->
                             <svg viewBox="0 0 24 24">
@@ -248,10 +250,10 @@
                             </svg>
                         </span>
                         <span class="category__label">해변</span>
-                    </a>
+                    </button>
 
                     <!-- 산 -->
-                    <a class="category" href="#">
+                    <button class="category-btn">
                         <span class="category__icon" aria-hidden="true">
                             <!-- mountain -->
                             <svg viewBox="0 0 24 24">
@@ -260,10 +262,10 @@
                             </svg>
                         </span>
                         <span class="category__label">산</span>
-                    </a>
+                    </button>
 
                     <!-- 전원주택 -->
-                    <a class="category" href="#">
+                    <button class="category-btn">
                         <span class="category__icon" aria-hidden="true">
                             <!-- home -->
                             <svg viewBox="0 0 24 24">
@@ -273,10 +275,10 @@
                             </svg>
                         </span>
                         <span class="category__label">전원주택</span>
-                    </a>
+                    </button>
 
                     <!-- 성 -->
-                    <a class="category" href="#">
+                    <button class="category-btn">
                         <span class="category__icon" aria-hidden="true">
                             <!-- castle -->
                             <svg viewBox="0 0 24 24">
@@ -286,10 +288,10 @@
                             </svg>
                         </span>
                         <span class="category__label">성</span>
-                    </a>
+                    </button>
 
                     <!-- 캠핑 -->
-                    <a class="category" href="#">
+                    <button class="category-btn">
                         <span class="category__icon" aria-hidden="true">
                             <!-- tent -->
                             <svg viewBox="0 0 24 24">
@@ -299,10 +301,10 @@
                             </svg>
                         </span>
                         <span class="category__label">캠핑</span>
-                    </a>
+                    </button>
 
                     <!-- 크루즈 -->
-                    <a class="category" href="#">
+                    <button class="category-btn">
                         <span class="category__icon" aria-hidden="true">
                             <!-- ship -->
                             <svg viewBox="0 0 24 24">
@@ -314,7 +316,7 @@
                             </svg>
                         </span>
                         <span class="category__label">크루즈</span>
-                    </a>
+                    </button>
                 </div>
             </div>
         </section>

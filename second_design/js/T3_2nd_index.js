@@ -195,4 +195,20 @@ function bind() {
             handleChat();
         }
     });
+
+    // ──────────────────────────────────────────────
+// 카테고리 버튼 활성화
+// ──────────────────────────────────────────────
+    const categoryBtns = document.querySelectorAll('.category-btn');
+
+    categoryBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+
+            // 모든 버튼에서 active 제거
+            categoryBtns.forEach(el => el.classList.remove('active'));
+
+            // 클릭한 버튼에만 active 추가
+            this.classList.add('active');
+        });
+    });
 }
