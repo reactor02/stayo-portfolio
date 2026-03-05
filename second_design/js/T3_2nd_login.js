@@ -47,6 +47,8 @@ window.onload = function () {
 
                 // 필요하면 여기서 토큰 저장 가능
                 // localStorage.setItem("loginUser", JSON.stringify(res));
+                // 로그인 상태 저장
+                localStorage.setItem("login", "true");
 
                 window.location.href = "T3_2nd_index.html";
             })
