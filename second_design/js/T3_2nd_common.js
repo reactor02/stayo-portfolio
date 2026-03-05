@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     logout.addEventListener("click", ()=>{
     
         localStorage.removeItem("login");
-        location.href = "T3_2nd_index.html";
+        location.replace("T3_2nd_index.html");
     
     })
 });
