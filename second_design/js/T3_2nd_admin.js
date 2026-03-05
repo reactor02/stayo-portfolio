@@ -139,7 +139,9 @@ window.onload = function () {
             alert('해당 리뷰가 숨김처리 되었습니다.')
 
         })
+    }
 
+        
     for (let i = 0; i < keep.length; i++) {
         keep[i].addEventListener('click', function () {
             alert('해당 리뷰가 되었습니다.')
@@ -150,5 +152,4 @@ window.onload = function () {
 
 
 
-    }
 }
