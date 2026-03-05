@@ -25,6 +25,10 @@ body {
     .discount {
         font-size: 15px;
     }
+    .line-through {
+      color: gray;
+      text-decoration: line-through;
+    }
 
     .list{ margin-top: 10px; display: grid; gap: 10px; }
 .item{
