@@ -7,6 +7,7 @@
     <title>STAYO | 숙소 리스트</title>
     <script src="../js/jquery-3.7.1.js"></script>
     <script src="../api_test/js/tb.api.v1.tb.js"></script>
+    <script src="../js/T3_2nd_common.js"></script>
     <script src="../js/T3_2nd_list.js"></script>
 
     <!-- 폰트(메인과 동일) -->
@@ -26,48 +27,70 @@
     <!-- ==========================
     공통 헤더(메인과 동일 구조)
   =========================== -->
-    <header class="header">
+    <header class="header is-login">
         <div class="container header__inner">
+            <!-- 로고 -->
             <a href="./T3_2nd_index.html" class="logo" aria-label="STAYO 홈">STAYO</a>
 
-            <!-- <nav class="gnb" aria-label="주요 메뉴">
-                <a href="#" class="gnb__link">숙소</a>
+            <!-- 가운데 메뉴 -->
+            <nav class="gnb" aria-label="주요 메뉴">
+                <a href="./list.html" class="gnb__link">숙소</a>
                 <a href="#" class="gnb__link">항공권</a>
                 <a href="#" class="gnb__link">패키지</a>
                 <a href="#" class="gnb__link">액티비티</a>
                 <a href="#" class="gnb__link">렌터카</a>
-            </nav> -->
+            </nav>
 
+            <!-- 오른쪽 -->
             <div class="header__right">
-                <button class="icon-btn" type="button" aria-label="언어/지역">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path
-                            d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.9 9h-3.2a15.8 15.8 0 00-1.2-6A8.1 8.1 0 0119.9 11zM12 4c.9 1.2 1.8 3.3 2.3 7H9.7C10.2 7.3 11.1 5.2 12 4zM4.1 13h3.2a15.8 15.8 0 001.2 6A8.1 8.1 0 014.1 13zm0-2a8.1 8.1 0 014.4-6 15.8 15.8 0 00-1.2 6H4.1zM12 20c-.9-1.2-1.8-3.3-2.3-7h4.6c-.5 3.7-1.4 5.8-2.3 7zm3.5-1a15.8 15.8 0 001.2-6h3.2a8.1 8.1 0 01-4.4 6z" />
-                    </svg>
-                </button>
+                <!-- ✅ 로그인 전 -->
+                <div class="header-guest">
+                    <a href="./T3_2nd_login.html" class="btn btn--ghost">
+                        <span class="btn__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z" />
+                            </svg>
+                        </span>
+                        로그인
+                    </a>
+                    <a href="./T3_2nd_signup.html" class="btn btn--solid">회원가입</a>
+                </div>
 
-                <a href="#">
-                    <button class="icon-btn" type="button" aria-label="찜 목록">
+                <!-- ✅ 로그인 후 -->
+                <div class="header-user">
+                    <!-- <a href="./T3_2nd_cart.html" class="icon-btn" aria-label="장바구니">
                         <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
-                         2 6 4 4 6.5 4
-                         8.04 4 9.54 4.81 10.4 6.09
-                         11.26 4.81 12.76 4 14.3 4
-                         16.8 4 18.8 6 18.8 8.5
-                         c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                        </svg>
-                    </button>
-                </a>
-
-                <a href="#" class="btn btn--login">
-                    <span class="btn__icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24">
                             <path
-                                d="M12 12a4.5 4.5 0 10-4.5-4.5A4.5 4.5 0 0012 12zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z" />
+                                d="M7 4H5L4 6v2h2l3.6 7.59L8.25 18A2 2 0 0 0 10 21h8v-2h-7.42a.25.25 0 0 1-.23-.37L11.1 17h5.45a2 2 0 0 0 1.79-1.11L21 9H7.42l-.94-2zM10 23a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm7 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
                         </svg>
-                    </span>
-                    로그인
-                </a>
+                    </a>
+
+                    <a href="./T3_2nd_mapage.html#sec-wish" class="icon-btn" aria-label="찜 목록">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6 4 4 6.5 4c1.54 0 3.04.81 3.9 2.09C11.26 4.81 12.76 4 14.3 4 16.8 4 18.8 6 18.8 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                        </svg>
+                    </a> -->
+
+                    <!-- ✅ 로그인 후 영역 안 -->
+                    <div class="user-menu">
+                        <!-- user-chip: 클릭 트리거 -->
+                        <button class="user-avatar-btn">
+                            <span class="user-chip__avatar">MH</span>
+                        </button>
+
+                        <!-- ✅ 모달(드롭다운 메뉴) -->
+                        <div class="user-modal" role="menu" aria-label="유저 메뉴">
+                            <a href="./T3_2nd_mapage.html" class="user-modal__item" role="menuitem">마이페이지</a>
+                            <a href="./T3_2nd_cart.html" class="user-modal__item" role="menuitem">장바구니</a>
+                            <a href="./T3_2nd_mapage.html#sec-wish" class="user-modal__item" role="menuitem">찜목록</a>
+                            <button type="button" class="user-modal__item user-modal__logout logout" role="menuitem">
+                                로그아웃
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>

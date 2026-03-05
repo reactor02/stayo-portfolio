@@ -2,6 +2,21 @@ window.addEventListener('load', bind)
 
 function bind() {
 
+    function updateCommentCount() {
+        const list = document.querySelector(".comment-list");
+        const btn = document.querySelector(".js-toggle-comments");
+        const totalText = document.querySelector(".comments-title .muted"); // "총 3개"
+
+        if (!list) return;
+
+        const count = list.querySelectorAll(".comment-item").length;
+
+        // 버튼: 댓글 보기(3)
+        if (btn) btn.textContent = `댓글 보기(${count})`;
+
+        // 제목 옆: 총 3개
+        if (totalText) totalText.textContent = `총 ${count}개`;
+    }
 
 
 
@@ -13,6 +28,7 @@ function bind() {
         if (!modal || !openBtn) return;
 
         const open = () => {
+
             modal.hidden = false;
             modal.setAttribute("aria-hidden", "false");
             document.body.style.overflow = "hidden";
@@ -43,6 +59,7 @@ function bind() {
 
     if (modal && openBtn) {
         const open = () => {
+            syncTagsToModalChecks();
             modal.hidden = false;
             modal.setAttribute('aria-hidden', 'false');
             document.body.style.overflow = 'hidden';
@@ -169,7 +186,10 @@ function bind() {
     const comment_list = document.querySelector('.comment-list')
 
 
-    btn_comment.addEventListener('click',()=>{
+    btn_comment.addEventListener('click', () => {
+
+        const text = comment_input.value.trim();
+        if (!text) return;
 
         comment_list.innerHTML += `
         <li class="comment-item">
@@ -200,15 +220,30 @@ function bind() {
                 </li>
         `
         comment_input.value = '';
+        document.querySelector('.limit').textContent = '0 / 200';  // ✅ 추가
+        updateCommentCount();
     })
 
-     const btn_modal = document.querySelector('.btn-modal')
+    const btn_modal = document.querySelector('.btn-modal')
 
-    btn_modal.addEventListener('click',()=>{
+    btn_modal.addEventListener('click', () => {
         // alert('리뷰 수정기능은 준비중입니다')
         rev_title.textContent = field__textarea_title.value
         rev_text.innerText = field__textarea_text.value
         // alert('리뷰가 수정되었습니다')
+        const tagsWrap = document.querySelector(".tags");
+        const checked = [...document.querySelectorAll('[data-modal] .checks input[type="checkbox"]:checked')]
+            .map(chk => chk.value.trim());
+
+        // 기존 태그 지우고 다시 만들기
+        tagsWrap.innerHTML = "";
+
+        checked.forEach(word => {
+            const span = document.createElement("span");
+            span.className = "tag";          // 스타일은 기본 .tag 적용됨 (CSS에 있음) :contentReference[oaicite:3]{index=3}
+            span.textContent = word;
+            tagsWrap.appendChild(span);
+        });
     })
     // btn_modal.addEventListener('click',close)
 
@@ -216,6 +251,7 @@ function bind() {
     const field__textarea_title = document.querySelector('.field__textarea_title')
     const rev_title = document.querySelector('.rev-title');
     const rev_text = document.querySelector('.rev-text')
+
 
     document.addEventListener("input", (e) => {
         const ta = e.target.closest(".field__textarea_text");
@@ -225,11 +261,37 @@ function bind() {
         const v = field__textarea_text.value.slice(0, 1000);
         if (v !== field__textarea_text.value) field__textarea_text.value = v;
         if (limitEl) limitEl.textContent = `${field__textarea_text.value.length} / 1000`;
-        
+
+
     });
     field__textarea_title.value = rev_title.textContent
     field__textarea_text.value = rev_text.innerText
 
-    
+    function syncTagsToModalChecks() {
+        // 리뷰 상세의 태그 텍스트들(청결/친절/가성비...)
+        const tags = [...document.querySelectorAll(".tags .tag")]
+            .map(el => el.textContent.trim());
+
+        // 모달 체크박스들
+        const checks = document.querySelectorAll('[data-modal] .checks input[type="checkbox"]');
+
+        // 초기화 후, 태그에 있는 것만 체크
+        checks.forEach(chk => {
+            chk.checked = tags.includes(chk.value);
+        });
+    }
+
+
+    const act = document.querySelector('.act')
+
+
+    act.addEventListener('click', () => {
+        const spl = act.textContent.split(' ')
+        spl[1]++;
+        act.textContent = `${spl[0]} ${spl[1]}`
+    })
+
+
+    updateCommentCount();
 
 }
