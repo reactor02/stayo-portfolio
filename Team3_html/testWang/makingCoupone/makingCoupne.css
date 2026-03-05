@@ -1,0 +1,43 @@
+body {
+      font-family: sans-serif;
+      padding: 40px;
+    }
+
+    dialog {
+      border: none;
+      border-radius: 10px;
+      padding: 20px 30px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    dialog::backdrop {
+      background: rgba(0,0,0,0.4);
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 8px 14px;
+      cursor: pointer;
+    }
+    .red {
+        color: rgb(206, 13, 13);
+    }
+    .discount {
+        font-size: 15px;
+    }
+
+    .list{ margin-top: 10px; display: grid; gap: 10px; }
+.item{
+  border: 1px solid #eee7e0;
+  background: rgba(255,255,255,0.82);
+  border-radius: 18px;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.item--warn{ background: rgba(255,255,255,0.78); }
+.item__title{ font-weight: 900; color:#111; }
+.item__meta{ margin-top: 4px; font-size: 12px; }
+.item__right{ display: flex; gap: 8px; }

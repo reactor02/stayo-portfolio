@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../makingCoupone/makingCoupne.css">
+    <script src="../makingCoupone/makingCoupne.js"> </script>
+</head>
+
+<body>
+
+    <button id="openBtn">모달 열기</button>
+    <dialog id="myDialog">
+        <p>테스트용 모달입니다 👋</p>
+        쿠폰명 <input type="text">
+        할인율 <select name="discount" id="couponDiscount">
+            <option value="10%">10%</option>
+            <option value="15%">15%</option>
+            <option value="20%">20%</option>
+            <option value="30%">30%</option>
+        </select>
+        유효기간 <input type="date" id="minDate">
+        <input type="date" id="maxDate">
+        <button id="makeCouponeBtn">쿠폰생성</button><br>
+        <button id="closeBtn">닫기</button>
+    </dialog>
+
+    <div class="couponeList">
+        <article class="item item--warn">
+            <div class="item__left">
+                <div class="item__title">쿠폰 이름</div>
+                <div class="discount red">할인율</div>
+                <div class="item__meta muted">유효기간</div>
+            </div>
+            <div class="item__right">
+                <button class="mini mini--ok" type="button">쿠폰 삭제</button>
+                <button class="mini" type="button">쿠폰 수정</button>
+            </div>
+        </article>
+    </div>
+
+</body>
+
+</html>
