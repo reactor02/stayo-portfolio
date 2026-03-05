@@ -45,13 +45,149 @@ document.addEventListener("DOMContentLoaded", function () {
 
     updateLoginUI();
 
-    logoutBtn.addEventListener("click", function () {
-        if (confirm("로그아웃 하시겠습니까?")) {
-            localStorage.removeItem("stayoUser");
-            location.reload();
-        }
-    });
+  logoutBtn.addEventListener("click", function () {
 
+    if (confirm("로그아웃 하시겠습니까?")) {
+
+        localStorage.removeItem("stayoUser");
+
+
+        /* =========================
+           기존 기능 (계정 정보 제거)
+        ==========================*/
+
+        const profileCard = document.querySelector(".profile-card");
+        if (profileCard) profileCard.remove();
+
+        const chips = document.querySelectorAll(".chip");
+        chips.forEach(chip => chip.remove());
+
+        const profileEditBtn = document.querySelector(".btn-main");
+        if (profileEditBtn) profileEditBtn.remove();
+
+
+        /* =========================
+           예약 / 찜 / 쿠폰 메뉴 제거
+        ==========================*/
+
+        const tabMenuItems = document.querySelectorAll(".tab-menu__item");
+
+        tabMenuItems.forEach(item => {
+
+            const text = item.textContent.trim();
+
+            if (
+                text.includes("예약") ||
+                text.includes("찜") ||
+                text.includes("쿠폰") ||
+                text.includes("프로필")
+            ) {
+                item.style.display = "none";
+            }
+
+        });
+
+
+        /* =========================
+           summary 카드 제거
+        ==========================*/
+
+        const summaryCards = document.querySelector(".summary-cards");
+
+        if (summaryCards) {
+
+            const cards = summaryCards.children;
+
+            Array.from(cards).forEach(card => {
+
+                const text = card.textContent;
+
+                if (
+                    text.includes("예약") ||
+                    text.includes("찜") ||
+                    text.includes("쿠폰")
+                ) {
+                    card.remove();
+                }
+
+            });
+
+        }
+
+/* ---------------------------
+   나의 문의 내역 제거
+----------------------------*/
+
+const inquiryTitle = document.querySelectorAll(".support__title");
+
+inquiryTitle.forEach(title => {
+
+    if (title.textContent.includes("나의 문의 내역")) {
+        title.remove();
+    }
+
+});
+
+
+const inquiryList = document.querySelector(".inquiry-list");
+
+if (inquiryList) {
+    inquiryList.remove();
+}
+
+
+/* ---------------------------
+   예약 내역 패널 제거
+----------------------------*/
+
+const reservationTitle = document.querySelectorAll(".panel__title");
+
+reservationTitle.forEach(title => {
+
+    if (title.textContent.includes("예약 내역")) {
+        title.remove();
+    }
+
+});
+
+
+const panelActions = document.querySelector(".panel__actions");
+
+if (panelActions) {
+    panelActions.remove();
+}
+
+
+/* ---------------------------
+   예약 카드 전체 제거
+----------------------------*/
+
+const bookingCards = document.querySelectorAll(".booking-card");
+
+bookingCards.forEach(card => {
+    card.remove();
+});
+        /* =========================
+           로그인 버튼 변경
+        ==========================*/
+
+        const loginBtn = document.querySelector(".btn--login");
+
+        if (loginBtn) {
+
+            loginBtn.textContent = "로그인";
+
+            loginBtn.onclick = function () {
+
+                location.reload();
+
+            };
+
+        }
+
+    }
+
+});
 
     /* =====================================================
        2. 탭 메뉴 기능 (기존 유지)
@@ -151,3 +287,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 });
+
