@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="../css/T3_2nd_common.css" />
     <!-- 페이지 전용 CSS -->
     <link rel="stylesheet" href="../css/T3_2nd_admin.css" />
+    <script src="../js/T3_2nd_admin.js"></script>
 </head>
 
 <body>
@@ -74,7 +75,7 @@
                         대시보드
                     </a>
 
-                 
+
 
                     <a class="admin-nav__item" href="#sec-stays">
                         <span class="admin-nav__icon" aria-hidden="true">
@@ -231,7 +232,7 @@
                                     <p class="panel__sub muted">최근 생성된 예약 목록</p>
                                 </div>
                                 <div class="panel__actions">
-                                    <button class="btn-outline btn-outline--sm" type="button">엑셀 다운로드</button>
+                                    <button class="btn-outline btn-outline--sm excel" type="button">엑셀 다운로드</button>
                                 </div>
                             </div>
 
@@ -246,7 +247,7 @@
                         </section>
 
                         <!-- ✅ (B) 예약 관리 섹션(좌측 메뉴용) -->
-                 
+
                         <!-- ✅ (C) 숙소 승인 대기: 최근 예약 아래로 이동 -->
                         <section id="sec-stays" class="panel anchor">
                             <div class="panel__head">
@@ -254,7 +255,7 @@
                                     <h2 class="panel__title">숙소 승인 대기</h2>
                                     <p class="panel__sub muted">등록/수정 요청</p>
                                 </div>
-                                <button class="btn-outline btn-outline--sm" type="button">전체보기</button>
+                                <button id="showall" class="btn-outline btn-outline--sm" type="button">전체보기</button>
                             </div>
 
                             <div class="list">
@@ -286,7 +287,79 @@
                                 </label>
                             </div>
                             <div class="hint muted">※ 실제 검색/필터 기능은 JS/백엔드 연동 파트입니다.</div>
+                            <div class="table-wrap">
+                                <table id="table" class="tbl" aria-label="회원 목록">
+                                    <thead>
+                                        <tr>
+                                            <th>업체명</th>
+                                            <th>숙소명</th>
+                                            <th>등록일</th>
+                                            <th>상태</th>
+                                            <th>관리</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>업체명</td>
+                                            <td>숙소명</td>
+                                            <td>2026.02.11</td>
+                                            <td><span class="st st--ok status">대기중</span></td>
+                                            <td class="td-actions">
+                                                <button class="mini approve" type="button">승인</button>
+                                                <button class="mini refuse" type="button">거절</button>
+                                                <button class="mini pending" type="button">보류</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>업체명</td>
+                                            <td>숙소명</td>
+                                            <td>2026.01.28</td>
+                                            <td><span class="st st--wait status">대기중 </span></td>
+                                            <td class="td-actions">
+                                                <button class="mini approve" type="button">승인</button>
+                                                <button class="mini refuse" type="button">거절</button>
+                                                <button class="mini pending" type="button">보류</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>업체명</td>
+                                            <td>숙소명</td>
+                                            <td>2026.01.28</td>
+                                            <td><span class="st st--wait status">대기중 </span></td>
+                                            <td class="td-actions">
+                                                <button class="mini approve" type="button">승인</button>
+                                                <button class="mini refuse" type="button">거절</button>
+                                                <button class="mini pending" type="button">보류</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>업체명</td>
+                                            <td>숙소명</td>
+                                            <td>2026.01.28</td>
+                                            <td><span class="st st--wait status">대기중 </span></td>
+                                            <td class="td-actions">
+                                                <button class="mini approve" type="button">승인</button>
+                                                <button class="mini refuse" type="button">거절</button>
+                                                <button class="mini pending" type="button">보류</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>업체명</td>
+                                            <td>숙소명</td>
+                                            <td>2026.01.28</td>
+                                            <td><span class="st st--wait status">대기중 </span></td>
+                                            <td class="td-actions">
+                                                <button class="mini approve" type="button">승인</button>
+                                                <button class="mini refuse" type="button">거절</button>
+                                                <button class="mini pending" type="button">보류</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </section>
+
+
 
 
                         <!-- ✅ (D) 회원 관리 -->
@@ -296,7 +369,7 @@
                                     <h2 class="panel__title">회원 관리</h2>
                                     <p class="panel__sub muted">회원 조회/정지/탈퇴 UI</p>
                                 </div>
-                                <button class="btn-outline btn-outline--sm" type="button">내보내기</button>
+                                <button class="btn-outline btn-outline--sm excel" type="button">엑셀다운로드</button>
                             </div>
 
                             <div class="table-wrap">
@@ -315,20 +388,50 @@
                                             <td>#U-1023</td>
                                             <td>min****@stayo.com</td>
                                             <td>2026.02.11</td>
-                                            <td><span class="st st--ok">정상</span></td>
+                                            <td><span class="st st--ok status1 ">정상</span></td>
                                             <td class="td-actions">
-                                                <button class="mini" type="button">활성화</button>
-                                                <button class="mini" type="button">정지</button>
+                                                <button class="mini energize" type="button">정상</button>
+                                                <button class="mini stop" type="button">정지</button>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>#U-0988</td>
                                             <td>jh****@stayo.com</td>
                                             <td>2026.01.28</td>
-                                            <td><span class="st st--wait">주의</span></td>
+                                            <td><span class="st st--ok status1">정상</span></td>
                                             <td class="td-actions">
-                                                <button class="mini" type="button">활성화</button>
-                                                <button class="mini" type="button">정지</button>
+                                                <button class="mini energize" type="button">정상</button>
+                                                <button class="mini stop" type="button">정지</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>#U-0988</td>
+                                            <td>jh****@stayo.com</td>
+                                            <td>2026.01.28</td>
+                                            <td><span class="st st--ok status1">정상</span></td>
+                                            <td class="td-actions">
+                                                <button class="mini energize" type="button">정상</button>
+                                                <button class="mini stop" type="button">정지</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>#U-0988</td>
+                                            <td>jh****@stayo.com</td>
+                                            <td>2026.01.28</td>
+                                            <td><span class="st st--ok status1">정상</span></td>
+                                            <td class="td-actions">
+                                                <button class="mini energize" type="button">정상</button>
+                                                <button class="mini stop" type="button">정지</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>#U-0988</td>
+                                            <td>jh****@stayo.com</td>
+                                            <td>2026.01.28</td>
+                                            <td><span class="st st--ok status1">정상</span></td>
+                                            <td class="td-actions">
+                                                <button class="mini energize" type="button">정상</button>
+                                                <button class="mini stop" type="button">정지</button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -343,7 +446,7 @@
                                     <h2 class="panel__title">리뷰/신고 관리</h2>
                                     <p class="panel__sub muted">신고 리뷰 검토 및 숨김 처리</p>
                                 </div>
-                                <button class="btn-outline btn-outline--sm" type="button">전체보기</button>
+                                <button id="showall2" class="btn-outline btn-outline--sm" type="button">전체보기</button>
                             </div>
 
                             <div class="list">
@@ -353,9 +456,66 @@
                                         <div class="item__title">“욕설/비방 포함” 신고</div>
                                         <div class="item__meta muted">#RV-8821 · 모던 부티크 호텔</div>
                                     </div>
+
                                     <div class="item__right">
-                                        <button class="mini mini--ok" type="button">숨김</button>
-                                        <button class="mini" type="button">유지</button>
+                                        <button  class="mini mini--ok hide" type="button">숨김</button>
+                                        <button  class="mini keep" type="button">유지</button>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="list">
+                                <!-- 기존 신고 item들 그대로 복사해서 여기로 넣어도 됨 -->
+                                <article class="item item--warn">
+                                    <div class="item__left">
+                                        <div class="item__title">“욕설/비방 포함” 신고</div>
+                                        <div class="item__meta muted">#RV-8821 · 모던 부티크 호텔</div>
+                                    </div>
+
+                                    <div class="item__right">
+                                        <button class="mini mini--ok hide" type="button">숨김</button>
+                                        <button class="mini keep" type="button">유지</button>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="list">
+                                <!-- 기존 신고 item들 그대로 복사해서 여기로 넣어도 됨 -->
+                                <article class="item item--warn">
+                                    <div class="item__left">
+                                        <div class="item__title">“욕설/비방 포함” 신고</div>
+                                        <div class="item__meta muted">#RV-8821 · 모던 부티크 호텔</div>
+                                    </div>
+
+                                    <div class="item__right">
+                                        <button class="mini mini--ok hide" type="button">숨김</button>
+                                        <button class="mini keep" type="button">유지</button>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="list">
+                                <!-- 기존 신고 item들 그대로 복사해서 여기로 넣어도 됨 -->
+                                <article class="item item--warn">
+                                    <div class="item__left">
+                                        <div class="item__title">“욕설/비방 포함” 신고</div>
+                                        <div class="item__meta muted">#RV-8821 · 모던 부티크 호텔</div>
+                                    </div>
+
+                                    <div class="item__right">
+                                        <button class="mini mini--ok hide" type="button">숨김</button>
+                                        <button class="mini keep" type="button">유지</button>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="list">
+                                <!-- 기존 신고 item들 그대로 복사해서 여기로 넣어도 됨 -->
+                                <article class="item item--warn">
+                                    <div class="item__left">
+                                        <div class="item__title">“욕설/비방 포함” 신고</div>
+                                        <div class="item__meta muted">#RV-8821 · 모던 부티크 호텔</div>
+                                    </div>
+
+                                    <div class="item__right">
+                                        <button class="mini mini--ok hide" type="button">숨김</button>
+                                        <button class="mini keep" type="button">유지</button>
                                     </div>
                                 </article>
                             </div>
