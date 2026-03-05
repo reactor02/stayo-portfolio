@@ -1,6 +1,6 @@
 window.addEventListener('load', bind);
 
-function bind() {
+async function bind() {
 
     // ──────────────────────────────────────────────
     // 팝업창 기능 구현
@@ -211,4 +211,33 @@ function bind() {
             this.classList.add('active');
         });
     });
+
+
+     let items = [];
+
+
+    // const logCall = (label, method, url, body) => {
+    //     console.log(`[CALL] ${label} :: ${method} ${url}`);
+    //     if (body !== undefined) console.log(`[BODY] ${label}`, body);
+    // };
+
+    // const logRes = (label, res) => console.log(`[RES] ${label}`, res);
+    // const logErr = (label, xhr) => {
+    //     const rj = xhr?.responseJSON;
+    //     const status = xhr?.status;
+    //     const msg = rj?.message || rj?.error || xhr?.statusText || "요청 실패";
+    //     console.log(`[ERR] ${label} :: status=${status}`, rj || msg);
+    // };
+
+
+    
+    let listRes;
+    
+    listRes = await API.V1.TB.Lodging.properties({ city: '서울', page: 1, pageSize: 50 });
+
+    items = listRes.items;
+    console.log(listRes.items)
+    // render1(items);
+    
+    // r = listRes;
 }

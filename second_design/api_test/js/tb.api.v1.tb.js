@@ -13,6 +13,7 @@
 
   const LS_KEY_URI = "api.v1.uri";
   const defaultOrigin = (w.location && w.location.origin) ? w.location.origin : "";
+  //API.V1.setURI("http://116.36.205.25:15180");
   API.V1.URI =
     (w.API_V1_URI && String(w.API_V1_URI).trim()) ||
     (w.localStorage && w.localStorage.getItem(LS_KEY_URI)) ||
@@ -23,6 +24,7 @@
     try { w.localStorage && w.localStorage.setItem(LS_KEY_URI, API.V1.URI); } catch (_) {}
     return API.V1.URI;
   });
+  API.V1.URI = "http://116.36.205.25:15180";
 
   const qs = (q) => {
     if (!q) return "";
