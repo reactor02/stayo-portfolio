@@ -23,7 +23,7 @@ window.onload = function () {
     const agree1 = document.querySelector('#agree1');
     const agree2 = document.querySelector('#agree2');
     const agree3 = document.querySelector('#agree3');
-    
+
 
     // 전체 동의 체크
     agreeAll.addEventListener('change', function () {
@@ -135,7 +135,20 @@ window.onload = function () {
         }
 
         if (isValid) {
-            alert("회원가입 완료!");
+            API.V1.TB.Auth.signup({
+                loginId: email.value.trim(),       // ← 입력한 이메일 사용
+                password: password.value.trim(),   // ← 입력한 비밀번호 사용
+                displayName: name.value.trim(),    // ← 입력한 이름 사용
+                email: email.value.trim()
+            })
+                .done(function (res) {
+                    console.log("회원가입 성공", res);
+                    alert("회원가입 완료!");
+                })
+                .fail(function (err) {
+                    console.log("회원가입 실패", err);
+                    alert("회원가입 실패");
+                });
         }
     });
 

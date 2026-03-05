@@ -51,6 +51,7 @@ window.onload = function () {
     // 정규식
     const verifyRegex = /^\d{6}$/; // 인증번호 6자리 숫자 검사식 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 이메일 검사식
+    const nameRegex = /^[가-힣A-Za-z]+$/; // 한글과 영어만 입력 가능한 정규식 
 
     // 아이디 찾기
     idBtn.addEventListener("click", function (e) {
@@ -76,7 +77,12 @@ window.onload = function () {
             idError.classList.remove("hide");
             isValid = false;
 
-        } else if (phoneValue === "") {
+        } else if (!nameRegex.test(nameValue)) {
+            idError.textContent = "이름은 한글과 영어만 입력 가능합니다.";
+            idError.classList.remove("hide");
+            isValid = false;
+        }
+        else if (phoneValue === "") {
             idError.textContent = "휴대폰 번호를 입력해주세요.";
             idError.classList.remove("hide");
             isValid = false;
@@ -140,6 +146,13 @@ window.onload = function () {
             nameError.classList.remove("hide");
             isValid = false;
         }
+
+        else if (!nameRegex.test(nameValue)) { 
+            nameError.textContent = "이름은 한글과 영어만 입력 가능합니다.";
+            nameError.classList.remove("hide");
+            isValid = false;
+        }
+
 
         if (phoneValue === "") {
             phoneError.textContent = "휴대폰 번호를 입력해주세요.";
@@ -257,7 +270,7 @@ window.onload = function () {
 
     });
 
-        
+
     pwverifyBtn.addEventListener("click", function () {
 
         const emailValue = pwEmail.value.trim();
