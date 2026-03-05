@@ -128,4 +128,16 @@ function bind() {
         alert('리뷰 저장기능은 준비중입니다')
     })
 
+    const field__textarea_text = document.querySelector('.field__textarea_text')
+
+    document.addEventListener("input", (e) => {
+        const ta = e.target.closest(".field__textarea_text");
+        if (!ta) return;
+        const item = ta.closest(".field");
+        const limitEl = item.querySelector(".reply-limit");
+        const v = field__textarea_text.value.slice(0, 1000);
+        if (v !== field__textarea_text.value) field__textarea_text.value = v;
+        if (limitEl) limitEl.textContent = `${field__textarea_text.value.length} / 1000`;
+    });
+
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -47,8 +48,7 @@
         <!-- 찜 -->
         <button class="icon-btn" type="button" aria-label="찜 목록">
           <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
                  2 6 4 4 6.5 4
                  8.04 4 9.54 4.81 10.4 6.09
                  11.26 4.81 12.76 4 14.3 4
@@ -60,8 +60,7 @@
         <a href="./T3_2nd_login.html" class="btn btn--login">
           <span class="btn__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24">
-              <path
-                d="M12 12a4.5 4.5 0 10-4.5-4.5A4.5 4.5 0 0012 12zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z" />
+              <path d="M12 12a4.5 4.5 0 10-4.5-4.5A4.5 4.5 0 0012 12zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z" />
             </svg>
           </span>
           로그인
@@ -109,14 +108,14 @@
 
             <!-- 키워드 칩 -->
             <div class="chips" aria-label="리뷰 키워드">
-               <button class="chip chip--active whole" type="button">전체</button>
+              <button class="chip chip--active whole" type="button">전체</button>
               <button class="chip clean" type="button">청결</button>
               <button class="chip loc" type="button">위치</button>
               <button class="chip cheap" type="button">가성비</button>
               <button class="chip kind" type="button">친절</button>
               <button class="chip acco" type="button">시설</button>
             </div>
-          </div> 
+          </div>
 
           <!-- 오른쪽: 평점 분포(막대) -->
           <div class="summary-right">
@@ -190,14 +189,14 @@
         </div>
 
         <!-- <div class="toolbar__right"> -->
-          <!-- <div class="search"> -->
-            <!-- <input type="text" placeholder="숙소명/키워드 검색" /> -->
-            <!-- <button type="button" aria-label="검색"> -->
-              <!-- <svg viewBox="0 0 24 24" aria-hidden="true">
+        <!-- <div class="search"> -->
+        <!-- <input type="text" placeholder="숙소명/키워드 검색" /> -->
+        <!-- <button type="button" aria-label="검색"> -->
+        <!-- <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path
                   d="M10 2a8 8 0 105 14l5 5 2-2-5-5a8 8 0 00-7-12zm0 2a6 6 0 110 12 6 6 0 010-12z" />
               </svg> -->
-            <!-- </button>
+        <!-- </button>
           </div> -->
         <!-- </div> -->
       </div>
@@ -213,41 +212,44 @@
           <!-- 리뷰 카드 -->
           <article class="rev">
             <a href="./T3_2nd_review_detail.html">
-            <div class="rev__head">
-              <div class="rev__user">
-                <div class="avatar" aria-hidden="true">MH</div>
-                <div>
-                  <div class="rev__name">박민호</div>
-                  <!-- <div class="rev__meta">오션뷰 빌라 인피니티 풀 · 2026-03-01</div> -->
-                  <div class="rev__meta">2026-03-01</div>
+              <div class="rev__head">
+                <div class="rev__user">
+                  <div class="avatar" aria-hidden="true">MH</div>
+                  <div>
+                    <div class="rev__name">박민호</div>
+                    <!-- <div class="rev__meta">오션뷰 빌라 인피니티 풀 · 2026-03-01</div> -->
+                    <div class="rev__meta">2026-03-01</div>
+                  </div>
+                </div>
+
+                <div class="rev__rate">
+                  <span class="stars" aria-label="별점 5점">★★★★★</span>
+                  <span class="score">5.0</span>
                 </div>
               </div>
 
-              <div class="rev__rate">
-                <span class="stars" aria-label="별점 5점">★★★★★</span>
-                <span class="score">5.0</span>
+              <p class="rev__text">
+                사진 그대로 뷰가 미쳤고, 직원분들도 정말 친절했어요. 조식 퀄리티도 만족!
+              </p>
+
+              <!-- 사진(선택) -->
+              <div class="rev__photos">
+                <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=80"
+                  alt="리뷰 사진 1">
+                <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=900&q=80"
+                  alt="리뷰 사진 2">
+                <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80"
+                  alt="리뷰 사진 3">
               </div>
-            </div>
-            
-            <p class="rev__text">
-              사진 그대로 뷰가 미쳤고, 직원분들도 정말 친절했어요. 조식 퀄리티도 만족!
-            </p>
-            
-            <!-- 사진(선택) -->
-            <div class="rev__photos">
-              <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=80" alt="리뷰 사진 1">
-              <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=900&q=80" alt="리뷰 사진 2">
-              <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80" alt="리뷰 사진 3">
-            </div>
-            
-            <!-- 태그 -->
-            <div class="rev__tags">
-              <span class="tag">청결</span>
-              <span class="tag">친절</span>
-              <span class="tag">뷰맛집</span>
-            </div>
-            
-          </a>
+
+              <!-- 태그 -->
+              <div class="rev__tags">
+                <span class="tag">청결</span>
+                <span class="tag">친절</span>
+                <span class="tag">뷰맛집</span>
+              </div>
+
+            </a>
             <!-- 하단 액션(UI) -->
             <div class="rev__actions">
               <button class="like like1" type="button" aria-label="도움이 돼요">
@@ -260,30 +262,30 @@
           <!-- 리뷰 카드 -->
           <article class="rev">
             <a href="./T3_2nd_review_detail.html">
-            <div class="rev__head">
-              <div class="rev__user">
-                <div class="avatar" aria-hidden="true">YS</div>
-                <div>
-                  <div class="rev__name">이용상</div>
-                  <!-- <div class="rev__meta">모던 부티크 호텔 · 2026-02-26</div> -->
-                  <div class="rev__meta">2026-02-26</div>
+              <div class="rev__head">
+                <div class="rev__user">
+                  <div class="avatar" aria-hidden="true">YS</div>
+                  <div>
+                    <div class="rev__name">이용상</div>
+                    <!-- <div class="rev__meta">모던 부티크 호텔 · 2026-02-26</div> -->
+                    <div class="rev__meta">2026-02-26</div>
+                  </div>
+                </div>
+
+                <div class="rev__rate">
+                  <span class="stars" aria-label="별점 4점">★★★★☆</span>
+                  <span class="score">4.0</span>
                 </div>
               </div>
 
-              <div class="rev__rate">
-                <span class="stars" aria-label="별점 4점">★★★★☆</span>
-                <span class="score">4.0</span>
+              <p class="rev__text">
+                위치가 좋아서 이동하기 편했어요. 방은 아담하지만 깔끔했습니다.
+              </p>
+
+              <div class="rev__tags">
+                <span class="tag">위치</span>
+                <span class="tag">청결</span>
               </div>
-            </div>
-
-            <p class="rev__text">
-              위치가 좋아서 이동하기 편했어요. 방은 아담하지만 깔끔했습니다.
-            </p>
-
-            <div class="rev__tags">
-              <span class="tag">위치</span>
-              <span class="tag">청결</span>
-            </div>
             </a>
 
             <div class="rev__actions">
@@ -297,30 +299,30 @@
           <!-- 리뷰 카드 -->
           <article class="rev">
             <a href="./T3_2nd_review_detail.html">
-            <div class="rev__head">
-              <div class="rev__user">
-                <div class="avatar" aria-hidden="true">JS</div>
-                <div>
-                  <div class="rev__name">강정석</div>
-                  <!-- <div class="rev__meta">전통 료칸 스테이 · 2026-02-20</div> -->
-                  <div class="rev__meta">2026-02-20</div>
+              <div class="rev__head">
+                <div class="rev__user">
+                  <div class="avatar" aria-hidden="true">JS</div>
+                  <div>
+                    <div class="rev__name">강정석</div>
+                    <!-- <div class="rev__meta">전통 료칸 스테이 · 2026-02-20</div> -->
+                    <div class="rev__meta">2026-02-20</div>
+                  </div>
+                </div>
+
+                <div class="rev__rate">
+                  <span class="stars" aria-label="별점 5점">★★★★★</span>
+                  <span class="score">5.0</span>
                 </div>
               </div>
 
-              <div class="rev__rate">
-                <span class="stars" aria-label="별점 5점">★★★★★</span>
-                <span class="score">5.0</span>
+              <p class="rev__text">
+                온천이 너무 좋았고, 조용해서 힐링 제대로 했어요. 다음에 또 오고 싶어요.
+              </p>
+
+              <div class="rev__tags">
+                <span class="tag">시설</span>
+                <span class="tag">조용함</span>
               </div>
-            </div>
-
-            <p class="rev__text">
-              온천이 너무 좋았고, 조용해서 힐링 제대로 했어요. 다음에 또 오고 싶어요.
-            </p>
-
-            <div class="rev__tags">
-              <span class="tag">시설</span>
-              <span class="tag">조용함</span>
-            </div>
             </a>
 
             <div class="rev__actions">
@@ -361,21 +363,41 @@
         <form class="write" action="#" method="post">
           <label class="field">
             <span class="field__label">숙소명</span>
-            <input class="field__input" type="text" placeholder="예) 오션뷰 빌라 인피니티 풀" required />
+            <input class="field__input" type="text" value="서울 중구 호텔 센트럴" readonly />
           </label>
 
           <label class="field">
             <span class="field__label">별점</span>
             <select class="field__input" required>
               <option value="" selected disabled>선택</option>
-              <option>5</option><option>4</option><option>3</option><option>2</option><option>1</option>
+              <option>5</option>
+              <option>4</option>
+              <option>3</option>
+              <option>2</option>
+              <option>1</option>
             </select>
           </label>
 
           <label class="field">
-            <span class="field__label">한줄평</span>
-            <textarea class="field__input field__textarea" rows="5" placeholder="리뷰를 작성해 주세요" required></textarea>
+            <span class="field__label">제목</span>
+            <input type="text" class="field__input field__textarea_title" rows="5" placeholder="제목을 작성해 주세요" required></input>
           </label>
+          <label class="field">
+            <span class="field__label">내용</span><span class="reply-limit muted">0 / 1000</span>
+            <textarea class="field__input field__textarea_text" rows="5" placeholder="리뷰를 작성해 주세요" required></textarea>
+          </label>
+
+          <div class="field">
+            <span class="field__label">키워드</span>
+
+            <div class="checks">
+              <label class="check"><input type="checkbox"> <span>청결</span></label>
+              <label class="check"><input type="checkbox"> <span>위치</span></label>
+              <label class="check"><input type="checkbox"> <span>가성비</span></label>
+              <label class="check"><input type="checkbox"> <span>친절</span></label>
+              <label class="check"><input type="checkbox"> <span>시설</span></label>
+            </div>
+          </div>
 
           <label class="field">
             <span class="field__label">사진 첨부(선택)</span>
@@ -485,4 +507,5 @@
     // });
   </script>
 </body>
+
 </html>
