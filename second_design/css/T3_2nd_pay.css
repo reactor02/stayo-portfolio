@@ -164,6 +164,11 @@
   .email__select{ width: 100%; }
 }
 
+/* 전화번호 3분할 */
+.phone-row{ display: flex; gap: 6px; align-items: center; }
+.phone__part{ flex: 1; text-align: center; padding: 12px 8px; font-weight: 900; letter-spacing: 2px; min-width: 0; }
+.phone__sep{ color: #6b6b6b; font-weight: 900; flex-shrink: 0; }
+
 /* 카드 번호 4칸 배치 */
 .card-number-row{ display: flex; gap: 8px; align-items: center; }
 .card__part{ width: 4.8rem; text-align: center; padding: 12px 8px; font-weight: 900; letter-spacing: 2px; }
@@ -199,12 +204,30 @@
   font-weight: 900;
   cursor: pointer;
 }
-.btn-small:hover{ background: rgba(0,0,0,0.05); }
+/* .btn-small:hover{ background: rgba(0,0,0,0.05); } */
 .btn-small--dark{
   background: #111;
   color: #fff;
 }
 .btn-small--dark:hover{ filter: brightness(1.05); }
+
+/* 필수 입력 * */
+.field__required{ color: #d32f2f; font-weight: 900; margin-left: 1px; }
+
+/* 포인트 wrap */
+.point__wrap{ display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.point__input-row{ display: flex; gap: 8px; align-items: center; }
+.point__all-check{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 900;
+  color: #111;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.point__all-check input{ width: 14px; height: 14px; cursor: pointer; }
 
 /* 포인트 입력 */
 .point{
@@ -220,6 +243,12 @@
   background: rgba(255,255,255,0.85);
   padding: 0 12px;
   font-weight: 900;
+  -moz-appearance: textfield;
+}
+.point__input::-webkit-outer-spin-button,
+.point__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 /* 결제수단 */
@@ -370,6 +399,9 @@
   font-size: 12px;
   text-align: center;
 }
+.red {
+  color: red;
+}
 
 /* 신뢰 안내 */
 .safe{
@@ -402,6 +434,37 @@
 /* 모바일 결제 버튼(기본은 숨김) */
 .mobile-pay{ display: none; }
 .mobile-pay__note{ text-align: center; margin-top: 8px; font-size: 12px; }
+
+/* 에러 메시지 공통 스타일 */
+.field__error, 
+#userNameError, 
+#userPhoneError, 
+#emailLocalError, 
+#agreeError {
+  color: #d32f2f !important; /* 강제 적용 */
+  font-size: 12px;
+  font-weight: 900;
+  margin-top: 4px;
+  display: none; /* 기본 숨김 */
+}
+
+/* 약관 에러 특별 여백 */
+#agreeError {
+  margin-top: 8px;
+}
+/* 쿠폰 모달 */
+.coupon-list { display: grid; gap: 12px; padding: 10px 0; }
+.coupon-item { 
+  display: flex; align-items: center; gap: 15px; padding: 16px; 
+  border: 1px solid #eee7e0; border-radius: 16px; cursor: pointer; transition: background 0.2s;
+}
+.coupon-item:hover { background: #fdfaf7; }
+.coupon-item input[type="radio"] { width: 20px; height: 20px; accent-color: #111; }
+.coupon-name { font-weight: 900; color: #111; font-size: 16px; }
+.coupon-val { color: #d32f2f; font-size: 14px; font-weight: 800; margin-top: 4px; }
+
+/* 요약창 쿠폰 할인 행 스타일 */
+#sumCouponRow b { color: #d32f2f; }
 
 /* =========================
   반응형

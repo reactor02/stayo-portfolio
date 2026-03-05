@@ -55,8 +55,8 @@ window.onload = function () {
             errorPw.textContent = "이메일을 입력해주세요.";
             errorPw.classList.remove("hide");
         }
-        else if (emailValue.indexOf("@") === -1 || emailValue.indexOf(".") === -1 
-               || emailValue.length <=6 ) {
+        else if (emailValue.indexOf("@") === -1 || emailValue.indexOf(".") === -1
+            || emailValue.length <= 6) {
             errorPw.textContent = "이메일 형식이 올바르지 않습니다.";
             errorPw.classList.remove("hide");
         }
@@ -87,7 +87,7 @@ window.onload = function () {
 
 
     userservice.addEventListener('click', function () {
-
+        // window.location.href = "" // 고객센터로 이동될 주소 넣기
     })
 
 

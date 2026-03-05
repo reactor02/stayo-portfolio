@@ -33,6 +33,7 @@ window.onload = function () {
         birthError.textContent = "";
         phoneError.textContent = "";
         emailError.textContent = "";
+        agreeError.textContent = "";
 
         let isValid = true;
 
@@ -63,7 +64,7 @@ window.onload = function () {
         }
 
         // 이메일 검사
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 이메일 검사하는 정규식 by gpt 
         if (!emailRegex.test(emailValue)) {
             emailError.textContent = "올바른 이메일 형식이 아닙니다.";
             isValid = false;
@@ -73,7 +74,7 @@ window.onload = function () {
         if (!agree1.checked || !agree2.checked || !agree3.checked) {
             agreeError.textContent = "필수 약관에 모두 동의해주세요.";
             isValid = false;
-        }
+        } 
 
         // 모든 검사 통과
         if (isValid) {

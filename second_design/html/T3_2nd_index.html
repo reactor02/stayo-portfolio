@@ -5,6 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>STAYO</title>
+    <script src="../js/jquery-3.7.1.js"></script>
+    <script src="../api_test/js/tb.api.v1.tb.js"></script>
+    <script src="../js/T3_2nd_index.js"></script>
 
     <!-- =========================================
     폰트(캡처 느낌: 제목은 명조/세리프, 본문은 산세리프)
@@ -20,7 +23,6 @@
     <link rel="stylesheet" href="../css/T3_2nd_common.css" />
     <!-- 페이지 전용 CSS -->
     <link rel="stylesheet" href="../css/T3_2nd_index.css" />
-    <script src="../js/index.js"></script>
 </head>
 
 <body>
@@ -48,8 +50,10 @@
             <div class="header__right">
                 <!-- 지구 아이콘 -->
                 <a href="#" class="parentCart">
-                    <img class="shoppingCart" src=".\..\..\Team3_html\testWang\wishlistMark\Gemini_Generated_Image_jn1jqmjn1jqmjn1j.png" alt="장바구니 이미지">
-                    <spna class="listNumber">2</span>
+                    <img class="shoppingCart"
+                        src=".\..\..\Team3_html\testWang\wishlistMark\Gemini_Generated_Image_jn1jqmjn1jqmjn1j.png"
+                        alt="장바구니 이미지">
+                    <span class="listNumber">2</span>
                 </a>
 
                 <!-- 하트 아이콘 -->
@@ -199,7 +203,7 @@
             <div class="hero__categories">
                 <div class="container categories">
                     <!-- 호텔 (active) -->
-                    <a class="category category--active" href="#">
+                    <button class="category-btn active">
                         <span class="category__icon" aria-hidden="true">
                             <!-- hotel -->
                             <svg viewBox="0 0 24 24">
@@ -214,10 +218,10 @@
                             </svg>
                         </span>
                         <span class="category__label">호텔</span>
-                    </a>
+                    </button>
 
                     <!-- 아파트 -->
-                    <a class="category" href="#">
+                    <button class="category-btn">
                         <span class="category__icon" aria-hidden="true">
                             <!-- building -->
                             <svg viewBox="0 0 24 24">
@@ -233,10 +237,10 @@
                             </svg>
                         </span>
                         <span class="category__label">아파트</span>
-                    </a>
+                    </button>
 
                     <!-- 해변 -->
-                    <a class="category" href="#">
+                    <button class="category-btn">
                         <span class="category__icon" aria-hidden="true">
                             <!-- waves -->
                             <svg viewBox="0 0 24 24">
@@ -246,10 +250,10 @@
                             </svg>
                         </span>
                         <span class="category__label">해변</span>
-                    </a>
+                    </button>
 
                     <!-- 산 -->
-                    <a class="category" href="#">
+                    <button class="category-btn">
                         <span class="category__icon" aria-hidden="true">
                             <!-- mountain -->
                             <svg viewBox="0 0 24 24">
@@ -258,10 +262,10 @@
                             </svg>
                         </span>
                         <span class="category__label">산</span>
-                    </a>
+                    </button>
 
                     <!-- 전원주택 -->
-                    <a class="category" href="#">
+                    <button class="category-btn">
                         <span class="category__icon" aria-hidden="true">
                             <!-- home -->
                             <svg viewBox="0 0 24 24">
@@ -271,10 +275,10 @@
                             </svg>
                         </span>
                         <span class="category__label">전원주택</span>
-                    </a>
+                    </button>
 
                     <!-- 성 -->
-                    <a class="category" href="#">
+                    <button class="category-btn">
                         <span class="category__icon" aria-hidden="true">
                             <!-- castle -->
                             <svg viewBox="0 0 24 24">
@@ -284,10 +288,10 @@
                             </svg>
                         </span>
                         <span class="category__label">성</span>
-                    </a>
+                    </button>
 
                     <!-- 캠핑 -->
-                    <a class="category" href="#">
+                    <button class="category-btn">
                         <span class="category__icon" aria-hidden="true">
                             <!-- tent -->
                             <svg viewBox="0 0 24 24">
@@ -297,10 +301,10 @@
                             </svg>
                         </span>
                         <span class="category__label">캠핑</span>
-                    </a>
+                    </button>
 
                     <!-- 크루즈 -->
-                    <a class="category" href="#">
+                    <button class="category-btn">
                         <span class="category__icon" aria-hidden="true">
                             <!-- ship -->
                             <svg viewBox="0 0 24 24">
@@ -312,7 +316,7 @@
                             </svg>
                         </span>
                         <span class="category__label">크루즈</span>
-                    </a>
+                    </button>
                 </div>
             </div>
         </section>
@@ -591,7 +595,29 @@
                 </div>
             </div>
         </section>
+
     </main>
+    <div id="ai-trigger" class="ai-trigger">
+        <span>AI<br>상담사</span>
+    </div>
+
+    <div id="ai-chat-container" class="ai-chat-container" style="display: none;">
+        <div class="ai-chat-header">
+            <span class="title">STAYO AI 상담원</span>
+            <button id="ai-close-btn" class="ai-close-btn">×</button>
+        </div>
+
+        <div id="ai-chat-box" class="ai-chat-box">
+            <div class="message model">
+                <div class="bubble">안녕하세요! STAYO 숙박 예약 상담원입니다. 무엇을 도와드릴까요?</div>
+            </div>
+        </div>
+
+        <div class="ai-chat-input-area">
+            <textarea id="ai-prompt" placeholder="메시지 입력..." rows="1"></textarea>
+            <button id="ai-ask-btn">전송</button>
+        </div>
+    </div>
 
     <!-- =========================================
     7) 푸터(캡처3 하단)

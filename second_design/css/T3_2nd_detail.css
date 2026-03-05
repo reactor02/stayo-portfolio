@@ -420,6 +420,7 @@
   background: rgba(255,255,255,0.55);
   border-radius: 18px;
   padding: 14px;
+  height: 150px;
 }
 
 .review__top{
@@ -662,4 +663,27 @@
   .amenities{
     grid-template-columns: 1fr;
   }
+}
+.modal-bg{
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.5);
+  display: none;              /* 기본은 숨김 */
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.modal-bg.on{ display: flex; }
+
+.modal{
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  min-width: 280px;
+  max-width: 900px;
+  max-height: 80vh;     /* 화면 높이의 80%까지만 */
+  overflow-y: auto;
+}
+.modal-body{
+  max-height: 70vh;
+  overflow-y: auto;
 }

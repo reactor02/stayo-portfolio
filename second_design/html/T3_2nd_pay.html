@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -38,7 +39,8 @@
       <div class="header__right">
         <button class="icon-btn" type="button" aria-label="언어/지역">
           <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.9 9h-3.2a15.8 15.8 0 00-1.2-6A8.1 8.1 0 0119.9 11zM12 4c.9 1.2 1.8 3.3 2.3 7H9.7C10.2 7.3 11.1 5.2 12 4zM4.1 13h3.2a15.8 15.8 0 001.2 6A8.1 8.1 0 014.1 13zm0-2a8.1 8.1 0 014.4-6 15.8 15.8 0 00-1.2 6H4.1zM12 20c-.9-1.2-1.8-3.3-2.3-7h4.6c-.5 3.7-1.4 5.8-2.3 7zm3.5-1a15.8 15.8 0 001.2-6h3.2a8.1 8.1 0 01-4.4 6z"/>
+            <path
+              d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.9 9h-3.2a15.8 15.8 0 00-1.2-6A8.1 8.1 0 0119.9 11zM12 4c.9 1.2 1.8 3.3 2.3 7H9.7C10.2 7.3 11.1 5.2 12 4zM4.1 13h3.2a15.8 15.8 0 001.2 6A8.1 8.1 0 014.1 13zm0-2a8.1 8.1 0 014.4-6 15.8 15.8 0 00-1.2 6H4.1zM12 20c-.9-1.2-1.8-3.3-2.3-7h4.6c-.5 3.7-1.4 5.8-2.3 7zm3.5-1a15.8 15.8 0 001.2-6h3.2a8.1 8.1 0 01-4.4 6z" />
           </svg>
         </button>
 
@@ -49,14 +51,14 @@
                      8.04 4 9.54 4.81 10.4 6.09
                      11.26 4.81 12.76 4 14.3 4
                      16.8 4 18.8 6 18.8 8.5
-                     c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                     c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
           </svg>
         </button>
 
         <a href="#" class="btn btn--login">
           <span class="btn__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24">
-              <path d="M12 12a4.5 4.5 0 10-4.5-4.5A4.5 4.5 0 0012 12zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/>
+              <path d="M12 12a4.5 4.5 0 10-4.5-4.5A4.5 4.5 0 0012 12zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z" />
             </svg>
           </span>
           로그인
@@ -107,7 +109,7 @@
             <div class="booking">
               <div class="booking__thumb">
                 <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1400&q=80"
-                     alt="모던 부티크 호텔" />
+                  alt="모던 부티크 호텔" />
               </div>
               <div class="booking__info">
                 <div class="booking__name">모던 부티크 호텔</div>
@@ -135,25 +137,37 @@
           <article class="card">
             <div class="card__head">
               <h2 class="card__title">예약자 정보</h2>
-              <span class="card__sub muted">필수 입력</span>
+              <span class="card__sub muted red">필수 입력</span>
             </div>
 
             <form class="form" action="#" method="post" aria-label="예약자 정보">
               <div class="form-grid">
                 <label class="field">
-                  <span  class="field__label">예약자 이름</span>
+                  <span class="field__label">예약자 이름 <span class="field__required">*</span></span>
                   <input id="userName" class="field__input" type="text" placeholder="이름을 입력하세요" />
-                  <div id="userNameError" class="field__error" aria-live="polite" style="display:none;color:red;font-size:12px;margin-top:4px;"></div>
+                  <div id="userNameError" class="field__error" aria-live="polite"
+                    style="display:none;color:red;font-size:12px;margin-top:4px;"></div>
                 </label>
 
-                <label class="field">
-                  <span class="field__label">연락처</span>
-                  <input id="userPhone" class="field__input" type="tel" maxlength="11" placeholder="010-0000-0000(-를 제외한 숫자만 입력해주세요)" />
-                  <div id="userPhoneError" class="field__error" aria-live="polite" style="display:none;color:red;font-size:12px;margin-top:4px;"></div>
+                <label class="field field--full">
+                  <span class="field__label">연락처 <span class="field__required">*</span></span>
+                  <div class="phone-row">
+                    <input id="phoneP1" class="field__input phone__part" type="text" inputmode="numeric" maxlength="3"
+                      placeholder="010" />
+                    <span class="phone__sep">-</span>
+                    <input id="phoneP2" class="field__input phone__part" type="text" inputmode="numeric" maxlength="4"
+                      placeholder="0000" />
+                    <span class="phone__sep">-</span>
+                    <input id="phoneP3" class="field__input phone__part" type="text" inputmode="numeric" maxlength="4"
+                      placeholder="0000" />
+                    <input type="hidden" id="userPhone" name="userPhone" />
+                  </div>
+                  <div id="userPhoneError" class="field__error" aria-live="polite"
+                    style="display:none;color:red;font-size:12px;margin-top:4px;"></div>
                 </label>
 
                 <label class="field field--full email-field">
-                  <span class="field__label">이메일</span>
+                  <span class="field__label">이메일 <span class="field__required">*</span></span>
                   <div class="email-row">
                     <input id="emailLocal" class="field__input email__local" type="text" placeholder="example" />
                     <span class="email__at">@</span>
@@ -166,8 +180,10 @@
                       <option value="icloud.com">icloud.com</option>
                       <option value="custom">직접입력</option>
                     </select>
-                    <input id="emailDomain" class="field__input email__domain" type="text" placeholder="직접입력" disabled />
+                    <input id="emailDomain" class="field__input email__domain" type="text" disabled />
                   </div>
+                  <div id="emailLocalError" aria-live="polite"
+                    style="display:none;color:#d32f2f;font-size:12px;margin-top:4px;font-weight:900;"></div>
                 </label>
               </div>
 
@@ -198,11 +214,20 @@
               <div class="discount__row">
                 <div class="discount__left">
                   <div class="discount__label">포인트</div>
-                  <div class="muted">보유 포인트: 12,000P</div>
+                  <div class="muted" id="pointOwned">보유 포인트: 12,000P</div>
+                  <div class="muted" id="pointUsedDisplay">사용 포인트: <span id="pointUsedAmt">0</span>P</div>
                 </div>
                 <div class="point">
-                  <input class="point__input" type="number" min="0" placeholder="0" />
-                  <button class="btn-small btn-small--dark" type="button">사용</button>
+                  <div class="point__wrap">
+                    <div class="point__input-row">
+                      <input id="pointInput" class="point__input" type="number" min="0" placeholder="0" />
+                      <button id="pointUseBtn" class="btn-small btn-small--dark" type="button">사용</button>
+                    </div>
+                    <label class="point__all-check">
+                      <input id="pointUseAll" type="checkbox" />
+                      <span>포인트 전체사용</span>
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
@@ -212,7 +237,7 @@
           <article class="card">
             <div class="card__head">
               <h2 class="card__title">결제 수단</h2>
-              <span class="card__sub muted">필수 선택</span>
+              <span class="card__sub muted red">필수 선택</span>
             </div>
 
             <!-- 결제수단 탭 -->
@@ -241,9 +266,9 @@
                 </span>
               </label>
             </div>
-
+            <!-- 삭제된 흔적 혹시 모르니 남겨둠 -->
             <!-- 카드 정보 폼(UI용) -->
-            <div class="cardpay">
+            <!-- <div class="cardpay">
               <div class="form-grid">
                 <label class="field field--full">
                   <span class="field__label">카드 번호</span>
@@ -266,7 +291,7 @@
                   <input class="field__input" type="password" placeholder="***" />
                 </label>
               </div>
-            </div>
+            </div> -->
           </article>
 
           <!-- ✅ 약관 동의 -->
@@ -305,12 +330,15 @@
               <p class="muted agree__note">
                 결제 완료 시 예약이 확정되며, 취소/환불 정책은 숙소 규정에 따릅니다.
               </p>
+              <div id="agreeError"
+                style="display:none; color:#d32f2f; font-size:12px; margin-top:8px; font-weight:900;"></div>
             </div>
           </article>
 
           <!-- 모바일에서만 보이는 결제 버튼(우측 요약이 아래로 내려오면 중복 방지 가능) -->
           <div class="mobile-pay">
-            <button id="paid-btn" class="btn-main btn-main--big" type="button">₩653,000 결제하기</button>
+            <button id="paid-btn" class="btn-main btn-main--big" type="button"><span
+                id="sumBtnTextMobile">₩653,000</span> 결제하기</button>
             <p class="muted mobile-pay__note">결제 버튼을 누르면 예약이 완료됩니다 (UI)</p>
           </div>
         </section>
@@ -334,18 +362,21 @@
                 <span class="muted">할인</span>
                 <b>-₩20,000</b>
               </div>
+              <div class="sum-row sum-row--discount" id="sumPointRow" style="display:none;">
+                <span class="muted">쿠폰할인</span>
+                <b id="sumPointAmt">-₩0</b>
+              </div>
 
               <div class="sum-line"></div>
 
               <div class="sum-row sum-row--total">
                 <span>총 결제 금액</span>
-                <b>₩653,000</b>
+                <b id="sumTotal">₩653,000</b>
               </div>
             </div>
 
-            <!-- 결제 버튼 -->
             <button class="btn-main btn-main--big" type="button">
-              ₩653,000 결제하기
+              <span id="sumBtnText">₩653,000</span> 결제하기
             </button>
 
             <p class="summary-note muted">
@@ -375,6 +406,27 @@
       </div>
     </section>
   </main>
+  <!-- 약관 내용 템플릿 -->
+  <template id="tmpl-terms">
+    <h4>이용약관 (샘플)</h4>
+    <p>1. 본 서비스는 예약 및 결제를 지원합니다. 사용자는 정확한 정보 제공에 동의합니다.</p>
+    <p>2. 예약 취소 및 환불 정책은 숙소 정책에 따릅니다. 부정확한 정보로 인한 불이익은 사용자 책임입니다.</p>
+    <p>3. 서비스 이용 중 발생하는 분쟁은 관련 법령 및 회사 이용약관에 따릅니다.</p>
+  </template>
+
+  <template id="tmpl-privacy">
+    <h4>개인정보 처리방침 (샘플)</h4>
+    <p>당사는 이용자의 개인정보를 서비스 제공 목적 범위 내에서만 처리합니다.</p>
+    <p>수집 항목: 이름, 연락처, 이메일, 결제 정보 등. 보유기간 및 파기는 관련 법령에 따릅니다.</p>
+    <p>이용자는 개인정보 처리에 대한 권리를 행사할 수 있습니다. 자세한 내용은 고객센터로 문의해주세요.</p>
+  </template>
+
+  <template id="tmpl-marketing">
+    <h4>마케팅 수신동의 (샘플)</h4>
+    <p>이벤트, 프로모션, 추천 콘텐츠 등의 정보를 이메일/SMS로 발송할 수 있습니다.</p>
+    <p>선택 동의 항목으로, 동의하지 않아도 서비스 이용에 제한이 없습니다.</p>
+  </template>
+
   <!-- 약관 모달 (공통) -->
   <div id="termsModal" class="terms-modal" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="terms-modal__overlay" data-action="close"></div>
@@ -383,15 +435,46 @@
         <h3 class="terms-modal__title">약관</h3>
         <button class="terms-modal__close" aria-label="닫기" data-action="close">✕</button>
       </header>
-      <div id="termsModalContent" class="terms-modal__content" tabindex="0" aria-label="약관 내용">
-        <!-- 내용은 JS에서 삽입 -->
+      <div id="termsModalContent" class="terms-modal__content" tabindex="0" aria-label="약관 내용"></div>
+      <div class="terms-modal__foot" style="display:flex; gap:10px;">
+       
+        <button class="btn-main" type="button" style="flex:2; height:46px;" data-action="close">닫기</button>
       </div>
-      <footer class="terms-modal__foot">
-        <button class="btn-small" type="button" data-action="close">닫기</button>
-      </footer>
     </div>
   </div>
 
+  <!-- 쿠폰 모달 -->
+  <div id="couponModal" class="terms-modal" aria-hidden="true">
+  <div class="terms-modal__overlay" data-action="close"></div>
+  <div class="terms-modal__panel">
+    <header class="terms-modal__head">
+      <h3 class="terms-modal__title">쿠폰 선택</h3>
+      <button class="terms-modal__close" data-action="close">✕</button>
+    </header>
+    <div class="terms-modal__content">
+      <div class="coupon-list">
+        <label class="coupon-item">
+          <input type="radio" name="couponSelect" value="0" data-name="미적용" checked>
+          <div class="coupon-info">
+            <div class="coupon-name">쿠폰 적용 안 함</div>
+            <div class="coupon-val">할인 혜택을 적용하지 않습니다.</div>
+          </div>
+        </label>
+
+        <label class="coupon-item">
+          <input type="radio" name="couponSelect" value="1000" data-name="웰컴 할인 쿠폰">
+          <div class="coupon-info">
+            <div class="coupon-name">웰컴 할인 쿠폰</div>
+            <div class="coupon-val">1,000원 할인</div>
+          </div>
+        </label>
+        </div>
+    </div>
+    <div class="terms-modal__foot">
+      <button id="applyCouponBtn" class="btn-main" type="button" style="width:100%; height:48px;">쿠폰 적용하기</button>
+    </div>
+  </div>
+</div>
   <!-- 공통 푸터 -->
   <footer class="footer">
     <div class="container footer__top">
@@ -447,4 +530,5 @@
     </div>
   </footer>
 </body>
+
 </html>
