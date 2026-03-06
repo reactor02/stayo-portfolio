@@ -133,12 +133,12 @@
 
             <div class="booking">
               <div class="booking__thumb">
-                <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1400&q=80"
-                  alt="모던 부티크 호텔" />
+                <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1600&q=80"
+                  alt="서울 중구 호텔 센트럴" />
               </div>
               <div class="booking__info">
-                <div class="booking__name">모던 부티크 호텔</div>
-                <div class="booking__meta muted">서울, 대한민국 · 디럭스 더블 · 성인 2명</div>
+                <div class="booking__name">서울 중구 호텔 센트럴</div>
+                <div class="booking__meta muted"> 서울, 대한민국 중구 · 디럭스 더블 · 성인 2명</div>
 
                 <div class="booking__dates">
                   <div class="date-chip">
@@ -152,6 +152,14 @@
                   <div class="date-chip">
                     <span class="date-chip__label muted">숙박</span>
                     <span class="date-chip__value">2박</span>
+                  </div>
+                  <div class="date-chip">
+                    <span class="date-chip__label muted">1박 요금</span>
+                    <span class="date-chip__value" id="chipPerNight">₩110,000</span>
+                  </div>
+                  <div class="date-chip">
+                    <span class="date-chip__label muted">총 숙박 요금</span>
+                    <span class="date-chip__value" id="chipTotalRoom">₩220,000</span>
                   </div>
                 </div>
               </div>
@@ -177,8 +185,8 @@
                 <label class="field field--full">
                   <span class="field__label">연락처 <span class="field__required">*</span></span>
                   <div class="phone-row">
-                    <input id="phoneP1" class="field__input phone__part" type="text" inputmode="numeric" maxlength="3"
-                      placeholder="010" />
+                    <input id="phoneP1" class="field__input phone__part" type="text" inputmode="numeric" maxlength="4"
+                      placeholder="000" />
                     <span class="phone__sep">-</span>
                     <input id="phoneP2" class="field__input phone__part" type="text" inputmode="numeric" maxlength="4"
                       placeholder="0000" />
@@ -323,7 +331,7 @@
           <article class="card">
             <div class="card__head">
               <h2 class="card__title">약관 동의</h2>
-              <span class="card__sub muted">필수</span>
+              <span class="card__sub muted red">필수 선택</span>
             </div>
 
             <div class="agree">
@@ -335,13 +343,13 @@
               <div class="agree__list">
                 <label class="check">
                   <input id="agree_terms" type="checkbox" data-required="true" />
-                  <span>[필수] 이용약관 동의</span>
+                  <span>[필수] 이용약관 동의 <span class="field__required">*</span></span>
                   <a href="#" class="agree__link" data-type="terms">보기</a>
                 </label>
 
                 <label class="check">
                   <input id="agree_privacy" type="checkbox" data-required="true" />
-                  <span>[필수] 개인정보 처리방침 동의</span>
+                  <span>[필수] 개인정보 처리방침 동의 <span class="field__required">*</span></span>
                   <a href="#" class="agree__link" data-type="privacy">보기</a>
                 </label>
 
@@ -362,8 +370,7 @@
 
           <!-- 모바일에서만 보이는 결제 버튼(우측 요약이 아래로 내려오면 중복 방지 가능) -->
           <div class="mobile-pay">
-            <button id="paid-btn" class="btn-main btn-main--big" type="button"><span
-                id="sumBtnTextMobile">₩653,000</span> 결제하기</button>
+            <button id="paid-btn" class="btn-main btn-main--big" type="button"><span id="sumBtnTextMobile">₩242,000</span> 결제하기</button>
             <p class="muted mobile-pay__note">결제 버튼을 누르면 예약이 완료됩니다 (UI)</p>
           </div>
         </section>
@@ -376,19 +383,16 @@
             <!-- 가격 상세 -->
             <div class="summary__rows">
               <div class="sum-row">
-                <span class="muted">숙박 요금</span>
-                <b>₩638,000</b>
+                <span class="muted">숙박 요금 <span id="sumNightsLabel" style="font-size:11px;font-weight:700;">(2박)</span></span>
+                <b id="sumRoomPrice">₩220,000</b>
               </div>
               <div class="sum-row">
-                <span class="muted">세금 및 수수료</span>
-                <b>₩35,000</b>
+                <span class="muted">세금 및 수수료 <span style="font-size:11px;font-weight:700;">(10%)</span></span>
+                <b id="sumTaxFee">₩22,000</b>
               </div>
-              <div class="sum-row sum-row--discount">
-                <span class="muted">할인</span>
-                <b>-₩20,000</b>
-              </div>
+
               <div class="sum-row sum-row--discount" id="sumPointRow" style="display:none;">
-                <span class="muted">쿠폰할인</span>
+                <span class="muted">포인트 할인</span>
                 <b id="sumPointAmt">-₩0</b>
               </div>
 
@@ -396,12 +400,12 @@
 
               <div class="sum-row sum-row--total">
                 <span>총 결제 금액</span>
-                <b id="sumTotal">₩653,000</b>
+                <b id="sumTotal">₩242,000</b>
               </div>
             </div>
 
             <button class="btn-main btn-main--big" type="button">
-              <span id="sumBtnText">₩653,000</span> 결제하기
+              <span id="sumBtnText">₩242,000</span> 결제하기
             </button>
 
             <p class="summary-note muted">

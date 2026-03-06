@@ -115,7 +115,7 @@
                     </p>
 
                     <!-- 검색바(실제 기능 없이 UI용) -->
-                    <form class="searchbar" action="#" method="get" aria-label="숙소 검색">
+                    <form class="searchbar" action="" method="get" aria-label="숙소 검색">
                         <!-- 목적지 -->
                         <div class="searchbar__item">
                             <div class="searchbar__icon" aria-hidden="true">
@@ -129,11 +129,11 @@
                                 <!-- <span class="searchbar__value">어디로 떠나시나요?</span> -->
                                 <input list="location" placeholder="어디로 떠나시나요?" class="search1">
                                 <datalist id="location">
-                                    <option value="가나"></option>
-                                    <option value="가봉"></option>
-                                    <option value="대한민국"></option>
-                                    <option value="스위스"></option>
-                                    <option value="도시"></option>
+                                    <option value="서울"></option>
+                                    <option value="인천"></option>
+                                    <option value="충남"></option>
+                                    <option value="충북"></option>
+                                    <option value=""></option>
                                     <option value="친구"></option>
                                     <option value="우정"></option>
                                     <option value="한강"></option>
@@ -152,18 +152,16 @@
                                 <span class="searchbar__label">체크인 - 체크아웃</span>
                                 <!-- <span class="searchbar__value">날짜 선택</span> -->
                                 <div class="booking-wrapper">
-                                    <div class="date-box">
-                                        <input type="text" id="text1" placeholder="checkin" disabled="disabled">
-                                        <input type="date" id="date1" class="hidden-date">
-                                        <span class="tooltip">checkin</span>
+                                    <div class="date-box" id="box1">
+                                        <span class="date-placeholder" id="ph1">체크인</span>
+                                        <span class="date-value" id="dv1"></span>
+                                        <input type="date" id="date1" class="date-input-hidden">
                                     </div>
-
                                     <div class="divider"></div>
-
-                                    <div class="date-box">
-                                        <input type="text" id="text2" placeholder="checkout" disabled="disabled">
-                                        <input type="date" id="date2" class="hidden-date">
-                                        <span class="tooltip">checkout</span>
+                                    <div class="date-box" id="box2">
+                                        <span class="date-placeholder" id="ph2">체크아웃</span>
+                                        <span class="date-value" id="dv2"></span>
+                                        <input type="date" id="date2" class="date-input-hidden">
                                     </div>
                                 </div>
 
@@ -184,12 +182,11 @@
                                     <input type="hidden" name="total_people" id="realNumber" value="0">
                                     <div id="popup" class="popup">
                                         <p>인원 선택</p>
-                                        <!-- 팝업창 -->
-                                        인원
-                                        <button id="minusBtn" type="button">-</button>
-                                        <span id="pCount">0</span>
-                                        <button id="plusBtn" type="button">+</button>
-                                        <br><br>
+                                        <div class="popup-row">
+                                            <button id="minusBtn" type="button">−</button>
+                                            <span id="pCount">0</span>
+                                            <button id="plusBtn" type="button">+</button>
+                                        </div>
                                         <button id="confirmBtn" type="button">적용</button>
                                     </div>
                                 </div>
@@ -198,7 +195,8 @@
 
 
                         <!-- 검색 버튼(캡처처럼 검정 큰 버튼) -->
-                        <button class="searchbar__submit" type="submit">
+                        
+                            <button class="searchbar__submit" type="button" onclick="location.href='./T3_2nd_list.html'">
                             <span class="searchbar__submit-icon" aria-hidden="true">
                                 <svg viewBox="0 0 24 24">
                                     <path
@@ -207,6 +205,8 @@
                             </span>
                             검색
                         </button>
+                        
+                        
                     </form>
                 </div>
             </div>
@@ -345,7 +345,7 @@
 
                 <div class="grid-dest">
                     <!-- 카드 1 -->
-                    <a href="#" class="dest-card">
+                    <a href="./T3_2nd_list.html" class="dest-card">
                         <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80"
                             alt="서울" />
                         <div class="dest-card__overlay">
@@ -355,7 +355,7 @@
                     </a>
 
                     <!-- 카드 2 -->
-                    <a href="#" class="dest-card">
+                    <a href="./T3_2nd_list.html" class="dest-card">
                         <img src="https://images.unsplash.com/photo-1526481280695-3c687fd5432c?auto=format&fit=crop&w=1200&q=80"
                             alt="도쿄" />
                         <div class="dest-card__overlay">
@@ -365,7 +365,7 @@
                     </a>
 
                     <!-- 카드 3 -->
-                    <a href="#" class="dest-card">
+                    <a href="./T3_2nd_list.html" class="dest-card">
                         <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80"
                             alt="발리" />
                         <div class="dest-card__overlay">
@@ -375,7 +375,7 @@
                     </a>
 
                     <!-- 카드 4 -->
-                    <a href="#" class="dest-card">
+                    <a href="./T3_2nd_list.html" class="dest-card">
                         <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80"
                             alt="다낭" />
                         <div class="dest-card__overlay">

@@ -26,7 +26,7 @@ async function bind() {
 
     pNumber.addEventListener("click", (e) => {
         e.stopPropagation();
-        popup.style.display = "block";
+        popup.style.display = popup.style.display === "flex" ? "none" : "flex";
     });
 
     popup.addEventListener("click", (e) => {
@@ -62,35 +62,56 @@ async function bind() {
     // ──────────────────────────────────────────────
     const date1 = document.getElementById('date1');
     const date2 = document.getElementById('date2');
-    const text1 = document.getElementById('text1');
-    const text2 = document.getElementById('text2');
+    const box1  = document.getElementById('box1');
+    const box2  = document.getElementById('box2');
+    const dv1   = document.getElementById('dv1');
+    const dv2   = document.getElementById('dv2');
 
     const today = new Date().toISOString().split('T')[0];
     date1.min = today;
     date2.min = today;
 
+    // 날짜를 "2025.06.15" 형식으로 포맷
+    function formatDate(val) {
+        const [y, m, d] = val.split('-');
+        return `${y}.${m}.${d}`;
+    }
+
+    // 박스 클릭 → 달력 열기
+    box1.addEventListener('click', () => date1.showPicker?.());
+    box2.addEventListener('click', () => date2.showPicker?.());
+
+    // 체크인 날짜 확정
     date1.addEventListener('change', function () {
         const val = this.value;
         if (!val) return;
 
-        text1.style.display = 'none';
-        this.style.color = '#111';
+        // 박스에 날짜 텍스트 표시
+        dv1.textContent = formatDate(val);
+        box1.classList.add('has-value');
 
+        // 체크아웃 최소날짜 업데이트
         const next = new Date(val);
         next.setDate(next.getDate() + 1);
         date2.min = next.toISOString().split('T')[0];
 
+        // 체크아웃이 체크인보다 이전이면 초기화
         if (date2.value && date2.value <= val) {
             date2.value = '';
-            text2.style.display = '';
-            date2.style.color = 'transparent';
+            dv2.textContent = '';
+            box2.classList.remove('has-value');
         }
+
+        // 체크아웃 달력 자동으로 열기
+        setTimeout(() => date2.showPicker?.(), 50);
     });
 
+    // 체크아웃 날짜 확정
     date2.addEventListener('change', function () {
-        if (!this.value) return;
-        text2.style.display = 'none';
-        this.style.color = '#111';
+        const val = this.value;
+        if (!val) return;
+        dv2.textContent = formatDate(val);
+        box2.classList.add('has-value');
     });
 
     // ──────────────────────────────────────────────
