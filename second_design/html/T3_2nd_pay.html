@@ -18,45 +18,46 @@
   <!-- 페이지 전용 CSS -->
   <link rel="stylesheet" href="../css/T3_2nd_pay.css" />
   <script src="../js/T3_2nd_pay.js"></script>
+  <script src="../js/T3_2nd_common.js"></script>
 </head>
 
 <body>
   <!-- ==========================
     공통 헤더(메인과 동일)
   =========================== -->
-   <header class="header">
-        <div class="container header__inner">
-            <!-- 로고 -->
-            <a href="./T3_2nd_index.html" class="logo" aria-label="STAYO 홈">STAYO</a>
+  <header class="header">
+    <div class="container header__inner">
+      <!-- 로고 -->
+      <a href="./T3_2nd_index.html" class="logo" aria-label="STAYO 홈">STAYO</a>
 
-            <!-- 가운데 메뉴 -->
-            <nav class="gnb" aria-label="주요 메뉴">
-                <a href="./list.html" class="gnb__link">숙소</a>
-                <a href="#" class="gnb__link">항공권</a>
-                <a href="#" class="gnb__link">패키지</a>
-                <a href="#" class="gnb__link">액티비티</a>
-                <a href="#" class="gnb__link">렌터카</a>
-            </nav>
+      <!-- 가운데 메뉴 -->
+      <nav class="gnb" aria-label="주요 메뉴">
+        <a href="./list.html" class="gnb__link">숙소</a>
+        <a href="#" class="gnb__link">항공권</a>
+        <a href="#" class="gnb__link">패키지</a>
+        <a href="#" class="gnb__link">액티비티</a>
+        <a href="#" class="gnb__link">렌터카</a>
+      </nav>
 
-            <!-- 오른쪽 -->
-            <div class="header__right">
-                <!-- ✅ 로그인 전 -->
-                <div class="header-guest">
-                    <a href="./T3_2nd_login.html" class="btn btn--ghost">
-                        <span class="btn__icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z" />
-                            </svg>
-                        </span>
-                        로그인
-                    </a>
-                    <a href="./T3_2nd_signup.html" class="btn btn--solid">회원가입</a>
-                </div>
+      <!-- 오른쪽 -->
+      <div class="header__right">
+        <!-- ✅ 로그인 전 -->
+        <div class="header-guest">
+          <a href="./T3_2nd_login.html" class="btn btn--ghost">
+            <span class="btn__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z" />
+              </svg>
+            </span>
+            로그인
+          </a>
+          <a href="./T3_2nd_signup.html" class="btn btn--solid">회원가입</a>
+        </div>
 
-                <!-- ✅ 로그인 후 -->
-                <div class="header-user">
-                    <!-- <a href="./T3_2nd_cart.html" class="icon-btn" aria-label="장바구니">
+        <!-- ✅ 로그인 후 -->
+        <div class="header-user">
+          <!-- <a href="./T3_2nd_cart.html" class="icon-btn" aria-label="장바구니">
                         <svg viewBox="0 0 24 24" aria-hidden="true">
                             <path
                                 d="M7 4H5L4 6v2h2l3.6 7.59L8.25 18A2 2 0 0 0 10 21h8v-2h-7.42a.25.25 0 0 1-.23-.37L11.1 17h5.45a2 2 0 0 0 1.79-1.11L21 9H7.42l-.94-2zM10 23a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm7 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
@@ -70,27 +71,27 @@
                         </svg>
                     </a> -->
 
-                    <!-- ✅ 로그인 후 영역 안 -->
-                    <div class="user-menu">
-                        <!-- user-chip: 클릭 트리거 -->
-                        <button class="user-avatar-btn">
-                            <span class="user-chip__avatar">MH</span>
-                        </button>
+          <!-- ✅ 로그인 후 영역 안 -->
+          <div class="user-menu">
+            <!-- user-chip: 클릭 트리거 -->
+            <button class="user-avatar-btn">
+              <span class="user-chip__avatar">MH</span>
+            </button>
 
-                        <!-- ✅ 모달(드롭다운 메뉴) -->
-                        <div class="user-modal" role="menu" aria-label="유저 메뉴">
-                            <a href="./T3_2nd_mapage.html" class="user-modal__item" role="menuitem">마이페이지</a>
-                            <a href="./T3_2nd_cart.html" class="user-modal__item" role="menuitem">장바구니</a>
-                            <a href="./T3_2nd_mapage.html#sec-wish" class="user-modal__item" role="menuitem">찜목록</a>
-                            <button type="button" class="user-modal__item user-modal__logout logout" role="menuitem">
-                                로그아웃
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            <!-- ✅ 모달(드롭다운 메뉴) -->
+            <div class="user-modal" role="menu" aria-label="유저 메뉴">
+              <a href="./T3_2nd_mapage.html" class="user-modal__item" role="menuitem">마이페이지</a>
+              <a href="./T3_2nd_cart.html" class="user-modal__item" role="menuitem">장바구니</a>
+              <a href="./T3_2nd_mapage.html#sec-wish" class="user-modal__item" role="menuitem">찜목록</a>
+              <button type="button" class="user-modal__item user-modal__logout logout" role="menuitem">
+                로그아웃
+              </button>
             </div>
+          </div>
         </div>
-    </header>
+      </div>
+    </div>
+  </header>
 
   <main class="pay">
     <!-- ==========================
@@ -370,7 +371,8 @@
 
           <!-- 모바일에서만 보이는 결제 버튼(우측 요약이 아래로 내려오면 중복 방지 가능) -->
           <div class="mobile-pay">
-            <button id="paid-btn" class="btn-main btn-main--big" type="button"><span id="sumBtnTextMobile">₩242,000</span> 결제하기</button>
+            <button id="paid-btn" class="btn-main btn-main--big" type="button"><span
+                id="sumBtnTextMobile">₩242,000</span> 결제하기</button>
             <p class="muted mobile-pay__note">결제 버튼을 누르면 예약이 완료됩니다 (UI)</p>
           </div>
         </section>
@@ -383,7 +385,8 @@
             <!-- 가격 상세 -->
             <div class="summary__rows">
               <div class="sum-row">
-                <span class="muted">숙박 요금 <span id="sumNightsLabel" style="font-size:11px;font-weight:700;">(2박)</span></span>
+                <span class="muted">숙박 요금 <span id="sumNightsLabel"
+                    style="font-size:11px;font-weight:700;">(2박)</span></span>
                 <b id="sumRoomPrice">₩220,000</b>
               </div>
               <div class="sum-row">
@@ -466,7 +469,7 @@
       </header>
       <div id="termsModalContent" class="terms-modal__content" tabindex="0" aria-label="약관 내용"></div>
       <div class="terms-modal__foot" style="display:flex; gap:10px;">
-       
+
         <button class="btn-main" type="button" style="flex:2; height:46px;" data-action="close">닫기</button>
       </div>
     </div>
@@ -474,87 +477,90 @@
 
   <!-- 쿠폰 모달 -->
   <div id="couponModal" class="terms-modal" aria-hidden="true">
-  <div class="terms-modal__overlay" data-action="close"></div>
-  <div class="terms-modal__panel">
-    <header class="terms-modal__head">
-      <h3 class="terms-modal__title">쿠폰 선택</h3>
-      <button class="terms-modal__close" data-action="close">✕</button>
-    </header>
-    <div class="terms-modal__content">
-      <div class="coupon-list">
-        <label class="coupon-item">
-          <input type="radio" name="couponSelect" value="0" data-name="미적용" checked>
-          <div class="coupon-info">
-            <div class="coupon-name">쿠폰 적용 안 함</div>
-            <div class="coupon-val">할인 혜택을 적용하지 않습니다.</div>
-          </div>
-        </label>
+    <div class="terms-modal__overlay" data-action="close"></div>
+    <div class="terms-modal__panel">
+      <header class="terms-modal__head">
+        <h3 class="terms-modal__title">쿠폰 선택</h3>
+        <button class="terms-modal__close" data-action="close">✕</button>
+      </header>
+      <div class="terms-modal__content">
+        <div class="coupon-list">
+          <label class="coupon-item">
+            <input type="radio" name="couponSelect" value="0" data-name="미적용" checked>
+            <div class="coupon-info">
+              <div class="coupon-name">쿠폰 적용 안 함</div>
+              <div class="coupon-val">할인 혜택을 적용하지 않습니다.</div>
+            </div>
+          </label>
 
-        <label class="coupon-item">
-          <input type="radio" name="couponSelect" value="1000" data-name="웰컴 할인 쿠폰">
-          <div class="coupon-info">
-            <div class="coupon-name">웰컴 할인 쿠폰</div>
-            <div class="coupon-val">1,000원 할인</div>
-          </div>
-        </label>
+          <label class="coupon-item">
+            <input type="radio" name="couponSelect" value="1000" data-name="웰컴 할인 쿠폰">
+            <div class="coupon-info">
+              <div class="coupon-name">웰컴 할인 쿠폰</div>
+              <div class="coupon-val">1,000원 할인</div>
+            </div>
+          </label>
         </div>
-    </div>
-    <div class="terms-modal__foot">
-      <button id="applyCouponBtn" class="btn-main" type="button" style="width:100%; height:48px;">쿠폰 적용하기</button>
+      </div>
+      <div class="terms-modal__foot">
+        <button id="applyCouponBtn" class="btn-main" type="button" style="width:100%; height:48px;">쿠폰 적용하기</button>
+      </div>
     </div>
   </div>
-</div>
-  <!-- 공통 푸터 -->
+  <!-- ==========================
+    공통 푸터
+  =========================== -->
   <footer class="footer">
     <div class="container footer__top">
       <div class="footer__brand">
         <div class="footer__logo">STAYO</div>
-        <p class="footer__desc">전 세계 최고의 숙소를<br />최저가로 만나보세요.</p>
+        <p class="footer__desc">
+          대한민국 최고의 숙소를<br />
+          합리적인 가격으로 예약하세요.
+        </p>
       </div>
 
       <div class="footer__cols">
         <div class="footer__col">
-          <div class="footer__col-title">서비스</div>
-          <a href="#" class="footer__link">숙소 예약</a>
-          <a href="#" class="footer__link">항공권</a>
-          <a href="#" class="footer__link">패키지 여행</a>
-          <a href="#" class="footer__link">액티비티</a>
-          <a href="#" class="footer__link">렌터카</a>
+          <div class="footer__title">서비스</div>
+          <a href="./T3_2nd_index.html" class="footer__link">숙소 예약</a>
+          <a href="#" class="footer__link alert">항공권</a>
+          <a href="#" class="footer__link alert">패키지</a>
+          <a href="#" class="footer__link alert">액티비티</a>
+          <a href="#" class="footer__link alert">렌터카</a>
         </div>
 
         <div class="footer__col">
-          <div class="footer__col-title">고객 지원</div>
-          <a href="#" class="footer__link">고객센터</a>
-          <a href="#" class="footer__link">자주 묻는 질문</a>
-          <a href="#" class="footer__link">취소 및 환불</a>
-          <a href="#" class="footer__link">이용약관</a>
-          <a href="#" class="footer__link">개인정보처리방침</a>
+          <div class="footer__title">고객지원</div>
+          <a href="./T3_2nd_mapage.html" class="footer__link">고객센터</a>
+          <a href="./T3_2nd_mapage.html#sec-support" class="footer__link">자주 묻는 질문</a>
+          <a href="./T3_2nd_mapage.html#sec-support" class="footer__link">취소/환불</a>
+          <a href="./T3_2nd_terms.html" class="footer__link">이용약관</a>
+          <a href="./T3_2nd_privacy.html" class="footer__link">개인정보처리방침</a>
         </div>
 
         <div class="footer__col">
-          <div class="footer__col-title">파트너</div>
-          <a href="#" class="footer__link">숙소 등록</a>
-          <a href="#" class="footer__link">제휴 프로그램</a>
-          <a href="#" class="footer__link">광고 문의</a>
-          <a href="#" class="footer__link">API</a>
+          <div class="footer__title">파트너</div>
+          <a href="./T3_2nd_host.html" class="footer__link">숙소 등록</a>
+          <a href="./T3_2nd_partnership.html" class="footer__link">제휴 문의</a>
+          <a href="./T3_2nd_ads.html" class="footer__link">광고 문의</a>
+          <a href="./T3_2nd_api.html" class="footer__link">API</a>
         </div>
 
         <div class="footer__col">
-          <div class="footer__col-title">회사</div>
-          <a href="#" class="footer__link">소개</a>
-          <a href="#" class="footer__link">채용</a>
-          <a href="#" class="footer__link">보도자료</a>
-          <a href="#" class="footer__link">투자자 정보</a>
+          <div class="footer__title">회사</div>
+          <a href="./T3_2nd_about.html" class="footer__link">회사 소개</a>
+          <a href="#" class="footer__link alert">채용</a>
+          <a href="./T3_2nd_notice.html" class="footer__link">공지사항</a>
+          <a href="#" class="footer__link alert">제휴사</a>
         </div>
       </div>
     </div>
 
     <div class="container footer__bottom">
-      <div class="footer__copyright">© 2026 STAYO. All rights reserved.</div>
+      <div class="footer__copy">© 2026 STAYO. All rights reserved.</div>
       <div class="footer__bottom-links">
-        <a href="#" class="footer__bottom-link">이용약관</a>
-        <a href="#" class="footer__bottom-link">개인정보처리방침</a>
-        <a href="#" class="footer__bottom-link">쿠키 설정</a>
+        2026 TEAM3 HTML 1st Project.
       </div>
     </div>
   </footer>
