@@ -295,13 +295,13 @@
                         <!-- ✅ (B) 예약 관리 섹션(좌측 메뉴용) -->
 
                         <!-- ✅ (C) 숙소 승인 대기: 최근 예약 아래로 이동 -->
-                        <section id="sec-stays" class="panel anchor">
+                        <section id="sec-stays-waiting" class="panel anchor">
                             <div class="panel__head">
                                 <div>
                                     <h2 class="panel__title">숙소 승인 대기</h2>
                                     <p class="panel__sub muted">등록/수정 요청</p>
                                 </div>
-                                <button id="showall" class="btn-outline btn-outline--sm" type="button">전체보기</button>
+                                <button id="showwaiting" class="btn-outline btn-outline--sm" type="button">전체보기</button>
                             </div>
 
                             <div class="list">
@@ -311,7 +311,7 @@
 
                             <!-- 간단 필터 UI(표현용) -->
                             <!-- <div class="admin-form"> -->
-                                <!-- <label class="f">
+                            <!-- <label class="f">
                                     <span class="f__label">상태</span>
                                     <select class="f__control">
                                         <option>전체</option>
@@ -334,7 +334,8 @@
                             <!-- </div> -->
                             <!-- <div class="hint muted"></div> -->
                             <div class="table-wrap">
-                                <table id="table" class="tbl" aria-label="회원 목록">
+                                
+                                <table id="waitingtable" class="tbl" aria-label="회원 목록">
                                     <thead>
                                         <tr>
                                             <th>업체명</th>
@@ -359,7 +360,7 @@
                                         <tr>
                                             <td>업체명</td>
                                             <td>숙소명</td>
-                                            <td>2026.01.28</td>
+                                            <td>2026.01.29</td>
                                             <td><span class="st st--wait status">대기중 </span></td>
                                             <td class="td-actions">
                                                 <button class="mini approve" type="button">승인</button>
@@ -370,7 +371,7 @@
                                         <tr>
                                             <td>업체명</td>
                                             <td>숙소명</td>
-                                            <td>2026.01.28</td>
+                                            <td>2026.01.30</td>
                                             <td><span class="st st--wait status">대기중 </span></td>
                                             <td class="td-actions">
                                                 <button class="mini approve" type="button">승인</button>
@@ -381,7 +382,7 @@
                                         <tr>
                                             <td>업체명</td>
                                             <td>숙소명</td>
-                                            <td>2026.01.28</td>
+                                            <td>2026.01.27</td>
                                             <td><span class="st st--wait status">대기중 </span></td>
                                             <td class="td-actions">
                                                 <button class="mini approve" type="button">승인</button>
@@ -404,15 +405,15 @@
                                 </table>
                             </div>
                         </section>
-                        
-                        <!-- ✅ (D) 숙소 승인 대기: 최근 예약 아래로 이동 -->
-                         <section id="sec-stays" class="panel anchor">
+
+                        <!-- ✅ (D) 숙소 처리 완료테이블 -->
+                        <section id="sec-stays-done" class="panel anchor">
                             <div class="panel__head">
                                 <div>
-                                    <h2 class="panel__title">숙소 승인 대기</h2>
+                                    <h2 class="panel__title">숙소 처리 완료</h2>
                                     <p class="panel__sub muted">등록/수정 요청</p>
                                 </div>
-                                <button id="showall" class="btn-outline btn-outline--sm" type="button">전체보기</button>
+                                <button id="change" class="btn-outline btn-outline--sm" type="button">수정요청</button>
                             </div>
 
                             <div class="list">
@@ -426,10 +427,9 @@
                                     <span class="f__label">상태</span>
                                     <select class="f__control">
                                         <option>전체</option>
-                                        <option>결제완료</option>
-                                        <option>이용예정</option>
-                                        <option>이용완료</option>
-                                        <option>취소</option>
+                                        <option>승인</option>
+                                        <option>거절</option>
+                                        <option>보류</option>
                                     </select>
                                 </label>
 
@@ -445,7 +445,7 @@
                             </div>
                             <div class="hint muted">※ 실제 검색/필터 기능은 JS/백엔드 연동 파트입니다.</div>
                             <div class="table-wrap">
-                                <table id="table" class="tbl" aria-label="회원 목록">
+                                <table id="donetable" class="tbl" aria-label="회원 목록">
                                     <thead>
                                         <tr>
                                             <th>업체명</th>
@@ -456,62 +456,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>업체명</td>
-                                            <td>숙소명</td>
-                                            <td>2026.02.11</td>
-                                            <td><span class="st st--ok status">대기중</span></td>
-                                            <td class="td-actions">
-                                                <button class="mini approve" type="button">승인</button>
-                                                <button class="mini refuse" type="button">거절</button>
-                                                <button class="mini pending" type="button">보류</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>업체명</td>
-                                            <td>숙소명</td>
-                                            <td>2026.01.28</td>
-                                            <td><span class="st st--wait status">대기중 </span></td>
-                                            <td class="td-actions">
-                                                <button class="mini approve" type="button">승인</button>
-                                                <button class="mini refuse" type="button">거절</button>
-                                                <button class="mini pending" type="button">보류</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>업체명</td>
-                                            <td>숙소명</td>
-                                            <td>2026.01.28</td>
-                                            <td><span class="st st--wait status">대기중 </span></td>
-                                            <td class="td-actions">
-                                                <button class="mini approve" type="button">승인</button>
-                                                <button class="mini refuse" type="button">거절</button>
-                                                <button class="mini pending" type="button">보류</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>업체명</td>
-                                            <td>숙소명</td>
-                                            <td>2026.01.28</td>
-                                            <td><span class="st st--wait status">대기중 </span></td>
-                                            <td class="td-actions">
-                                                <button class="mini approve" type="button">승인</button>
-                                                <button class="mini refuse" type="button">거절</button>
-                                                <button class="mini pending" type="button">보류</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>업체명</td>
-                                            <td>숙소명</td>
-                                            <td>2026.01.28</td>
-                                            <td><span class="st st--wait status">대기중 </span></td>
-                                            <td class="td-actions">
-                                                <button class="mini approve" type="button">승인</button>
-                                                <button class="mini refuse" type="button">거절</button>
-                                                <button class="mini pending" type="button">보류</button>
-                                            </td>
-                                        </tr>
                                     </tbody>
+                                   
                                 </table>
                             </div>
                         </section>

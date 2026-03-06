@@ -29,22 +29,64 @@ window.onload = function () {
         })
     }
 
+    const waitingtable = document.querySelector("#waitingTable tbody");
+    const doneTable = document.querySelector("#donetable tbody");
 
     for (let i = 0; i < approve.length; i++) {
 
         approve[i].addEventListener('click', function () {
             status[i].textContent = "승인";
+
+            const row = approve[i].parentNode.parentNode; // 
+
+            doneTable.appendChild(row);
+            // 관리버튼 변경
+            row.querySelector(".td-actions").innerHTML =  // approve 의 부모의 부모인 tr로 가서 class가 td-actions인것 
+                '<button class="mini editRequest">수정요청</button>';
+
+
+
         });
 
         refuse[i].addEventListener('click', function () {
             status[i].textContent = "거절";
+            const row = refuse[i].parentNode.parentNode;
+
+            doneTable.appendChild(row);
+            row.querySelector(".td-actions").innerHTML =  // approve 의 부모의 부모인 tr로 가서 class가 td-actions인것 
+                '<button class="mini editRequest">수정요청</button>';
         });
 
         pending[i].addEventListener('click', function () {
             status[i].textContent = "보류";
+            const row = pending[i].parentNode.parentNode;
+
+            doneTable.appendChild(row);
+            row.querySelector(".td-actions").innerHTML =  // approve 의 부모의 부모인 tr로 가서 class가 td-actions인것 
+                '<button class="mini editRequest">수정요청</button>';
+
         });
 
     }
+// const editRequest = document.querySelectorAll('.editRequest');
+
+// for (let i = 0; i < editRequest.length; i++) {
+
+//     editRequest[i].addEventListener('click', function () {
+
+//         const td = editRequest[i].parentElement;
+//         const row = td.parentElement;
+
+//         waitingtable.appendChild(row);
+
+//         status[i].textContent = "대기중";
+
+//     });
+
+// }
+
+   
+
 
     for (let i = 0; i < energize.length; i++) {
 
@@ -60,8 +102,8 @@ window.onload = function () {
 
     }
 
-    const rows = document.querySelectorAll("#table tbody tr");
-    const showall = document.querySelector("#showall");
+    const rows = document.querySelectorAll("#waitingtable tbody tr");
+    const showwaiting = document.querySelector("#showwaiting");
 
     let opened = false; // 현재 상태 (false = 2개만 보이는 상태)
 
@@ -71,14 +113,14 @@ window.onload = function () {
     }
 
     // 전체보기 클릭
-    showall.addEventListener("click", function () {
+    showwaiting.addEventListener("click", function () {
 
         if (opened == false) {
             // 전체보기
             for (let i = 0; i < rows.length; i++) {
                 rows[i].style.display = "table-row"; // <tr> 처럼 
             }
-            showall.textContent = "접기";
+            showwaiting.textContent = "접기";
             opened = true
 
         } else {
@@ -86,7 +128,7 @@ window.onload = function () {
             for (let i = 2; i < rows.length; i++) {
                 rows[i].style.display = "none";
             }
-            showall.textContent = "전체보기";
+            showwaiting.textContent = "전체보기";
             opened = false;
         }
 
@@ -131,12 +173,12 @@ window.onload = function () {
     for (let i = 0; i < hide.length; i++) {
         hide[i].addEventListener('click', function () {
             alert('해당 리뷰가 숨김처리 되었습니다.')
-            item[i].style.display ='none'
+            item[i].style.display = 'none'
 
         })
     }
 
-        
+
     for (let i = 0; i < keep.length; i++) {
         keep[i].addEventListener('click', function () {
             alert('해당 리뷰 유지 되었습니다.')
@@ -153,21 +195,21 @@ window.onload = function () {
 ================================================ */
 window.addEventListener('load', function adminCouponBind() {
 
-    const dialog         = document.getElementById("adminDialog");
-    const openBtn        = document.getElementById("adminOpenBtn");
-    const closeBtn       = document.getElementById("adminCloseBtn");
+    const dialog = document.getElementById("adminDialog");
+    const openBtn = document.getElementById("adminOpenBtn");
+    const closeBtn = document.getElementById("adminCloseBtn");
 
-    const dialog2        = document.getElementById("adminDialog2");
-    const closeBtn2      = document.getElementById("adminCloseBtn2");
+    const dialog2 = document.getElementById("adminDialog2");
+    const closeBtn2 = document.getElementById("adminCloseBtn2");
 
-    const makecouponBtn  = document.getElementById("adminMakeCouponBtn");
-    const couponList     = document.getElementById("adminCouponList");
-    const couponName     = document.getElementById("adminCouponName");
+    const makecouponBtn = document.getElementById("adminMakeCouponBtn");
+    const couponList = document.getElementById("adminCouponList");
+    const couponName = document.getElementById("adminCouponName");
     const couponDiscount = document.getElementById("adminCouponDiscount");
-    const minDate        = document.getElementById("adminMinDate");
-    const maxDate        = document.getElementById("adminMaxDate");
+    const minDate = document.getElementById("adminMinDate");
+    const maxDate = document.getElementById("adminMaxDate");
 
-    let currentEditItem  = null;
+    let currentEditItem = null;
 
     // 오늘 날짜 제한
     const today = new Date().toISOString().split('T')[0];
@@ -189,8 +231,8 @@ window.addEventListener('load', function adminCouponBind() {
     // 쿠폰 생성
     makecouponBtn.addEventListener('click', function () {
         try {
-            const name   = couponName.value;
-            const dis    = couponDiscount.value;
+            const name = couponName.value;
+            const dis = couponDiscount.value;
             const expMin = minDate.value;
             const expMax = maxDate.value;
 
@@ -231,8 +273,8 @@ window.addEventListener('load', function adminCouponBind() {
 
             // 입력값 초기화
             couponName.value = '';
-            minDate.value    = '';
-            maxDate.value    = '';
+            minDate.value = '';
+            maxDate.value = '';
 
         } catch (error) {
             console.log("쿠폰 생성 중 오류 발생", error);
@@ -246,20 +288,20 @@ window.addEventListener('load', function adminCouponBind() {
         if (e.target.classList.contains('adminCBtn')) {
             e.target.closest('.item').remove();
 
-        // 수정 모달 열기
+            // 수정 모달 열기
         } else if (e.target.classList.contains('adminCBtn2')) {
             currentEditItem = e.target.closest('.item');
 
-            const oldName     = currentEditItem.querySelector('.item__title').innerText.replace('쿠폰 이름: ', '');
+            const oldName = currentEditItem.querySelector('.item__title').innerText.replace('쿠폰 이름: ', '');
             const oldDiscount = currentEditItem.querySelector('.discount').innerText.replace('할인율: ', '');
 
-            document.getElementById("adminCouponName2").value     = oldName;
+            document.getElementById("adminCouponName2").value = oldName;
             document.getElementById("adminCouponDiscount2").value = oldDiscount;
 
             const adminMinDate2 = document.getElementById("adminMinDate2");
             const adminMaxDate2 = document.getElementById("adminMaxDate2");
-            adminMinDate2.min   = today;
-            adminMaxDate2.min   = today;
+            adminMinDate2.min = today;
+            adminMaxDate2.min = today;
 
             dialog2.showModal();
         }
@@ -270,10 +312,10 @@ window.addEventListener('load', function adminCouponBind() {
         try {
             if (!currentEditItem) return;
 
-            const newName     = document.getElementById("adminCouponName2").value;
+            const newName = document.getElementById("adminCouponName2").value;
             const newDiscount = document.getElementById("adminCouponDiscount2").value;
-            const newMin      = document.getElementById("adminMinDate2").value;
-            const newMax      = document.getElementById("adminMaxDate2").value;
+            const newMin = document.getElementById("adminMinDate2").value;
+            const newMax = document.getElementById("adminMaxDate2").value;
 
             if (!newName || !newMin || !newMax) {
                 alert("수정할 내용을 모두 입력해주세요.");
@@ -281,7 +323,7 @@ window.addEventListener('load', function adminCouponBind() {
             }
 
             currentEditItem.querySelector('.item__title').innerText = `쿠폰 이름: ${newName}`;
-            currentEditItem.querySelector('.discount').innerText    = `할인율: ${newDiscount}`;
+            currentEditItem.querySelector('.discount').innerText = `할인율: ${newDiscount}`;
 
             const metaArea = currentEditItem.querySelector('.item__meta');
             if (today > newMax) {
