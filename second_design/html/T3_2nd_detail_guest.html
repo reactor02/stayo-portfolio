@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STAYO | 숙소 상세</title>
+  <script src="../js/jquery-3.7.1.js"></script>
+  <script src="../api_test/js/tb.api.v1.tb.js"></script>
+  <script src="../js/T3_2nd_common.js"></script>
+  <script src="../js/T3_2nd_detail.js"></script>
+
+  <!-- 폰트(메인과 동일) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- 공통 CSS -->
+  <link rel="stylesheet" href="../css/T3_2nd_common.css" />
+  <!-- 상세페이지 전용 CSS -->
+  <link rel="stylesheet" href="../css/T3_2nd_detail.css" />
+</head>
+
+<body>
+  <!-- ==========================
+    공통 헤더(메인과 동일)
+  =========================== -->
+  <header class="header">
+    <div class="container header__inner">
+      <!-- 로고 -->
+      <a href="./T3_2nd_index.html" class="logo" aria-label="STAYO 홈">STAYO</a>
+
+      <!-- 가운데 메뉴 -->
+      <nav class="gnb" aria-label="주요 메뉴">
+        <a href="./list.html" class="gnb__link">숙소</a>
+        <a href="#" class="gnb__link">항공권</a>
+        <a href="#" class="gnb__link">패키지</a>
+        <a href="#" class="gnb__link">액티비티</a>
+        <a href="#" class="gnb__link">렌터카</a>
+      </nav>
+
+      <!-- 오른쪽 -->
+      <div class="header__right">
+        <!-- ✅ 로그인 전 -->
+        <div class="header-guest">
+          <a href="./T3_2nd_login.html" class="btn btn--ghost">
+            <span class="btn__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z" />
+              </svg>
+            </span>
+            로그인
+          </a>
+          <a href="./T3_2nd_signup.html" class="btn btn--solid">회원가입</a>
+        </div>
+
+        <!-- ✅ 로그인 후 -->
+        <div class="header-user">
+          <!-- <a href="./T3_2nd_cart.html" class="icon-btn" aria-label="장바구니">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                                d="M7 4H5L4 6v2h2l3.6 7.59L8.25 18A2 2 0 0 0 10 21h8v-2h-7.42a.25.25 0 0 1-.23-.37L11.1 17h5.45a2 2 0 0 0 1.79-1.11L21 9H7.42l-.94-2zM10 23a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm7 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                        </svg>
+                    </a>
+
+                    <a href="./T3_2nd_mapage.html#sec-wish" class="icon-btn" aria-label="찜 목록">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6 4 4 6.5 4c1.54 0 3.04.81 3.9 2.09C11.26 4.81 12.76 4 14.3 4 16.8 4 18.8 6 18.8 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                        </svg>
+                    </a> -->
+
+          <!-- ✅ 로그인 후 영역 안 -->
+          <div class="user-menu">
+            <!-- user-chip: 클릭 트리거 -->
+            <button class="user-avatar-btn">
+              <span class="user-chip__avatar">MH</span>
+            </button>
+
+            <!-- ✅ 모달(드롭다운 메뉴) -->
+            <div class="user-modal" role="menu" aria-label="유저 메뉴">
+              <a href="./T3_2nd_mapage.html" class="user-modal__item" role="menuitem">마이페이지</a>
+              <a href="./T3_2nd_cart.html" class="user-modal__item" role="menuitem">장바구니</a>
+              <a href="./T3_2nd_mapage.html#sec-wish" class="user-modal__item" role="menuitem">찜목록</a>
+              <button type="button" class="user-modal__item user-modal__logout logout" role="menuitem">
+                로그아웃
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="detail">
+    <!-- ==========================
+      1) 상단 브레드크럼(간단)
+    =========================== -->
+    <section class="detail-top">
+      <div class="container">
+        <nav class="crumb" aria-label="현재 위치">
+          <a href="./T3_2nd_index.html">홈</a>
+          <span class="crumb__sep">/</span>
+          <a href="./T3_2nd_list.html">숙소 리스트</a>
+          <span class="crumb__sep">/</span>
+          <span class="crumb__current">숙소 상세</span>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ==========================
+      2) 갤러리(캡처 느낌: 큰 메인 + 서브)
+      - 실제 구현은 "CSS 그리드"로 비슷하게
+    =========================== -->
+    <section class="gallery">
+      <div class="container">
+        <div class="gallery-grid">
+          <!-- 메인 이미지 -->
+          <a class="gallery-item gallery-item--main" href="#" aria-label="사진 크게 보기" data-modal="photo">
+            <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1600&q=80"
+              alt="숙소 메인 사진" />
+          </a>
+
+          <!-- 서브 이미지 4장 -->
+
+          <a class="gallery-item" href="#" aria-label="사진 크게 보기" data-modal="photo">
+            <img src="https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?auto=format&fit=crop&w=1200&q=80"
+              alt="숙소 사진 3" />
+          </a>
+
+          <a class="gallery-item" href="#" aria-label="사진 크게 보기" data-modal="photo">
+            <img src="https://picsum.photos/seed/P00012/480/320" alt="숙소 사진 4" />
+          </a>
+
+          <a class="gallery-item" href="#" aria-label="사진 크게 보기" data-modal="photo">
+            <img src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1200&q=80"
+              alt="숙소 사진 5" />
+          </a>
+          <a class="gallery-item" href="#" aria-label="사진 크게 보기" data-modal="photo">
+            <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461" alt="숙소 사진이 준비중입니다" />
+          </a>
+
+          <!-- 우측 상단: 사진 전체보기 버튼(예시) -->
+          <button class="gallery-all" type="button">
+            사진 전체보기
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================
+      3) 본문 레이아웃
+      - 좌측: 설명/룸/편의/리뷰/정책/지도
+      - 우측: 예약 카드(sticky)
+    =========================== -->
+    <section class="detail-body">
+      <div class="container detail-grid">
+        <!-- ==========================
+          왼쪽 메인 콘텐츠
+        =========================== -->
+        <section class="content" aria-label="숙소 상세 정보">
+          <!-- 숙소 요약 헤더 -->
+          <header class="property-head">
+            <div class="property-head__left">
+              <div class="property-badges">
+                <span class="pill pill--dark">슈퍼호스트</span>
+                <span class="pill">할인 중</span>
+              </div>
+
+              <h1 class="property-title"></h1>
+
+              <div class="property-meta">
+                <div class="meta-item">
+                  <span class="star">★</span>
+                  <b></b>
+                  <span class="muted"></span>
+                </div>
+
+                <span class="dot">·</span>
+
+                <div class="meta-item muted">
+
+                </div>
+              </div>
+            </div>
+
+            <!-- 우측: 공유/찜 버튼(선택) -->
+            <div class="property-head__right">
+              <button class="ghost-btn" type="button" aria-label="공유하기">
+                <span class="ghost-btn__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M18 8a3 3 0 10-2.8-4H15a3 3 0 003 4z" />
+                    <path d="M6 14a3 3 0 10-2.8-4H3a3 3 0 003 4z" />
+                    <path d="M18 20a3 3 0 10-2.8-4H15a3 3 0 003 4z" />
+                    <path d="M8 12l8-4" />
+                    <path d="M8 12l8 4" />
+                  </svg>
+                </span>
+                공유
+              </button>
+
+              <a href="./T3_2nd_mapage.html#sec-wish">
+                <button class="ghost-btn" type="button" aria-label="찜하기">
+                  <span class="ghost-btn__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+                             2 6 4 4 6.5 4
+                             8.04 4 9.54 4.81 10.4 6.09
+                             11.26 4.81 12.76 4 14.3 4
+                             16.8 4 18.8 6 18.8 8.5
+                             c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                    </svg>
+                  </span>
+                  찜
+                </button>
+              </a>
+            </div>
+          </header>
+
+          <!-- 호스트/핵심 정보 카드 -->
+          <section class="panel">
+            <div class="host">
+              <div class="host__avatar" aria-hidden="true">S</div>
+              <div class="host__info">
+                <div class="host__title">호스트: STAYO Official</div>
+                <div class="host__sub muted">응답률 99% · 평균 응답 1시간 이내</div>
+              </div>
+            </div>
+
+            <div class="highlights">
+              <div class="highlight">
+                <div class="highlight__icon" aria-hidden="true">✔</div>
+                <div>
+                  <div class="highlight__title">무료 취소</div>
+                  <div class="highlight__desc muted">체크인 24시간 전까지 무료 취소 가능</div>
+                </div>
+              </div>
+
+              <div class="highlight">
+                <div class="highlight__icon" aria-hidden="true">⏱</div>
+                <div>
+                  <div class="highlight__title">빠른 체크인</div>
+                  <div class="highlight__desc muted">키오스크/모바일 체크인 지원</div>
+                </div>
+              </div>
+
+              <div class="highlight">
+                <div class="highlight__icon" aria-hidden="true">🛡</div>
+                <div>
+                  <div class="highlight__title">안전한 결제</div>
+                  <div class="highlight__desc muted">검증된 보안 시스템으로 안전하게</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 숙소 소개 -->
+          <section class="panel" id="about">
+            <h2 class="panel__title">숙소 소개</h2>
+            <p class="panel__text">
+              도심 속에서 여유를 즐길 수 있는 모던 부티크 호텔입니다. 넓은 객실과 고급 침구,
+              감각적인 인테리어가 준비되어 있어요. 인근에 맛집/쇼핑/교통이 편리하여 여행과
+              비즈니스 모두에 적합합니다.
+            </p>
+
+            <ul class="bullets">
+              <li>체크인 15:00 / 체크아웃 11:00</li>
+              <li>금연 객실</li>
+              <li>24시간 프런트 데스크</li>
+            </ul>
+          </section>
+
+          <!-- 객실 선택(리스트 스타일) -->
+          <section class="panel" id="rooms">
+            <div class="panel-head">
+              <h2 class="panel__title">객실 선택</h2>
+              <!-- <a class="panel-head__link" href="#">전체 객실 보기</a> -->
+            </div>
+
+            <div class="room-list">
+              <!-- 객실 1 -->
+              <!-- <article class="room">
+                <div class="room__media">
+                  <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80"
+                    alt="디럭스 더블" />
+                </div>
+
+                <div class="room__body">
+                  <div class="room__title">디럭스 더블</div>
+                  <div class="room__meta muted">2인 · 더블베드 1 · 28m²</div>
+
+                  <div class="room__tags">
+                    <span class="tag">무료 취소</span>
+                    <span class="tag">조식 옵션</span>
+                    <span class="tag">시티뷰</span>
+                  </div>
+                </div>
+
+                <div class="room__side">
+                  <div class="room__price">
+                    ₩189,000 <span>/ 박</span>
+                  </div>
+                  <button class="btn-main" type="button">선택</button>
+                </div>
+              </article> -->
+
+              <!-- 객실 2 -->
+              <!-- <article class="room">
+                <div class="room__media">
+                  <img
+                    src="https://images.unsplash.com/photo-1501117716987-c8e1ecb210d3?auto=format&fit=crop&w=1200&q=80"
+                    alt="프리미엄 스위트" />
+                </div>
+
+                <div class="room__body">
+                  <div class="room__title">프리미엄 스위트</div>
+                  <div class="room__meta muted">3인 · 퀸베드 1 + 싱글 1 · 42m²</div>
+
+                  <div class="room__tags">
+                    <span class="tag">조식 포함</span>
+                    <span class="tag">무료 취소</span>
+                    <span class="tag">라운지</span>
+                  </div>
+                </div>
+
+                <div class="room__side">
+                  <div class="room__price">
+                    ₩260,000 <span>/ 박</span>
+                  </div>
+                  <button class="btn-main" type="button">선택</button>
+                </div>
+              </article>
+              <article class="room">
+                <div class="room__media">
+                  <img
+                    src="https://images.unsplash.com/photo-1501117716987-c8e1ecb210d3?auto=format&fit=crop&w=1200&q=80"
+                    alt="프리미엄 스위트" />
+                </div>
+
+                <div class="room__body">
+                  <div class="room__title">프리미엄 스위트</div>
+                  <div class="room__meta muted">3인 · 퀸베드 1 + 싱글 1 · 42m²</div>
+
+                  <div class="room__tags">
+                    <span class="tag">조식 포함</span>
+                    <span class="tag">무료 취소</span>
+                    <span class="tag">라운지</span>
+                  </div>
+                </div>
+
+                <div class="room__side">
+                  <div class="room__price">
+                    ₩260,000 <span>/ 박</span>
+                  </div>
+                  <button class="btn-main" type="button">선택</button>
+                </div>
+              </article> -->
+            </div>
+          </section>
+
+          <!-- 편의시설 -->
+          <section class="panel" id="amenities">
+            <h2 class="panel__title">편의시설</h2>
+
+            <div class="amenities">
+              <div class="amenity">
+                <span class="amenity__icon" aria-hidden="true">📶</span>
+                <span class="amenity__text">무료 Wi-Fi</span>
+              </div>
+              <div class="amenity">
+                <span class="amenity__icon" aria-hidden="true">🏊</span>
+                <span class="amenity__text">수영장</span>
+              </div>
+              <div class="amenity">
+                <span class="amenity__icon" aria-hidden="true">🅿</span>
+                <span class="amenity__text">주차 가능</span>
+              </div>
+              <div class="amenity">
+                <span class="amenity__icon" aria-hidden="true">🏋</span>
+                <span class="amenity__text">피트니스</span>
+              </div>
+              <div class="amenity">
+                <span class="amenity__icon" aria-hidden="true">☕</span>
+                <span class="amenity__text">조식(옵션)</span>
+              </div>
+              <div class="amenity">
+                <span class="amenity__icon" aria-hidden="true">🧺</span>
+                <span class="amenity__text">세탁 서비스</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- 후기(리뷰) -->
+          <section class="panel" id="reviews">
+            <div class="panel-head">
+              <h2 class="panel__title">리뷰</h2>
+              <div class="review-score">
+                <span class="star">★</span> <b>4.8</b> <span class="muted">(512)</span>
+              </div>
+            </div>
+
+            <a href="./T3_2nd_review_detail.html">
+              <div class="review-grid">
+                <article class="review">
+                  <div class="review__top">
+                    <div class="review__name">박민호</div>
+                    <div class="review__rate"><span class="star">★</span> 5.0</div>
+                  </div>
+                  <p class="review__text muted">
+                    사진 그대로 뷰가 미쳤어요!
+                  </p>
+                </article>
+            </a>
+
+            <a href="./T3_2nd_review_detail.html">
+              <article class="review">
+                <div class="review__top">
+                  <div class="review__name">박준호</div>
+                  <div class="review__rate"><span class="star">★</span> 4.7</div>
+                </div>
+                <p class="review__text muted">
+                  체크인이 편했고 직원분들이 친절했어요. 조식도 만족!
+                </p>
+              </article>
+            </a>
+
+            <a href="./T3_2nd_review_detail.html">
+              <article class="review">
+                <div class="review__top">
+                  <div class="review__name">이서연</div>
+                  <div class="review__rate"><span class="star">★</span> 4.8</div>
+                </div>
+                <p class="review__text muted">
+                  사진 그대로 분위기 좋고, 주변에 맛집이 많아서 여행하기 편했어요.
+                </p>
+              </article>
+            </a>
+
+            <a href="./T3_2nd_review_detail.html">
+              <article class="review">
+                <div class="review__top">
+                  <div class="review__name">정현우</div>
+                  <div class="review__rate"><span class="star">★</span> 4.9</div>
+                </div>
+                <p class="review__text muted">
+                  방음도 괜찮고 뷰가 좋았습니다. 재방문 의사 있어요!
+                </p>
+
+              </article>
+            </a>
+      </div>
+
+      <a href="./T3_2nd_review.html"><button class="btn-outline" type="button">리뷰 더보기</button></a>
+    </section>
+
+    <!-- 이용 규정 -->
+    <section class="panel" id="policy">
+      <h2 class="panel__title">이용 규정</h2>
+
+      <div class="policy">
+        <div class="policy__item">
+          <div class="policy__label">체크인</div>
+          <div class="policy__value">15:00 이후</div>
+        </div>
+        <div class="policy__item">
+          <div class="policy__label">체크아웃</div>
+          <div class="policy__value">11:00 이전</div>
+        </div>
+        <div class="policy__item">
+          <div class="policy__label">취소</div>
+          <div class="policy__value">체크인 24시간 전 무료 취소</div>
+        </div>
+        <div class="policy__item">
+          <div class="policy__label">주의사항</div>
+          <div class="policy__value">금연 / 반려동물 불가</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 위치(지도 영역은 UI만) -->
+    <section class="panel" id="location">
+      <h2 class="panel__title">위치</h2>
+      <div class="map">
+        <!-- 실제 지도 API 대신, UI용 박스 -->
+        <div class="map__box">
+          <!-- <div class="map__pin" aria-hidden="true">📍</div> -->
+          <div class="map__text">
+            <!-- * 카카오맵 - 지도퍼가기 -->
+            <!-- 1. 지도 노드 -->
+            <div id="daumRoughmapContainer1772524490681" class="root_daum_roughmap root_daum_roughmap_landing">
+            </div>
+
+            <!--
+	2. 설치 스크립트
+	* 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
+-->
+            <script charset="UTF-8" class="daum_roughmap_loader_script"
+              src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+
+            <!-- 3. 실행 스크립트 -->
+            <script charset="UTF-8">
+              new daum.roughmap.Lander({
+                "timestamp": "1772524490681",
+                "key": "ipbwpt3q2z7",
+                "mapWidth": "640",
+                "mapHeight": "160"
+              }).render();
+            </script>
+          </div>
+        </div>
+      </div>
+    </section>
+    </section>
+
+    <!-- ==========================
+          오른쪽 예약 카드(스크롤 따라 sticky)
+        =========================== -->
+    <aside class="booking" aria-label="예약 영역">
+      <div class="book-card">
+        <div class="book-price">
+          <b>₩ 275,000</b>
+          <!-- <span class="muted">/ 박</span> -->
+        </div>
+
+        <div class="book-rating muted">
+          <span class="star">★</span> 4.8 <span>(512)</span>
+        </div>
+
+        <!-- 체크인/아웃/인원 입력 UI(기능 없음) -->
+        <div class="book-form">
+          <div class="book-grid">
+            <div class="book-field">
+              <div class="book-label">체크인</div>
+              <div class="book-value">03/10</div>
+            </div>
+            <div class="book-field">
+              <div class="book-label">체크아웃</div>
+              <div class="book-value">03/12</div>
+            </div>
+            <div class="book-field book-field--full">
+              <div class="book-label">인원</div>
+              <div class="book-value">성인 2명</div>
+            </div>
+          </div>
+
+          <!-- 가격 요약 -->
+          <div class="book-summary">
+            <div class="sum-row">
+              <span class="muted"></span>
+              <!-- <b>₩378,000</b> -->
+            </div>
+            <!-- <div class="sum-row">
+                  <span class="muted">세금 및 수수료</span>
+                  <b>₩22,000</b>
+                </div> -->
+            <div class="sum-line"></div>
+            <div class="sum-row sum-row--total">
+              <span>총 합계</span>
+              <b>₩550,000</b>
+            </div>
+          </div>
+
+          <a href="./T3_2nd_pay.html">
+            <button class="btn-main btn-main--big" type="button">
+              예약하기
+            </button>
+          </a>
+
+          <div class="book-note muted">
+            결제 전까지 예약이 확정되지 않습니다.
+          </div>
+        </div>
+      </div>
+
+      <!-- 빠른 이동(앵커) -->
+      <nav class="anchor" aria-label="섹션 바로가기">
+        <a href="#about">숙소 소개</a>
+        <a href="#rooms">객실 선택</a>
+        <a href="#amenities">편의시설</a>
+        <a href="#reviews">후기</a>
+        <a href="#policy">이용 규정</a>
+        <a href="#location">위치</a>
+      </nav>
+    </aside>
+    </div>
+    </section>
+  </main>
+
+  <!-- ==========================
+    공통 푸터
+  =========================== -->
+  <footer class="footer">
+    <div class="container footer__top">
+      <div class="footer__brand">
+        <div class="footer__logo">STAYO</div>
+        <p class="footer__desc">
+          대한민국 최고의 숙소를<br />
+          합리적인 가격으로 예약하세요.
+        </p>
+      </div>
+
+      <div class="footer__cols">
+        <div class="footer__col">
+          <div class="footer__title">서비스</div>
+          <a href="./T3_2nd_index.html" class="footer__link">숙소 예약</a>
+          <a href="#" class="footer__link alert">항공권</a>
+          <a href="#" class="footer__link alert">패키지</a>
+          <a href="#" class="footer__link alert">액티비티</a>
+          <a href="#" class="footer__link alert">렌터카</a>
+        </div>
+
+        <div class="footer__col">
+          <div class="footer__title">고객지원</div>
+          <a href="./T3_2nd_mapage.html" class="footer__link">고객센터</a>
+          <a href="./T3_2nd_mapage.html#sec-support" class="footer__link">자주 묻는 질문</a>
+          <a href="./T3_2nd_mapage.html#sec-support" class="footer__link">취소/환불</a>
+          <a href="./T3_2nd_terms.html" class="footer__link">이용약관</a>
+          <a href="./T3_2nd_privacy.html" class="footer__link">개인정보처리방침</a>
+        </div>
+
+        <div class="footer__col">
+          <div class="footer__title">파트너</div>
+          <a href="./T3_2nd_host.html" class="footer__link">숙소 등록</a>
+          <a href="./T3_2nd_partnership.html" class="footer__link">제휴 문의</a>
+          <a href="./T3_2nd_ads.html" class="footer__link">광고 문의</a>
+          <a href="./T3_2nd_api.html" class="footer__link">API</a>
+        </div>
+
+        <div class="footer__col">
+          <div class="footer__title">회사</div>
+          <a href="./T3_2nd_about.html" class="footer__link">회사 소개</a>
+          <a href="#" class="footer__link alert">채용</a>
+          <a href="./T3_2nd_notice.html" class="footer__link">공지사항</a>
+          <a href="#" class="footer__link alert">제휴사</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer__bottom">
+      <div class="footer__copy">© 2026 STAYO. All rights reserved.</div>
+      <div class="footer__bottom-links">
+        2026 TEAM3 HTML 1st Project.
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal-bg" id="modalBg">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" id="modalClose" type="button">×</button>
+      <h3 id="modalTitle">제목</h3>
+      <p id="modalBody">내용</p>
+    </div>
+  </div>
+
+
+
+</body>
+
+</html>
