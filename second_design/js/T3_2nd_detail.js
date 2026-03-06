@@ -222,15 +222,24 @@
 
 // }
 
+// 페이지가 모두 로드되면 App 객체의 bind 함수 실행
 window.addEventListener('load', () => App.bind());
 
 const App = {
+    // API에서 받아온 숙소 목록 저장
     items: [],
+
+    // 숙소 목록 전체 응답 저장
     listRes: null,
+
+    // 현재 선택된 숙소의 propertyId 저장
     propertyId: null,
 
+    // 자주 사용할 DOM 요소 저장
     el: {},
 
+    // 시작 함수
+    // DOM 찾기, 이벤트 연결, 숙소 정보 불러오기, 쿠폰 만료 체크 실행
     async bind() {
         this.cacheDom();
         this.bindEvents();
@@ -238,47 +247,58 @@ const App = {
         this.checkExpiredCoupons();
     },
 
+    // 필요한 DOM 요소를 한 번만 찾아서 저장
     cacheDom() {
+        // 숙소 상단 정보 영역
         this.el.property_title = document.querySelector('.property-title');
         this.el.muted = document.querySelector('.muted');
         this.el.star = document.querySelector('.meta-item b');
         this.el.meta_item = document.querySelector('.meta-item');
 
+        // 사진 모달 관련 요소
         this.el.modalBg = document.querySelector('#modalBg');
         this.el.modalClose = document.querySelector('#modalClose');
         this.el.modalTitle = document.querySelector('#modalTitle');
         this.el.modalBody = document.querySelector('#modalBody');
 
+        // 갤러리 영역과 전체보기 버튼
         this.el.galleryGrid = document.querySelector('.gallery-grid');
         this.el.allBtn = document.querySelector('.gallery-all');
 
+        // 객실 목록과 예약 요약 영역
         this.el.room_list = document.querySelector('.room-list');
         this.el.book_price = document.querySelector('.book-price');
         this.el.sum_row = document.querySelector('.sum-row b');
         this.el.sum_row1 = document.querySelector('.sum-row span');
     },
 
+    // 이벤트 등록
     bindEvents() {
+        // 모달 닫기 버튼 클릭 시 모달 닫기
         this.el.modalClose.addEventListener('click', () => {
             this.closeModal();
         });
 
+        // 모달 배경 클릭 시 바깥 영역이면 모달 닫기
         this.el.modalBg.addEventListener('click', (e) => {
             if (e.target === this.el.modalBg) {
                 this.closeModal();
             }
         });
 
+        // ESC 키를 누르면 모달 닫기
         window.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 this.closeModal();
             }
         });
 
+        // 갤러리 이미지 클릭 시 해당 이미지를 모달로 크게 보기
         this.el.galleryGrid.addEventListener('click', (e) => {
             const a = e.target.closest('[data-modal="photo"]');
             if (!a) return;
 
+            // a 태그 기본 이동 막기
             e.preventDefault();
 
             const img = a.querySelector('img');
@@ -290,9 +310,11 @@ const App = {
             );
         });
 
+        // 사진 전체보기 버튼이 있으면 갤러리 안 모든 이미지를 모달에 출력
         if (this.el.allBtn) {
             this.el.allBtn.addEventListener('click', () => {
                 const imgs = [...document.querySelectorAll('.gallery-item img')];
+
                 const html = imgs.map((i) => {
                     return `<img src="${i.src}" alt="${i.alt}" style="width:100%; height:auto; border-radius:12px; margin-bottom:10px;">`;
                 }).join('');
@@ -301,6 +323,7 @@ const App = {
             });
         }
 
+        // 객실 목록에서 선택 버튼 클릭 시 예약 요약 가격 변경
         this.el.room_list.addEventListener('click', (e) => {
             const btn = e.target.closest('.btn-main');
             if (!btn) return;
@@ -312,6 +335,7 @@ const App = {
         });
     },
 
+    // 숙소 목록 API 호출
     async loadProperty() {
         try {
             this.listRes = await API.V1.TB.Lodging.properties({
@@ -320,12 +344,16 @@ const App = {
                 pageSize: 50
             });
 
+            // 숙소 목록 저장
             this.items = this.listRes.items;
 
+            // 데이터가 없으면 종료
             if (!this.items.length) return;
 
+            // 첫 번째 숙소 정보를 화면에 출력
             this.renderProperty(this.items[0]);
 
+            // 첫 번째 숙소의 propertyId 저장 후 객실 목록 불러오기
             this.propertyId = this.items[0].propertyId;
             this.loadRooms(this.propertyId);
 
@@ -334,6 +362,7 @@ const App = {
         }
     },
 
+    // 숙소 기본 정보 출력
     renderProperty(item) {
         this.el.property_title.innerHTML = item.name;
         this.el.muted.innerHTML = item.reviewCount;
@@ -341,16 +370,20 @@ const App = {
         this.el.meta_item.innerHTML = item.city + ' , 대한민국 · ' + item.district;
     },
 
+    // 모달 열기
+    // 제목과 본문 HTML을 넣고 on 클래스를 추가
     openModal(htmlTitle, htmlBody) {
         this.el.modalTitle.textContent = htmlTitle;
         this.el.modalBody.innerHTML = htmlBody;
         this.el.modalBg.classList.add('on');
     },
 
+    // 모달 닫기
     closeModal() {
         this.el.modalBg.classList.remove('on');
     },
 
+    // 객실 목록 API 호출
     async loadRooms(propertyId) {
         try {
             const res = await API.V1.TB.Lodging.rooms(propertyId);
@@ -360,6 +393,7 @@ const App = {
         }
     },
 
+    // 객실 카드에 사용할 랜덤 이미지 목록
     hotelImages: [
         "https://images.unsplash.com/photo-1566073771259-6a8506099945",
         "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267",
@@ -368,12 +402,15 @@ const App = {
         "https://images.unsplash.com/photo-1578683010236-d716f9a3f461"
     ],
 
+    // 객실 카드에 넣을 이미지를 랜덤으로 하나 반환
     getRandomImage() {
         const index = Math.floor(Math.random() * this.hotelImages.length);
         return this.hotelImages[index];
     },
 
+    // 객실 목록 출력
     renderRooms(list = []) {
+        // 기존 객실 목록 비우기
         this.el.room_list.innerHTML = '';
 
         list.forEach((r) => {
@@ -403,19 +440,27 @@ const App = {
         });
     },
 
+    // 객실 선택 시 예약 요약 정보 업데이트
     updateBooking(priceText) {
+        // 선택한 객실 1박 가격 표시
         this.el.book_price.innerHTML = priceText;
 
+        // "₩ 120000" 형태의 문자열에서 숫자만 꺼내기
         const numberPrice = Number(
             priceText.replace('₩', '').replaceAll(',', '').trim()
         );
 
+        // 2박 기준 총 가격 계산
         const totalPrice = numberPrice * 2;
 
+        // 총 합계 표시
         this.el.sum_row.innerHTML = '₩ ' + this.formatMoney(totalPrice);
+
+        // 1박 가격과 숙박 수 표시
         this.el.sum_row1.innerHTML = priceText + ' / 2박';
     },
 
+    // 숫자에 3자리마다 콤마 추가
     formatMoney(num) {
         let money = '' + num;
         let result = '';
@@ -429,7 +474,9 @@ const App = {
         return result;
     },
 
+    // 쿠폰 유효기간이 지났는지 확인하고 표시 문구 변경
     checkExpiredCoupons() {
+        // 오늘 날짜를 yyyy-mm-dd 형식으로 구함
         const today = new Date().toISOString().split('T')[0];
         const items = document.querySelectorAll('#couponList .item');
 
@@ -437,6 +484,7 @@ const App = {
             const metaArea = item.querySelector('.item__meta');
             if (!metaArea) return;
 
+            // 유효기간 텍스트에서 시작일과 종료일 추출
             const metaText = metaArea.innerText;
             const dateMatch = metaText.match(/(\d{4}-\d{2}-\d{2})\s*~\s*(\d{4}-\d{2}-\d{2})/);
             if (!dateMatch) return;
@@ -444,10 +492,12 @@ const App = {
             const expMin = dateMatch[1];
             const expMax = dateMatch[2];
 
+            // 오늘 날짜가 종료일보다 크면 만료 처리
             if (today > expMax) {
                 metaArea.className = 'item__meta muted line-through';
                 metaArea.innerText = `유효기간만료: ${expMin} ~ ${expMax}`;
             } else {
+                // 아직 유효한 쿠폰이면 원래 스타일 유지
                 metaArea.className = 'item__meta muted';
                 metaArea.innerText = `유효기간: ${expMin} ~ ${expMax}`;
             }
