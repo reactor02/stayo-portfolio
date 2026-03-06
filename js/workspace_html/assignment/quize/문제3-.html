@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            border: 1px solid red;
+            height: 80vh;
+            width: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+        }
+        .content {
+            position: relative;
+            height: 800px;
+        }
+        .content .band {
+            width: 10%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: calc(50% - 10%);
+
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="box left">
+            <div>좌상단</div>
+            <div>좌하단</div>
+        </div>
+    </div>
+    <div>
+        <div class="box right">
+            <div>우상단</div>
+            <div>우하단</div>
+        </div>
+        <div class="band"></div>
+    </div>
+</body>
+</html>

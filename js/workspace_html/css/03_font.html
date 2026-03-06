@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <style>
+        /* 웹폰트 다운로드 */
+        @font-face {
+            font-family: 'GMarketSans';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+            font-weight: 500;
+            font-display: swap;
+        }
+
+        /* 폰트 적용 */
+        #p1 {
+            font-family: 'GMarketSans', Arial;
+        }
+
+        .style {
+            font-style: italic;
+        }
+        .fw-100 {font-weight: 100;}
+        .fw-400 {font-weight: 400;}
+        .fw-1000 {font-weight: 1000;}
+        /* 일반글꼴은 100~900 까지 100 단위로 사용가능
+            가변글꼴은 100~1000까지 세밀하게 조정가능
+        */
+        .fw-2000 {font-weight: 2000;}
+        .fw-bold {font-weight: bold;}
+
+        .fake-h1 {
+            font-size: 2em;
+            font-weight: bolder;
+        }
+
+        .border{
+             border: 1px solid red;
+        }
+        .align-right{
+            text-align: right;
+        }
+        .align-center{
+            text-align: center;
+        }
+        .align-left{
+            text-align: left;
+        }
+        .align-justify{
+            text-align: justify;
+        }
+        .spacing{
+            /* letter-spacing: 1em; */
+            letter-spacing: -0.1em;
+
+        }
+        .lh{
+            line-height: 300%; /*세로 방향 중앙 정렬 가능*/
+        }
+        .middle{
+            border: 1px solid red;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+        }
+        .nowrap{
+            border: 1px solid red;
+            width: 50vw;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .text {
+            border: 1px solid red;
+            width: 200px;
+        }
+        .word-wrap{
+            /* 한 단어가 너무 길면 튀어나오니까
+                단어 중간에라도 다음 줄에 보여주는 기능
+            */
+            word-wrap: break-word;
+        }
+        .word-break {
+            word-break: break-all;
+        }
+        .td1{
+            text-decoration: underline;
+        }
+        .td2{
+            text-decoration: line-through;
+        }
+    </style>
+<body>
+    기본글씨 abc 123
+    <p id="p1">
+        글씨를 적습니다
+        <div>
+            자식 안쪽의 글씨
+        </div>
+    </p>
+
+    <div class="style">
+        font-style
+    </div>
+    <div class="fw-100">100</div>
+    <div class="fw-400">400</div>
+    <div class="fw-1000">1000</div>
+    <div class="fw-2000">2000</div>
+    <div class="fw-bold">bold</div>
+    <hr>
+    <h1>h1</h1>
+    <div class="fake-h1">fake-h1</div>
+    <hr>
+    <div class="align-right border">align-right</div>
+    <div class="align-center border">align-center</div>
+    <div class="align-left border">align-left</div>
+    <div class="align-justify">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus quis aut explicabo, quam vero mollitia facere ducimus reprehenderit soluta rerum et incidunt fuga expedita, quibusdam maiores earum? Veniam, sint nulla!
+    </div>
+    <a href="asdf" class="align-center border">
+        Hello World
+    </a>
+    <div class="align-right border">
+        <a href="asdf">
+            Hello World
+        </a>
+    </div>
+    <div class="spacing">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos magni quos cum inventore sit numquam perferendis ea ut. Labore, nisi vitae eius sed adipisci quos corrupti sapiente nihil dolore dicta.
+    </div>
+    <div class="lh">
+        첫번째 줄 <br>
+        두번째 줄 
+    </div>
+    <div class="middle">
+        세로 방향 중앙 정렬
+    </div>
+    <hr>
+    <div class="nowrap">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde enim ex doloremque sequi molestiae? Asperiores consequuntur, quis quia eum, iste enim quaerat dolorum, sunt expedita omnis saepe rem repellat eaque!
+    </div>
+
+    <div class="text">
+        asdfsafjwoifjeoiajwsfoijsdiojfiwoeiojfaoiwjefoiaj
+        asdfsadfjiejm
+        djiofjwoiejoiajwfo-ijjfolsjiejlfisjdlijflsidj
+        asdfasfsdasffjsoidj-oifjsiod
+    </div>
+    <div class="text word-wrap">
+        asdfsafjwoifjeoiajwsfoijsdiojfiwoeiojfaoiwjefoiaj
+        asdfsadfjiejm
+        djiofjwoiejoiajwfoijjfolsjiejlfisjdlijflsidj
+        asdfasfsdasffjsoidjoifjsiod
+    </div>
+    <div class="text word-break">
+        asdfsafjwoifjeoiajwsfoijsdiojfiwoeiojfaoiwjefoiaj
+        asdfsadfjiejm
+        djiofjwoiejoiajwfoijjfolsjiejlfisjdlijflsidj
+        asdfasfsdasffjsoidjoifjsiod
+    </div>
+    <div class="td1">
+        글씨 몇자
+    </div>
+    <div class="td2">
+        글씨 몇자
+    </div>
+</body>
+</html>

@@ -279,21 +279,26 @@
     gap: 24px;
 }
 
-/* 카드 */
-.stay-card {
-    background: transparent;
-    /* 캡처는 카드 배경 거의 없음 */
+/* 카드 래퍼 링크 */
+.grid-stay a {
+    text-decoration: none;
+    color: inherit;
 }
 
-.stay-card__media {
+/* 카드 */
+.card {
+    background: transparent;
+}
+
+.card__media {
     position: relative;
+    height: 210px;
     border-radius: 20px;
     overflow: hidden;
-    height: 240px;
     box-shadow: 0 16px 36px rgba(0, 0, 0, 0.10);
 }
 
-.stay-card__media img {
+.card__media img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -307,7 +312,7 @@
     padding: 6px 10px;
     border-radius: 999px;
     font-size: 12px;
-    font-weight: 700;
+    font-weight: 800;
 }
 
 .badge--dark {
@@ -315,82 +320,78 @@
     color: #fff;
 }
 
-/* 찜 버튼(오른쪽 위 하트 원형) */
-/* ✅ 찜 버튼(원형) - 찌그러짐 방지 강제 */
-.wish{
-  position: absolute;
-  top: 12px;
-  right: 12px;
+/* 찜 버튼 */
+.wish {
+    position: absolute;
+    right: 12px;
+    top: 12px;
 
-  width: 36px !important;
-  height: 36px !important;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.95);
+    cursor: pointer;
 
-  min-width: 36px;
-  min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
 
-  padding: 0 !important;        /* 버튼 기본 패딩 제거 */
-  border: 0;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.95);
-
-  display: flex;                /* grid 대신 flex도 OK */
-  align-items: center;
-  justify-content: center;
-
-  line-height: 0;               /* 텍스트 라인높이 영향 제거 */
-  flex: 0 0 36px;               /* flex 레이아웃에서도 크기 고정 */
-
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* ✅ SVG도 비율 고정 + 찌그러짐 방지 */
-.wish svg{
-  width: 20px !important;
-  height: 20px !important;
-  aspect-ratio: 1 / 1;          /* 최신 브라우저에서 강력 */
-  display: block;
-  fill: #6b6b6b;
+/* 하트 SVG — 기본: 빈 윤곽선 */
+.wish .heart {
+    width: 20px;
+    height: 20px;
+    display: block;
+    fill: none;
+    stroke: #bbb;
+    stroke-width: 1.5px;
+    transition: fill 0.2s ease, stroke 0.2s ease, transform 0.15s ease;
 }
 
-/* hover 효과 */
-.wish:hover svg {
-  transform: scale(1.1);
-  cursor: pointer;
+/* 찜 활성화: 빨강 채움 */
+.wish .heart.active {
+    fill: #e53935;
+    stroke: #e53935;
 }
 
-/* 카드 텍스트 영역 */
-.stay-card__body {
+.wish:hover .heart {
+    transform: scale(1.1);
+}
+
+/* 카드 본문 */
+.card__body {
     padding: 12px 2px 0;
 }
 
-.stay-card__title {
+.card__title {
     font-family: "Nanum Myeongjo", serif;
-    font-weight: 800;
+    font-weight: 900;
     font-size: 18px;
-    letter-spacing: -0.2px;
 }
 
-.stay-card__meta {
+.card__meta {
     margin-top: 6px;
     color: #6b6b6b;
     font-size: 13px;
 }
 
-.stay-card__price {
+/* 평점/가격 한 줄 */
+.card__row {
     margin-top: 10px;
-    font-weight: 800;
-    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
 }
 
-.stay-card__price span {
-    color: #6b6b6b;
-    font-weight: 500;
-}
-
-.stay-card__rating {
-    margin-top: 8px;
+.card__rating {
     font-size: 14px;
-    font-weight: 800;
+    font-weight: 900;
     display: flex;
     align-items: center;
     gap: 6px;
@@ -404,6 +405,66 @@
     font-weight: 600;
     color: #6b6b6b;
 }
+
+.card__price {
+    font-weight: 900;
+    font-size: 15px;
+}
+
+.card__price span {
+    font-weight: 600;
+    color: #6b6b6b;
+}
+
+/* 태그 */
+.card__tags {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    font-size: 12px;
+    font-weight: 800;
+    color: #444;
+    border: 1px solid #e1dbd4;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 6px 10px;
+    border-radius: 999px;
+}
+
+/* 객실 보기 버튼 */
+.card__btn {
+    margin-top: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
+    width: 100%;
+    border-radius: 14px;
+    border: 0;
+    background: #111;
+    color: #fff;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.card__btn:hover {
+    filter: brightness(1.15);
+}
+
+/* --------- stay-card → card 별칭 (HTML 구조 호환) --------- */
+/* stay-card__* 클래스를 쓰는 정적 HTML 카드가 card와 동일하게 보이도록 */
+.stay-card                  { background: transparent; }
+.stay-card__media           { position: relative; height: 210px; border-radius: 20px; overflow: hidden; box-shadow: 0 16px 36px rgba(0,0,0,0.10); }
+.stay-card__media img       { width: 100%; height: 100%; object-fit: cover; }
+.stay-card__body            { padding: 12px 2px 0; }
+.stay-card__title           { font-family: "Nanum Myeongjo", serif; font-weight: 900; font-size: 18px; }
+.stay-card__meta            { margin-top: 6px; color: #6b6b6b; font-size: 13px; }
+.stay-card__price           { margin-top: 10px; font-weight: 900; font-size: 15px; }
+.stay-card__price span      { font-weight: 600; color: #6b6b6b; }
+.stay-card__rating          { margin-top: 10px; display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 900; }
 
 /* --------- 프로모션 배너 --------- */
 .promo {
@@ -756,17 +817,7 @@
 .hidden {
     display: none;
 }
-/* heart 색변환 */
-svg.heart {
-    fill: rgb(107, 107, 107);
-    transition: fill 0.3s ease; /* 색 변할 때 부드럽게 */
-    cursor: pointer;
-}
-
-/* 클릭되어 active 클래스가 붙었을 때 (빨간색) */
-svg.heart.active {
-    fill: rgb(229, 57, 53);
-}
+/* heart 색변환은 .wish .heart / .wish .heart.active 로 관리 (위 카드 섹션 참고) */
 
 /* ai 상담사, 멀티턴 */
 /* AI 상담사 트리거 버튼 */

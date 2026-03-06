@@ -1,0 +1,72 @@
+#div1 {
+    
+    border: 1px solid red;
+}
+.block {
+    border: 1px solid red;
+    width: 100px;
+    height: 50px;
+    margin: 10px auto;
+    
+}
+
+.inline {
+    border: 1px solid red;
+    /* 너비 높이를 줄 수 없다.*/
+    width: 200px;
+    height: 300px;
+    /* 좌우는 되고 상하는 안 됨 */
+    margin: 20px 30px;
+    /*좌우만 되고 위아래 적용 안 됨, 그런데 border는 밀어짐*/
+    padding: 30px 30px;
+    /* display: block; */
+    background-color: green;
+}
+
+.parent   {
+    border: 1px dotted rgb(255, 0, 255);
+    text-align: center;
+    /* width: 400px; */
+   
+}
+
+.parent > div {
+    border: 1px solid red;
+    display: inline-block;
+    /* width: 100px; */
+    width: 300px;
+    height: 50px;
+    margin: 30px;
+    padding: 50px;
+}
+.parent2 {
+    border: 1px dotted rgb(255, 0, 255);
+    font-size: 0;
+}
+
+.parent2 > div {
+    border: 1px solid red;
+    display: inline-block;
+    /* width: 100px; */
+    width: 300px;
+    height: 50px;
+
+    /* inline, inline-block만 통해요. */
+    vertical-align: top;
+    font-size: 16px;
+}   
+
+.hide {
+    display: none;
+}
+
+.table {
+    display: table;
+}
+
+.table .td {
+    display: table-cell;
+    border: 1px solid red;
+    height: 100px;
+    vertical-align: middle;
+}

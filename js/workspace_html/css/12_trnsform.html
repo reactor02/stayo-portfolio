@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            border: 1px solid red;
+            height: 100px;
+            width: 100px;
+            background-color: green;
+            color: white;
+            margin: 10px;
+        }
+        .translate {
+            transform: translate(10px, 20px);
+            transform: translate(50%, 50%);
+        }
+        .scale {/*1이 100%*/
+            transform: scale(1.5);
+        }
+        .rotate {
+            transform: rotate(30deg);
+        }
+        .skew {
+            transform: skew(80deg);
+        }
+        .total {
+            transform: translate(50%, 50%) scale(1.3) rotate(-45deg);
+        }
+        /* 부모와 자식의 사이즈 관계없이 가로 세로 중앙 정렬 */
+        .parent {
+            width: 40%;
+            height: 30vh;
+            border: 1px solid red;
+            position: relative;
+        }
+        .child {
+            width: 100px;
+            height: 100px;
+            border: 1px solid blue;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+        }
+        
+        .box {
+            transition: all 0.5s;
+        }
+        .box:hover {
+            width: 200px;
+            background-color: red;
+            border-radius: 20px;
+        }
+        .box2 {
+            border: 1px solid red;
+            height: 50vh;
+            /* 뱡향 or 각도deg, 색상(색, 거리%), 색상(색, 거리%), 색상(색, 거리%) */
+            background-image:  linear-gradient(135deg, red 30%, green 80%, blue 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="box">비교</div>
+    <div class="box translate">translate</div>
+    <div class="box scale">scale</div>
+    <div class="box rotate">rotate</div>
+    <div class="box skew">skew</div>
+    <div class="box total">total</div>
+    <br><br><br><br><br><br><br><br><br><br>
+    <div class="parent">
+        <div class="child">
+
+        </div>
+    </div>
+
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+
+    <div class="box2"></div>
+</body>
+</html>

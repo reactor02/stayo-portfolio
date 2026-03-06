@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <style>
+        .v {
+            /* display: none; */
+            /* 공간은 남아있고 요소는 사라짐*/
+            visibility: hidden;
+        }
+        .v:hover {
+            /*요소가 없어서 적용 안됨*/
+            visibility: visible;
+        }
+        .op {
+            /* 1보임, 0완전 투명. 어떤 요소에도 투명도를 줄 수 있다 */
+            opacity: 0;
+        }
+        .op:hover{
+            opacity: 0.5;
+        }
+        .box {
+            border: 1px solid red;
+            height: 110px;
+            width: 100px;
+            margin: 10px;
+        }
+        .of-hidden {
+            overflow: hidden;
+        }
+        .of-scroll {
+            overflow: scroll;
+        }
+        .of-auto {
+            overflow: auto;
+        }
+        .parent div {
+            border: 1px solid brown;
+            display: inline-block;
+            width: 300px;
+            margin: 5px;
+            
+        }
+        .parent {
+            border: 1px solid blue;
+            width: 300px;
+            white-space: nowrap;
+            overflow: auto;
+        }
+    </style>
+<body>
+    <div>윗줄</div>
+    <div class="v">중간</div>
+    <div>아랫줄</div>
+    <hr>
+    <div>윗줄</div>
+    <div class="op">중간</div>
+    <div>아랫줄</div>
+    <hr>
+
+    <div class="box of-hidden" title="원문">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perferendis est dolores animi temporibus aut in labore itaque quod similique impedit error perspiciatis numquam illum, neque debitis sunt. Cupiditate, accusamus modi.
+    </div>
+    <div class="box of-scroll">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perferendis est dolores animi temporibus aut in labore itaque quod similique impedit error perspiciatis numquam illum, neque debitis sunt. Cupiditate, accusamus modi.
+    </div>
+    <div class="box of-auto">
+        Lorem 
+    </div>
+    <div class="parent">
+        <div>항목1</div>
+        <div>항목2</div>
+        <div>항목3</div>
+        <div>항목4</div>
+        <div>항목5</div>
+    </div>
+</body>
+</html>

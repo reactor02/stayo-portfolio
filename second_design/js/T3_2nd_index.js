@@ -3,7 +3,7 @@ window.addEventListener('load', bind);
 async function bind() {
 
     // ──────────────────────────────────────────────
-    // 팝업창 기능 구현
+    // 1. 팝업창 기능 구현
     // ──────────────────────────────────────────────
     const pNumber = document.getElementById("pNumber");
     const realNumber = document.getElementById("realNumber");
@@ -14,7 +14,7 @@ async function bind() {
     const confirmBtn = document.getElementById("confirmBtn");
     const hearts = document.querySelectorAll("svg.heart");
 
-    // heart 색변경 및 찜버튼에 정보전달
+    // 정적 하트(HTML에 직접 작성된 요소)용 이벤트
     hearts.forEach(heart => {
         heart.addEventListener("click", function (e) {
             e.stopPropagation();
@@ -58,14 +58,14 @@ async function bind() {
     });
 
     // ──────────────────────────────────────────────
-    // 날짜 선택
+    // 2. 날짜 선택
     // ──────────────────────────────────────────────
     const date1 = document.getElementById('date1');
     const date2 = document.getElementById('date2');
-    const box1  = document.getElementById('box1');
-    const box2  = document.getElementById('box2');
-    const dv1   = document.getElementById('dv1');
-    const dv2   = document.getElementById('dv2');
+    const box1 = document.getElementById('box1');
+    const box2 = document.getElementById('box2');
+    const dv1 = document.getElementById('dv1');
+    const dv2 = document.getElementById('dv2');
 
     const today = new Date().toISOString().split('T')[0];
     date1.min = today;
@@ -86,23 +86,19 @@ async function bind() {
         const val = this.value;
         if (!val) return;
 
-        // 박스에 날짜 텍스트 표시
         dv1.textContent = formatDate(val);
         box1.classList.add('has-value');
 
-        // 체크아웃 최소날짜 업데이트
         const next = new Date(val);
         next.setDate(next.getDate() + 1);
         date2.min = next.toISOString().split('T')[0];
 
-        // 체크아웃이 체크인보다 이전이면 초기화
         if (date2.value && date2.value <= val) {
             date2.value = '';
             dv2.textContent = '';
             box2.classList.remove('has-value');
         }
 
-        // 체크아웃 달력 자동으로 열기
         setTimeout(() => date2.showPicker?.(), 50);
     });
 
@@ -115,10 +111,9 @@ async function bind() {
     });
 
     // ──────────────────────────────────────────────
-    // AI 챗봇 (멀티턴)
-    // ⚠️ DOMContentLoaded 제거 → load 콜백 안에서 바로 실행
+    // 3. AI 챗봇 (멀티턴)
     // ──────────────────────────────────────────────
-    const API_KEY = 'AIzaSyDDh6S0C3xUBccRyslV-QsxGgN4H11wLDk'; // .trim()은 생략해도 무방합니다.
+    const API_KEY = 'AIzaSyDDh6S0C3xUBccRyslV-QsxGgN4H11wLDk';
     const FINAL_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
     const SYSTEM_INSTRUCTION = "당신은 'STAYO'의 친절한 숙박 예약 상담원입니다. 숙박, 여행, 예약 관련 질문에만 답하세요. 답변은 항상 친절하게 '~요'체로 끝내주세요.";
 
@@ -155,7 +150,6 @@ async function bind() {
         const text = promptInput.value.trim();
         if (!text || askBtn.disabled) return;
 
-        // 사용자 메시지 UI 추가 및 히스토리 저장
         appendMessage('user', text);
         chatHistory.push({ role: 'user', parts: [{ text }] });
 
@@ -174,10 +168,8 @@ async function bind() {
 
             const data = await response.json();
 
-            // ✅ HTTP 상태 코드 확인 (400, 429 에러 대응)
             if (!response.ok) {
                 console.error('API 상세 에러:', data);
-
                 if (response.status === 429) {
                     appendMessage('model', '현재 대화 요청이 너무 많아요. 1분만 기다렸다가 다시 말을 걸어주세요!');
                 } else if (response.status === 400) {
@@ -185,15 +177,12 @@ async function bind() {
                 } else {
                     appendMessage('model', `오류가 발생했어요. (코드: ${response.status})`);
                 }
-                return; // 에러 발생 시 이후 로직 중단
+                return;
             }
 
-            // ✅ 정상 응답 처리
             if (data.candidates && data.candidates.length > 0) {
                 const aiText = data.candidates[0].content.parts[0].text;
                 appendMessage('model', aiText);
-
-                // AI 답변을 히스토리에 추가하여 문맥 유지
                 chatHistory.push({ role: 'model', parts: [{ text: aiText }] });
             } else {
                 appendMessage('model', '답변을 생성하지 못했습니다. 다시 한 번 말씀해 주시겠어요?');
@@ -218,45 +207,105 @@ async function bind() {
     });
 
     // ──────────────────────────────────────────────
-// 카테고리 버튼 활성화
-// ──────────────────────────────────────────────
+    // 4 & 5. 카테고리 버튼 활성화 + 인기 숙소 카드 출력
+    // ──────────────────────────────────────────────
     const categoryBtns = document.querySelectorAll('.category-btn');
 
+    // 숙소 리스트를 그리는 함수
+    async function loadLodgings(type = '호텔') {
+        try {
+            // API 호출 (선택된 type 전달)
+            const listRes = await API.V1.TB.Lodging.properties({
+                q: type,       // 호텔·펜션 등 키워드로 검색
+                page: 1,
+                pageSize: 6
+            });
+
+            const result_grid = document.querySelector('.result-grid');
+
+            // 1. 기존에 그려져 있던 카드들을 모두 지웁니다.
+            result_grid.innerHTML = '';
+
+            // 2. 데이터가 없을 경우 처리
+            if (!listRes.items || listRes.items.length === 0) {
+                result_grid.innerHTML = '<p>조회된 숙소가 없습니다.</p>';
+                return;
+            }
+
+            // 2. 새로운 데이터로 카드 생성
+            listRes.items.forEach((item) => {
+                result_grid.innerHTML += `
+                    <a href="./T3_2nd_detail.html">
+                        <article class="card">
+                            <div class="card__media">
+                                <img src="${item.thumbnail}" alt="${item.name}" />
+                                <span class="badge badge--dark">할인 중</span>
+                                <button class="wish" type="button" aria-label="찜하기">
+                                    <svg viewBox="0 0 24 24" class="heart" aria-hidden="true">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+                                        2 6 4 4 6.5 4
+                                        8.04 4 9.54 4.81 10.4 6.09
+                                        11.26 4.81 12.76 4 14.3 4
+                                        16.8 4 18.8 6 18.8 8.5
+                                        c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="card__body">
+                                <div class="card__title">${item.name}</div>
+                                <div class="card__meta">${item.city} · ${item.district}</div>
+                                <div class="card__row">
+                                    <div class="card__rating">
+                                        <span class="star">★</span> ${item.rating}
+                                        <span class="count">${item.reviewCount}</span>
+                                    </div>
+                                    <div class="card__price">
+                                        ₩${item.priceFrom.toLocaleString()} <span>/ 1박</span>
+                                    </div>
+                                </div>
+                                <div class="card__tags">
+                                    <span class="tag">기타 편의시설</span>
+                                </div>
+                            </div>
+                        </article>
+                    </a>
+                `;
+            });
+        } catch (error) {
+            console.error('숙소 로딩 실패:', error);
+            document.querySelector('.result-grid').innerHTML = '<p>데이터를 불러오는 중 오류가 발생했습니다.</p>';
+        }
+    }
+
+    // 카테고리 버튼 클릭 이벤트 연결 (4번 섹션 수정)
     categoryBtns.forEach(btn => {
         btn.addEventListener('click', function () {
-
-            // 모든 버튼에서 active 제거
+            // UI 활성화 변경
             categoryBtns.forEach(el => el.classList.remove('active'));
-
-            // 클릭한 버튼에만 active 추가
             this.classList.add('active');
+
+            // 버튼 텍스트 가져오기 (예: "호텔", "펜션")
+            const selectedType = this.querySelector('.category__label').textContent.trim();
+
+            // 해당 타입으로 데이터 다시 불러오기
+            loadLodgings(selectedType);
         });
     });
 
+    // 초기 페이지 로딩 시 '호텔' 데이터 출력
+    loadLodgings('호텔');
 
-     let items = [];
-
-
-    // const logCall = (label, method, url, body) => {
-    //     console.log(`[CALL] ${label} :: ${method} ${url}`);
-    //     if (body !== undefined) console.log(`[BODY] ${label}`, body);
-    // };
-
-    // const logRes = (label, res) => console.log(`[RES] ${label}`, res);
-    // const logErr = (label, xhr) => {
-    //     const rj = xhr?.responseJSON;
-    //     const status = xhr?.status;
-    //     const msg = rj?.message || rj?.error || xhr?.statusText || "요청 실패";
-    //     console.log(`[ERR] ${label} :: status=${status}`, rj || msg);
-    // };
+    // 동적 생성 카드의 하트 이벤트 위임
+    const resultGrid = document.querySelector('.result-grid');
+    resultGrid.addEventListener('click', function (e) {
+        const wishBtn = e.target.closest('.wish');
+        if (!wishBtn) return;
+        e.preventDefault();
+        e.stopPropagation();
+        const heart = wishBtn.querySelector('.heart');
+        if (heart) heart.classList.toggle('active');
+    });
 
 
-    
-    try {
-        let listRes = await API.V1.TB.Lodging.properties({ city: '서울', page: 1, pageSize: 50 });
-        items = listRes.items;
-        console.log(listRes.items);
-    } catch (e) {
-        console.warn('API 호출 실패 (무시하고 계속):', e);
-    }
+
 }

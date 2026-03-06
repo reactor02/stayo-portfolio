@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--테이블 -->
+    <table border="1">
+        <!-- tr: table row, 한 줄을 뜻함.-->
+        <tr>
+            <!-- 
+                td : table data, 한 칸을 뜻함
+                상하정렬
+            -->
+            <td>내용 1-1</td>
+            <td>내용 1-2</td>
+            <td>내용 1-3</td>
+        </tr>
+        <tr>
+            <td>
+                내용 2-1111111111
+            </td>
+            <td>내용 2-222222222222</td>
+            <td>내용 2-33333333</td>
+        </tr>
+    </table>
+    <!--컨트롤+d로 다음 똑같은 글자를 선택해줌-->
+    <table border="1"> 
+        <tr>
+            <!-- 
+                th : table header 컬럼의 제목
+                두꺼운 글씨로 상하좌우 정렬
+            -->
+            <th>내용 1-1</th>
+            <th>내용 1-2</th>
+            <th>내용 1-3</th>
+        </tr>
+        <tr>
+            <td>
+                내용 2-11111111111
+            </td>
+            <td>내용 2-22222222222</td>
+            <td>내용 2-333333333</td>
+        </tr>
+    </table>
+    <!--각 줄마다 칸의 개수가 같아야한다.
+        같지 않으면 디자인이 이상해진다.
+    -->
+    <table border="1"> 
+        <tr>
+            <th>내용 1-1</th>
+            <th>내용 1-2</th>
+            <th>내용 1-3</th>
+        </tr>
+        <tr>
+            <td>
+                내용 2-11111111111
+            </td>
+            <td>내용 2-22222222222</td>
+            <td>내용 2-333333333</td>
+            <td>내용 2-444444444</td>
+        </tr>
+    </table>
+    <br>
+        <table border="1">
+            <tr>
+                <th>천안</th>
+                <td>3명</td>
+                <td>5000원</td>
+            </tr>
+            <tr>
+                <th>평택</th>
+                <td>5명</td>
+                <td>12000원</td>
+            </tr>
+        </table>
+
+    <hr>
+    <h1>테이블의 정석 구성</h1>
+    <table border="1">
+        <caption>테이블 내용에 대한 설명</caption>
+        <summary>제목1, 제목2 (컬럼나열)</summary>
+
+        <thead>
+            <tr>
+                <th>제목1</th>
+                <th>제목2</th> 
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>내용1</td>
+                <td>내용2</td> 
+            </tr>
+            <tr>
+                <td>내용1</td>
+                <td>내용2</td> 
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+        <table border="1">
+            <tr>
+                 <th width="200", height="200">제목</th>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                 <td width="200", height="200">내용</td>
+            </tr>
+        </table>
+    <hr>
+        <table border="1">
+            <!-- tr*2>td*3  row의 개수 * rowdata의 개수 테이블 쉽게 
+                세로*가로 테이블 완성-->
+             <!--rowspan 행병합
+                 colspan 열병합   
+             -->
+           <tr>
+                <td rowspan="2"> 1-1</td>
+                <td colspan="2"> 1-2</td>
+                <td>1-3</td>
+           </tr>
+            <tr>
+                <td>2-1</td>
+                <td>2-2</td>
+                <td>2-3</td>
+            </tr>
+        </table>
+
+    <table border="1">
+        <caption>아무거나</caption>
+        <summary>제목1, 제목2</summary>
+
+        <!--헤드와 바디 서로 열병합 속성사용시 별개로 취급함-->
+        <br>
+        <thead>
+            <tr>
+                <th rowspan="2">열1</th>
+                <th colspan="3">열2</th>
+                <!-- <th>열3</th> -->
+                <!-- <th>열4</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td rowspan="3">1-1</td>
+                <td colspan="3">1-2</td>
+                <td>1-3</td>
+                <td>1-4</td>
+            </tr>
+            <tr>
+                <td>2-1</td>
+                <td>2-2</td>
+                <td>2-3</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>3</td>
+                <td>3</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>4</td>
+                <td>4</td>
+                <td>4</td>
+            </tr>
+        </tbody>
+
+    </table>
+</body>
+
+</html>
