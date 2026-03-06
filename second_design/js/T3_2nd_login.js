@@ -64,10 +64,12 @@ window.onload = function () {
     const naverBtn = document.getElementById("naver-btn");
     kakaoBtn.addEventListener("click", function () {
         alert("카카오 로그인 기능은 추후 구현 예정입니다.");
+        window.location.href = "https://accounts.kakao.com/"
     });
 
     naverBtn.addEventListener("click", function () {
         alert("네이버 로그인 기능은 추후 구현 예정입니다.");
+        window.location.href = "https://nid.naver.com/"
     });
 
 

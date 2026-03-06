@@ -1,6 +1,7 @@
 window.onload = function () {
-    const joinBtn = document.querySelector('#joinBtn');
 
+    // 각각의 DOM들 가져오기 
+    const joinBtn = document.querySelector('#joinBtn');
     const name = document.querySelector('#name');
     const email = document.querySelector('#email');
     const password = document.querySelector('#password');
@@ -10,6 +11,7 @@ window.onload = function () {
     const birthMonth = document.querySelector('#birthMonth');
     const birthDay = document.querySelector('#birthDay');
 
+    //에러 메시지 칸들 
     const nameError = document.querySelector('#nameError');
     const emailError = document.querySelector('#emailError');
     const passwordError = document.querySelector('#passwordError');
@@ -18,6 +20,7 @@ window.onload = function () {
     const birthError = document.querySelector('#birthError');
     const agreeError = document.querySelector('#agreeError');
 
+    // 동의 창들 
     const agreeAll = document.querySelector('#agreeAll');
     const agreeItems = document.querySelectorAll('.agreeItem');
     const agree1 = document.querySelector('#agree1');
@@ -49,6 +52,7 @@ window.onload = function () {
     // 가입 버튼 클릭
     joinBtn.addEventListener('click', function (e) {
         e.preventDefault();
+        
 
         // 초기화
         nameError.textContent = "";
@@ -144,12 +148,15 @@ window.onload = function () {
                 .done(function (res) {
                     console.log("회원가입 성공", res);
                     alert("회원가입 완료!");
+                    window.location.href= "T3_2nd_login.html"
                 })
                 .fail(function (err) {
                     console.log("회원가입 실패", err);
                     alert("회원가입 실패");
                 });
-        }
+        } 
+
+       
     });
 
     const kakaoBtn = document.getElementById("kakao-btn");
@@ -157,9 +164,11 @@ window.onload = function () {
 
     kakaoBtn.addEventListener("click", function () {
         alert("카카오 로그인 기능은 추후 구현 예정입니다.");
+        window.location.href="https://accounts.kakao.com/"
     });
-
+    
     naverBtn.addEventListener("click", function () {
         alert("네이버 로그인 기능은 추후 구현 예정입니다.");
+        window.location.href="https://nid.naver.com/"
     });
 }

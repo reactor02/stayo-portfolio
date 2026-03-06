@@ -310,6 +310,117 @@
 
 
                             <!-- 간단 필터 UI(표현용) -->
+                            <!-- <div class="admin-form"> -->
+                                <!-- <label class="f">
+                                    <span class="f__label">상태</span>
+                                    <select class="f__control">
+                                        <option>전체</option>
+                                        <option>결제완료</option>
+                                        <option>이용예정</option>
+                                        <option>이용완료</option>
+                                        <option>취소</option>
+                                    </select>
+                                </label>
+
+                                <label class="f">
+                                    <span class="f__label">기간</span>
+                                    <input class="f__control" type="text" placeholder="예) 2026.03.01 ~ 2026.03.31" />
+                                </label>
+
+                                <label class="f f--wide">
+                                    <span class="f__label">검색</span>
+                                    <input class="f__control" type="text" placeholder="예약번호/숙소명/이메일" />
+                                </label> -->
+                            <!-- </div> -->
+                            <!-- <div class="hint muted"></div> -->
+                            <div class="table-wrap">
+                                <table id="table" class="tbl" aria-label="회원 목록">
+                                    <thead>
+                                        <tr>
+                                            <th>업체명</th>
+                                            <th>숙소명</th>
+                                            <th>등록일</th>
+                                            <th>상태</th>
+                                            <th>관리</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>업체명</td>
+                                            <td>숙소명</td>
+                                            <td>2026.02.11</td>
+                                            <td><span class="st st--ok status">대기중</span></td>
+                                            <td class="td-actions">
+                                                <button class="mini approve" type="button">승인</button>
+                                                <button class="mini refuse" type="button">거절</button>
+                                                <button class="mini pending" type="button">보류</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>업체명</td>
+                                            <td>숙소명</td>
+                                            <td>2026.01.28</td>
+                                            <td><span class="st st--wait status">대기중 </span></td>
+                                            <td class="td-actions">
+                                                <button class="mini approve" type="button">승인</button>
+                                                <button class="mini refuse" type="button">거절</button>
+                                                <button class="mini pending" type="button">보류</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>업체명</td>
+                                            <td>숙소명</td>
+                                            <td>2026.01.28</td>
+                                            <td><span class="st st--wait status">대기중 </span></td>
+                                            <td class="td-actions">
+                                                <button class="mini approve" type="button">승인</button>
+                                                <button class="mini refuse" type="button">거절</button>
+                                                <button class="mini pending" type="button">보류</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>업체명</td>
+                                            <td>숙소명</td>
+                                            <td>2026.01.28</td>
+                                            <td><span class="st st--wait status">대기중 </span></td>
+                                            <td class="td-actions">
+                                                <button class="mini approve" type="button">승인</button>
+                                                <button class="mini refuse" type="button">거절</button>
+                                                <button class="mini pending" type="button">보류</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>업체명</td>
+                                            <td>숙소명</td>
+                                            <td>2026.01.28</td>
+                                            <td><span class="st st--wait status">대기중 </span></td>
+                                            <td class="td-actions">
+                                                <button class="mini approve" type="button">승인</button>
+                                                <button class="mini refuse" type="button">거절</button>
+                                                <button class="mini pending" type="button">보류</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                        
+                        <!-- ✅ (D) 숙소 승인 대기: 최근 예약 아래로 이동 -->
+                         <section id="sec-stays" class="panel anchor">
+                            <div class="panel__head">
+                                <div>
+                                    <h2 class="panel__title">숙소 승인 대기</h2>
+                                    <p class="panel__sub muted">등록/수정 요청</p>
+                                </div>
+                                <button id="showall" class="btn-outline btn-outline--sm" type="button">전체보기</button>
+                            </div>
+
+                            <div class="list">
+                                <!-- 기존 숙소 승인 item 3개 그대로 -->
+                            </div>
+
+
+                            <!-- 간단 필터 UI(표현용) -->
                             <div class="admin-form">
                                 <label class="f">
                                     <span class="f__label">상태</span>
@@ -408,12 +519,12 @@
 
 
 
-                        <!-- ✅ (D) 회원 관리 -->
+                        <!-- ✅ (E) 회원 관리 -->
                         <section id="sec-users" class="panel anchor">
                             <div class="panel__head">
                                 <div>
                                     <h2 class="panel__title">회원 관리</h2>
-                                    <p class="panel__sub muted">회원 조회/정지/탈퇴 UI</p>
+                                    <p class="panel__sub muted">회원 조회/정지 UI</p>
                                 </div>
                                 <button class="btn-outline btn-outline--sm excel" type="button">엑셀다운로드</button>
                             </div>
@@ -443,7 +554,7 @@
                                         <tr>
                                             <td>#U-0988</td>
                                             <td>jh****@stayo.com</td>
-                                            <td>2026.01.28</td>
+                                            <td>2026.01.30</td>
                                             <td><span class="st st--ok status1">정상</span></td>
                                             <td class="td-actions">
                                                 <button class="mini energize" type="button">정상</button>
@@ -451,9 +562,9 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>#U-0988</td>
-                                            <td>jh****@stayo.com</td>
-                                            <td>2026.01.28</td>
+                                            <td>#U-1035</td>
+                                            <td>as****@stayo.com</td>
+                                            <td>2026.02.18</td>
                                             <td><span class="st st--ok status1">정상</span></td>
                                             <td class="td-actions">
                                                 <button class="mini energize" type="button">정상</button>
@@ -461,9 +572,9 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>#U-0988</td>
-                                            <td>jh****@stayo.com</td>
-                                            <td>2026.01.28</td>
+                                            <td>#U-0968</td>
+                                            <td>wj****@stayo.com</td>
+                                            <td>2026.01.24</td>
                                             <td><span class="st st--ok status1">정상</span></td>
                                             <td class="td-actions">
                                                 <button class="mini energize" type="button">정상</button>
@@ -471,9 +582,9 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>#U-0988</td>
-                                            <td>jh****@stayo.com</td>
-                                            <td>2026.01.28</td>
+                                            <td>#U-0992</td>
+                                            <td>rk****@stayo.com</td>
+                                            <td>2026.01.31</td>
                                             <td><span class="st st--ok status1">정상</span></td>
                                             <td class="td-actions">
                                                 <button class="mini energize" type="button">정상</button>

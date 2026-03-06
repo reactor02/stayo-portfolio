@@ -34,18 +34,14 @@ window.onload = function () {
 
         approve[i].addEventListener('click', function () {
             status[i].textContent = "승인";
-            status[i].style.color = "green"
-
         });
 
         refuse[i].addEventListener('click', function () {
             status[i].textContent = "거절";
-            status[i].style.color = "red";
         });
 
         pending[i].addEventListener('click', function () {
             status[i].textContent = "보류";
-            status[i].style.color = "grey";
         });
 
     }
@@ -61,8 +57,6 @@ window.onload = function () {
             status1[i].textContent = "정지";
             status1[i].style.color = "red";
         });
-
-
 
     }
 
@@ -145,7 +139,7 @@ window.onload = function () {
         
     for (let i = 0; i < keep.length; i++) {
         keep[i].addEventListener('click', function () {
-            alert('해당 리뷰가 되었습니다.')
+            alert('해당 리뷰 유지 되었습니다.')
         })
     }
 

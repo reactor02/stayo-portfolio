@@ -1,7 +1,7 @@
 window.onload = function () {
 
 
-    // 1 DOM 전부 위로 정리
+    // DOM 전부 위로 정리
     //  탭 & 레이아웃
     const tabId = document.getElementById("tab-id");
     const tabPw = document.getElementById("tab-pw");
