@@ -87,11 +87,8 @@ async function bind() {
     //     logErr("TB-LOD-1 PROPERTIES_LIST", e);
     //     return;
     // }
-<<<<<<< HEAD
-    listRes = await API.V1.TB.Lodging.properties({ city: '인천', page: 1, pageSize: 50 });
-=======
+
     listRes = await API.V1.TB.Lodging.properties({ city: '서울', page: 1, pageSize: 10 });
->>>>>>> fcb1ebb (LYS 수정사항)
     // console.log(q)
     items = listRes.items;
     console.log(listRes.items)
