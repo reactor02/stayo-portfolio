@@ -91,14 +91,14 @@
 
 //     listRes = await API.V1.TB.Lodging.properties({ city: '서울', page: 1, pageSize: 10 });
 
-    
+
 //     // console.log(q)
 //     items = listRes.items;
 //     console.log(listRes.items)
 //     render1(items);
-    
+
 //     r = listRes;
-    
+
 
 //     // console.log(items[0], Object.keys(items[0]));
 //     // console.log('rating=', items[0]?.rating);
@@ -145,7 +145,7 @@
 
 //                                 <div class="card__tags">
 //                                     <span class="tag">기타 편의시설</span>
-                                    
+
 //                                 </div>
 //                                     <button type="button" class="card__btn">객실 보기</button>
 //                             </div>
@@ -170,6 +170,7 @@ window.addEventListener('load', () => App.bind());
 const App = {
     // API에서 받아온 숙소 목록 저장
     items: [],
+    filteredItems: [],
 
     // 숙소 목록 전체 응답 저장
     r: null,
@@ -209,6 +210,12 @@ const App = {
 
         // 정렬 select 박스
         this.el.select = document.querySelector('.select');
+
+        this.el.gradeChecks = document.querySelectorAll('.side-box:nth-of-type(2) .check input[type="checkbox"]');
+        this.el.facilityChecks = document.querySelectorAll('.side-box:nth-of-type(3) .check input[type="checkbox"]');
+        this.el.rateRadios = document.querySelectorAll('input[name="rate"]');
+        this.el.resultsCount = document.querySelector('.results-head__meta b');
+        this.el.summaryCount = document.querySelector('.summary__desc');
     },
 
     // 이벤트 등록
@@ -225,7 +232,7 @@ const App = {
 
         // 필터 적용 버튼 클릭 시 아직 준비중 알림 표시
         this.el.side_apply.addEventListener('click', () => {
-            alert('기능이 준비중입니다');
+            this.applyFilters();
         });
 
         // 정렬 select 값이 바뀌면 정렬 다시 실행
@@ -246,13 +253,18 @@ const App = {
             // 응답에서 숙소 배열 저장
             this.items = listRes.items;
 
+            this.filteredItems = [...this.items];
+
             // 전체 응답 저장
             this.r = listRes;
 
             console.log(this.items);
 
             // 처음 화면에 숙소 카드 출력
-            this.renderCards(this.items);
+            this.filteredItems = [...this.items];
+            this.renderCards(this.filteredItems);
+            this.renderPrice();
+            this.updateResultCount();
 
             // 처음 가격 range 값도 같이 표시
             this.renderPrice();
@@ -278,6 +290,91 @@ const App = {
         // 화면에 원화 형식으로 출력
         this.el.side_range_value.textContent = '₩ ' + result;
     },
+    getLabelText(input) {
+        return input.parentElement.textContent.trim();
+    },
+
+    applyFilters() {
+        let list = [...this.items];
+
+        // 1. 가격 필터
+        const maxPrice = Number(this.el.price_range.value);
+        list = list.filter((item) => Number(item.priceFrom) <= maxPrice);
+
+        // 2. 숙소 등급 필터
+        const selectedGrades = [...this.el.gradeChecks]
+            .filter((input) => input.checked)
+            .map((input) => this.getLabelText(input));
+
+        if (selectedGrades.length > 0) {
+            list = list.filter((item) => {
+                const gradeValue =
+                    item.starRating ||
+                    item.grade ||
+                    item.hotelGrade ||
+                    item.ratingGrade ||
+                    '';
+
+                const gradeText = String(gradeValue);
+
+                return selectedGrades.some((grade) => {
+                    if (grade === '기타') {
+                        return !['3성급', '4성급', '5성급'].includes(gradeText);
+                    }
+                    return gradeText === grade || gradeText.includes(grade.replace('성급', ''));
+                });
+            });
+        }
+
+        // 3. 편의시설 필터
+        const selectedFacilities = [...this.el.facilityChecks]
+            .filter((input) => input.checked)
+            .map((input) => this.getLabelText(input));
+
+        if (selectedFacilities.length > 0) {
+            list = list.filter((item) => {
+                const facilities = [
+                    ...(Array.isArray(item.amenities) ? item.amenities : []),
+                    ...(Array.isArray(item.facilities) ? item.facilities : []),
+                    ...(Array.isArray(item.options) ? item.options : []),
+                    ...(Array.isArray(item.tags) ? item.tags : [])
+                ].join(' ');
+
+                return selectedFacilities.every((facility) => {
+                    return facilities.includes(facility);
+                });
+            });
+        }
+
+        // 4. 평점 필터
+        const checkedRate = [...this.el.rateRadios].find((radio) => radio.checked);
+
+        if (checkedRate) {
+            const rateText = this.getLabelText(checkedRate);
+
+            if (rateText !== '전체') {
+                const minRating = Number(rateText.replace('+', ''));
+                list = list.filter((item) => Number(item.rating) >= minRating);
+            }
+        }
+
+        this.filteredItems = list;
+        this.handleSort();
+        this.updateResultCount();
+    },
+
+    updateResultCount() {
+        const count = this.filteredItems.length;
+
+        if (this.el.resultsCount) {
+            this.el.resultsCount.textContent = count;
+        }
+
+        if (this.el.summaryCount) {
+            this.el.summaryCount.textContent = `검색 결과 ${count}개`;
+        }
+    },
+
 
     // select 값에 따라 숙소 목록 정렬
     handleSort() {
@@ -285,16 +382,16 @@ const App = {
 
         // 추천순 선택 시 원래 목록 그대로 출력
         if (value == this.el.recomand.textContent) {
-            this.renderCards(this.items);
+            this.renderCards(this.filteredItems);
 
-        // 낮은 가격순 선택 시 priceFrom 오름차순 정렬
+            // 낮은 가격순 선택 시 priceFrom 오름차순 정렬
         } else if (value == this.el.low.textContent) {
-            const sorted = [...this.items].sort((a, b) => a.priceFrom - b.priceFrom);
+            const sorted = [...this.fillteredItems].sort((a, b) => a.priceFrom - b.priceFrom);
             this.renderCards(sorted);
 
-        // 평점 높은순 선택 시 rating 내림차순 정렬
+            // 평점 높은순 선택 시 rating 내림차순 정렬
         } else if (value == this.el.high.textContent) {
-            const sorted = [...this.items].sort((a, b) => b.rating - a.rating);
+            const sorted = [...this.fillteredItems].sort((a, b) => b.rating - a.rating);
             this.renderCards(sorted);
         }
     },
