@@ -22,11 +22,13 @@ async function bind() {
         });
     });
 
-    let count = 0;
+    let count = 2;
+    pCount.textContent = count;
 
+    // 팝업 열기/닫기 (class 방식)
     pNumber.addEventListener("click", (e) => {
         e.stopPropagation();
-        popup.style.display = popup.style.display === "flex" ? "none" : "flex";
+        popup.classList.toggle("open");
     });
 
     popup.addEventListener("click", (e) => {
@@ -34,27 +36,25 @@ async function bind() {
     });
 
     document.addEventListener("click", () => {
-        popup.style.display = "none";
+        popup.classList.remove("open");
     });
 
     minusBtn.addEventListener("click", () => {
-        if (Number(pCount.textContent) <= 0) {
-            pCount.textContent = 0;
-        } else {
-            pCount.textContent = Number(pCount.textContent) - 1;
-            count = Number(pCount.textContent);
+        if (count > 1) {
+            count--;
+            pCount.textContent = count;
         }
     });
 
     plusBtn.addEventListener("click", () => {
-        pCount.textContent = Number(pCount.textContent) + 1;
-        count = Number(pCount.textContent);
+        count++;
+        pCount.textContent = count;
     });
 
     confirmBtn.addEventListener("click", () => {
         pNumber.value = `성인 ${count}명`;
         realNumber.value = count;
-        popup.style.display = "none";
+        popup.classList.remove("open");
     });
 
     // ──────────────────────────────────────────────
@@ -252,13 +252,11 @@ async function bind() {
 
 
     
-    let listRes;
-    
-    listRes = await API.V1.TB.Lodging.properties({ city: '서울', page: 1, pageSize: 50 });
-
-    items = listRes.items;
-    console.log(listRes.items)
-    // render1(items);
-    
-    // r = listRes;
+    try {
+        let listRes = await API.V1.TB.Lodging.properties({ city: '서울', page: 1, pageSize: 50 });
+        items = listRes.items;
+        console.log(listRes.items);
+    } catch (e) {
+        console.warn('API 호출 실패 (무시하고 계속):', e);
+    }
 }
