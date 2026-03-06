@@ -49,7 +49,7 @@ async function bind() {
         if (e.key === 'Escape') closeModal();
     });
 
-    // ✅ 갤러리 클릭 → 모달 열기 (이벤트 위임)
+    // 갤러리 클릭 → 모달 열기 (이벤트 위임)
     const galleryGrid = document.querySelector('.gallery-grid');
     galleryGrid.addEventListener('click', (e) => {
         const a = e.target.closest('[data-modal="photo"]');
@@ -79,33 +79,11 @@ async function bind() {
         });
     }
 
-    // const logCall = (label, method, url, body) => {
-    //     // console.log(`[CALL] ${label} :: ${method} ${url}`);
-    //     if (body !== undefined) console.log(`[BODY] ${label}`, body);
-    // };
-
-    // const logRes = (label, res) => console.log(`[RES] ${label}`, res);
-    // const logErr = (label, xhr) => {
-    //     const rj = xhr?.responseJSON;
-    //     const status = xhr?.status;
-    //     const msg = rj?.message || rj?.error || xhr?.statusText || "요청 실패";
-    //     console.log(`[ERR] ${label} :: status=${status}`, rj || msg);
-    // };
-
-    // const first = Array.isArray(items) ? items[0] : null;
-    // const propertyId = first?.propertyId || first?.id || first?.property_id;
-    // const rurl = API.V1.url(API.V1.API.TB_LODG_PROPERTIES_ROOMS, { propertyId });
-    // logCall("TB-LOD-3 PROPERTIES_ROOMS", "GET", rurl);
-    // DD.V1.TB.Lodging.rooms(propertyId).then(r => logRes("TB-LOD-3 PROPERTIES_ROOMS", r)).catch(e => logErr("TB-LOD-3 PROPERTIES_ROOMS", e));
-    // if (!propertyId) {
-    //     console.log("[SKIP] TB-LOD-2~4: propertyId 못 찾음");
-    //     return;
-    // }
     const propertyId = items[0].propertyId;
 
     API.V1.TB.Lodging.rooms(propertyId)
         .then((res) => {
-            render1(res.rooms);   // ✅ 여기!
+            render1(res.rooms);   
         })
         .catch((e) => logErr("TB-LOD-3 PROPERTIES_ROOMS", e));
 
