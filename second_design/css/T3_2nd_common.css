@@ -33,21 +33,15 @@ a { color: inherit; text-decoration: none; }
 button { font: inherit; }
 img { max-width: 100%; display: block; }
 
-/* --------- 공통 컨테이너 ---------
-  캡처 화면이 "넓은 데스크톱" 느낌이라 1200~1280 정도로 잡음
----------------------------------- */
+/* --------- 공통 컨테이너 --------- */
 .container {
   width: min(1200px, calc(100% - 48px));
   margin: 0 auto;
 }
 
 /* --------- 섹션 공통 --------- */
-.section {
-  padding: 64px 0;
-}
-.section--tight {
-  padding-top: 36px;
-}
+.section { padding: 64px 0; }
+.section--tight { padding-top: 36px; }
 
 .section__title {
   margin: 0;
@@ -64,7 +58,7 @@ img { max-width: 100%; display: block; }
 
 /* --------- 헤더 --------- */
 .header {
-  position: sticky; /* 캡처 상단 고정 느낌 */
+  position: sticky;
   top: 0;
   z-index: 50;
   background: rgba(245, 244, 242, 0.92);
@@ -97,9 +91,7 @@ img { max-width: 100%; display: block; }
   font-size: 14px;
   color: #555;
 }
-.gnb__link:hover {
-  color: #111;
-}
+.gnb__link:hover { color: #111; }
 
 /* 오른쪽 */
 .header__right {
@@ -145,6 +137,162 @@ img { max-width: 100%; display: block; }
   place-items: center;
 }
 .btn__icon svg { width: 18px; height: 18px; fill: #222; }
+
+/* ================================
+  ✅ STAYO 헤더 로그인 전/후 토글
+  - 기본(로그인 전): guest 보임
+  - .header.is-login 붙이면: user 보임
+================================ */
+
+/* 기본값: 로그인 전(게스트)만 노출 */
+.header-guest { 
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.header-user { 
+  display: none;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 로그인 후 상태 */
+.header.is-login .header-guest { display: none; }
+.header.is-login .header-user  { display: flex; }
+
+/* ================================
+  ✅ 숫자 배지(장바구니/찜 카운트) 완전 제거
+  - HTML에 span이 남아있어도 표시 안 됨
+================================ */
+.icon-badge,
+.listNumber,
+.listNumber2 {
+  display: none !important;
+}
+
+/* 혹시 남아있는 badge 계열 클래스가 있어도 무력화 */
+.icon-btn--badge { position: static !important; }
+
+/* ================================
+  유저 칩(마이페이지 링크형)
+  - 공통 .btn 톤과 맞춰서 통일감 유지
+================================ */
+.user-chip{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  /* padding: 8px 12px; */
+  border-radius: 999px;
+  border: 1px solid #ded9d2;
+  /* background: rgba(255,255,255,0.7); */
+  color: #222;
+}
+
+.user-chip__avatar{
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #0f0f0f;
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.user-avatar-btn{
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.user-chip__name{
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+
+/* user-menu 기준점 */
+.user-menu{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* 아바타 버튼 */
+.user-avatar-btn{
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* 검은 원 MH (기존 유지/필요시 여기만 조절) */
+.user-chip__avatar{
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--black);
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+/* 모달 기본 숨김 */
+.user-modal{
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 180px;
+
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(10px);
+  border: 1px solid #ded9d2;
+  border-radius: 14px;
+  box-shadow: 0 14px 40px rgba(0,0,0,.12);
+
+  padding: 8px;
+
+  display: none;        /* ✅ 기본 숨김 */
+  z-index: 80;
+}
+
+/* ✅ 열림 상태 */
+.user-menu.is-open .user-modal{
+  display: block;
+}
+
+/* 메뉴 아이템 */
+.user-modal__item{
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+
+  display: flex;
+  align-items: center;
+
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+
+  font-size: 14px;
+  color: #222;
+}
+
+.user-modal__item:hover{
+  background: rgba(17,17,17,.06);
+}
+
+.user-modal__logout{
+  color: #b3261e;
+}
+.user-modal__logout:hover{
+  background: rgba(179,38,30,.08);
+}
 
 /* --------- 푸터 --------- */
 .footer {
@@ -207,18 +355,12 @@ img { max-width: 100%; display: block; }
 .footer__bottom-link { color: #8f8f8f; }
 .footer__bottom-link:hover { color: #fff; }
 
-/* --------- 반응형(최소한) ---------
-  캡처는 데스크톱 중심이지만, 깨지지 않게만 처리
----------------------------------- */
+/* --------- 반응형(최소한) --------- */
 @media (max-width: 960px) {
-  .gnb { display: none; } /* 모바일에서는 메뉴 숨김(원하면 햄버거로 확장 가능) */
+  .gnb { display: none; }
 
-  .footer__top {
-    grid-template-columns: 1fr;
-  }
-  .footer__cols {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .footer__top { grid-template-columns: 1fr; }
+  .footer__cols { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 560px) {
