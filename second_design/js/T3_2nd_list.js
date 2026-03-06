@@ -88,7 +88,10 @@ async function bind() {
     //     return;
     // }
 
+
     listRes = await API.V1.TB.Lodging.properties({ city: '서울', page: 1, pageSize: 10 });
+
+    
     // console.log(q)
     items = listRes.items;
     console.log(listRes.items)
