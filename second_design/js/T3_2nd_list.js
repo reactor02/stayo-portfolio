@@ -87,7 +87,11 @@ async function bind() {
     //     logErr("TB-LOD-1 PROPERTIES_LIST", e);
     //     return;
     // }
-    listRes = await API.V1.TB.Lodging.properties({ city: '서울', page: 1, pageSize: 50 });
+<<<<<<< HEAD
+    listRes = await API.V1.TB.Lodging.properties({ city: '인천', page: 1, pageSize: 50 });
+=======
+    listRes = await API.V1.TB.Lodging.properties({ city: '서울', page: 1, pageSize: 10 });
+>>>>>>> fcb1ebb (LYS 수정사항)
     // console.log(q)
     items = listRes.items;
     console.log(listRes.items)
@@ -105,6 +109,7 @@ async function bind() {
 
         list.forEach((item) => {
             result_grid.innerHTML += `
+            <a href="./T3_2nd_detail.html" >
                     <article class="card">
                             <div class="card__media">
                                 <img src="${item.thumbnail}"/>
@@ -142,10 +147,10 @@ async function bind() {
                                     <span class="tag">기타 편의시설</span>
                                     
                                 </div>
-
-                                <a href="./T3_2nd_detail.html" class="card__btn">객실 보기</a>
+                                    <button type="button" class="card__btn">객실 보기
                             </div>
                         </article>
+                        </a>
             `
         })
     }

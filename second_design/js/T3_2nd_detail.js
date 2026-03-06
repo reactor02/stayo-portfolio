@@ -5,7 +5,7 @@ async function bind() {
     let listRes;
 
     listRes = await API.V1.TB.Lodging.properties({ city: '서울', page: 1, pageSize: 50 });
-   
+
     items = listRes.items;
 
     // console.log(items[0].name)
@@ -49,7 +49,7 @@ async function bind() {
         if (e.key === 'Escape') closeModal();
     });
 
-    // ✅ 갤러리 클릭 → 모달 열기 (이벤트 위임)
+    // 갤러리 클릭 → 모달 열기 (이벤트 위임)
     const galleryGrid = document.querySelector('.gallery-grid');
     galleryGrid.addEventListener('click', (e) => {
         const a = e.target.closest('[data-modal="photo"]');
@@ -79,33 +79,11 @@ async function bind() {
         });
     }
 
-    // const logCall = (label, method, url, body) => {
-    //     // console.log(`[CALL] ${label} :: ${method} ${url}`);
-    //     if (body !== undefined) console.log(`[BODY] ${label}`, body);
-    // };
-
-    // const logRes = (label, res) => console.log(`[RES] ${label}`, res);
-    // const logErr = (label, xhr) => {
-    //     const rj = xhr?.responseJSON;
-    //     const status = xhr?.status;
-    //     const msg = rj?.message || rj?.error || xhr?.statusText || "요청 실패";
-    //     console.log(`[ERR] ${label} :: status=${status}`, rj || msg);
-    // };
-
-    // const first = Array.isArray(items) ? items[0] : null;
-    // const propertyId = first?.propertyId || first?.id || first?.property_id;
-    // const rurl = API.V1.url(API.V1.API.TB_LODG_PROPERTIES_ROOMS, { propertyId });
-    // logCall("TB-LOD-3 PROPERTIES_ROOMS", "GET", rurl);
-    // DD.V1.TB.Lodging.rooms(propertyId).then(r => logRes("TB-LOD-3 PROPERTIES_ROOMS", r)).catch(e => logErr("TB-LOD-3 PROPERTIES_ROOMS", e));
-    // if (!propertyId) {
-    //     console.log("[SKIP] TB-LOD-2~4: propertyId 못 찾음");
-    //     return;
-    // }
     const propertyId = items[0].propertyId;
-    
+
     API.V1.TB.Lodging.rooms(propertyId)
         .then((res) => {
-            render1(res.rooms);   // ✅ 여기!
+            render1(res.rooms);   
         })
         .catch((e) => logErr("TB-LOD-3 PROPERTIES_ROOMS", e));
 
@@ -205,6 +183,35 @@ async function bind() {
 
 
     // const map__text = document.querySelector('.map__text')
+    function checkExpiredCoupons() {
+        const today = new Date().toISOString().split('T')[0];
+        const items = document.querySelectorAll('#couponList .item');
+
+        items.forEach(item => {
+            const metaArea = item.querySelector('.item__meta');
+            if (!metaArea) return;
+
+            // 유효기간 텍스트에서 날짜 추출
+            const metaText = metaArea.innerText;
+            const dateMatch = metaText.match(/(\d{4}-\d{2}-\d{2})\s*~\s*(\d{4}-\d{2}-\d{2})/);
+            if (!dateMatch) return;
+
+            const expMin = dateMatch[1];
+            const expMax = dateMatch[2];
+
+            if (today > expMax) {
+                // 만료된 쿠폰 → line-through 스타일 + 텍스트 변경
+                metaArea.className = 'item__meta muted line-through';
+                metaArea.innerText = `유효기간만료: ${expMin} ~ ${expMax}`;
+            } else {
+                // 유효한 쿠폰 → 정상 스타일 복원
+                metaArea.className = 'item__meta muted';
+                metaArea.innerText = `유효기간: ${expMin} ~ ${expMax}`;
+            }
+        });
+    }
+    checkExpiredCoupons();
+
 
 
 

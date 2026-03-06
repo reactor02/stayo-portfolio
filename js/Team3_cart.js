@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function () {
 
   const cartBox = document.querySelector(".cart-box");
@@ -242,3 +243,39 @@ document.addEventListener("DOMContentLoaded", function () {
   checkEmptyCart();
   updateScroll();
 });
+
+/* ----- 링크 코드 ------*/
+/* ---------------- 🔗 헤더 네비게이션 링크 기능 추가 ---------------- */
+
+(function () {
+
+  const nav = document.querySelector(".nav");
+  if (!nav) return;
+
+  const links = nav.querySelectorAll("a");
+
+  links.forEach(link => {
+
+    const text = link.textContent.trim();
+
+    // 기본 a 태그 href="#" 동작 방지
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      if (text === "동행") {
+        window.location.href = "companion.html";
+      }
+
+      else if (text === "회원신청") {
+        window.location.href = "signup.html";
+      }
+
+      else if (text.includes("마이페이지")) {
+        window.location.href = "http://127.0.0.1:5500/Team3_html/Team3_mypage.html";
+      }
+
+    });
+
+  });
+
+})();

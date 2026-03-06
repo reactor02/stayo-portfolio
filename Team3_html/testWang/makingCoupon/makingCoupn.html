@@ -31,15 +31,30 @@
         <article class="item item--warn">
             <div class="item__left">
                 <div class="item__title">쿠폰 이름</div>
-                <div class="discount red">할인율</div>
-                <div class="item__meta muted">유효기간</div>
+                <div class="discount red">할인율 10%</div>
+                <div class="item__meta muted">유효기간 2023-04-15 ~ 2023-04-15</div>
             </div>
             <div class="item__right">
-                <button class="mini mini--ok" type="button">쿠폰 삭제</button>
-                <button class="mini" type="button">쿠폰 수정</button>
+                <button class="mini mini--ok cBtn" type="button">쿠폰 삭제</button>
+                <button class="mini cBtn2" type="button">쿠폰 수정</button>
             </div>
         </article>
     </div>
+
+    <dialog id="myDialog2">
+        <p>테스트용 모달입니다 👋</p>
+        쿠폰명 <input type="text" id="couponName2">
+        할인율 <select name="discount" id="couponDiscount2">
+            <option value="10%">10%</option>
+            <option value="15%">15%</option>
+            <option value="20%">20%</option>
+            <option value="30%">30%</option>
+        </select>
+        유효기간 <input type="date" id="minDate2">
+        <input type="date" id="maxDate2">
+        <button id="makeCouponBtn2">쿠폰수정</button><br>
+        <button id="closeBtn2">닫기</button>
+    </dialog>
 
 </body>
 

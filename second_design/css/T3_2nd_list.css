@@ -447,7 +447,9 @@
   color: #fff;
   font-weight: 900;
 }
-.card__btn:hover{ filter: brightness(1.05); }
+.card__btn:hover{ filter: brightness(1.05);
+cursor: pointer;
+}
 
 /* 페이지네이션 */
 .pagination{

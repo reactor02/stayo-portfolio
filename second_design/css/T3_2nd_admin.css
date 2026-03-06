@@ -627,3 +627,16 @@
   .tool-search input{ min-width: 160px; }
   .kpi{ grid-template-columns: 1fr; }
 }
+/* ================================================
+   쿠폰/프로모션 추가 스타일 (makingCoupn.css 이식)
+================================================ */
+.red {
+    color: rgb(206, 13, 13);
+}
+.discount {
+    font-size: 15px;
+}
+.line-through {
+    color: gray;
+    text-decoration: line-through;
+}
