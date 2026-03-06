@@ -190,7 +190,19 @@
 
             <!-- 우측: 공유/찜 버튼(선택) -->
             <div class="property-head__right">
-              <button class="ghost-btn" type="button" aria-label="공유하기">
+              <button class="ghost-btn cart-btn" type="button" aria-label="장바구니">
+                <span class="ghost-btn__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      d="M7 4H5L4 6v2h2l2.2 4.4 1.2 2.4-.95 1.72A1.8 1.8 0 0 0 10 21h8v-2h-7.3l.9-1.6h5.2a2 2 0 0 0 1.8-1.1L21 9H8.3L7 6.5z" />
+                    <circle cx="10.5" cy="20" r="1.2"></circle>
+                    <circle cx="17.5" cy="20" r="1.2"></circle>
+                  </svg>
+                </span>
+                장바구니
+              </button>
+
+              <button class="ghost-btn share-btn" type="button" aria-label="공유하기">
                 <span class="ghost-btn__icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24">
                     <path d="M18 8a3 3 0 10-2.8-4H15a3 3 0 003 4z" />
@@ -203,21 +215,19 @@
                 공유
               </button>
 
-              <a href="./T3_2nd_mapage.html#sec-wish">
-                <button class="ghost-btn" type="button" aria-label="찜하기">
-                  <span class="ghost-btn__icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24">
-                      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
-                             2 6 4 4 6.5 4
-                             8.04 4 9.54 4.81 10.4 6.09
-                             11.26 4.81 12.76 4 14.3 4
-                             16.8 4 18.8 6 18.8 8.5
-                             c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                    </svg>
-                  </span>
-                  찜
-                </button>
-              </a>
+              <button class="ghost-btn wish-btn" type="button" aria-label="찜하기">
+                <span class="ghost-btn__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path class="heart" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+          2 6 4 4 6.5 4
+          8.04 4 9.54 4.81 10.4 6.09
+          11.26 4.81 12.76 4 14.3 4
+          16.8 4 18.8 6 18.8 8.5
+          c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                  </svg>
+                </span>
+                찜
+              </button>
             </div>
           </header>
 
@@ -282,83 +292,7 @@
             </div>
 
             <div class="room-list">
-              <!-- 객실 1 -->
-              <!-- <article class="room">
-                <div class="room__media">
-                  <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80"
-                    alt="디럭스 더블" />
-                </div>
 
-                <div class="room__body">
-                  <div class="room__title">디럭스 더블</div>
-                  <div class="room__meta muted">2인 · 더블베드 1 · 28m²</div>
-
-                  <div class="room__tags">
-                    <span class="tag">무료 취소</span>
-                    <span class="tag">조식 옵션</span>
-                    <span class="tag">시티뷰</span>
-                  </div>
-                </div>
-
-                <div class="room__side">
-                  <div class="room__price">
-                    ₩189,000 <span>/ 박</span>
-                  </div>
-                  <button class="btn-main" type="button">선택</button>
-                </div>
-              </article> -->
-
-              <!-- 객실 2 -->
-              <!-- <article class="room">
-                <div class="room__media">
-                  <img
-                    src="https://images.unsplash.com/photo-1501117716987-c8e1ecb210d3?auto=format&fit=crop&w=1200&q=80"
-                    alt="프리미엄 스위트" />
-                </div>
-
-                <div class="room__body">
-                  <div class="room__title">프리미엄 스위트</div>
-                  <div class="room__meta muted">3인 · 퀸베드 1 + 싱글 1 · 42m²</div>
-
-                  <div class="room__tags">
-                    <span class="tag">조식 포함</span>
-                    <span class="tag">무료 취소</span>
-                    <span class="tag">라운지</span>
-                  </div>
-                </div>
-
-                <div class="room__side">
-                  <div class="room__price">
-                    ₩260,000 <span>/ 박</span>
-                  </div>
-                  <button class="btn-main" type="button">선택</button>
-                </div>
-              </article>
-              <article class="room">
-                <div class="room__media">
-                  <img
-                    src="https://images.unsplash.com/photo-1501117716987-c8e1ecb210d3?auto=format&fit=crop&w=1200&q=80"
-                    alt="프리미엄 스위트" />
-                </div>
-
-                <div class="room__body">
-                  <div class="room__title">프리미엄 스위트</div>
-                  <div class="room__meta muted">3인 · 퀸베드 1 + 싱글 1 · 42m²</div>
-
-                  <div class="room__tags">
-                    <span class="tag">조식 포함</span>
-                    <span class="tag">무료 취소</span>
-                    <span class="tag">라운지</span>
-                  </div>
-                </div>
-
-                <div class="room__side">
-                  <div class="room__price">
-                    ₩260,000 <span>/ 박</span>
-                  </div>
-                  <button class="btn-main" type="button">선택</button>
-                </div>
-              </article> -->
             </div>
           </section>
 
@@ -650,12 +584,16 @@
 
   <div class="modal-bg" id="modalBg">
     <div class="modal" role="dialog" aria-modal="true">
-      <button class="modal-close" id="modalClose" type="button">×</button>
-      <h3 id="modalTitle">제목</h3>
-      <p id="modalBody">내용</p>
+      <div class="modal-top">
+        <h3 id="modalTitle">제목</h3>
+        <button class="modal-close" id="modalClose" type="button">×</button>
+      </div>
+
+      <div class="modal-body" id="modalBody">
+        내용
+      </div>
     </div>
   </div>
-
 
 
 </body>
