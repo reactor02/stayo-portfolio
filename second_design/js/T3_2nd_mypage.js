@@ -11,14 +11,19 @@
  *  └───────────────────────────────────────────────────────────────────────┘
  *
  *  ┌─ 동작 규칙 ───────────────────────────────────────────────────────────┐
+ *  │                                                                       │
  *  │  [비로그인 - 마이페이지 진입]                                         │
- *  │    → 모든 요소가 정상 표시됩니다.                                     │
+ *  │    → 예약·찜·쿠폰 요약 카드, 프로필 카드,                            │
+ *  │      사이드 탭 메뉴 4개(예약 내역/찜 목록/쿠폰·포인트/프로필 관리),   │
+ *  │      탭 콘텐츠 4개, 나의 문의 내역 블록 → 전부 숨김                  │
+ *  │    → 고객센터 탭 메뉴 항목만 표시 (클릭 유도)                        │
+ *  │    → 탭 콘텐츠 영역(#sec-support)도 숨긴 채 대기                     │
+ *  │    → 로그인 유도 배너 표시                                            │
  *  │                                                                       │
  *  │  [비로그인 - 고객센터 탭 클릭]                                        │
- *  │    → 프로필 카드, 요약 카드(예약·찜·쿠폰), 사이드 메뉴 4개,          │
- *  │       탭 콘텐츠 4개(예약/찜/쿠폰/프로필), 나의 문의 내역 블록 숨김   │
- *  │    → 로그인 유도 배너 표시                                            │
- *  │    → 고객센터 콘텐츠만 표시                                           │
+ *  │    → 로그인 유도 배너 제거                                            │
+ *  │    → #sec-support 섹션만 표시 (나머지 숨김 유지)                      │
+ *  │    → 고객센터 탭 active, 나의 문의 내역은 계속 숨김                   │
  *  │                                                                       │
  *  │  [로그인 성공 후 마이페이지 복귀]                                     │
  *  │    → 숨겨진 모든 요소 복원                                            │
@@ -27,7 +32,7 @@
  *  │                                                                       │
  *  │  [로그아웃 클릭]                                                      │
  *  │    → sessionStorage 초기화                                            │
- *  │    → 마이페이지이면 즉시 비로그인 상태(전체 표시)로 전환              │
+ *  │    → 마이페이지이면 즉시 비로그인 상태로 전환                         │
  *  └───────────────────────────────────────────────────────────────────────┘
  *
  *  ┌─ 데모 계정 (실서버 연동 시 handleLogin 내 검증 로직 교체) ───────────┐
@@ -51,14 +56,15 @@
    * ========================================================================= */
   function hide(el) {
     if (!el || el.hasAttribute(HIDDEN_ATTR)) return;
-    var d = window.getComputedStyle(el).display;
-    el.setAttribute(HIDDEN_ATTR, d === 'none' ? '' : d);
+    var computed = window.getComputedStyle(el).display;
+    el.setAttribute(HIDDEN_ATTR, computed === 'none' ? '' : computed);
     el.style.display = 'none';
   }
 
   function show(el) {
     if (!el || !el.hasAttribute(HIDDEN_ATTR)) return;
-    el.style.display = el.getAttribute(HIDDEN_ATTR) || '';
+    var orig = el.getAttribute(HIDDEN_ATTR);
+    el.style.display = orig || '';
     el.removeAttribute(HIDDEN_ATTR);
   }
 
@@ -94,18 +100,19 @@
     });
 
     return {
-      profileCard  : document.querySelector('.profile-card'),
-      summaryCards : document.querySelector('.summary-cards'),
-      menuItems    : menuItems,
-      sections     : [
+      profileCard   : document.querySelector('.profile-card'),
+      summaryCards  : document.querySelector('.summary-cards'),
+      menuItems     : menuItems,
+      sections      : [
         document.getElementById('sec-reservation'),
         document.getElementById('sec-wish'),
         document.getElementById('sec-coupon'),
         document.getElementById('sec-profile'),
       ],
-      inquiryBlock : inquiryBlock,
-      headerGuest  : document.querySelector('.header-guest'),
-      headerUser   : document.querySelector('.header-user'),
+      secSupport    : document.getElementById('sec-support'),   // 고객센터 섹션
+      inquiryBlock  : inquiryBlock,
+      headerGuest   : document.querySelector('.header-guest'),
+      headerUser    : document.querySelector('.header-user'),
     };
   }
 
@@ -162,11 +169,15 @@
       '</div>',
     ].join('');
 
-    // .tabs 앞에 삽입, 없으면 .my-grid 끝에 추가
-    var tabsEl = document.querySelector('.tabs');
-    var gridEl = document.querySelector('.my-grid');
-    if (tabsEl && gridEl) gridEl.insertBefore(banner, tabsEl);
-    else if (gridEl)       gridEl.appendChild(banner);
+    // 탭 콘텐츠 영역(.tab-content) 안 첫 번째 자리에 삽입
+    var tabContent = document.querySelector('.tab-content');
+    var gridEl     = document.querySelector('.my-grid');
+
+    if (tabContent) {
+      tabContent.insertBefore(banner, tabContent.firstChild);
+    } else if (gridEl) {
+      gridEl.appendChild(banner);
+    }
 
     // [로그인] 클릭 → 복귀 URL 저장 후 로그인 페이지로 이동
     var btn = document.getElementById('mypage-login-btn');
@@ -212,10 +223,8 @@
     document.body.appendChild(toast);
 
     requestAnimationFrame(function () {
-      requestAnimationFrame(function () {
-        toast.style.opacity   = '1';
-        toast.style.transform = 'translateX(-50%) translateY(0)';
-      });
+      toast.style.opacity   = '1';
+      toast.style.transform = 'translateX(-50%) translateY(0)';
     });
 
     setTimeout(function () {
@@ -227,29 +236,69 @@
     }, 3000);
   }
 
-  /* ── A-5. 비로그인 상태에서 고객센터 클릭 시 적용되는 UI ──────────────── */
+  /* ── A-5. [비로그인] 마이페이지 진입 시 UI ─────────────────────────────── *
+   *  · 프로필 카드 / 요약 카드 / 탭 메뉴 4개 / 탭 콘텐츠 4개               *
+   *    / 고객센터 섹션(#sec-support) / 나의 문의 내역 → 모두 숨김           *
+   *  · 고객센터 탭 메뉴 항목만 표시 (클릭 유도)                             *
+   *  · 로그인 유도 배너 표시                                                 *
+   * ========================================================================= */
   function applyGuestUI() {
     var t = getTargets();
 
-    // 로그인이 필요한 영역 전부 숨기기
+    // 프로필 카드 / 요약 카드 / 나의 문의 내역 숨김
     hide(t.profileCard);
     hide(t.summaryCards);
     hide(t.inquiryBlock);
+
+    // 고객센터를 제외한 사이드 탭 메뉴 항목 숨김
     hideAll(t.menuItems);
+
+    // 탭 콘텐츠 섹션 4개 숨김 (예약/찜/쿠폰/프로필)
     hideAll(t.sections);
 
-    // 헤더
+    // 고객센터 섹션도 숨김 (배너 표시 중에는 콘텐츠 안 보임)
+    hide(t.secSupport);
+
+    // 헤더: 비로그인 상태
     show(t.headerGuest);
     hide(t.headerUser);
 
-    // 고객센터 탭만 활성화
+    // 고객센터 탭만 active
     setActiveTab('#sec-support');
 
     // 로그인 유도 배너 표시
     createBanner();
   }
 
-  /* ── A-6. 로그인 후 전체 UI 복원 ───────────────────────────────────────── */
+  /* ── A-6. [비로그인] 고객센터 탭 클릭 시 UI ────────────────────────────── *
+   *  · 배너 제거 후 #sec-support 섹션만 표시                                *
+   *  · 프로필·요약·메뉴 4개·섹션 4개·나의 문의 내역은 숨김 유지            *
+   * ========================================================================= */
+  function applyGuestSupportUI() {
+    var t = getTargets();
+
+    // 배너 제거
+    removeBanner();
+
+    // 고객센터 섹션만 표시
+    show(t.secSupport);
+
+    // 나머지는 계속 숨김 유지
+    hide(t.profileCard);
+    hide(t.summaryCards);
+    hide(t.inquiryBlock);
+    hideAll(t.menuItems);
+    hideAll(t.sections);
+
+    // 헤더: 비로그인 상태
+    show(t.headerGuest);
+    hide(t.headerUser);
+
+    // 고객센터 탭 active 유지
+    setActiveTab('#sec-support');
+  }
+
+  /* ── A-7. [로그인] 전체 UI 복원 ────────────────────────────────────────── */
   function applyUserUI() {
     var t = getTargets();
 
@@ -262,8 +311,9 @@
     show(t.inquiryBlock);
     showAll(t.menuItems);
     showAll(t.sections);
+    show(t.secSupport);
 
-    // 헤더
+    // 헤더: 로그인 상태
     show(t.headerUser);
     hide(t.headerGuest);
 
@@ -274,46 +324,27 @@
     showToastIfNeeded();
   }
 
-  /* ── A-7. 완전 초기 상태 (비로그인 + 마이페이지 첫 진입) ──────────────── */
-  //  → 아무것도 숨기지 않고 정상 표시, 헤더만 비로그인 상태로 조정
-  function applyDefaultUI() {
-    var t = getTargets();
-
-    // 혹시 이전에 숨겨졌던 요소가 있으면 복원
-    show(t.profileCard);
-    show(t.summaryCards);
-    show(t.inquiryBlock);
-    showAll(t.menuItems);
-    showAll(t.sections);
-
-    // 헤더: 비로그인 상태
-    show(t.headerGuest);
-    hide(t.headerUser);
-
-    // 예약 내역 탭 활성화 (기본)
-    setActiveTab('#sec-reservation');
-
-    // 배너 없음
-    removeBanner();
+  /* ── A-8. [로그아웃] 후 비로그인 상태 전환 ─────────────────────────────── */
+  function applyLogoutUI() {
+    applyGuestUI();
   }
 
-  /* ── A-8. 고객센터 탭 클릭 이벤트 바인딩 ───────────────────────────────── */
-  //  비로그인이면 → applyGuestUI()
-  //  로그인이면  → 그냥 탭 이동 (기본 동작 허용)
+  /* ── A-9. 고객센터 탭 클릭 이벤트 바인딩 ───────────────────────────────── */
   function bindSupportTabClick() {
     var supportTab = document.querySelector('.tab-menu__item[href="#sec-support"]');
     if (!supportTab) return;
 
     supportTab.addEventListener('click', function (e) {
       if (!isLoggedIn()) {
-        // 기본 앵커 이동은 허용하되 숨김 UI 적용
-        applyGuestUI();
+        e.preventDefault();
+        // 배너를 닫고 고객센터 콘텐츠만 표시
+        applyGuestSupportUI();
       }
-      // 로그인 상태이면 아무 처리 없이 탭 이동 그대로
+      // 로그인 상태이면 기본 탭 이동 동작 그대로
     });
   }
 
-  /* ── A-9. 로그아웃 버튼 바인딩 ─────────────────────────────────────────── */
+  /* ── A-10. 로그아웃 버튼 바인딩 ────────────────────────────────────────── */
   function bindLogout() {
     document.querySelectorAll('.logout').forEach(function (btn) {
       if (btn.dataset.logoutBound) return;
@@ -324,10 +355,10 @@
         sessionStorage.removeItem('justLoggedIn');
         sessionStorage.removeItem('loginReturnUrl');
 
-        // 마이페이지이면 페이지 이동 없이 즉시 기본(전체 표시) 상태로 전환
+        // 마이페이지이면 페이지 이동 없이 즉시 비로그인 상태로 전환
         var path = location.pathname;
         if (path.includes('mapage') || path.includes('mypage')) {
-          applyDefaultUI();
+          applyLogoutUI();
         } else {
           location.href = './T3_2nd_index.html';
         }
@@ -335,14 +366,12 @@
     });
   }
 
-  /* ── A-10. 마이페이지 초기화 ────────────────────────────────────────────── */
+  /* ── A-11. 마이페이지 초기화 ────────────────────────────────────────────── */
   function initMypage() {
     if (isLoggedIn()) {
-      // 로그인 상태 → 전체 UI 복원 (로그인 직후이면 토스트 포함)
       applyUserUI();
     } else {
-      // 비로그인 상태 → 정상 표시 (고객센터 클릭 전까지는 모두 보임)
-      applyDefaultUI();
+      applyGuestUI();
     }
 
     // 고객센터 탭 클릭 감시
@@ -363,10 +392,10 @@
   }
 
   function getIdInput() {
-    return document.getElementById('login-id')            ||
-           document.querySelector('[name="userId"]')      ||
-           document.querySelector('[name="email"]')       ||
-           document.querySelector('input[type="email"]')  ||
+    return document.getElementById('login-id')           ||
+           document.querySelector('[name="userId"]')     ||
+           document.querySelector('[name="email"]')      ||
+           document.querySelector('input[type="email"]') ||
            document.querySelector('input[type="text"]');
   }
 
@@ -403,7 +432,7 @@
     el.textContent     = msg;
     el.style.display   = 'block';
     el.style.animation = 'none';
-    void el.offsetWidth;
+    void el.offsetWidth; // reflow
     el.style.animation = 'mp-shake .32s ease';
   }
 
@@ -434,14 +463,14 @@
     var returnUrl = sessionStorage.getItem('loginReturnUrl');
     if (returnUrl) {
       sessionStorage.removeItem('loginReturnUrl');
-      location.href = returnUrl;           // ← 마이페이지(또는 원래 페이지)로 복귀
+      location.href = returnUrl; // ← 마이페이지(또는 원래 페이지)로 복귀
     } else {
       location.href = './T3_2nd_index.html';
     }
   }
 
   /* ── B-5. 로그인 검증 ───────────────────────────────────────────────────── *
-   *  실서버 연동 시 아래 함수 내부를 fetch 호출로 교체하세요:               *
+   *  실서버 연동 시 아래 함수 내부를 fetch 호출로 교체하세요.               *
    *                                                                           *
    *  fetch('/api/login', {                                                    *
    *    method : 'POST',                                                       *
@@ -454,7 +483,7 @@
    *    else showError(errorEl, data.message || '로그인에 실패했습니다.');     *
    *  })                                                                       *
    *  .catch(function () {                                                     *
-   *    showError(errorEl, '서버 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.'); *
+   *    showError(errorEl, '서버 오류가 발생했습니다.');                       *
    *  });                                                                      *
    * ========================================================================= */
   function handleLogin(idVal, pwVal, errorEl) {
@@ -528,8 +557,6 @@
   });
 
 })();
-
-
 
 
 
