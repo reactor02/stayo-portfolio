@@ -574,7 +574,7 @@
                                     <h2 class="panel__title">쿠폰/프로모션</h2>
                                     <p class="panel__sub muted">쿠폰 생성/배포 UI</p>
                                 </div>
-                                <button class="btn-main btn-main--sm" type="button">쿠폰 생성</button>
+                                <button id="adminOpenBtn" class="btn-main btn-main--sm" type="button">쿠폰 생성</button>
                             </div>
 
                             <div class="admin-form">
@@ -595,7 +595,43 @@
                                     <span class="f__label">유효기간</span>
                                     <input class="f__control" type="text" placeholder="예) 2026.03.01 ~ 2026.03.31" />
                                 </label>
+                                <label class="f f--wide">
+                                    <div id="adminCouponList" class="list"></div>
+                                </label>
                             </div>
+
+                            <!-- 쿠폰 생성 모달 -->
+                            <dialog id="adminDialog">
+                                <p>쿠폰 생성</p>
+                                쿠폰명 <input type="text" id="adminCouponName">
+                                할인율 <select id="adminCouponDiscount">
+                                    <option value="10%">10%</option>
+                                    <option value="15%">15%</option>
+                                    <option value="20%">20%</option>
+                                    <option value="30%">30%</option>
+                                </select>
+                                유효기간 <input type="date" id="adminMinDate">
+                                <input type="date" id="adminMaxDate">
+                                <button id="adminMakeCouponBtn">쿠폰생성</button><br>
+                                <button id="adminCloseBtn">닫기</button>
+                            </dialog>
+
+                            <!-- 쿠폰 수정 모달 -->
+                            <dialog id="adminDialog2">
+                                <p>쿠폰 수정</p>
+                                쿠폰명 <input type="text" id="adminCouponName2">
+                                할인율 <select id="adminCouponDiscount2">
+                                    <option value="10%">10%</option>
+                                    <option value="15%">15%</option>
+                                    <option value="20%">20%</option>
+                                    <option value="30%">30%</option>
+                                </select>
+                                유효기간 <input type="date" id="adminMinDate2">
+                                <input type="date" id="adminMaxDate2">
+                                <button id="adminMakeCouponBtn2">쿠폰수정</button><br>
+                                <button id="adminCloseBtn2">닫기</button>
+                            </dialog>
+
                         </section>
 
                         <!-- ✅ (G) 설정 -->

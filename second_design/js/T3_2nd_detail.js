@@ -5,7 +5,7 @@ async function bind() {
     let listRes;
 
     listRes = await API.V1.TB.Lodging.properties({ city: '서울', page: 1, pageSize: 50 });
-   
+
     items = listRes.items;
 
     // console.log(items[0].name)
@@ -102,7 +102,7 @@ async function bind() {
     //     return;
     // }
     const propertyId = items[0].propertyId;
-    
+
     API.V1.TB.Lodging.rooms(propertyId)
         .then((res) => {
             render1(res.rooms);   // ✅ 여기!
@@ -205,6 +205,35 @@ async function bind() {
 
 
     // const map__text = document.querySelector('.map__text')
+    function checkExpiredCoupons() {
+        const today = new Date().toISOString().split('T')[0];
+        const items = document.querySelectorAll('#couponList .item');
+
+        items.forEach(item => {
+            const metaArea = item.querySelector('.item__meta');
+            if (!metaArea) return;
+
+            // 유효기간 텍스트에서 날짜 추출
+            const metaText = metaArea.innerText;
+            const dateMatch = metaText.match(/(\d{4}-\d{2}-\d{2})\s*~\s*(\d{4}-\d{2}-\d{2})/);
+            if (!dateMatch) return;
+
+            const expMin = dateMatch[1];
+            const expMax = dateMatch[2];
+
+            if (today > expMax) {
+                // 만료된 쿠폰 → line-through 스타일 + 텍스트 변경
+                metaArea.className = 'item__meta muted line-through';
+                metaArea.innerText = `유효기간만료: ${expMin} ~ ${expMax}`;
+            } else {
+                // 유효한 쿠폰 → 정상 스타일 복원
+                metaArea.className = 'item__meta muted';
+                metaArea.innerText = `유효기간: ${expMin} ~ ${expMax}`;
+            }
+        });
+    }
+    checkExpiredCoupons();
+
 
 
 
