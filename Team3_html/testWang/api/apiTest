@@ -2,40 +2,35 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>결제 테스트</title>
+    <title>결제 연동 테스트</title>
     <script src="https://js.tosspayments.com/v1/payment"></script>
 </head>
 <body>
-    <h2>팀 프로젝트 결제 테스트</h2>
-    <p>아래 버튼을 누르면 가짜 결제창이 뜹니다.</p>
-    
-    <button id="payment-button" style="padding: 10px 20px; cursor: pointer;">
-        15,000원 결제하기
-    </button>
+    <div style="text-align: center; margin-top: 50px;">
+        <h2>숙소 예약 결제</h2>
+        <p>테스트 결제 금액: <strong>1,004원</strong></p>
+        <button id="pay-btn" style="padding: 15px 30px; font-size: 16px; cursor: pointer;">
+            결제창 띄우기
+        </button>
+    </div>
 
     <script>
-        // 2. 클라이언트 키 (토스에서 제공하는 공용 테스트 키입니다)
+        // 토스에서 제공하는 공용 테스트 키 (누구나 사용 가능)
         const clientKey = 'test_ck_D53Qo7CZ696759u637n3Wj7Y';
         const tossPayments = TossPayments(clientKey);
 
-        const button = document.getElementById('payment-button');
-
-        button.addEventListener('click', function () {
-            // 3. 결제 요청 함수 호출
+        document.getElementById('pay-btn').addEventListener('click', function() {
             tossPayments.requestPayment('카드', {
-                amount: 15000,
-                orderId: 'order-' + new Date().getTime(), // 주문번호는 매번 달라야 함
-                orderName: '숙박 예약 테스트',
-                customerName: '홍길동',
-                successUrl: window.location.origin + '/success.html', // 성공 시 이동할 페이지
-                failUrl: window.location.origin + '/fail.html',      // 실패 시 이동할 페이지
+                amount: 1004,
+                orderId: 'TEAM_PROJ_' + Math.random().toString(36).substring(2, 11), // 매번 고유값 생성
+                orderName: '여행지 예약 결제 테스트',
+                customerName: '팀프로젝트_사용자',
+                successUrl: window.location.origin, // 성공 시 돌아올 주소
+                failUrl: window.location.origin,    // 실패 시 돌아올 주소
             })
             .catch(function (error) {
-                if (error.code === 'USER_CANCEL') {
-                    alert('사용자가 결제를 취소했습니다.');
-                } else {
-                    alert(error.message);
-                }
+                console.error(error);
+                alert(error.message);
             });
         });
     </script>

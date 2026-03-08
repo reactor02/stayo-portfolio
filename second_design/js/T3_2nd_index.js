@@ -111,13 +111,17 @@ async function bind() {
     });
 
     // ──────────────────────────────────────────────
-    // 3. AI 챗봇 (멀티턴)
+    // 3. AI 챗봇 (멀티턴) - Groq API (무료)
     // ──────────────────────────────────────────────
-    const API_KEY = 'AIzaSyDDh6S0C3xUBccRyslV-QsxGgN4H11wLDk';
-    const FINAL_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+    const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+    const API_KEY = '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';  // 🔑 https://console.groq.com 에서 무료 발급
     const SYSTEM_INSTRUCTION = "당신은 'STAYO'의 친절한 숙박 예약 상담원입니다. 숙박, 여행, 예약 관련 질문에만 답하세요. 답변은 항상 친절하게 '~요'체로 끝내주세요.";
 
-    const chatHistory = [];
+    // ✅ Groq는 system 메시지를 history 맨 앞에 포함시키는 방식
+    const chatHistory = [
+        { role: 'system', content: SYSTEM_INSTRUCTION }
+    ];
+
     const trigger = document.querySelector('#ai-trigger');
     const chatContainer = document.querySelector('#ai-chat-container');
     const closeBtn = document.querySelector('#ai-close-btn');
@@ -145,24 +149,30 @@ async function bind() {
         chatBox.scrollTop = chatBox.scrollHeight;
     }
 
-    // AI 통신 (멀티턴)
+    // AI 통신 (멀티턴) - Groq API
     async function handleChat() {
         const text = promptInput.value.trim();
         if (!text || askBtn.disabled) return;
 
         appendMessage('user', text);
-        chatHistory.push({ role: 'user', parts: [{ text }] });
+        // ✅ OpenAI 호환 형식: { role, content }
+        chatHistory.push({ role: 'user', content: text });
 
         promptInput.value = '';
         askBtn.disabled = true;
 
         try {
-            const response = await fetch(`${FINAL_URL}?key=${API_KEY}`, {
+            const response = await fetch(GROQ_API_URL, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${API_KEY}`
+                },
                 body: JSON.stringify({
-                    system_instruction: { parts: [{ text: SYSTEM_INSTRUCTION }] },
-                    contents: chatHistory
+                    model: 'llama-3.3-70b-versatile',  // ✅ Groq 무료 모델
+                    messages: chatHistory,              // ✅ 전체 히스토리 전송 (멀티턴 핵심)
+                    max_tokens: 1024,
+                    temperature: 0.7
                 })
             });
 
@@ -171,26 +181,26 @@ async function bind() {
             if (!response.ok) {
                 console.error('API 상세 에러:', data);
                 if (response.status === 429) {
-                    appendMessage('model', '현재 대화 요청이 너무 많아요. 1분만 기다렸다가 다시 말을 걸어주세요!');
-                } else if (response.status === 400) {
-                    appendMessage('model', '메시지 형식이 잘못되었거나 API 설정에 문제가 있어요.');
+                    appendMessage('assistant', '현재 요청이 너무 많아요. 잠시 후 다시 말을 걸어주세요!');
                 } else {
-                    appendMessage('model', `오류가 발생했어요. (코드: ${response.status})`);
+                    appendMessage('assistant', `오류가 발생했어요. (코드: ${response.status})`);
                 }
                 return;
             }
 
-            if (data.candidates && data.candidates.length > 0) {
-                const aiText = data.candidates[0].content.parts[0].text;
-                appendMessage('model', aiText);
-                chatHistory.push({ role: 'model', parts: [{ text: aiText }] });
+            // ✅ Groq 응답 구조: data.choices[0].message.content
+            if (data.choices && data.choices.length > 0) {
+                const aiText = data.choices[0].message.content;
+                appendMessage('assistant', aiText);
+                // ✅ AI 응답도 history에 추가 (멀티턴 유지)
+                chatHistory.push({ role: 'assistant', content: aiText });
             } else {
-                appendMessage('model', '답변을 생성하지 못했습니다. 다시 한 번 말씀해 주시겠어요?');
+                appendMessage('assistant', '답변을 생성하지 못했습니다. 다시 한 번 말씀해 주시겠어요?');
             }
 
         } catch (error) {
             console.error('네트워크 또는 시스템 오류:', error);
-            appendMessage('model', '연결이 원활하지 않습니다. 인터넷 상태를 확인해 주세요.');
+            appendMessage('assistant', '연결이 원활하지 않습니다. 인터넷 상태를 확인해 주세요.');
         } finally {
             askBtn.disabled = false;
             promptInput.focus();
@@ -321,7 +331,7 @@ async function bind() {
 
     // 인디케이터 활성화
     function destIndicator() {
-        destDots.forEach(function(dot) {
+        destDots.forEach(function (dot) {
             dot.classList.remove('dest-dot--active');
         });
         destDots[destIndex].classList.add('dest-dot--active');
@@ -339,7 +349,7 @@ async function bind() {
 
         // 마지막(가짜) 슬라이드에 도달하면 → 조용히 첫 번째로 점프
         if (destIndex === destSlides.length - 1) {
-            setTimeout(function() {
+            setTimeout(function () {
                 destTrack.style.transition = 'none';
                 destTrack.style.transform = 'translateX(0%)';
                 destIndex = 0;
@@ -354,12 +364,12 @@ async function bind() {
     let destAuto = setInterval(destMove, 3000);
 
     // 다음 버튼
-    destNext.addEventListener('click', function() {
+    destNext.addEventListener('click', function () {
         destMove();
     });
 
     // 이전 버튼
-    destPrev.addEventListener('click', function() {
+    destPrev.addEventListener('click', function () {
         if (destIndex === 0) {
             // 첫 번째에서 이전 → 가짜 마지막으로 순간 점프 후 한 칸 뒤로
             destIndex = destSlides.length - 2;
