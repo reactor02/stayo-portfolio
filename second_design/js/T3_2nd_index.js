@@ -306,6 +306,76 @@ async function bind() {
         if (heart) heart.classList.toggle('active');
     });
 
+    // ──────────────────────────────────────────────
+    // 6. 인기 여행지 캐러셀
+    // ──────────────────────────────────────────────
+    const destTrack = document.querySelector('.dest-carousel__track');
+    const destSlides = document.querySelectorAll('.dest-carousel__slide');
 
+    const destPrev = document.querySelector('.dest-carousel__btn--prev');
+    const destNext = document.querySelector('.dest-carousel__btn--next');
+
+    const destDots = document.querySelectorAll('.dest-dot');
+
+    let destIndex = 0;
+
+    // 인디케이터 활성화
+    function destIndicator() {
+        destDots.forEach(function(dot) {
+            dot.classList.remove('dest-dot--active');
+        });
+        destDots[destIndex].classList.add('dest-dot--active');
+    }
+
+    // 초기 인디케이터 세팅 (페이지 로드 시 첫 번째 점 확실히 활성화)
+    destIndicator();
+
+    // 다음 슬라이드로 이동
+    function destMove() {
+        destIndex++;
+
+        destTrack.style.transition = '0.5s';
+        destTrack.style.transform = 'translateX(-' + (100 * destIndex) + '%)';
+
+        // 마지막(가짜) 슬라이드에 도달하면 → 조용히 첫 번째로 점프
+        if (destIndex === destSlides.length - 1) {
+            setTimeout(function() {
+                destTrack.style.transition = 'none';
+                destTrack.style.transform = 'translateX(0%)';
+                destIndex = 0;
+                destIndicator();
+            }, 500);
+        } else {
+            destIndicator();
+        }
+    }
+
+    // 자동 재생
+    let destAuto = setInterval(destMove, 3000);
+
+    // 다음 버튼
+    destNext.addEventListener('click', function() {
+        destMove();
+    });
+
+    // 이전 버튼
+    destPrev.addEventListener('click', function() {
+        if (destIndex === 0) {
+            // 첫 번째에서 이전 → 가짜 마지막으로 순간 점프 후 한 칸 뒤로
+            destIndex = destSlides.length - 2;
+            destTrack.style.transition = 'none';
+            destTrack.style.transform = 'translateX(-' + (100 * destIndex) + '%)';
+        }
+
+        destIndex--;
+
+        // 강제 리플로우 (없으면 transition이 씹힘)
+        destTrack.getBoundingClientRect();
+
+        destTrack.style.transition = '0.5s';
+        destTrack.style.transform = 'translateX(-' + (100 * destIndex) + '%)';
+
+        destIndicator();
+    });
 
 }

@@ -211,12 +211,77 @@
     border-radius: 999px;
 }
 
-/* --------- 인기 여행지(4개 카드) --------- */
-.grid-dest {
+/* --------- 인기 여행지 캐러셀 래퍼 --------- */
+.dest-carousel {
     margin-top: 28px;
+    position: relative;
+}
+
+/* 뷰포트: 슬라이드 하나만 보이도록 overflow hidden */
+.dest-carousel__viewport {
+    overflow: hidden;
+}
+
+/* 트랙: 슬라이드들을 가로로 나열 */
+.dest-carousel__track {
+    display: flex;
+}
+
+/* 슬라이드 하나 = 뷰포트 100% 너비 */
+.dest-carousel__slide {
+    flex: 0 0 100%;
+}
+
+/* 슬라이드 안의 카드 그리드 — 기존 .grid-dest 그대로 */
+.grid-dest {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 22px;
+}
+
+/* 좌우 버튼 */
+.dest-carousel__btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-60%); /* 인디케이터 높이 감안해 약간 위로 */
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 10;
+    transition: background 0.15s, color 0.15s;
+}
+
+.dest-carousel__btn:hover {
+    background: #111;
+    color: #fff;
+}
+
+.dest-carousel__btn--prev { left: -22px; }
+.dest-carousel__btn--next { right: -22px; }
+
+/* 인디케이터 */
+.dest-carousel__indicator {
+    text-align: center;
+    margin-top: 18px;
+}
+
+.dest-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #ccc;
+    border-radius: 50%;
+    margin: 0 5px;
+    transition: background 0.2s;
+}
+
+.dest-dot--active {
+    background: #111;
 }
 
 .dest-card {
@@ -973,12 +1038,28 @@
         width: 100%;
     }
 
+    /* 1100px 이하: 슬라이드 안 카드 3개씩 */
     .grid-dest {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .dest-card {
+        height: 280px;
     }
 
     .grid-stay {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) and (min-width: 641px) {
+    /* 768px~641px: 슬라이드 안 카드 2개씩 */
+    .grid-dest {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dest-card {
+        height: 220px;
     }
 }
 
@@ -1022,13 +1103,23 @@
         flex: 0 0 auto;
     }
 
+    /* 640px 이하: 슬라이드 안 카드 1개씩, 높이 줄여서 모바일에서 스크롤 조작 가능 */
     .grid-dest {
         grid-template-columns: 1fr;
+        gap: 14px;
     }
 
     .dest-card {
-        height: 280px;
+        height: 160px;
     }
+
+    .dest-card__name {
+        font-size: 20px;
+    }
+
+    /* 버튼이 너무 가장자리로 나가지 않도록 */
+    .dest-carousel__btn--prev { left: 4px; }
+    .dest-carousel__btn--next { right: 4px; }
 
     .grid-stay {
         grid-template-columns: 1fr;
