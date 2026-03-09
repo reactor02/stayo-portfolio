@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #color {
+            height: 600px;
+            width: 50%;
+            /* width: 50vw; */
+            background-color: rgb(125, 56, 236);
+
+            position: absolute;
+            left: 50%
+        }
+        #pic {
+            height: 400px;
+            width: 400px;
+            background-image: url(https://images03.nicepage.com/c461c07a441a5d220e8feb1a/e1900cdaa5c15cecae8746b6/rtyy-min.jpg);
+            background-size: cover;
+            position: absolute;
+            top: 100px;
+            left: calc(50% - 200px)
+        }
+
+        #txt {
+            height: 300px;
+            width: 300px;
+            background-color: white;
+            position: absolute;
+            top: 150px;
+            left: 720px;
+        }
+    </style>
+</head>
+<body>
+    <div id="color">남색</div>
+    <div id="pic"></div>
+    <div id="txt">글씨</div>
+</body>
+</html>

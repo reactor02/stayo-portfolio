@@ -1,0 +1,19 @@
+/* 현재 목표 2-4. 박스를 만들어 
+1. 가운데 정렬. 전체 박스를 마진 정렬로 중앙으로 모아야한다.
+2. 2번째 박스는 2개다 좌우로 나눈다.
+3. 나눠진 박스에 content를 채운다.
+3. 글의 앞에 기다란 줄을 넣어야한다. inline-block으로 색을 채운 줄을 만든다.
+폰트는 weight로 두께를 준다.
+전략 수립완료
+*/
+
+.box1 {border: 1px solid red; height: 100%; width:70%; min-width: 500px; margin: 20px auto 0; padding: 0px; text-align: center;}
+.box2, .box3 {border: 1px solid red; display: inline-block; width: 430px; vertical-align: top; text-align: left}
+.parent1, .parent2{ margin: 30px 0;}
+
+[src] {width: 100%; }
+.child2 {border: 1px solid red; height: 100px;}
+
+.child2 .content1 {border-left:10px solid aquamarine; width: 80%; min-height: 80px; display: inline-block; padding-left: 10px;}
+
+.box3 .content1 {border: 1px solid red; margin-top: 60px; padding: 0 40px;}

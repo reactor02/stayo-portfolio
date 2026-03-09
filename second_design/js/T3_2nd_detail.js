@@ -114,18 +114,18 @@
 //                           <img src="${getRandomImage()}"
 //                             />
 //                         </div>
-        
+
 //                         <div class="room__body">
 //                           <div class="room__title">${r.name}</div>
 //                           <div class="room__meta muted">${r.capacity}인 · 더블베드 2 · 28m²</div>
-        
+
 //                           <div class="room__tags">
 //                             <span class="tag">무료 취소</span>
 //                             <span class="tag">조식 옵션</span>
 //                             <span class="tag">시티뷰</span>
 //                           </div>
 //                         </div>
-        
+
 //                         <div class="room__side">
 //                           <div class="room__price">
 //                             ₩ ${r.basePrice} 
@@ -270,6 +270,11 @@ const App = {
         this.el.book_price = document.querySelector('.book-price');
         this.el.sum_row = document.querySelector('.sum-row b');
         this.el.sum_row1 = document.querySelector('.sum-row span');
+
+        this.el.wishBtn = document.querySelector('.wish-btn');
+        this.el.wishHeart = document.querySelector('.wish-btn .heart');
+        this.el.cartBtn = document.querySelector('.cart-btn')
+        this.el.shareBtn = document.querySelector('.share-btn') 
     },
 
     // 이벤트 등록
@@ -333,6 +338,32 @@ const App = {
 
             this.updateBooking(priceText);
         });
+
+        if (this.el.wishBtn) {
+            this.el.wishBtn.addEventListener('click', () => {
+                this.el.wishBtn.classList.toggle('is-liked');
+
+                const liked = this.el.wishBtn.classList.contains('is-liked');
+
+                if (liked) {
+                    this.el.wishHeart.style.fill = '#ff5a5f';
+                    this.el.wishHeart.style.stroke = '#ff5a5f';
+                } else {
+                    this.el.wishHeart.style.fill = 'none';
+                    this.el.wishHeart.style.stroke = 'currentColor';
+                }
+            });
+        }
+        if (this.el.cartBtn) {
+            this.el.cartBtn.addEventListener('click',()=>{
+                alert('장바구니에 추가되었습니다')
+            })
+        }
+        if (this.el.shareBtn) {
+            this.el.shareBtn.addEventListener('click',()=>{
+                alert(`주소가 복사되었습니다 \n${window.document.location.href}`)
+            })
+        }
     },
 
     // 숙소 목록 API 호출
@@ -432,7 +463,7 @@ const App = {
                     </div>
 
                     <div class="room__side">
-                        <div class="room__price">₩ ${r.basePrice}</div>
+                        <div class="room__price">₩ ${this.formatMoney(r.basePrice)}</div>
                         <button class="btn-main" type="button">선택</button>
                     </div>
                 </article>

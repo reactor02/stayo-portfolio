@@ -1,0 +1,75 @@
+/* 현재 목표치.
+    그림을 누르면 오른쪽에 이미지가 떠야한다.
+    같은 위치에 똑같은 크기가 나오ㅜㅏ야한다.
+    디스플레이논으로 숨겨야한ㄷ.
+    이미지에 손을 대면 보더가 나타나야한다. hover이면 된다.
+    왼쪽으로 정렬한 이미지를 써야한다. position으로 왼쪽정렬을 해보자.
+    각 그림은 상자로 감싸야한다.
+*/
+.parentBox {
+    border: 1px solid red;
+    height: 400px;
+    width: 400px;
+    position: relative;
+}
+ul {
+    padding:0;
+    font-size: 0;
+    position: relative;
+    box-sizing: border-box;
+    
+}
+ul li {
+    border: 1px solid red;
+    width: 50px;
+    height: 50px;
+    list-style-type: none;
+    box-sizing: border-box;
+    position: relative;
+    
+    
+}
+.img {
+    border: 1px solid red;
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: 0px;
+    left: 60px;
+    box-sizing: border-box;
+    display: none
+    
+}
+.click1 {
+    background-image: url(https://thumbnail.coupangcdn.com/thumbnails/remote/48x48ex/image/retail/images/2025/07/23/12/1/1b2a4f85-9a71-4737-8513-8f16d11d1ac8.png);
+    background-size: cover;
+}
+.click2{
+    background-image: url(https://thumbnail.coupangcdn.com/thumbnails/remote/48x48ex/image/rs_quotation_api/wcbdcaql/88b2358c4b97491b8515f7592d7bf37c.jpg);
+    background-size: cover;
+}
+.click3{
+    background-image: url(https://thumbnail.coupangcdn.com/thumbnails/remote/48x48ex/image/retail/images/446284238753922-a62c5a0a-effb-4889-b0a4-a0fe07f60163.jpg);
+    background-size: cover;
+}
+.zoomout1 {
+    background-image: url(https://thumbnail.coupangcdn.com/thumbnails/remote/492x492ex/image/retail/images/2025/07/23/12/1/1b2a4f85-9a71-4737-8513-8f16d11d1ac8.png);
+    background-size: contain;
+}
+.zoomout2 {
+    background-image: url(https://thumbnail.coupangcdn.com/thumbnails/remote/492x492ex/image/rs_quotation_api/wcbdcaql/88b2358c4b97491b8515f7592d7bf37c.jpg);
+    background-size: contain;
+}
+.zoomout3 {
+    background-image: url(https://thumbnail.coupangcdn.com/thumbnails/remote/492x492ex/image/retail/images/446284238753922-a62c5a0a-effb-4889-b0a4-a0fe07f60163.jpg);
+    background-size: contain;
+}
+.click:hover + .img {
+    display: block;
+}
+/* .click2:hover + .zoomout2 {
+    display: block;
+}
+.click3:hover + .zoomout3 {
+    display: block;
+} 클래스 img와 click으로 통일하기 전의 잔재*/

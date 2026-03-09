@@ -6,9 +6,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const cartBox = document.querySelector(".cart-left");
   const summaryBox = document.querySelector(".summary-price");
+  const payBtn = document.querySelector(".btn-main--big"); // 결제 버튼 선택자 추가
 
   const TAX = 35000;
-  const DISCOUNT_RATE = 0.1;
+  // 할인율(DISCOUNT_RATE) 변수 제거됨
 
   let deletedItems = [];
 
@@ -22,46 +23,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function updateSummary() {
 
-  const cartItems = document.querySelectorAll(".cart-item");
+    const cartItems = document.querySelectorAll(".cart-item");
 
-  let stayTotal = 0;
+    let stayTotal = 0;
 
-  cartItems.forEach(item => {
+    cartItems.forEach(item => {
+      const sumEl = item.querySelector(".sum-total");
+      if (!sumEl) return;
 
-    const sumEl = item.querySelector(".sum-total");
+      const price = getNumber(sumEl.textContent);
+      stayTotal += price;
+    });
 
-    if (!sumEl) return;
+    // 세금 및 수수료 (기존 고정값 유지)
+    const tax = TAX;
 
-    const price = getNumber(sumEl.textContent);
+    // 최종 금액 (할인 계산 제외)
+    const finalTotal = stayTotal + tax;
 
-    stayTotal += price;
+    const rows = summaryBox.querySelectorAll(".sum-row");
 
-  });
+    if (rows.length >= 3) {
+      // 숙박 요금
+      rows[0].querySelector("b").textContent = formatWon(stayTotal);
 
-  // 세금 및 수수료 (기존 고정값 유지)
-  const tax = TAX;
+      // 세금 및 수수료
+      rows[1].querySelector("b").textContent = formatWon(tax);
 
-  // 할인
-  const discount = Math.floor(stayTotal * DISCOUNT_RATE);
-
-  // 최종 금액
-  const finalTotal = stayTotal + tax - discount;
-
-  const rows = summaryBox.querySelectorAll(".sum-row");
-
-  // 숙박 요금
-  rows[0].querySelector("b").textContent = formatWon(stayTotal);
-
-  // 세금 및 수수료
-  rows[1].querySelector("b").textContent = formatWon(tax);
-
-  // 할인
-  rows[2].querySelector("b").textContent = "-" + formatWon(discount);
-
-  // 총 결제 금액
-  rows[3].querySelector("b").textContent = formatWon(finalTotal);
-
-}
+      // 총 결제 금액 (할인 행이 빠졌으므로 rows[2]로 변경)
+      rows[2].querySelector("b").textContent = formatWon(finalTotal);
+    }
+  }
 
 
   /* ===============================
@@ -76,83 +68,84 @@ document.addEventListener("DOMContentLoaded", function () {
     const item = btn.closest(".cart-item");
     if (!item) return;
 
-// 수정 버튼
-if (btn.textContent.trim() === "수정") {
+    // 수정 버튼
+    if (btn.textContent.trim() === "수정") {
 
-  let controller = item.querySelector(".qty-controller");
+      let controller = item.querySelector(".qty-controller");
 
-  // 이미 있으면 제거 (토글)
-  if (controller) {
-    controller.remove();
-    return;
-  }
+      // 이미 있으면 제거 (토글)
+      if (controller) {
+        controller.remove();
+        return;
+      }
 
-  controller = document.createElement("span");
-  controller.className = "qty-controller";
-  controller.style.marginLeft = "10px";
+      controller = document.createElement("span");
+      controller.className = "qty-controller";
+      controller.style.marginLeft = "10px";
 
-  controller.innerHTML = `
-    <button class="qty-minus">-</button>
-    <span class="qty-val">1</span>
-    <button class="qty-plus">+</button>
-  `;
-
-  btn.after(controller);
-
-  const minusBtn = controller.querySelector(".qty-minus");
-  const plusBtn = controller.querySelector(".qty-plus");
-  const qtyVal = controller.querySelector(".qty-val");
-
-  const nightEl = item.querySelector(".pill:last-child");
-
-  minusBtn.addEventListener("click", function () {
-
-    let qty = parseInt(qtyVal.textContent);
-
-    if (qty > 1) {
-      qty--;
-      qtyVal.textContent = qty;
-      nightEl.textContent = qty + "박";
-
-      const unitPrice = getNumber(
-        item.querySelector(".cart-item__price b").textContent
-      );
-
-      const total = unitPrice * qty;
-
-      item.querySelector(".cart-item__sum").innerHTML =
-      `
-      <div class="sum-line1">${formatWon(unitPrice)} × ${qty}박</div>
-      <div class="sum-total">총 ${formatWon(total)}</div>
+      controller.innerHTML = `
+        <button class="qty-minus">-</button>
+        <span class="qty-val">1</span>
+        <button class="qty-plus">+</button>
       `;
 
-      updateSummary();
+      btn.after(controller);
+
+      const minusBtn = controller.querySelector(".qty-minus");
+      const plusBtn = controller.querySelector(".qty-plus");
+      const qtyVal = controller.querySelector(".qty-val");
+
+      const nightEl = item.querySelector(".pill:last-child");
+
+      minusBtn.addEventListener("click", function () {
+
+        let qty = parseInt(qtyVal.textContent);
+
+        if (qty > 1) {
+          qty--;
+          qtyVal.textContent = qty;
+          nightEl.textContent = qty + "박";
+
+          const unitPrice = getNumber(
+            item.querySelector(".cart-item__price b").textContent
+          );
+
+          const total = unitPrice * qty;
+
+          item.querySelector(".cart-item__sum").innerHTML =
+          `
+          <div class="sum-line1">${formatWon(unitPrice)} × ${qty}박</div>
+          <div class="sum-total">총 ${formatWon(total)}</div>
+          `;
+
+          updateSummary();
+        }
+      });
+
+      plusBtn.addEventListener("click", function () {
+
+        let qty = parseInt(qtyVal.textContent);
+
+        qty++;
+        qtyVal.textContent = qty;
+        nightEl.textContent = qty + "박";
+
+        const unitPrice = getNumber(
+          item.querySelector(".cart-item__price b").textContent
+        );
+
+        const total = unitPrice * qty;
+
+        item.querySelector(".cart-item__sum").innerHTML =
+        `
+        <div class="sum-line1">${formatWon(unitPrice)} × ${qty}박</div>
+        <div class="sum-total">총 ${formatWon(total)}</div>
+        `;
+
+        updateSummary();
+      });
     }
-  });
 
-  plusBtn.addEventListener("click", function () {
-
-    let qty = parseInt(qtyVal.textContent);
-
-    qty++;
-    qtyVal.textContent = qty;
-    nightEl.textContent = qty + "박";
-
-    const unitPrice = getNumber(
-      item.querySelector(".cart-item__price b").textContent
-    );
-
-    const total = unitPrice * qty;
-
-    item.querySelector(".cart-item__sum").innerHTML =
-    `
-    <div class="sum-line1">${formatWon(unitPrice)} × ${qty}박</div>
-    <div class="sum-total">총 ${formatWon(total)}</div>
-    `;
-
-    updateSummary();
-  });
-}
     // 삭제 버튼
     if (btn.textContent.trim() === "삭제") {
 
@@ -262,20 +255,22 @@ if (btn.textContent.trim() === "수정") {
      💳 결제 버튼
   =============================== */
 
-  payBtn.addEventListener("click", function (e) {
+  if (payBtn) {
+    payBtn.addEventListener("click", function (e) {
+      const cartItems = document.querySelectorAll(".cart-item");
 
-  const cartItems = document.querySelectorAll(".cart-item");
+      if (cartItems.length === 0) {
+        alert("결제할 상품이 없습니다.");
+        e.preventDefault();
+        return;
+      }
 
-  if (cartItems.length === 0) {
-    alert("결제할 상품이 없습니다.");
-    e.preventDefault();
-    return;
+      if (!confirm("선택한 상품을 결제하시겠습니까?")) {
+        e.preventDefault();
+      }
+    });
   }
 
-  if (!confirm("선택한 상품을 결제하시겠습니까?")) {
-    e.preventDefault();
-  }
-});
 
   /* ===============================
      🔗 네비게이션 링크
@@ -311,6 +306,3 @@ if (btn.textContent.trim() === "수정") {
   updateScroll();
 
 });
-
-
-

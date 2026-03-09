@@ -1,0 +1,69 @@
+        * { margin: 0; padding: 0;}
+        nav{font-size: 0; width: 100%;} /* 부모에 font-size 0줘서 자식 리스트 끼리의 여백공간삭제*/
+        .n1 {
+            position: fixed;
+            top: 0;   
+        }
+        .n2 {
+            display: none;
+            position: fixed;
+            top:60px; 
+            width: 100%;
+            
+        }
+
+        ul {border:1px solid red; 
+            width: 33.3%; 
+            box-sizing: border-box; 
+            display: inline-block;
+            background-color: blue;
+            list-style: none;
+            text-align: center;
+            
+        }
+        ul li {
+            border: 1px solid green;
+            box-sizing: border-box;
+            font-size: 30px;
+            line-height: 60px;
+            height: 60px;
+        }
+        .t1{
+            border: 1px solid green;
+            box-sizing: border-box;
+            font-size: 30px;
+            line-height: 60px;
+            height: 60px;
+            width: 100%;
+            font-size: 0;
+            
+        }
+        .t1 li{
+            width: 33.3%;
+            display: inline-block;
+        }
+        .n1:hover+.n2{ /*둘은 형제 요소이므로 +로 묶어줘야 한다.*/
+                         /*형제 요소는 바로 다음에 나오는 코드여야한다. 중간에 다른 코드가 있으면 형제요소 아님*/
+            display: block;
+            
+        }
+        .n2:hover {
+            display: block;
+        }
+        .n2 ul li {
+            background-color: green;
+        }
+        
+        a {
+            text-decoration:none;
+            color: white;
+        }
+        a:hover, a:visited:hover {
+            color: red;
+            text-decoration:underline;
+            text-decoration-color: red;
+        }
+        a:visited {
+            color: white;
+        }
+       

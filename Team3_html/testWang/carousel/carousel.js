@@ -1,23 +1,78 @@
 window.addEventListener('load', bind)
 function bind(){ 
-const slider = document.querySelector('.slider');
-const items = document.querySelectorAll('.item');
+const track = document.querySelector('.track')
+const slides = document.querySelectorAll('.slide')
 
-let index = 0;
-const total = items.length;
+const prev = document.querySelector('.prev')
+const next = document.querySelector('.next')
 
-setInterval(() => {
+const dots = document.querySelectorAll('.dot')
 
-  index++;
+let index = 0
+const width = 300
 
-  // 마지막 다음이면 처음으로
-  if (index >= total) {
-    index = 0;
+function indicator(){
+
+  dots.forEach(function(dot){
+    dot.classList.remove('active')
+  })
+
+  dots[index].classList.add('active')
+
+}
+
+function move(){
+
+  index++
+
+  track.style.transition = "0.5s"
+  track.style.transform = "translateX(-" + (width * index) + "px)"
+
+  if(index === slides.length - 1){
+
+    setTimeout(function(){
+
+      track.style.transition = "none"
+      track.style.transform = "translateX(0px)"
+      index = 0
+      indicator()
+
+    },500)
+
+  }else{
+
+    indicator()
+
   }
 
-  slider.style.transform = `translateX(-${index * 100}%)`;
+}
 
-}, 2000);
+let auto = setInterval(move,2000)
+
+next.addEventListener('click',function(){
+
+  move()
+
+})
+
+prev.addEventListener('click',function(){
+
+  if(index === 0){
+
+    index = slides.length - 2
+    track.style.transition = "none"
+    track.style.transform = "translateX(-" + (width * index) + "px)"
+
+  }
+
+  index--
+
+  track.style.transition = "0.5s"
+  track.style.transform = "translateX(-" + (width * index) + "px)"
+
+  indicator()
+
+})
 }
 
 

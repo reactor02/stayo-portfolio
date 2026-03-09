@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>결제 연동 테스트</title>
+    <script src="https://js.tosspayments.com/v1/payment"></script>
+</head>
+<body>
+    <div style="text-align: center; margin-top: 50px;">
+        <h2>숙소 예약 결제</h2>
+        <p>테스트 결제 금액: <strong>1,004원</strong></p>
+        <button id="pay-btn" style="padding: 15px 30px; font-size: 16px; cursor: pointer;">
+            결제창 띄우기
+        </button>
+    </div>
+
+    <script>
+        // 토스에서 제공하는 공용 테스트 키 (누구나 사용 가능)
+        const clientKey = 'test_ck_D53Qo7CZ696759u637n3Wj7Y';
+        const tossPayments = TossPayments(clientKey);
+
+        document.getElementById('pay-btn').addEventListener('click', function() {
+            tossPayments.requestPayment('카드', {
+                amount: 1004,
+                orderId: 'TEAM_PROJ_' + Math.random().toString(36).substring(2, 11), // 매번 고유값 생성
+                orderName: '여행지 예약 결제 테스트',
+                customerName: '팀프로젝트_사용자',
+                successUrl: window.location.origin, // 성공 시 돌아올 주소
+                failUrl: window.location.origin,    // 실패 시 돌아올 주소
+            })
+            .catch(function (error) {
+                console.error(error);
+                alert(error.message);
+            });
+        });
+    </script>
+</body>
+</html>
