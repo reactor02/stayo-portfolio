@@ -29,7 +29,7 @@ window.onload = function () {
         })
     }
 
-  
+
 
     // 승인대기 테이블 tbody 가져오기
     const waitingtable = document.querySelector("#waitingtable tbody");
@@ -37,8 +37,8 @@ window.onload = function () {
     // 처리완료 테이블 tbody 가져오기
     const doneTable = document.querySelector("#donetable tbody");
 
-       // 문서 전체에서 클릭 이벤트를 감지 (이벤트 위임 방식)
-    document.addEventListener("click", function (e) {
+    // 문서 전체에서 클릭 이벤트를 감지 (이벤트 위임 방식)
+    waitingtable.addEventListener("click", function (e) {
 
         // 클릭된 요소가 승인 버튼이면
         if (e.target.classList.contains("approve")) {
@@ -93,27 +93,30 @@ window.onload = function () {
                 '<button class="mini editRequest">수정요청</button>';
         }
 
-
-        // 클릭된 요소가 수정요청 버튼이면
-        if (e.target.classList.contains("editRequest")) {
-
-            // 수정요청 버튼이 있는 행 찾기
-            const row = e.target.closest("tr");
-
-            // 상태를 다시 대기중으로 변경
-            row.querySelector(".status").textContent = "대기중";
-
-            // 행을 다시 승인대기 테이블로 이동
-            waitingtable.appendChild(row);
-
-            // 관리 버튼을 원래대로 복구 (승인 / 거절 / 보류)
-            row.querySelector(".td-actions").innerHTML =
-                '<button class="mini approve">승인</button>' +
-                '<button class="mini refuse">거절</button>' +
-                '<button class="mini pending">보류</button>';
-        }
-
     })
+
+    // 클릭된 요소가 수정요청 버튼이면
+     doneTable.addEventListener("click", function(){
+         if (e.target.classList.contains("editRequest")) {
+     
+             // 수정요청 버튼이 있는 행 찾기
+             const row = e.target.closest("tr");
+     
+             // 상태를 다시 대기중으로 변경
+             row.querySelector(".status").textContent = "대기중";
+     
+             // 행을 다시 승인대기 테이블로 이동
+             waitingtable.appendChild(row);
+     
+             // 관리 버튼을 원래대로 복구 (승인 / 거절 / 보류)
+             row.querySelector(".td-actions").innerHTML =
+                 '<button class="mini approve">승인</button>' +
+                 '<button class="mini refuse">거절</button>' +
+                 '<button class="mini pending">보류</button>';
+         }
+
+     })
+
 
 
 
@@ -285,7 +288,7 @@ window.onload = function () {
 /* ================================================
    [최종 통합] 쿠폰 관리 시스템 (생성·수정·검색·가시성)
 ================================================ */
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     // 1. 요소 선택
     const couponList = document.getElementById("adminCouponList");
     const showAllBtn = document.getElementById("adminShowAllCoupons");
@@ -295,14 +298,14 @@ window.addEventListener('load', function() {
 
     const dialog = document.getElementById("adminDialog");  // 생성 모달
     const dialog2 = document.getElementById("adminDialog2"); // 수정 모달
-    
+
     let isExpanded = false;     // 전체보기 활성화 여부
     let currentEditItem = null; // 현재 수정 중인 쿠폰 아이템
 
     // 2. 가시성 제어 함수 (2개 제한 및 안내 문구)
     function updateCouponVisibility() {
         const items = couponList.querySelectorAll('.coupon-item');
-        
+
         items.forEach((item, index) => {
             if (isExpanded) {
                 item.style.display = "flex";
@@ -314,12 +317,12 @@ window.addEventListener('load', function() {
 
         // 안내 문구 표시 로직: 접혀있고 쿠폰이 2개보다 많을 때만 노출
         if (!isExpanded && items.length > 2) {
-            if(statusMsg) {
+            if (statusMsg) {
                 statusMsg.style.display = "block";
                 statusMsg.innerText = "전체보기 상태가 아닙니다";
             }
         } else {
-            if(statusMsg) statusMsg.style.display = "none";
+            if (statusMsg) statusMsg.style.display = "none";
         }
 
         if (showAllBtn) showAllBtn.textContent = isExpanded ? "접기" : "전체보기";
@@ -328,7 +331,7 @@ window.addEventListener('load', function() {
     // 3. 쿠폰 생성 (모달 유지 로직)
     const makeBtn = document.getElementById("adminMakeCouponBtn");
     if (makeBtn) {
-        makeBtn.addEventListener('click', function() {
+        makeBtn.addEventListener('click', function () {
             const name = document.getElementById("adminCouponName").value.trim();
             const dis = document.getElementById("adminCouponDiscount").value;
             const min = document.getElementById("adminMinDate").value;
@@ -338,7 +341,7 @@ window.addEventListener('load', function() {
 
             const article = document.createElement("article");
             article.className = "coupon-item item item--warn";
-            
+
             // 검색 및 수정을 위한 데이터 저장
             article.dataset.name = name;
             article.dataset.discount = dis;
@@ -357,11 +360,11 @@ window.addEventListener('load', function() {
                 </div>`;
 
             couponList.prepend(article);
-            
+
             // 입력 필드만 초기화하고 모달(dialog)은 닫지 않음
             document.getElementById("adminCouponName").value = "";
-            alert("쿠폰이 생성되었습니다."); 
-            
+            alert("쿠폰이 생성되었습니다.");
+
             updateCouponVisibility();
         });
     }
@@ -389,7 +392,7 @@ window.addEventListener('load', function() {
     // 5. 쿠폰 수정 완료 처리
     const saveEditBtn = document.getElementById("adminMakeCouponBtn2");
     if (saveEditBtn) {
-        saveEditBtn.addEventListener('click', function() {
+        saveEditBtn.addEventListener('click', function () {
             if (!currentEditItem) return;
 
             const newName = document.getElementById("adminCouponName2").value.trim();
@@ -411,14 +414,14 @@ window.addEventListener('load', function() {
             currentEditItem.querySelector('.coupon-item__meta').innerText = `유효기간: ${newMin} ~ ${newMax}`;
 
             dialog2.close();
-            alert("쿠폰 수정이 완료됐습니다."); 
+            alert("쿠폰 수정이 완료됐습니다.");
             currentEditItem = null;
         });
     }
 
     // 6. 검색 필터 로직
     if (searchBtn) {
-        searchBtn.addEventListener("click", function() {
+        searchBtn.addEventListener("click", function () {
             const nameQ = document.getElementById("filterCouponName").value.toLowerCase();
             const discQ = document.getElementById("filterDiscount").value;
             const minQ = document.getElementById("filterMinDate").value;
@@ -434,12 +437,12 @@ window.addEventListener('load', function() {
                 // 할인율 검색
                 if (discQ && discount !== discQ) isMatch = false;
                 // 유효기간 범위 로직
-                if (minQ && !maxQ) { 
-                    if (max < minQ) isMatch = false; 
-                } else if (!minQ && maxQ) { 
-                    if (min > maxQ) isMatch = false; 
-                } else if (minQ && maxQ) { 
-                    if (max < minQ || min > maxQ) isMatch = false; 
+                if (minQ && !maxQ) {
+                    if (max < minQ) isMatch = false;
+                } else if (!minQ && maxQ) {
+                    if (min > maxQ) isMatch = false;
+                } else if (minQ && maxQ) {
+                    if (max < minQ || min > maxQ) isMatch = false;
                 }
 
                 item.style.display = isMatch ? "flex" : "none";
