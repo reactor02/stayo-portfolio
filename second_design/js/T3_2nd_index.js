@@ -317,75 +317,119 @@ async function bind() {
     });
 
     // ──────────────────────────────────────────────
-    // 6. 인기 여행지 캐러셀
+    // 6. 인기 여행지 캐러셀 (무한 루프)
+    // 구조: [가짜3] [진짜1] [진짜2] [진짜3] [가짜1]
+    //  인덱스:  0       1       2       3       4
     // ──────────────────────────────────────────────
     const destTrack = document.querySelector('.dest-carousel__track');
     const destSlides = document.querySelectorAll('.dest-carousel__slide');
+    // 진짜 슬라이드 수 = 전체 - 2 (앞뒤 가짜 각 1개)
+    const DEST_REAL_COUNT = destSlides.length - 2; // 3
 
     const destPrev = document.querySelector('.dest-carousel__btn--prev');
     const destNext = document.querySelector('.dest-carousel__btn--next');
-
     const destDots = document.querySelectorAll('.dest-dot');
+    const destIndicatorBox = document.querySelector('.dest-carousel__indicator');
 
-    let destIndex = 0;
+    // 시작 인덱스: 진짜 슬라이드 1번(index=1)에서 시작
+    let destIndex = 1;
 
-    // 인디케이터 활성화
-    function destIndicator() {
+    // 초기 위치 설정 (transition 없이 바로 이동)
+    destTrack.style.transition = 'none';
+    destTrack.style.transform = 'translateX(-' + (100 * destIndex) + '%)';
+
+    // 인디케이터 업데이트
+    function destUpdateIndicator(dotIndex) {
         destDots.forEach(function (dot) {
             dot.classList.remove('dest-dot--active');
         });
-        destDots[destIndex].classList.add('dest-dot--active');
+        if (destDots[dotIndex]) {
+            destDots[dotIndex].classList.add('dest-dot--active');
+        }
     }
 
-    // 초기 인디케이터 세팅 (페이지 로드 시 첫 번째 점 확실히 활성화)
-    destIndicator();
+    // 현재 destIndex → 점 인덱스 계산 (가짜 슬라이드 보정)
+    function destGetDotIndex() {
+        if (destIndex === 0) return DEST_REAL_COUNT - 1;              // 가짜 앞 → 마지막 점
+        if (destIndex === destSlides.length - 1) return 0;            // 가짜 뒤 → 첫 번째 점
+        return destIndex - 1;                                          // 진짜: 0-based
+    }
 
-    // 다음 슬라이드로 이동
+    // 초기 인디케이터
+    destUpdateIndicator(destGetDotIndex());
+
+    // ── 다음 슬라이드 ──
     function destMove() {
         destIndex++;
 
         destTrack.style.transition = '0.5s';
         destTrack.style.transform = 'translateX(-' + (100 * destIndex) + '%)';
 
-        // 마지막(가짜) 슬라이드에 도달하면 → 조용히 첫 번째로 점프
+        // 가짜 뒤(슬라이드1 복사)에 도달 → 진짜 슬라이드1로 순간 점프
         if (destIndex === destSlides.length - 1) {
             setTimeout(function () {
                 destTrack.style.transition = 'none';
-                destTrack.style.transform = 'translateX(0%)';
-                destIndex = 0;
-                destIndicator();
+                destIndex = 1;
+                destTrack.style.transform = 'translateX(-100%)';
+                destUpdateIndicator(0);
             }, 500);
         } else {
-            destIndicator();
+            destUpdateIndicator(destGetDotIndex());
         }
     }
 
     // 자동 재생
     let destAuto = setInterval(destMove, 3000);
 
-    // 다음 버튼
+    // ── 다음 버튼 ──
     destNext.addEventListener('click', function () {
+        clearInterval(destAuto);
         destMove();
+        destAuto = setInterval(destMove, 3000);
     });
 
-    // 이전 버튼
+    // ── 이전 버튼 ──
     destPrev.addEventListener('click', function () {
-        if (destIndex === 0) {
-            // 첫 번째에서 이전 → 가짜 마지막으로 순간 점프 후 한 칸 뒤로
-            destIndex = destSlides.length - 2;
-            destTrack.style.transition = 'none';
-            destTrack.style.transform = 'translateX(-' + (100 * destIndex) + '%)';
-        }
+        clearInterval(destAuto);
 
         destIndex--;
-
-        // 강제 리플로우 (없으면 transition이 씹힘)
-        destTrack.getBoundingClientRect();
 
         destTrack.style.transition = '0.5s';
         destTrack.style.transform = 'translateX(-' + (100 * destIndex) + '%)';
 
-        destIndicator();
+        // 가짜 앞(슬라이드3 복사)에 도달 → 진짜 슬라이드3으로 순간 점프
+        if (destIndex === 0) {
+            setTimeout(function () {
+                destTrack.style.transition = 'none';
+                destIndex = DEST_REAL_COUNT; // 진짜 마지막(index = 3)
+                destTrack.style.transform = 'translateX(-' + (100 * destIndex) + '%)';
+                destUpdateIndicator(DEST_REAL_COUNT - 1);
+            }, 500);
+        } else {
+            destUpdateIndicator(destGetDotIndex());
+        }
+
+        destAuto = setInterval(destMove, 3000);
+    });
+
+    // ── 인디케이터 클릭 ──
+    destIndicatorBox.addEventListener('click', function (e) {
+        const dot = e.target.closest('.dest-dot');
+        if (!dot) return;
+
+        const dotIdx = Array.from(destDots).indexOf(dot);
+        if (dotIdx === -1) return;
+
+        clearInterval(destAuto);
+
+        destIndex = dotIdx + 1; // 가짜 앞 보정
+
+        destTrack.style.transition = 'none';
+        destTrack.style.transform = 'translateX(-' + (100 * destIndex) + '%)';
+
+        destUpdateIndicator(dotIdx);
+
+        destAuto = setInterval(destMove, 3000);
     });
 
 }

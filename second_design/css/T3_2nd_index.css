@@ -279,7 +279,9 @@
     margin: 0 5px;
     transition: background 0.2s;
 }
-
+.dest-dot:hover {
+    cursor: pointer;
+}
 .dest-dot--active {
     background: #111;
 }
@@ -1020,7 +1022,10 @@
     font-weight: 700;
 }
 
-
+.hidden-car{
+    visibility: hidden;
+    
+}
 
 /* --------- 반응형(메인 전용) --------- */
 @media (max-width: 1100px) {
