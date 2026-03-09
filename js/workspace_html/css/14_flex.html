@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="asset\css\14_flex.css"> -->
+    <style>
+        .container {
+            border: 1px solid green;
+            height: 300px;
+
+            display: flex;
+            /* display: inline-flex; */
+
+            /*메인 축의 기본값: 왼쪽에서 오른쪽*/
+            /* flex-direction: row; */
+
+            /* 오른쪽에서 왼쪽으로 */
+            /* flex-direction: row-reverse; */
+            
+            /* 메인축과 크로스를 바꾼다. 위에서 아래로*/
+            /* flex-direction: column; */
+            /* 아래에서 위로 */
+            /* flex-direction: column-reverse; */
+            
+            /* 기본값, 한줄에 모든 item을 표시하려고 노력 */
+            /* flex-wrap: nowrap; */
+            /* 넘치는 경우 다음 줄로. inline-block처럼 */
+            /* cross axis start에서 end로 */
+            /* flex-wrap: wrap; */
+
+            /* cross axis end에서 strat로 */
+            /* flex-wrap: wrap-reverse; */
+
+            /* 메인 축의 start 방향으로 정렬 */
+            /* justify-content: flex-start; */
+            /* main 축의 end 방향으로 정렬 */
+            /* justify-content: flex-end; */
+            /* main 축의 가운데 정렬 */
+            /* justify-content: center; */
+            /* 남은 공간 사이사이에 균등하게 배치*/
+            /* justify-content: space-between; */
+            /* item의 양쪽에 동일한 공간 배치 */
+            /* justify-content: space-around; */
+            /* 모든 공간을 균등하게 배치*/
+            /* justify-content: space-evenly; */
+
+            /* 한 줄에 대한 cross axis의 이야기 */
+            /* 기본값, 부모 크기 만큼 cross axis 방향으로 쭉 늘리기 */
+            /* align-items: stretch; */
+            /* cross axis 방향 */
+            /* align-items: flex-start; */
+            /* align-items: flex-end; */
+            /* align-items: center; */
+
+            /* 여러 줄에 대한 cross axis의 이야기 */
+            /* flex-wrap: wrap; */
+            /* 기본값, 각 줄의 높이를 꽉 채운 상태*/
+            /* align-content: stretch; */
+            /* align-content: flex-start; */
+            /* align-content: center; */
+            /* justify-content: space-evenly; */
+        }
+        .item {
+            border: 1px solid red;
+            background-color: brown;
+            color: white;
+            /* width: 100px; flex-basis랑 동일. */
+            flex-basis: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="item" style="align-self: stretch;">1</div>
+        <div class="item" style="order: 1;">2</div>
+        <div class="item" style="order: -1;">3</div>
+        <div class="item" style="flex-grow: 1; flex-shrink: 4; min-width: 60px;">4</div>
+        <div class="item" style="flex-grow: 3; flex-shrink: 2;">5</div>
+    </div>
+</body>
+</html>

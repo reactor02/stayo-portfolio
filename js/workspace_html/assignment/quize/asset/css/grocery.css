@@ -1,0 +1,312 @@
+ /* <div></div> <!--fixed search engine-->
+    <ul></ul><!--upper menu-->
+    <ul></ul><!--upper menu2-->
+    <div><!--메인 영역 나누기-->
+        <ul></ul><!--사이드 메뉴-->
+        <main>    
+            <div></div> <!--배너-->
+            <h1></h1>제목
+            <h2></h2>부제목
+            <ul></ul><!--상품목록-->
+        </main>
+    </div>
+    <div></div><!--구독메일-->
+    aside
+        <ul></ul>
+        <ul></ul>
+    aside
+    <footer>
+        <div></div>
+    </footer>
+    <header></header> */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.stickyBox {
+    border: 1px solid red;
+    width: 100%;
+    height: 40px;
+    position: sticky;
+    top: 0px;
+    display: flex;
+    background-color: black;
+    z-index: 1000;
+}
+
+/* a {
+    color: black;
+    text-decoration: none;
+}
+a:hover {
+    color: black;
+    text-decoration: none;
+}
+a:active {
+    color: black;
+    text-decoration: none;
+} */
+
+.barList1 {
+    background-color: greenyellow;
+    color: white;
+    display: inline-block;
+    width: 25%;
+    height: 100%;
+    text-align: center;
+}
+.barList2 {
+    font-size: 0px;
+    border: 1px solid red;
+    height: 100%;
+    display: inline-block;
+    width: 30%;
+    text-align: right;
+    min-width: 250px;
+}
+
+[type=text], [type=submit], form {
+    height: 100%;
+    display: inline-block;
+}
+
+
+.search1 {
+    background: url(https://p.w3layouts.com/demos/july-2016/07-07-2016/grocery_store/web/images/img-sp.png)  no-repeat 14px 5px #FA1818;
+    width: 30%;
+    height: 100%;
+    
+}
+
+.cart {
+    border: 1px solid green;
+    height: 100%;
+    width: 20%;
+    min-width: 150px;
+    text-align: center;
+    
+}
+
+.cart span {
+    background: url(https://p.w3layouts.com/demos/july-2016/07-07-2016/grocery_store/web/images/cart.png) no-repeat 7px 10px;
+    width: 40px;
+    height: 100%;
+    background-color: #FA1818;
+    display: inline-block;
+}
+
+.hiddenMenu {
+    background-color: blue;
+    height: 100%;
+    width: 30px;
+    display: inline-block;
+    
+}
+.hiddenMenu::before {
+  content: "\f007";
+}
+
+.contact {
+    background-color: red;
+    color: white;
+    height: 100%;
+    width: 15%;
+    text-align: center;
+    font-size: 25px;
+    margin-left: auto;
+}
+
+.invisible1 {
+    display: none;
+}
+
+/* upper menu */
+
+nav {
+    border:1px solid red;
+    width: 70%;
+    height: 120px;
+    color: black;
+    font-size: 15px;
+    margin: auto;
+    
+}
+nav ul {
+    height: 100%;
+    width: 100%;
+}
+
+nav ul li {
+    height: 100%;
+    display: inline-block;
+    width: 10%;
+    height: 1rem;
+    width: 10%;
+}
+.link {
+    border: 1px solid red;
+    height: 100%;
+    width: 10%;
+    min-width: 100px;
+    display: inline-block;
+    background: url(https://p.w3layouts.com/demos/july-2016/07-07-2016/grocery_store/web/images/img-sp.png) no-repeat 20px 0px;
+}
+.link a {width: 100%; height: 100%; display: block;}
+
+.link span{
+    text-align: left;
+}
+
+.link div {
+    text-align: center;
+    font-size: 40px;
+}
+.skew {
+     border-right: 1px solid gray;
+    transform: skew(-40deg);
+}
+
+.skew a, .skew span { 
+    transform: skew(40deg);
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+
+}
+
+.bar {
+    background-color: greenyellow;
+    width: 100%;
+    height:20%;
+}
+.bar ul {
+    border: 1px solid red;
+    width: 70%;
+    margin: auto;
+    list-style: none;
+    
+}
+.bar ul li {width: 80px; height: 100%; display: inline-block; text-align: center;}
+.bar1-1 { border-right: 1px solid gray;}
+.bar1-2 { border: 1px solid red; margin: 15px;}
+.bar a {
+    transition: all 0.5s;
+   
+}
+.bar a:hover{
+    color: red;
+}
+section{
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    background-color: aqua;
+}
+
+.leftMenu {
+    list-style: none;
+    background-color: white;
+    width: 30%;
+    min-width: 150px;
+    height: 100%;
+    display: inline-block;
+}
+.leftMenu li:hover {
+    background-color: greenyellow;
+    color: white;
+}
+.leftMenu li {
+    width: 100px;
+}
+/* banner */
+main {
+    display: inline-block;
+    background-color: pink;
+    width: 68%;
+    height: auto;
+    vertical-align: top;
+}
+.banner {
+    background: url(https://p.w3layouts.com/demos/july-2016/07-07-2016/grocery_store/web/images/16.jpg);
+    background-size: cover;
+    width: 100%;
+    height: 20%;
+}
+
+.goods {
+   display:flex;
+   justify-content: space-between;
+   list-style: none;
+}
+@media screen and (max-width: 900px){ 
+    .goods {flex-wrap : wrap; justify-content: space-around;}
+    
+}
+
+
+.outerBorder {
+    border: 1px solid gray;
+    padding: 10px;
+    position: relative;
+    overflow: hidden; 
+    
+    min-width: 100px;
+    text-align: center;
+}
+
+.innerBorder {
+    border: 1px solid gray;
+    padding: 0 5%;
+}
+
+.offer {
+    background-color: red;
+    color: white;
+    width: 70px;
+    text-align: center  ;
+    position: absolute;
+    top: 10px;
+    left: -15px;
+    transform: rotate(-45deg);
+    
+}
+.price1, .price2 {
+    display: inline-block;
+}
+.price2 {
+    text-decoration: line-through;
+    color: gray;
+}
+.innerBorder a{
+    display: block;
+}
+.aside1 {
+    background-color: #FA1818;
+    width: 100%;
+    height: 10vh;
+    text-align: center;
+    position: flex;
+    align-content: center;
+}
+.search2 {
+    color: white;
+
+}
+em {
+    display: inline-block;
+    font-size: 30px;
+    border: 1px solid green;
+}
+.aside1 input { 
+    height: 25%;
+}
+.blink {
+    background-color: red;
+    transition: all 0.5s;
+}
+
+.blink:hover {
+    background-color: green;
+}
+

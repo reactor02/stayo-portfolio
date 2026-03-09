@@ -463,7 +463,7 @@ const App = {
                     </div>
 
                     <div class="room__side">
-                        <div class="room__price">₩ ${r.basePrice}</div>
+                        <div class="room__price">₩ ${this.formatMoney(r.basePrice)}</div>
                         <button class="btn-main" type="button">선택</button>
                     </div>
                 </article>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="asset\css\08_position.css">
+</head>
+<body id="top">
+    <div class="parent">
+        <div>T</div>
+        <div>H</div>
+        <div>A</div>
+        <div>N</div>
+        <div>K</div>
+        <div>S</div>
+    </div>
+
+    <!-- 나중에 실습한 건데 걍 여기 둠-->
+    <div class="sticky">
+        스티키: 메뉴1 메뉴2
+    </div>
+
+    relative
+    <div class="parent">
+        <div>T</div>
+        <div class="relative">H</div>
+        <div>A</div>
+        <div>N</div>
+        <div>K</div>
+        <div>S</div>
+    </div>
+    absolute
+    <div class="parent">
+        <div>T</div>
+        <div class="absolute">H</div>
+        <div class="relative">A</div>
+        <div>N</div>
+        <div class="abs-bottom">K</div>
+        <div>S</div>
+    </div>
+    parent 중에 relative
+    <div class="parent rel">
+        <div>T</div>
+        <div class="absolute">H</div>
+        <div class="relative">A</div>
+        <div>N</div>
+        <div class="abs-bottom">K</div>
+        <div>S</div>
+    </div>
+    <hr>
+    <div class="parent2 abs2">
+        <div>위</div>
+        <div class="child2 abs">
+            <!--인라인 블록으로 변경된다.-->
+            가운데<br>
+        </div>
+        <div>아래</div>
+    </div>
+    <div class="fixed">
+        <a href="#top">맨 위로</a>
+    </div>
+
+    <div class="parent2">
+        <div class="rel z1">1번</div>
+        <div class="rel z2">2번</div>
+        <div class="rel z3">3번</div>
+    </div>
+    <div>
+
+    </div>
+    
+</body>
+</html>

@@ -56,7 +56,7 @@ window.onload = function () {
     // 아이디 찾기
     idBtn.addEventListener("click", function (e) {
 
-        e.preventDefault();
+        // e.preventDefault();
 
         let isValid = true;
 

@@ -1,0 +1,356 @@
+*{ 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    /* border: 1px solid red; */
+    width: 1100px;
+    min-height: 100vh;
+    margin: auto;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+li {
+    padding: 0;
+}
+.invisbleMenu {
+    display: none;
+}
+a {
+    color: black;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+a:visited {
+    color: black;
+    text-decoration: none;
+}
+.aboveMenu {
+    /* border: 1px solid red; */
+    height: 30px;
+}
+.naverLogo {
+    display: inline-block;
+    font-size: 0;
+    vertical-align: bottom;
+}
+.aboveMenuChild {
+    display: inline-block;
+    width: 580px;
+    height: 30px;
+    /* border: 1px solid purple; */
+    float: right;
+    text-align: center;
+    line-height: 30px;
+}
+.right {
+    
+    margin: 0 5px;
+    font-size: 15px;
+}
+.login {
+    border: 1px solid gray;
+    font-size: 15px;
+}
+.borderLine {
+    border-right: 1px solid rgba(128, 128, 128, 0.534);
+    padding-right: 15px;
+}
+.banner {
+    background-image: url(	https://ssl.pstatic.net/static/cafe/cafe_pc/bg_default_title_white_180724.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* border: 1px solid green; */
+    width: 100%;
+    height: 180px; 
+    text-align: left;
+}
+.banner a {
+    /* border: 1px solid green; */
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    height: 100%;
+}
+.banner a:hover {
+    text-decoration: none;
+}
+.banner a h1 {
+    width: 700px;
+    margin: 40px 20px 0;
+}
+.banner a p {
+    color: black;
+    font-weight: 300;
+    font-size: 12px;
+    margin: 0 20px;
+}
+
+.leftMenu {
+    display: inline-block;
+    width: 200px;
+    font-size: 13px;
+   
+    
+}
+.leftMneu li a {
+    display: inline-block;
+}
+.cafeInform {
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    width: 100%;
+    height: 30px;
+    font-size: 0;
+
+}
+.cafeInform a {
+    font-size: 12px;
+    display: inline-block;
+    text-align: center;
+    width: 50%;
+    height: 20px;  
+    margin: 5px 0;
+}
+.border {
+    border-right: 1px solid black
+}
+.mangerBox {
+    /* border: 1px solid green; */
+    padding: 10px;
+    height: 80px;
+    width: 100%;   
+}
+.mangerBox>div {
+    display: inline-block;
+    font-size: 13px;
+    vertical-align: top;
+}
+.box1 {
+    /* border: 1px solid red ; */
+    width: 110px;
+}
+.box1-1 {
+    font-weight: 700;
+}
+.box1-2 {
+    /* border: 1px solid gray; */
+    font-size: 10px;
+    font-weight: 300;
+}
+
+.seed1 div {
+    overflow: hidden;
+    width: 20px;
+    height: 20px;
+    background-image: url(https://cafe.pstatic.net/img/section/indi_cafe/ico_sprite_ranktbl.gif);
+    display: inline-block;
+}
+.seed1 a {
+    display: inline-block;
+}
+.seed2 div {
+    /* border: 1px solid red; */
+    background-image: url(https://ssl.pstatic.net/static/cafe/cafe_pc/svg/ico_member.svg);
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.join {
+    border: 1px solid black;
+    background-color: gray;
+    color: white;
+    display: block;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 15px;
+    height: 30px;
+    line-height: 30px;
+}
+.join:visited {
+    color: white;
+}
+.chat {
+    border: 1px solid gray;
+    display: block;
+    margin-top: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 15px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.leftMenu ul {
+    border-bottom: 1px solid gray;
+}
+
+.banner {
+    width: 100%;
+}
+
+
+
+.rightMenu {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 13px;
+    font-weight: 400;
+    width: 892px;
+    height: 900px;
+}
+
+
+
+.rightTop {
+    border: 10px solid gray;
+    width: 100%;
+    height: 250px;
+    padding: 40px ;
+}
+.top1  {
+    font-size: 13px;
+    margin-bottom: 20px ;
+}
+.top2  {
+    font-size: 24px;
+}
+.top3  {
+    display: block;
+    font-size: 24px;
+    margin-top: 15px;
+}
+.top4  {
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+
+
+.rightBottom {
+    line-height: 40px;
+}
+.rightBottom li, .rightBottom div{
+    border-bottom: 1px solid rgb(128, 128, 128);
+}
+
+.bottom-1 {
+    /* border: 1px solid red; */
+    width: 300px;
+}
+.bottom-2, .bottom-3, .bottom-4 {
+    /* border: 1px solid red; */
+    width: 100px; 
+    height: 40px;
+    text-align: center;     
+}
+.bottom-2 {
+    width: 150px
+}
+.flexBottom {
+    float: right;
+    display: flex;
+}
+.bottom-3 {
+    /* border: 1px solid red; */
+    width: 100px;   
+    float: right;
+}
+.bottom-4 {
+    /* border: 1px solid red; */
+    width: 100px;   
+}
+
+.rightBottom .allthing1{
+    float: left;
+    font-weight: 800;
+}
+.rightBottom .allthing2 {
+    float: right;
+}
+.clearFix::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+footer {
+    font-size: 15px;
+    width: 100%;
+    height: 80px;
+    line-height: 80px;
+    border-top: 5px solid gray;
+}
+
+footer span {
+    font-weight: 600;
+}
+
+.bar1 {
+    border-left: 1px solid gray;
+    padding-left: 5px;
+}
+.footerLogo {
+    font-weight: 900;
+    font-size: 20px;
+     float: right;
+}
+
+.leftMenu, .rightMenu, .rightBottom, section{
+    /* border: 1px solid pink; */
+}
+
+[type=submit] {
+    border: 0;
+    position: absolute;
+    background-color: green;
+    color: white;
+    width: 30px;
+    top: 5px;
+    height: 25px;
+    border-radius: 0 5px 5px 0;
+}
+[name=q] {
+    margin-top: 5px ;
+    width: 80%;
+    height: 25px;
+}
+[method=get] {
+    position: relative;
+    height: 30px;
+}
+[value=검색]:hover {
+    cursor: pointer;
+}
+
+.comment, .rightBottom ul {
+    list-style-type: square;
+    list-style-position: inside;
+}
+
+.bottomClip {
+    display: inline-block;
+    background-image: url(https://ssl.pstatic.net/static/cafe/cafe_pc/sp/sp_icon_06952b76.svg);
+    background-repeat: no-repeat;
+    background-position: -285px -223px;
+    width: 12px;
+    height: 12px;
+    /* border: 1px solid red; */
+    vertical-align: baseline;
+}
+.listImg {
+    display: inline-block;
+    background-image: url(https://ssl.pstatic.net/static/cafe/cafe_pc/sp/sp_icon_06952b76.svg);
+    background-repeat: no-repeat;
+    background-position: -306px -42px;
+    width: 10px;
+    height: 11px;
+}
+

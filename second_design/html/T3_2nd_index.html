@@ -9,12 +9,12 @@
     폰트(캡처 느낌: 제목은 명조/세리프, 본문은 산세리프)
     - 필요하면 바꿔도 됨
   ========================================== -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-  href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap"
-  rel="stylesheet">
-  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap"
+        rel="stylesheet">
+
     <!-- 공통 CSS -->
     <link rel="stylesheet" href="../css/T3_2nd_common.css" />
     <!-- 페이지 전용 CSS -->
@@ -29,7 +29,7 @@
         <div class="container header__inner">
             <!-- 로고 -->
             <a href="./T3_2nd_index.html" class="logo" aria-label="STAYO 홈">STAYO</a>
-            
+
             <!-- 가운데 메뉴 -->
             <nav class="gnb" aria-label="주요 메뉴">
                 <a href="./list.html" class="gnb__link">숙소</a>
@@ -38,7 +38,7 @@
                 <a href="#" class="gnb__link">액티비티</a>
                 <a href="#" class="gnb__link">렌터카</a>
             </nav>
-            
+
             <!-- 오른쪽 -->
             <div class="header__right">
                 <!-- ✅ 로그인 전 -->
@@ -47,14 +47,14 @@
                         <span class="btn__icon" aria-hidden="true">
                             <svg viewBox="0 0 24 24">
                                 <path
-                                d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z" />
+                                    d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z" />
                             </svg>
                         </span>
                         로그인
                     </a>
                     <a href="./T3_2nd_signup.html" class="btn btn--solid">회원가입</a>
                 </div>
-                
+
                 <!-- ✅ 로그인 후 -->
                 <div class="header-user">
                     <!-- <a href="./T3_2nd_cart.html" class="icon-btn" aria-label="장바구니">
@@ -70,14 +70,14 @@
                             d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6 4 4 6.5 4c1.54 0 3.04.81 3.9 2.09C11.26 4.81 12.76 4 14.3 4 16.8 4 18.8 6 18.8 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                         </svg>
                     </a> -->
-                    
+
                     <!-- ✅ 로그인 후 영역 안 -->
                     <div class="user-menu">
                         <!-- user-chip: 클릭 트리거 -->
                         <button class="user-avatar-btn">
                             <span class="user-chip__avatar">MH</span>
                         </button>
-                        
+
                         <!-- ✅ 모달(드롭다운 메뉴) -->
                         <div class="user-modal" role="menu" aria-label="유저 메뉴">
                             <a href="./T3_2nd_mapage.html" class="user-modal__item" role="menuitem">마이페이지</a>
@@ -92,7 +92,7 @@
             </div>
         </div>
     </header>
-    
+
     <main>
         <!-- =========================================
         2) 히어로(큰 배경 이미지 + 카피 + 검색바)
@@ -109,7 +109,7 @@
                     <p class="hero__desc">
                         전 세계 100만개 이상의 숙소에서 최고의 가격을 만나보세요
                     </p>
-                    
+
                     <!-- 검색바(실제 기능 없이 UI용) -->
                     <form class="searchbar" action="" method="get" aria-label="숙소 검색">
                         <!-- 목적지 -->
@@ -117,7 +117,7 @@
                             <div class="searchbar__icon" aria-hidden="true">
                                 <svg viewBox="0 0 24 24">
                                     <path
-                                    d="M12 2a7 7 0 00-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 00-7-7zm0 9.3A2.3 2.3 0 119.7 9 2.3 2.3 0 0112 11.3z" />
+                                        d="M12 2a7 7 0 00-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 00-7-7zm0 9.3A2.3 2.3 0 119.7 9 2.3 2.3 0 0112 11.3z" />
                                 </svg>
                             </div>
                             <div class="searchbar__text">
@@ -160,10 +160,10 @@
                                         <input type="date" id="date2" class="date-input-hidden">
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
-                        
+
                         <!-- 인원 -->
                         <div class="searchbar__item">
                             <div class="searchbar__icon" aria-hidden="true">
@@ -189,20 +189,20 @@
                             </div>
                         </div>
 
-                        
+
                         <!-- 검색 버튼(캡처처럼 검정 큰 버튼) -->
-                        
+
                         <button class="searchbar__submit" type="button" onclick="location.href='./T3_2nd_list.html'">
                             <span class="searchbar__submit-icon" aria-hidden="true">
                                 <svg viewBox="0 0 24 24">
                                     <path
-                                    d="M10 2a8 8 0 105 14l5 5 2-2-5-5a8 8 0 00-7-12zm0 2a6 6 0 110 12 6 6 0 010-12z" />
+                                        d="M10 2a8 8 0 105 14l5 5 2-2-5-5a8 8 0 00-7-12zm0 2a6 6 0 110 12 6 6 0 010-12z" />
                                 </svg>
                             </span>
                             검색
                         </button>
-                        
-                        
+
+
                     </form>
                 </div>
             </div>
@@ -229,8 +229,8 @@
                         </span>
                         <span class="category__label">호텔</span>
                     </button>
-                    
-                    <!-- 아파트 -->
+
+                    <!-- 펜션 -->
                     <button class="category-btn">
                         <span class="category__icon" aria-hidden="true">
                             <!-- building -->
@@ -246,35 +246,39 @@
                                 <path d="M17 21h4" />
                             </svg>
                         </span>
-                        <span class="category__label">아파트</span>
+                        <span class="category__label">펜션</span>
                     </button>
-                    
-                    <!-- 해변 -->
+
+                    <!-- 모텔 -->
                     <button class="category-btn">
                         <span class="category__icon" aria-hidden="true">
-                            <!-- waves -->
-                            <svg viewBox="0 0 24 24">
-                                <path d="M3 15c1.5 1 3.5 1 5 0s3.5-1 5 0 3.5 1 5 0 3.5-1 5 0" />
-                                <path d="M3 19c1.5 1 3.5 1 5 0s3.5-1 5 0 3.5 1 5 0 3.5-1 5 0" />
-                                <path d="M3 11c1.5 1 3.5 1 5 0s3.5-1 5 0 3.5 1 5 0 3.5-1 5 0" />
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 7v11a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7" />
+                                <path d="M6 11h4a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z" />
+                                <path d="M14 11h4a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z" />
+                                <path d="M21 15H3" />
                             </svg>
                         </span>
-                        <span class="category__label">해변</span>
+                        <span class="category__label">모텔</span>
                     </button>
-                    
-                    <!-- 산 -->
+
+                    <!-- 리조트 -->
                     <button class="category-btn">
                         <span class="category__icon" aria-hidden="true">
-                            <!-- mountain -->
-                            <svg viewBox="0 0 24 24">
-                                <path d="M3 20l7-12 4 7 2-3 5 8H3z" />
-                                <path d="M10 8l2 2 2-2" />
+                            <svg viewBox="0 0 24 24" width="24" height="24"
+                                style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;">
+                                <path d="M3 21h18" />
+                                <path d="M5 21V7l8-4 8 4v14" />
+                                <path d="M12 11h9l-4-5-5 5" />
+                                <path d="M12 11v10" />
+                                <path d="M9 10a6.3 6.3 0 0 1 6 0" />
                             </svg>
                         </span>
-                        <span class="category__label">산</span>
+                        <span class="category__label">리조트</span>
                     </button>
-                    
-                    <!-- 전원주택 -->
+
+                    <!-- 레지던스 -->
                     <button class="category-btn">
                         <span class="category__icon" aria-hidden="true">
                             <!-- home -->
@@ -284,53 +288,12 @@
                                 <path d="M9 21v-6h6v6" />
                             </svg>
                         </span>
-                        <span class="category__label">전원주택</span>
-                    </button>
-                    
-                    <!-- 성 -->
-                    <button class="category-btn">
-                        <span class="category__icon" aria-hidden="true">
-                            <!-- castle -->
-                            <svg viewBox="0 0 24 24">
-                                <path d="M4 21V7l2-2 2 2 2-2 2 2 2-2 2 2 2-2 2 2v14" />
-                                <path d="M8 21v-6h8v6" />
-                                <path d="M4 11h16" />
-                            </svg>
-                        </span>
-                        <span class="category__label">성</span>
-                    </button>
-
-                    <!-- 캠핑 -->
-                    <button class="category-btn">
-                        <span class="category__icon" aria-hidden="true">
-                            <!-- tent -->
-                            <svg viewBox="0 0 24 24">
-                                <path d="M2 20L12 4l10 16H2z" />
-                                <path d="M12 4v16" />
-                                <path d="M7 20l5-8 5 8" />
-                            </svg>
-                        </span>
-                        <span class="category__label">캠핑</span>
-                    </button>
-                    
-                    <!-- 크루즈 -->
-                    <button class="category-btn">
-                        <span class="category__icon" aria-hidden="true">
-                            <!-- ship -->
-                            <svg viewBox="0 0 24 24">
-                                <path d="M3 18l9 3 9-3" />
-                                <path d="M4 16h16l-2-7H6l-2 7z" />
-                                <path d="M10 9V5h4v4" />
-                                <path d="M8 5h8" />
-                                <path d="M2 18c1.5 1 3.5 1 5 0s3.5-1 5 0 3.5 1 5 0 3.5-1 5 0" />
-                            </svg>
-                        </span>
-                        <span class="category__label">크루즈</span>
+                        <span class="category__label">레지던스</span>
                     </button>
                 </div>
             </div>
         </section>
-        
+
         <!-- =========================================
         4) 인기 여행지(캡처 4개 큰 카드)
         ========================================== -->
@@ -338,51 +301,168 @@
             <div class="container">
                 <h2 class="section__title">인기 여행지</h2>
                 <p class="section__sub">지금 가장 핫한 여행지를 만나보세요</p>
-                
-                <div class="grid-dest">
-                    <!-- 카드 1 -->
-                    <a href="./T3_2nd_list.html" class="dest-card">
-                        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80"
-                        alt="서울" />
-                        <div class="dest-card__overlay">
-                            <div class="dest-card__name">서울</div>
-                            <div class="dest-card__count">12,340개 숙소</div>
-                        </div>
-                    </a>
-                    
-                    <!-- 카드 2 -->
-                    <a href="./T3_2nd_list.html" class="dest-card">
-                        <img src="https://images.unsplash.com/photo-1526481280695-3c687fd5432c?auto=format&fit=crop&w=1200&q=80"
-                        alt="도쿄" />
-                        <div class="dest-card__overlay">
-                            <div class="dest-card__name">도쿄</div>
-                            <div class="dest-card__count">9,821개 숙소</div>
-                        </div>
-                    </a>
-                    
-                    <!-- 카드 3 -->
-                    <a href="./T3_2nd_list.html" class="dest-card">
-                        <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80"
-                        alt="발리" />
-                        <div class="dest-card__overlay">
-                            <div class="dest-card__name">발리</div>
-                            <div class="dest-card__count">7,654개 숙소</div>
-                        </div>
-                    </a>
-                    
-                    <!-- 카드 4 -->
-                    <a href="./T3_2nd_list.html" class="dest-card">
-                        <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80"
-                        alt="다낭" />
-                        <div class="dest-card__overlay">
-                            <div class="dest-card__name">다낭</div>
-                            <div class="dest-card__count">5,432개 숙소</div>
-                        </div>
-                    </a>
-                </div>
+
+                <!-- 캐러셀 래퍼 -->
+                <div class="dest-carousel">
+
+                    <!-- 뷰포트: 넘치는 슬라이드는 숨김 -->
+                    <div class="dest-carousel__viewport">
+                        <div class="dest-carousel__track">
+
+                            <!-- 슬라이드 1 (서울·인천·제주·광주) -->
+                            <div class="dest-carousel__slide">
+                                <div class="grid-dest">
+                                    <a href="./T3_2nd_list.html" class="dest-card">
+                                        <img src="../index_img/seoul.png" alt="서울" />
+                                        <div class="dest-card__overlay">
+                                            <div class="dest-card__name">서울</div>
+                                            <div class="dest-card__count">12,340개 숙소</div>
+                                        </div>
+                                    </a>
+                                    <a href="./T3_2nd_list.html" class="dest-card">
+                                        <img src="../index_img/incheon.png" alt="인천" />
+                                        <div class="dest-card__overlay">
+                                            <div class="dest-card__name">인천</div>
+                                            <div class="dest-card__count">9,821개 숙소</div>
+                                        </div>
+                                    </a>
+                                    <a href="./T3_2nd_list.html" class="dest-card">
+                                        <img src="../index_img/jeju.png" alt="제주" />
+                                        <div class="dest-card__overlay">
+                                            <div class="dest-card__name">제주</div>
+                                            <div class="dest-card__count">7,654개 숙소</div>
+                                        </div>
+                                    </a>
+                                    <a href="./T3_2nd_list.html" class="dest-card">
+                                        <img src="../index_img/gwanju.png" alt="광주" />
+                                        <div class="dest-card__overlay">
+                                            <div class="dest-card__name">광주</div>
+                                            <div class="dest-card__count">5,432개 숙소</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- 슬라이드 2 (부산·강릉·전주·경주) -->
+                            <div class="dest-carousel__slide">
+                                <div class="grid-dest">
+                                    <a href="./T3_2nd_list.html" class="dest-card">
+                                        <img src="" alt="부산" />
+                                        <div class="dest-card__overlay">
+                                            <div class="dest-card__name">부산</div>
+                                            <div class="dest-card__count">10,120개 숙소</div>
+                                        </div>
+                                    </a>
+                                    <a href="./T3_2nd_list.html" class="dest-card">
+                                        <img src="" alt="강릉" />
+                                        <div class="dest-card__overlay">
+                                            <div class="dest-card__name">강릉</div>
+                                            <div class="dest-card__count">4,230개 숙소</div>
+                                        </div>
+                                    </a>
+                                    <a href="./T3_2nd_list.html" class="dest-card">
+                                        <img src="" alt="전주" />
+                                        <div class="dest-card__overlay">
+                                            <div class="dest-card__name">전주</div>
+                                            <div class="dest-card__count">3,870개 숙소</div>
+                                        </div>
+                                    </a>
+                                    <a href="./T3_2nd_list.html" class="dest-card">
+                                        <img src="" alt="경주" />
+                                        <div class="dest-card__overlay">
+                                            <div class="dest-card__name">경주</div>
+                                            <div class="dest-card__count">3,540개 숙소</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- 슬라이드 3 (여수·춘천·속초·대전) -->
+                            <div class="dest-carousel__slide">
+                                <div class="grid-dest">
+                                    <a href="./T3_2nd_list.html" class="dest-card">
+                                        <img src="" alt="여수" />
+                                        <div class="dest-card__overlay">
+                                            <div class="dest-card__name">여수</div>
+                                            <div class="dest-card__count">2,980개 숙소</div>
+                                        </div>
+                                    </a>
+                                    <a href="./T3_2nd_list.html" class="dest-card">
+                                        <img src="" alt="춘천" />
+                                        <div class="dest-card__overlay">
+                                            <div class="dest-card__name">춘천</div>
+                                            <div class="dest-card__count">2,110개 숙소</div>
+                                        </div>
+                                    </a>
+                                    <a href="./T3_2nd_list.html" class="dest-card">
+                                        <img src="" alt="속초" />
+                                        <div class="dest-card__overlay">
+                                            <div class="dest-card__name">속초</div>
+                                            <div class="dest-card__count">1,890개 숙소</div>
+                                        </div>
+                                    </a>
+                                    <a href="./T3_2nd_list.html" class="dest-card">
+                                        <img src="" alt="대전" />
+                                        <div class="dest-card__overlay">
+                                            <div class="dest-card__name">대전</div>
+                                            <div class="dest-card__count">1,650개 숙소</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- 가짜 슬라이드 (슬라이드 1 복사 — 무한 루프용) -->
+                            <div class="dest-carousel__slide">
+                                <div class="grid-dest">
+                                    <a href="./T3_2nd_list.html" class="dest-card">
+                                        <img src="../index_img/seoul.png" alt="서울" />
+                                        <div class="dest-card__overlay">
+                                            <div class="dest-card__name">서울</div>
+                                            <div class="dest-card__count">12,340개 숙소</div>
+                                        </div>
+                                    </a>
+                                    <a href="./T3_2nd_list.html" class="dest-card">
+                                        <img src="../index_img/incheon.png" alt="인천" />
+                                        <div class="dest-card__overlay">
+                                            <div class="dest-card__name">인천</div>
+                                            <div class="dest-card__count">9,821개 숙소</div>
+                                        </div>
+                                    </a>
+                                    <a href="./T3_2nd_list.html" class="dest-card">
+                                        <img src="../index_img/jeju.png" alt="제주" />
+                                        <div class="dest-card__overlay">
+                                            <div class="dest-card__name">제주</div>
+                                            <div class="dest-card__count">7,654개 숙소</div>
+                                        </div>
+                                    </a>
+                                    <a href="./T3_2nd_list.html" class="dest-card">
+                                        <img src="../index_img/gwanju.png" alt="광주" />
+                                        <div class="dest-card__overlay">
+                                            <div class="dest-card__name">광주</div>
+                                            <div class="dest-card__count">5,432개 숙소</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div><!-- /.dest-carousel__track -->
+                    </div><!-- /.dest-carousel__viewport -->
+
+                    <!-- 좌우 버튼 -->
+                    <button class="dest-carousel__btn dest-carousel__btn--prev" aria-label="이전">◀</button>
+                    <button class="dest-carousel__btn dest-carousel__btn--next" aria-label="다음">▶</button>
+
+                    <!-- 인디케이터 -->
+                    <div class="dest-carousel__indicator">
+                        <span class="dest-dot dest-dot--active"></span>
+                        <span class="dest-dot"></span>
+                        <span class="dest-dot"></span>
+                    </div>
+
+                </div><!-- /.dest-carousel -->
             </div>
         </section>
-        
+
         <!-- =========================================
         5) 인기 숙소(캡처: 제목 + 전체보기 + 카드 그리드)
         ========================================== -->
@@ -395,10 +475,10 @@
                     </div>
                     <a class="section-head__more" href="#">전체 보기</a>
                 </div>
-                
-                <div class="grid-stay">
+
+                <div class="grid-stay result-grid">
                     <!-- 카드 1 -->
-                    <article class="stay-card">
+                    <!-- <article class="stay-card">
                         <div class="stay-card__media">
                             <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1400&q=80"
                             alt="오션뷰 빌라 인피니티 풀" />
@@ -422,10 +502,10 @@
                                 <span class="star">★</span> 4.9 <span class="count">(328)</span>
                             </div>
                         </div>
-                    </article>
-                    
+                    </article> -->
+
                     <!-- 카드 2 -->
-                    <article class="stay-card">
+                    <!-- <article class="stay-card">
                         <div class="stay-card__media">
                             <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1400&q=80"
                             alt="모던 부티크 호텔" />
@@ -448,10 +528,10 @@
                                 <span class="star">★</span> 4.8 <span class="count">(512)</span>
                             </div>
                         </div>
-                    </article>
+                    </article> -->
 
                     <!-- 카드 3 -->
-                    <article class="stay-card">
+                    <!-- <article class="stay-card">
                         <div class="stay-card__media">
                             <img src="https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?auto=format&fit=crop&w=1400&q=80"
                             alt="마운틴뷰 펜트하우스" />
@@ -475,10 +555,10 @@
                                 <span class="star">★</span> 4.7 <span class="count">(156)</span>
                             </div>
                         </div>
-                    </article>
-                    
+                    </article> -->
+
                     <!-- 카드 4 -->
-                    <article class="stay-card">
+                    <!-- <article class="stay-card">
                         <div class="stay-card__media">
                             <img src="https://images.unsplash.com/photo-1526481280695-3c687fd5432c?auto=format&fit=crop&w=1400&q=80"
                             alt="전통 료칸 스테이" />
@@ -501,10 +581,10 @@
                                 <span class="star">★</span> 4.9 <span class="count">(201)</span>
                             </div>
                         </div>
-                    </article>
-                    
+                    </article> -->
+
                     <!-- 카드 5 -->
-                    <article class="stay-card">
+                    <!-- <article class="stay-card">
                         <div class="stay-card__media">
                             <img src="https://images.unsplash.com/photo-1501117716987-c8e1ecb210d3?auto=format&fit=crop&w=1400&q=80"
                                 alt="라벤더 가든 하우스" />
@@ -528,10 +608,10 @@
                                 <span class="star">★</span> 4.8 <span class="count">(98)</span>
                             </div>
                         </div>
-                    </article>
+                    </article> -->
 
                     <!-- 카드 6 -->
-                    <article class="stay-card">
+                    <!-- <article class="stay-card">
                         <div class="stay-card__media">
                             <img src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1400&q=80"
                             alt="시티뷰 럭셔리 스위트" />
@@ -554,11 +634,11 @@
                                 <span class="star">★</span> 4.7 <span class="count">(166)</span>
                             </div>
                         </div>
-                    </article>
+                    </article> -->
                 </div>
             </div>
         </section>
-        
+
         <!-- =========================================
         6) 프로모션 배너 + 혜택 3개
         - 캡처3 상단(검정 큰 배너) + 아래 3개 카드
@@ -571,13 +651,13 @@
                         <div class="promo__title">첫 예약 시 20% 할인</div>
                         <div class="promo__desc">지금 가입하고 특별 할인 혜택을 받아보세요</div>
                     </div>
-                    
+
                     <a href="#" class="promo__btn">
                         할인 받기
                         <span aria-hidden="true">→</span>
                     </a>
                 </div>
-                
+
                 <div class="benefits">
                     <article class="benefit">
                         <div class="benefit__icon" aria-hidden="true">%</div>
@@ -586,7 +666,7 @@
                             <div class="benefit__desc">타 사이트 대비 최저가를 보장합니다</div>
                         </div>
                     </article>
-                    
+
                     <article class="benefit">
                         <div class="benefit__icon" aria-hidden="true">🕒</div>
                         <div class="benefit__text">
@@ -594,7 +674,7 @@
                             <div class="benefit__desc">대부분의 숙소 무료 취소 가능</div>
                         </div>
                     </article>
-                    
+
                     <article class="benefit">
                         <div class="benefit__icon" aria-hidden="true">🛡️</div>
                         <div class="benefit__text">
@@ -605,30 +685,30 @@
                 </div>
             </div>
         </section>
-        
+
     </main>
     <div id="ai-trigger" class="ai-trigger">
         <span>AI<br>상담사</span>
     </div>
-    
+
     <div id="ai-chat-container" class="ai-chat-container" style="display: none;">
         <div class="ai-chat-header">
             <span class="title">STAYO AI 상담원</span>
             <button id="ai-close-btn" class="ai-close-btn">×</button>
         </div>
-        
+
         <div id="ai-chat-box" class="ai-chat-box">
             <div class="message model">
                 <div class="bubble">안녕하세요! STAYO 숙박 예약 상담원입니다. 무엇을 도와드릴까요?</div>
             </div>
         </div>
-        
+
         <div class="ai-chat-input-area">
             <textarea id="ai-prompt" placeholder="메시지 입력..." rows="1"></textarea>
             <button id="ai-ask-btn">전송</button>
         </div>
     </div>
-    
+
     <!-- ==========================
     공통 푸터
     =========================== -->
@@ -641,7 +721,7 @@
                     합리적인 가격으로 예약하세요.
                 </p>
             </div>
-            
+
             <div class="footer__cols">
                 <div class="footer__col">
                     <div class="footer__title">서비스</div>
@@ -651,7 +731,7 @@
                     <a href="#" class="footer__link alert">액티비티</a>
                     <a href="#" class="footer__link alert">렌터카</a>
                 </div>
-                
+
                 <div class="footer__col">
                     <div class="footer__title">고객지원</div>
                     <a href="./T3_2nd_mapage.html#sec-support" class="footer__link">고객센터</a>
@@ -660,7 +740,7 @@
                     <a href="./T3_2nd_terms.html" class="footer__link">이용약관</a>
                     <a href="./T3_2nd_privacy.html" class="footer__link">개인정보처리방침</a>
                 </div>
-                
+
                 <div class="footer__col">
                     <div class="footer__title">파트너</div>
                     <a href="./T3_2nd_host.html" class="footer__link">숙소 등록</a>
@@ -668,7 +748,7 @@
                     <a href="./T3_2nd_ads.html" class="footer__link">광고 문의</a>
                     <a href="./T3_2nd_api.html" class="footer__link">API</a>
                 </div>
-                
+
                 <div class="footer__col">
                     <div class="footer__title">회사</div>
                     <a href="./T3_2nd_about.html" class="footer__link">회사 소개</a>
@@ -678,7 +758,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="container footer__bottom">
             <div class="footer__copy">© 2026 STAYO. All rights reserved.</div>
             <div class="footer__bottom-links">
@@ -686,10 +766,10 @@
             </div>
         </div>
     </footer>
-    <script defer src="../js/jquery-3.7.1.js"></script>
-    <script defer src="../api_test/js/tb.api.v1.tb.js"></script>
-    <script defer src="../js/T3_2nd_index.js"></script>
-    <script defer src="../js/T3_2nd_common.js"></script>
+    <script src="../js/jquery-3.7.1.js"></script>
+    <script src="../api_test/js/tb.api.v1.tb.js"></script>
+    <script src="../js/T3_2nd_index.js"></script>
+    <script src="../js/T3_2nd_common.js"></script>
 </body>
 
 </html>

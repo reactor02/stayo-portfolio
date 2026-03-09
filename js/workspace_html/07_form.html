@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        text : <input type="text"><br>
+        text(기본값) : <input><br>
+        text(value) : <input type="text" value="head"><br>
+        text(placeholder) : <input type="text" placeholder="placeholder"><br>
+        text(value, placeholder) : <input type="text" value="head" placeholder="플레이스 홀더"><br>
+        text(readonly) : <input type="text" value="head" readonly="readonly"><br>
+        text(disabled) : <input type="text" value="head" disabled="disabled"><br>
+        password : <input type="password"><br>
+        <hr>
+        <textarea rows="10" cols="100">미리 
+            보여줄 글
+        </textarea>
+        <br>
+        datalist 연습 : <input type="text" list="c">
+        <datalist id="c">
+                <option value="가나"></option>
+                <option value="가봉"></option>
+                <option value="한국"></option>
+                <option value="스위스"></option>
+        </datalist><br>
+        input:button : <input type="button" value="로그인"><br>
+        input:button : <input type="button"><br>
+        button : <button type="button">버튼태그</button><br>
+        button : <button type="button"></button><br>
+        <!-- 버튼 인터페이스가 나오는 방법. 아직 기능은 구현 안됨 -->
+        submit : <input type="submit" value="전송"><br>
+        submit(value없음) : <input type="submit"><br>
+        <!-- submit attribute가 보여주는 기본값은 '제출'이다.-->
+        button :  <button type="submit">버튼 submit</button><br>
+        reset : <input type="reset" value="기본글씨는 초기화"><br>
+        이미지를 버튼으로 감싼다<br>
+        <button type="button">
+            <img src="https://image.ytn.co.kr/general/jpg/2017/1018/201710181100063682_d.jpg" width="20" height="20">
+        </button><br>
+        <!-- button type의 기본값은 submit -->
+        <hr>
+        checkbox : 
+        <input type="checkbox" value="1">샷추가
+        <input type="checkbox" value="2" checked="checked">휘핑크림추가
+        <input type="checkbox" value="3" disabled="disabled">펄추가
+        <input type="checkbox" value="4">시럽추가
+        <br>
+        radio : 
+        <input type="radio" name="china" value="1" checked="checked">짜장면
+        <input type="radio" name="china" value="2">짬뽕
+        <input type="radio" name="china" value="3">탕수육
+        <br>
+        <input type="radio" name="gender" value="male" checked="checked">남자
+        <input type="radio" name="gender" value="female">여자
+        <br>
+        select :
+        <select>
+            <option>--종류--</option>
+            <option>분식</option>
+            <option>일식</option>
+            <option selected="selected">중식</option>
+            <option>양식1111111</option>
+        </select> <br>
+        select - size3:
+        <select size=3>
+            <option>--종류--</option>
+            <option>분식</option>
+            <option>일식</option>
+            <option selected="selected">중식</option>
+            <option>양식1111111</option>
+        </select><br>
+        select - multiple
+        <select size=4 multiple="multiple">
+            <option>--종류--</option>
+            <option>분식</option>
+            <option>일식</option>
+            <option selected="selected">중식</option>
+            <option>양식1111111</option>
+        </select>
+        <br>
+        label 1 : 
+        <label>
+            <input type="checkbox"> 펄추가
+        </label>
+        <br>
+        label 2 :
+        <label for="perl">펄추가</label>
+        <input type="checkbox" id="perl">
+        <br>
+        color :
+        <input type="color">
+        <br>
+        date :
+        <input type="date">
+        <input type="date" value="2022-03-01"><br>
+        time : 
+        <input type="time"><br>
+        number : 
+        <input type="number"><br> <!-- 숫자만 잡음-->
+        range :
+        <input type="range" min="10" max="100" step="5">
+        fieldset :
+        <fieldset>
+            <legend>제목</legend>
+            내용
+        </fieldset>
+    </form>
+    <hr>
+    <hr>
+    <!-- 
+        form 속성
+        method : get, post
+        method 기본값은 get
+
+        action: 전송할 주소
+        action 기본값은 현재 내 주소
+    -->
+    <form method="get">
+        <input type="text" name="abcd"><br>
+        <input type="text" name="stacy"><br>
+        <input type="submit" value="get 연습"><br>
+    </form>
+    <form method="get" action="https://search.naver.com/search.naver">
+        <input type="text" name="query"><br>
+        <input type="submit" value="네이버 검색">
+    </form>
+    <form method="get" action="https://www.google.com/search">
+        <input type="text" name="q"><br>
+        <input type="submit" value="구글 검색">
+    </form>
+    <form method="post">
+        <input type="text" name="q"><br>
+        <input type="text" name="stacy"><br>
+        <input type="submit" value="post 연습">
+    </form>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>

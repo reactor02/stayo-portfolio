@@ -1,0 +1,80 @@
+.bigBox {
+    border: 1px solid red;
+    width: 100vw;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 0;
+    text-align: center;
+}
+
+.contentBox1, .contentBox2{
+    box-sizing: border-box;
+    margin: 0;
+    vertical-align: top;
+    border: 1px solid red;
+    display: inline-block;
+    width: 60%;
+    min-width: 400px;
+    height: 400px;
+    position: relative;
+}
+
+.contentBox1 {
+    box-sizing: border-box;
+    height: 200px;
+    width: 40%;
+    z-index: 20;
+}
+
+.contentBox2 {background-color: purple; z-index: 30; height: 100vh;}
+
+.background1 {
+    border: 1px solid green;
+    width: 40%;
+    height: 200px;
+}
+
+
+.img1 {
+    box-sizing: border-box;
+    border: 1px solid red;
+    height: 60vh;
+    width: 50vw;
+    min-height: 200px;
+    min-width: 200px;
+    position: absolute;
+    top: 0;
+    z-index: 25;
+    left: calc(100%/2 - 200px/2);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url(https://images03.nicepage.com/c461c07a441a5d220e8feb1a/e1900cdaa5c15cecae8746b6/rtyy-min.jpg);
+}
+
+.content {
+    height: 400px;
+    width: 400px;
+    text-align: right;
+    padding: 10px;
+    border: 1px solid red;
+    font-size: 20px;
+    background-color: gray;
+    color: purple;
+    position: relative;
+    
+    box-sizing: border-box;
+    
+}
+.text1 {
+    font-size: 15px;
+
+}
+.text2 {
+    font-size: 30px;
+    height: 100px;
+}
+.text3 {
+    height: 50px;
+}

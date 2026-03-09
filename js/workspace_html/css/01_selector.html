@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* CSS 주석 */
+
+        /* 전체 선택자*/
+        * {
+            color : red;
+        }
+
+        /* tag 선택자 */
+        h2 {
+            font-size: 400%;
+        }
+
+        h1{
+            font-size: 400%;
+        }
+        /* ,로 구분해서 여러 개 적용가능 */
+        h1, h2 {
+            font-size: 400%;
+        }
+
+        /* 클래스 선택자*/
+        .c1 {
+            background-color: green;
+        }
+        .bigText {
+            font-size: 30px;
+        }
+        /* id selector */
+        #i1 {
+            color: rgb(0, 0, 0)
+        }
+        /* 자식 selector */
+        div > strong {
+            background-color: dodgerblue
+        }
+
+        /* descendent selector */
+        div strong {
+            border: 3px solid red;
+        }
+        /* attribute selector */
+        /* 속성이 있으면*/
+        [href] {
+            background-color: yellow;
+        }
+        
+        /* 속성의 값이 일치하면 */
+        [type=text]{
+            background-color: yellow;
+        }
+
+        /* #i1은 [id=i1]의 줄임말 */
+        [id=i1]{
+            background-color: yellow;
+        }
+        /* https로 값이 시작되는 것들 (like 검색처럼)*/ 
+        [href^=https] {
+            background-color: pink;
+        }
+
+        [id^=title_] {
+            color: rgb(52, 27, 189);
+        }
+        /* $= 값으로 끝나는 모든것 */
+        [id$=_title]{
+            color: blueviolet;
+        }
+
+        /*  띄어쓰기로 구분되어 값을 포함하는 것 */
+        /* .c1은 [class~=c1]의 줄임말 */
+        [class~=c1]{
+            color: red;
+        }
+        /* 딱 붙여서 사용하면 and 조건이 된다 */
+        input[readonly]{
+            color: red;
+        }
+        input[type=text]{
+            color: red;
+        }
+        a.c2{
+            color: red;
+        }
+        li.c1.c2{color: red;}
+        /* 마우스를 올렸을 때 */
+        #div1:hover {
+            background-color: yellow;
+        }
+        /* 마우스를 클릭하고 있을 때 */
+        #div1:active {
+            background-color: aqua;
+        }
+
+        .text1:focus {
+            background-color: yellow;
+        }
+        #ul1 > li:nth-child(4) {
+            background-color: aqua;}
+        #ul1 > li:nth-child(2n-1) {
+            background-color: gray;}
+        h3:after {
+            content: " AFTER";
+            color: black;
+        }
+        h3:before {
+            content: "BEFORE ";
+            color: blue;
+            font-size: 10px;
+        }
+        #ul1 li:not(.c2){
+            font-size: 32px;
+        }
+        /* *::selectio = ::selectio *은 생략가능 */
+        ::selection{
+            background-color: aqua;
+        }
+        input[type=checkbox]:checked {
+            width: 30px; height: 30px;
+        }
+        input[type=checkbox]:checked + span {
+            text-decoration: line-through ;
+        }
+
+        /* 우선순위
+            !important>style attribute>id selector>attribute selector=class selector>tag selector>전체 선택자(universal selector) >브라우저 기본값
+            동등한 우선순위일 때는 나중에 나온 것이 덮어쓴다
+            둘다 !important면 style overriding을 따른다
+        */
+       
+        #id2 {
+            color: purple;
+        }
+       
+        .class1 {
+            color: pink;
+        }
+       [data-human] {
+            color: coral;
+        }
+        div {
+            color: blue;
+            font-size: 32px;
+        }
+        div {
+            color: skyblue;
+        }
+       
+        
+    </style>
+</head>
+<body>
+    <h1>hello world</h1>
+    <h2>부제목</h2>
+    <ul>
+        <li class="c1" id="i1">li 1</li>
+        <li class="c1 bigText c2">li 2</li>
+        <li>li 3</li>
+    </ul>
+
+    <strong>밖에 strong</strong>
+    <div>
+        <strong>div 안에 스트롱</strong>
+    </div>
+    <div>
+        <a href="">
+            <strong>div > a > strong</strong>
+        </a>
+    </div>
+
+    <input type="text"><br>
+    <input type="password"><br>
+    <a href="http//:...">http</a>
+    <a href="https//:...">https</a><br>
+
+    <!-- table>tr*3>td*3<br> -->
+    <table border = 1>
+        <tr>
+            <td class="no">No</td>
+            <td id="title_0">제목</td>
+            <td class="c123 c3 smalltext">글쓴이</td>
+        </tr>
+        <tr>
+            <td class="no">2</td>
+            <td id="title_2">제목2</td>
+            <td>글쓴이2</td>
+        </tr>
+        <tr>
+            <td class="no">3</td>
+            <td id="title_1">제목3</td>
+            <td>글쓴이3</td>
+        </tr>
+    </table>
+
+    <div id="div1">
+        hover 연습
+    </div>
+    focus 연습 : <input type="number" class="text1"><br>
+    <ul id="ul1">
+        <li class="c2">1</li>
+        <li class="c2">2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <h3>abcd</h3>
+    <br>
+    <input type="checkbox"><span>복습</span><br>
+    <input type="checkbox"><span>저녁</span><br>
+    <input type="checkbox"><span>친구</span><br>
+
+    <div id="id2" class="class1" data-human="천안" syle="color:brown">
+        우선 순위 연습
+    </div>
+</body>
+</html>

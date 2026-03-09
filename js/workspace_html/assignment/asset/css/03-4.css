@@ -1,0 +1,83 @@
+.bigBox {
+    border: 1px solid red;
+    min-height: 100vh;
+    min-width: 50vw;
+    font-size: 0px;
+    position: relative;
+    text-align: center;
+    
+}
+.box1, .box2 {
+    box-sizing: border-box;
+    border: 1px solid green;
+    display: inline-block;
+    width: 50%;
+    min-width: 500px;
+    height: 100%;
+    vertical-align: top;
+    position: relative;
+}
+
+.back {
+    box-sizing: border-box;
+    background-color: chocolate;
+    min-height: 100vh;
+    min-width: 200px;
+    font-size: 0px;
+    position: absolute;
+    top: 0px;
+    left: calc(100%/2 - 100px);
+    z-index: 0;
+}
+.contentbox {
+    box-sizing: border-box;
+    position: absolute;
+    z-index: 999;
+}
+
+.img1, .img2, .img3 {
+    box-sizing: border-box;
+    border: 1px solid red;
+    margin: 20px;
+    position: relative;
+}
+
+.img1 {
+    box-sizing: border-box;
+    background-image: url(https://images01.nicepage.com/c461c07a441a5d220e8feb1a/4583c5e5778759d5bf354095/dfggdf-min.jpg);
+    min-height: 400px;
+    min-width: 400px;
+    background-size: cover;
+}
+.img2 {
+    box-sizing: border-box;
+    background-image: url(https://images01.nicepage.com/c461c07a441a5d220e8feb1a/ea6de3a355c35c3fb5e2e8fb/gfgg.jpg);
+    height: 180px;
+    width: 180px;
+    background-size: cover;
+    left: calc(100% - 50% - 110px);
+}
+.img3 {
+    box-sizing: border-box;
+    background-image: url(https://images01.nicepage.com/c461c07a441a5d220e8feb1a/fe2b4f4f73b2545cb746601b/spirituality-religion-hands-folded-prayer-holy-bible-church-concept-faith_1150-148781.jpg);
+    height: 80px;
+    width: 80px;
+    background-size: cover;
+    
+}
+
+.text {
+    box-sizing: border-box;
+    font-size: 20px;
+}
+
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+}
+a:visited {
+    text-decoration: none;
+    color: w;
+}

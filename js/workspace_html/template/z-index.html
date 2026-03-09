@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <!-- z인덱스를 완성할 생각이다.
+            이 때 칸 3개를 겹쳐 보이게 해야한다.
+            이것을 연습해보자. 
+     -->
+    <style>
+        p {
+            height: 200px;
+            width: 200px;
+            position: sticky;
+          
+            overflow-wrap:break-all;
+        }
+
+        .z3 {background-color: red; top: 20px; left: 30px; z-index: 1;}
+        .z2 {background-color:  gray; top: 70px; left: 80px; z-index: 2 ;}
+        .z1 {background-color: blue; top: 0px ; left: 50px; z-index: 3 ;}
+        
+        .z2:hover { z-index: 10;}
+        .z3:hover { z-index: 10;}
+    </style>
+</head>
+<body>
+   <article>
+        <p class="z3">세번째 장입니다 close ehteeeeeeee sdfsdfsdfsdfsdfsdfsdfsdfsdf sefs sdfwefwfasdf    sdf sd fsd  </p>
+        <p class="z2">2번째 장입니다</p>
+        <p class="z1">첫번째 장입니다</p>
+   </article>
+</body>
+</html>

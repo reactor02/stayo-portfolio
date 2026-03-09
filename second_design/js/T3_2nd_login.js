@@ -15,6 +15,13 @@ window.onload = function () {
         //  여기서 값을 다시 읽어야 함
         const emailValue = email.value.trim();
         const passwordValue = password.value.trim();
+        
+        // 관리자용 로그인 하드코딩 
+        if (emailValue === "asdf1234@stayo.com" && passwordValue === "asdf1234") {
+            alert('관리자로 로그인 하시겠습니까?')
+            window.document.location.href= "T3_2nd_index_guest.html" // 이거 관리자용 메인페이지로 링크바꾸면 됨 
+        }  
+
 
         if (emailValue === "" && passwordValue === "") {
             error.textContent = "이메일과 비밀번호를 입력해주세요.";

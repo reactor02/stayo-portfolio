@@ -335,7 +335,7 @@
                             <!-- </div> -->
                             <!-- <div class="hint muted"></div> -->
                             <div class="table-wrap">
-                                
+
                                 <table id="waitingtable" class="tbl" aria-label="회원 목록">
                                     <thead>
                                         <tr>
@@ -458,7 +458,7 @@
                                     </thead>
                                     <tbody>
                                     </tbody>
-                                   
+
                                 </table>
                             </div>
                         </section>
@@ -630,95 +630,152 @@
                             <div class="panel__head">
                                 <div>
                                     <h2 class="panel__title">쿠폰/프로모션</h2>
-                                    <p class="panel__sub muted">쿠폰 생성/배포 UI</p>
+                                    <p class="panel__sub muted">쿠폰 생성/배포 및 조회</p>
                                 </div>
-                                <button id="adminOpenBtn" class="btn-main btn-main--sm" type="button">쿠폰 생성</button>
+                                <div class="panel__actions" style="display: flex; gap: 8px;">
+                                    <button id="adminShowAllCoupons" class="btn-outline btn-outline--sm"
+                                        type="button">전체보기</button>
+                                    <button id="adminOpenBtn" class="btn-main btn-main--sm" type="button">쿠폰 생성</button>
+                                </div>
                             </div>
 
                             <div class="admin-form">
                                 <label class="f">
-                                    <span class="f__label">쿠폰명</span>
-                                    <input class="f__control" type="text" placeholder="예) 신규가입 20% 할인" />
+                                    <span class="f__label">쿠폰명 검색</span>
+                                    <input id="filterCouponName" class="f__control" type="text"
+                                        placeholder="신규가입 20% 할인" />
                                 </label>
                                 <label class="f">
                                     <span class="f__label">할인율</span>
-                                    <select class="f__control">
-                                        <option>10%</option>
-                                        <option>15%</option>
-                                        <option selected>20%</option>
-                                        <option>30%</option>
+                                    <select id="filterDiscount" class="f__control">
+                                        <option value="">전체</option>
+                                        <option value="10%">10%</option>
+                                        <option value="15%">15%</option>
+                                        <option value="20%">20%</option>
+                                        <option value="30%">30%</option>
                                     </select>
                                 </label>
-                                <label class="f f--wide">
-                                    <span class="f__label">유효기간</span>
-                                    <input class="f__control" type="text" placeholder="예) 2026.03.01 ~ 2026.03.31" />
-                                </label>
-                                <label class="f f--wide">
-                                    <div id="adminCouponList" class="list"></div>
-                                </label>
+                                <div class="f f--wide" style="display: flex; gap: 10px; align-items: flex-end;">
+                                    <label style="flex: 1;">
+                                        <span class="f__label">유효기간 검색 (시작~종료)</span>
+                                        <div style="display: flex; gap: 5px; align-items: center;">
+                                            <input id="filterMinDate" class="f__control" type="date" />
+                                            <span>~</span>
+                                            <input id="filterMaxDate" class="f__control" type="date" />
+                                        </div>
+                                    </label>
+                                    <button id="adminSearchBtn" class="btn-main btn-main--sm" type="button"
+                                        style="height: 40px; min-width: 80px;">검색</button>
+                                    <button id="resetFilter" class="btn-outline btn-outline--sm" type="button"
+                                        style="height: 40px; min-width: 80px;">필터 초기화</button>
+                                </div>
+
+                                <div id="adminCouponList" class="list" style="grid-column: 1 / -1; margin-top: 20px;">
+                                </div>
+                                <div id="couponStatusMsg" class="muted"
+                                    style="text-align: center; margin-top: 10px; font-size: 0.9rem; display: none;">
+                                    전체보기 상태가 아닙니다
+                                </div>
                             </div>
 
-                            <!-- 쿠폰 생성 모달 -->
                             <dialog id="adminDialog">
-                                <p>쿠폰 생성</p>
-                                쿠폰명 <input type="text" id="adminCouponName">
-                                할인율 <select id="adminCouponDiscount">
-                                    <option value="10%">10%</option>
-                                    <option value="15%">15%</option>
-                                    <option value="20%">20%</option>
-                                    <option value="30%">30%</option>
-                                </select>
-                                유효기간 <input type="date" id="adminMinDate">
-                                <input type="date" id="adminMaxDate">
-                                <button id="adminMakeCouponBtn">쿠폰생성</button><br>
-                                <button id="adminCloseBtn">닫기</button>
+                                <div class="dialog-content">
+                                    <h3>새 쿠폰 생성</h3>
+                                    <input type="text" id="adminCouponName" placeholder="쿠폰명 입력">
+                                    <select id="adminCouponDiscount">
+                                        <option value="10%">10%</option>
+                                        <option value="15%">15%</option>
+                                        <option value="20%">20%</option>
+                                        <option value="30%">30%</option>
+                                    </select>
+                                    <input type="date" id="adminMinDate">
+                                    <input type="date" id="adminMaxDate">
+                                    <div style="margin-top: 15px;">
+                                        <button id="adminMakeCouponBtn" class="btn-main btn-main--sm">생성</button>
+                                        <button id="adminCloseBtn" class="btn-outline btn-outline--sm">닫기</button>
+                                    </div>
+                                </div>
                             </dialog>
-
-                            <!-- 쿠폰 수정 모달 -->
                             <dialog id="adminDialog2">
-                                <p>쿠폰 수정</p>
-                                쿠폰명 <input type="text" id="adminCouponName2">
-                                할인율 <select id="adminCouponDiscount2">
-                                    <option value="10%">10%</option>
-                                    <option value="15%">15%</option>
-                                    <option value="20%">20%</option>
-                                    <option value="30%">30%</option>
-                                </select>
-                                유효기간 <input type="date" id="adminMinDate2">
-                                <input type="date" id="adminMaxDate2">
-                                <button id="adminMakeCouponBtn2">쿠폰수정</button><br>
-                                <button id="adminCloseBtn2">닫기</button>
+                                <div class="dialog-content">
+                                    <h3>쿠폰 정보 수정</h3>
+                                    <input type="text" id="adminCouponName2" placeholder="수정할 쿠폰명">
+                                    <select id="adminCouponDiscount2">
+                                        <option value="10%">10%</option>
+                                        <option value="15%">15%</option>
+                                        <option value="20%">20%</option>
+                                        <option value="30%">30%</option>
+                                    </select>
+                                    <input type="date" id="adminMinDate2">
+                                    <input type="date" id="adminMaxDate2">
+                                    <div style="margin-top: 15px;">
+                                        <button id="adminMakeCouponBtn2" class="btn-main btn-main--sm">수정완료</button>
+                                        <button id="adminCloseBtn2" class="btn-outline btn-outline--sm">취소</button>
+                                    </div>
+                                </div>
                             </dialog>
-
                         </section>
+                        <!-- 쿠폰 생성 모달 -->
+                        <dialog id="adminDialog">
+                            <p>쿠폰 생성</p>
+                            쿠폰명 <input type="text" id="adminCouponName">
+                            할인율 <select id="adminCouponDiscount">
+                                <option value="10%">10%</option>
+                                <option value="15%">15%</option>
+                                <option value="20%">20%</option>
+                                <option value="30%">30%</option>
+                            </select>
+                            유효기간 <input type="date" id="adminMinDate">
+                            <input type="date" id="adminMaxDate">
+                            <button id="adminMakeCouponBtn">쿠폰생성</button><br>
+                            <button id="adminCloseBtn">닫기</button>
+                        </dialog>
 
-                        <!-- ✅ (G) 설정 -->
-                        <section id="sec-settings" class="panel anchor">
-                            <div class="panel__head">
-                                <h2 class="panel__title">설정</h2>
-                            </div>
+                        <!-- 쿠폰 수정 모달 -->
+                        <dialog id="adminDialog2">
+                            <p>쿠폰 수정</p>
+                            쿠폰명 <input type="text" id="adminCouponName2">
+                            할인율 <select id="adminCouponDiscount2">
+                                <option value="10%">10%</option>
+                                <option value="15%">15%</option>
+                                <option value="20%">20%</option>
+                                <option value="30%">30%</option>
+                            </select>
+                            유효기간 <input type="date" id="adminMinDate2">
+                            <input type="date" id="adminMaxDate2">
+                            <button id="adminMakeCouponBtn2">쿠폰수정</button><br>
+                            <button id="adminCloseBtn2">닫기</button>
+                        </dialog>
 
-                            <div class="settings">
+            </section>
 
-                                <label class="check">
-                                    <input type="checkbox" checked>
-                                    <span class="check__box"></span>
-                                    <span class="check__text">숙소 등록 시 자동 승인 끄기</span>
-                                </label>
+            <!-- ✅ (G) 설정 -->
+            <section id="sec-settings" class="panel anchor">
+                <div class="panel__head">
+                    <h2 class="panel__title">설정</h2>
+                </div>
 
-                                <label class="check">
-                                    <input type="checkbox">
-                                    <span class="check__box"></span>
-                                    <span class="check__text">리뷰 신고 3회 이상 자동 숨김</span>
-                                </label>
+                <div class="settings">
 
-                            </div>
-                        </section>
+                    <label class="check">
+                        <input type="checkbox" checked>
+                        <span class="check__box"></span>
+                        <span class="check__text">숙소 등록 시 자동 승인 끄기</span>
+                    </label>
 
-                    </div>
+                    <label class="check">
+                        <input type="checkbox">
+                        <span class="check__box"></span>
+                        <span class="check__text">리뷰 신고 3회 이상 자동 숨김</span>
+                    </label>
 
                 </div>
             </section>
+
+        </div>
+
+        </div>
+        </section>
         </div>
     </main>
 

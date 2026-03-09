@@ -1,0 +1,131 @@
+body {height: 200vh;}
+
+.parent{
+    margin-bottom: 30px;
+}
+.parent div {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    border: 1px solid lightgray;
+    text-align: center;
+    color: white;
+    background-color: red;
+}
+.parent .relative {
+    /* 
+        원래 위치를 기준으로 이동 
+        top, left, right, bottom 연동해서 이동
+        원래 내가 가지고 있던 공간이 유지된다
+    */
+    position: relative;
+    /* top: 20px; */
+    top: -20px;
+    /* left: 50%; */
+    left: 10px;
+    background-color: #f007;
+}
+
+.parent .absolute {
+    /* 
+    부모 중에 relative 등, static이 아닌 것 (없으면 body) 기준으로 이동
+    원래 내공간은 없어진다 
+    */
+    position: absolute;
+    top: 30px;
+    left: 350px;
+}
+.parent .abs-bottom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.rel {
+    position: relative;
+}
+.parent2 {
+    border: 1px solid red;
+    width: 100px;
+    background-color: green;
+    color: white;
+}
+.child2 {
+    background-color: rgba(0, 0, 255, 0.5);
+
+}
+.abs {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+.fixed {
+    border: 1px solid red;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+}
+.sticky {
+    position: sticky;
+    top: 20px;
+}
+/* z index는 형제요소끼리만 가능하다. 부모는 안됨. */
+.z1 {
+    background-color: hotpink;
+    top: 5px;
+    left:  20px;
+    height: 50px;
+
+    z-index: 2;
+}
+.z2 {
+    background-color: yellow;
+    top: -10px;
+    left:  -10px;
+    height: 50px;
+
+    z-index: 1;
+}
+.z3 {
+    background-color: blue;
+    top: -70px;
+    left:  50px;
+    height: 50px;
+
+    z-index: 99;
+}
+
+.rel:hover {
+    z-index: 999;
+    box-shadow: 0 0 10px 10px lightgray;
+    /* top: -2px; */
+}
+.p1 {border: 1px solid blue;
+    width: 100px;
+    height: 100px;
+
+    position: relative;
+    }
+.c1 {
+    border: 1px solid blue;
+    width: 100px;
+    height: 100px;
+
+    position: absolute;
+    /* 양쪽에 공백 필수 */
+    top: calc((200px/2) - (100px/2));
+    left: calc(50%-(100px/2));
+}
+
+:root {
+    --menu-color: 1px solid red;
+}
+
+.p1 {
+    background-color: var(--menu-color);
+}
+

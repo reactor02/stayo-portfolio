@@ -29,63 +29,158 @@ window.onload = function () {
         })
     }
 
-    const waitingtable = document.querySelector("#waitingTable tbody");
+
+
+    // 승인대기 테이블 tbody 가져오기
+    const waitingtable = document.querySelector("#waitingtable tbody");
+
+    // 처리완료 테이블 tbody 가져오기
     const doneTable = document.querySelector("#donetable tbody");
 
-    for (let i = 0; i < approve.length; i++) {
+    // 문서 전체에서 클릭 이벤트를 감지 (이벤트 위임 방식)
+    waitingtable.addEventListener("click", function (e) {
 
-        approve[i].addEventListener('click', function () {
-            status[i].textContent = "승인";
+        // 클릭된 요소가 승인 버튼이면
+        if (e.target.classList.contains("approve")) {
 
-            const row = approve[i].parentNode.parentNode; // 
+            // 클릭된 버튼이 포함된 가장 가까운 tr 찾기 (행 전체)
+            const row = e.target.closest("tr");
 
+            // 상태 칸(.status)의 텍스트를 승인으로 변경
+            row.querySelector(".status").textContent = "승인";
+
+            // 해당 행을 처리완료 테이블로 이동
             doneTable.appendChild(row);
-            // 관리버튼 변경
-            row.querySelector(".td-actions").innerHTML =  // approve 의 부모의 부모인 tr로 가서 class가 td-actions인것 
+
+            // 관리 버튼을 수정요청 버튼으로 변경
+            row.querySelector(".td-actions").innerHTML =
                 '<button class="mini editRequest">수정요청</button>';
+        }
 
 
+        // 클릭된 요소가 거절 버튼이면
+        if (e.target.classList.contains("refuse")) {
 
-        });
+            // 클릭된 버튼이 속한 행 찾기
+            const row = e.target.closest("tr");
 
-        refuse[i].addEventListener('click', function () {
-            status[i].textContent = "거절";
-            const row = refuse[i].parentNode.parentNode;
+            // 상태를 거절로 변경
+            row.querySelector(".status").textContent = "거절";
 
+            // 처리완료 테이블로 이동
             doneTable.appendChild(row);
-            row.querySelector(".td-actions").innerHTML =  // approve 의 부모의 부모인 tr로 가서 class가 td-actions인것 
+
+            // 관리 버튼을 수정요청으로 변경
+            row.querySelector(".td-actions").innerHTML =
                 '<button class="mini editRequest">수정요청</button>';
-        });
+        }
 
-        pending[i].addEventListener('click', function () {
-            status[i].textContent = "보류";
-            const row = pending[i].parentNode.parentNode;
 
+        // 클릭된 요소가 보류 버튼이면
+        if (e.target.classList.contains("pending")) {
+
+            // 클릭된 버튼이 속한 행 찾기
+            const row = e.target.closest("tr");
+
+            // 상태를 보류로 변경
+            row.querySelector(".status").textContent = "보류";
+
+            // 처리완료 테이블로 이동
             doneTable.appendChild(row);
-            row.querySelector(".td-actions").innerHTML =  // approve 의 부모의 부모인 tr로 가서 class가 td-actions인것 
+
+            // 관리 버튼을 수정요청으로 변경
+            row.querySelector(".td-actions").innerHTML =
                 '<button class="mini editRequest">수정요청</button>';
+        }
 
-        });
+    })
 
-    }
-// const editRequest = document.querySelectorAll('.editRequest');
+    // 클릭된 요소가 수정요청 버튼이면
+     doneTable.addEventListener("click", function(){
+         if (e.target.classList.contains("editRequest")) {
+     
+             // 수정요청 버튼이 있는 행 찾기
+             const row = e.target.closest("tr");
+     
+             // 상태를 다시 대기중으로 변경
+             row.querySelector(".status").textContent = "대기중";
+     
+             // 행을 다시 승인대기 테이블로 이동
+             waitingtable.appendChild(row);
+     
+             // 관리 버튼을 원래대로 복구 (승인 / 거절 / 보류)
+             row.querySelector(".td-actions").innerHTML =
+                 '<button class="mini approve">승인</button>' +
+                 '<button class="mini refuse">거절</button>' +
+                 '<button class="mini pending">보류</button>';
+         }
 
-// for (let i = 0; i < editRequest.length; i++) {
+     })
 
-//     editRequest[i].addEventListener('click', function () {
 
-//         const td = editRequest[i].parentElement;
-//         const row = td.parentElement;
 
-//         waitingtable.appendChild(row);
 
-//         status[i].textContent = "대기중";
 
-//     });
 
-// }
 
-   
+    // for (let i = 0; i < approve.length; i++) {
+
+    //     approve[i].addEventListener('click', function () {
+    //         status[i].textContent = "승인";
+
+    //         const row = approve[i].parentNode.parentNode; // 
+
+    //         doneTable.appendChild(row);
+    //         // 관리버튼 변경
+    //         row.querySelector(".td-actions").innerHTML =  // approve 의 부모의 부모인 tr로 가서 class가 td-actions인것 
+    //             '<button class="mini editRequest">수정요청</button>';
+
+
+
+    //     });
+
+    //     refuse[i].addEventListener('click', function () {
+    //         status[i].textContent = "거절";
+    //         const row = refuse[i].parentNode.parentNode;
+
+    //         doneTable.appendChild(row);
+    //         row.querySelector(".td-actions").innerHTML =  // approve 의 부모의 부모인 tr로 가서 class가 td-actions인것 
+    //             '<button class="mini editRequest">수정요청</button>';
+    //     });
+
+    //     pending[i].addEventListener('click', function () {
+    //         status[i].textContent = "보류";
+    //         const row = pending[i].parentNode.parentNode;
+
+    //         doneTable.appendChild(row);
+    //         row.querySelector(".td-actions").innerHTML =  // approve 의 부모의 부모인 tr로 가서 class가 td-actions인것 
+    //             '<button class="mini editRequest">수정요청</button>';
+
+    //     });
+
+    // }
+    // doneTable.addEventListener("click", function (e) {
+
+    //     if (e.target.classList.contains("editRequest")) {
+
+    //         const td = e.target.parentElement;
+    //         const row = td.parentElement;
+
+    //         waitingtable.appendChild(row);
+
+    //         const statusCell = row.querySelector(".status");
+    //         statusCell.textContent = "대기중";
+
+    //         row.querySelector(".td-actions").innerHTML =
+    //             '<button class="mini approve">승인</button>' +
+    //             '<button class="mini refuse">거절</button>' +
+    //             '<button class="mini pending">보류</button>';
+
+    //     }
+
+    // });
+
+
 
 
     for (let i = 0; i < energize.length; i++) {
@@ -191,155 +286,195 @@ window.onload = function () {
 
 }
 /* ================================================
-   쿠폰/프로모션 로직 (makingCoupn.js 이식 - admin 전용 id 사용)
+   [최종 통합] 쿠폰 관리 시스템 (생성·수정·검색·가시성)
 ================================================ */
-window.addEventListener('load', function adminCouponBind() {
-
-    const dialog = document.getElementById("adminDialog");
-    const openBtn = document.getElementById("adminOpenBtn");
-    const closeBtn = document.getElementById("adminCloseBtn");
-
-    const dialog2 = document.getElementById("adminDialog2");
-    const closeBtn2 = document.getElementById("adminCloseBtn2");
-
-    const makecouponBtn = document.getElementById("adminMakeCouponBtn");
+window.addEventListener('load', function () {
+    // 1. 요소 선택
     const couponList = document.getElementById("adminCouponList");
-    const couponName = document.getElementById("adminCouponName");
-    const couponDiscount = document.getElementById("adminCouponDiscount");
-    const minDate = document.getElementById("adminMinDate");
-    const maxDate = document.getElementById("adminMaxDate");
+    const showAllBtn = document.getElementById("adminShowAllCoupons");
+    const statusMsg = document.getElementById("couponStatusMsg"); // "전체보기 상태가 아닙니다" 문구
+    const searchBtn = document.getElementById("adminSearchBtn");
+    const resetBtn = document.getElementById("resetFilter");
 
-    let currentEditItem = null;
+    const dialog = document.getElementById("adminDialog");  // 생성 모달
+    const dialog2 = document.getElementById("adminDialog2"); // 수정 모달
 
-    // 오늘 날짜 제한
-    const today = new Date().toISOString().split('T')[0];
-    minDate.min = today;
-    maxDate.min = today;
+    let isExpanded = false;     // 전체보기 활성화 여부
+    let currentEditItem = null; // 현재 수정 중인 쿠폰 아이템
 
-    // 생성 모달 열기/닫기
-    openBtn.addEventListener("click", () => { dialog.showModal(); });
-    closeBtn.addEventListener("click", () => { dialog.close(); });
+    // 2. 가시성 제어 함수 (2개 제한 및 안내 문구)
+    function updateCouponVisibility() {
+        const items = couponList.querySelectorAll('.coupon-item');
 
-    // 수정 모달 닫기
-    closeBtn2.addEventListener("click", () => { dialog2.close(); });
-
-    // 시작일 선택 시 종료일 최소날짜 연동
-    minDate.addEventListener("input", function () {
-        maxDate.min = this.value;
-    });
-
-    // 쿠폰 생성
-    makecouponBtn.addEventListener('click', function () {
-        try {
-            const name = couponName.value;
-            const dis = couponDiscount.value;
-            const expMin = minDate.value;
-            const expMax = maxDate.value;
-
-            if (!name || !dis || !expMin || !expMax) {
-                alert("빈칸을 전부 채워주세요");
-                return;
+        items.forEach((item, index) => {
+            if (isExpanded) {
+                item.style.display = "flex";
+            } else {
+                // 전체보기가 아닐 때는 상위 2개만 표시
+                item.style.display = index < 2 ? "flex" : "none";
             }
+        });
+
+        // 안내 문구 표시 로직: 접혀있고 쿠폰이 2개보다 많을 때만 노출
+        if (!isExpanded && items.length > 2) {
+            if (statusMsg) {
+                statusMsg.style.display = "block";
+                statusMsg.innerText = "전체보기 상태가 아닙니다";
+            }
+        } else {
+            if (statusMsg) statusMsg.style.display = "none";
+        }
+
+        if (showAllBtn) showAllBtn.textContent = isExpanded ? "접기" : "전체보기";
+    }
+
+    // 3. 쿠폰 생성 (모달 유지 로직)
+    const makeBtn = document.getElementById("adminMakeCouponBtn");
+    if (makeBtn) {
+        makeBtn.addEventListener('click', function () {
+            const name = document.getElementById("adminCouponName").value.trim();
+            const dis = document.getElementById("adminCouponDiscount").value;
+            const min = document.getElementById("adminMinDate").value;
+            const max = document.getElementById("adminMaxDate").value;
+
+            if (!name || !min || !max) return alert("내용을 입력해주세요.");
 
             const article = document.createElement("article");
-            article.className = "item item--warn";
+            article.className = "coupon-item item item--warn";
 
-            if (today <= expMax) {
-                article.innerHTML = `
-                    <div class="item__left">
-                        <div class="item__title">쿠폰 이름: ${name}</div>
-                        <div class="discount red">할인율: ${dis}</div>
-                        <div class="item__meta muted">유효기간: ${expMin} ~ ${expMax}</div>
-                    </div>
-                    <div class="item__right">
-                        <button class="mini mini--ok adminCBtn" type="button">쿠폰 삭제</button>
-                        <button class="mini adminCBtn2" type="button">쿠폰 수정</button>
-                    </div>`;
-            } else {
-                article.innerHTML = `
-                    <div class="item__left">
-                        <div class="item__title">쿠폰 이름: ${name}</div>
-                        <div class="discount red">할인율: ${dis}</div>
-                        <div class="item__meta muted line-through">유효기간만료: ${expMin} ~ ${expMax}</div>
-                    </div>
-                    <div class="item__right">
-                        <button class="mini mini--ok adminCBtn" type="button">쿠폰 삭제</button>
-                        <button class="mini adminCBtn2" type="button">쿠폰 수정</button>
-                    </div>`;
-            }
+            // 검색 및 수정을 위한 데이터 저장
+            article.dataset.name = name;
+            article.dataset.discount = dis;
+            article.dataset.min = min;
+            article.dataset.max = max;
+
+            article.innerHTML = `
+                <div class="item__left">
+                    <div class="item__title coupon-item__name">쿠폰 이름: ${name}</div>
+                    <div class="discount red coupon-item__discount">할인율: ${dis}</div>
+                    <div class="item__meta muted coupon-item__meta">유효기간: ${min} ~ ${max}</div>
+                </div>
+                <div class="item__right">
+                    <button class="mini adminCBtn2" type="button">수정</button>
+                    <button class="mini mini--ok coupon-delete-btn" type="button">삭제</button>
+                </div>`;
 
             couponList.prepend(article);
-            dialog.close();
 
-            // 입력값 초기화
-            couponName.value = '';
-            minDate.value = '';
-            maxDate.value = '';
+            // 입력 필드만 초기화하고 모달(dialog)은 닫지 않음
+            document.getElementById("adminCouponName").value = "";
+            alert("쿠폰이 생성되었습니다.");
 
-        } catch (error) {
-            console.log("쿠폰 생성 중 오류 발생", error);
-        }
-    });
+            updateCouponVisibility();
+        });
+    }
 
-    // 쿠폰 목록 이벤트 위임 (삭제 / 수정)
-    couponList.addEventListener("click", function (e) {
-
-        // 삭제
-        if (e.target.classList.contains('adminCBtn')) {
-            e.target.closest('.item').remove();
-
-            // 수정 모달 열기
-        } else if (e.target.classList.contains('adminCBtn2')) {
-            currentEditItem = e.target.closest('.item');
-
-            const oldName = currentEditItem.querySelector('.item__title').innerText.replace('쿠폰 이름: ', '');
-            const oldDiscount = currentEditItem.querySelector('.discount').innerText.replace('할인율: ', '');
-
-            document.getElementById("adminCouponName2").value = oldName;
-            document.getElementById("adminCouponDiscount2").value = oldDiscount;
-
-            const adminMinDate2 = document.getElementById("adminMinDate2");
-            const adminMaxDate2 = document.getElementById("adminMaxDate2");
-            adminMinDate2.min = today;
-            adminMaxDate2.min = today;
-
+    // 4. 쿠폰 수정 및 삭제 (이벤트 위임)
+    couponList.addEventListener("click", (e) => {
+        // [수정 버튼]
+        if (e.target.classList.contains('adminCBtn2')) {
+            currentEditItem = e.target.closest('.coupon-item');
+            document.getElementById("adminCouponName2").value = currentEditItem.dataset.name;
+            document.getElementById("adminCouponDiscount2").value = currentEditItem.dataset.discount;
+            document.getElementById("adminMinDate2").value = currentEditItem.dataset.min;
+            document.getElementById("adminMaxDate2").value = currentEditItem.dataset.max;
             dialog2.showModal();
         }
+        // [삭제 버튼]
+        if (e.target.classList.contains('coupon-delete-btn')) {
+            if (confirm("정말로 삭제하시겠습니까?")) {
+                e.target.closest('.coupon-item').remove();
+                updateCouponVisibility();
+            }
+        }
     });
 
-    // 쿠폰 수정 저장
-    document.getElementById("adminMakeCouponBtn2").addEventListener('click', function () {
-        try {
+    // 5. 쿠폰 수정 완료 처리
+    const saveEditBtn = document.getElementById("adminMakeCouponBtn2");
+    if (saveEditBtn) {
+        saveEditBtn.addEventListener('click', function () {
             if (!currentEditItem) return;
 
-            const newName = document.getElementById("adminCouponName2").value;
-            const newDiscount = document.getElementById("adminCouponDiscount2").value;
+            const newName = document.getElementById("adminCouponName2").value.trim();
+            const newDisc = document.getElementById("adminCouponDiscount2").value;
             const newMin = document.getElementById("adminMinDate2").value;
             const newMax = document.getElementById("adminMaxDate2").value;
 
-            if (!newName || !newMin || !newMax) {
-                alert("수정할 내용을 모두 입력해주세요.");
-                return;
-            }
+            if (!newName || !newMin || !newMax) return alert("수정할 내용을 모두 입력해주세요.");
 
-            currentEditItem.querySelector('.item__title').innerText = `쿠폰 이름: ${newName}`;
-            currentEditItem.querySelector('.discount').innerText = `할인율: ${newDiscount}`;
+            // 데이터 갱신
+            currentEditItem.dataset.name = newName;
+            currentEditItem.dataset.discount = newDisc;
+            currentEditItem.dataset.min = newMin;
+            currentEditItem.dataset.max = newMax;
 
-            const metaArea = currentEditItem.querySelector('.item__meta');
-            if (today > newMax) {
-                metaArea.className = "item__meta muted line-through";
-                metaArea.innerText = `유효기간만료: ${newMin} ~ ${newMax}`;
-            } else {
-                metaArea.className = "item__meta muted";
-                metaArea.innerText = `유효기간: ${newMin} ~ ${newMax}`;
-            }
+            // UI 갱신
+            currentEditItem.querySelector('.coupon-item__name').innerText = `쿠폰 이름: ${newName}`;
+            currentEditItem.querySelector('.coupon-item__discount').innerText = `할인율: ${newDisc}`;
+            currentEditItem.querySelector('.coupon-item__meta').innerText = `유효기간: ${newMin} ~ ${newMax}`;
 
             dialog2.close();
+            alert("쿠폰 수정이 완료됐습니다.");
             currentEditItem = null;
+        });
+    }
 
-        } catch (error) {
-            console.log("쿠폰 수정 중 오류 발생", error);
-        }
-    });
+    // 6. 검색 필터 로직
+    if (searchBtn) {
+        searchBtn.addEventListener("click", function () {
+            const nameQ = document.getElementById("filterCouponName").value.toLowerCase();
+            const discQ = document.getElementById("filterDiscount").value;
+            const minQ = document.getElementById("filterMinDate").value;
+            const maxQ = document.getElementById("filterMaxDate").value;
 
+            const items = couponList.querySelectorAll('.coupon-item');
+            items.forEach(item => {
+                const { name, discount, min, max } = item.dataset;
+                let isMatch = true;
+
+                // 이름 검색
+                if (nameQ && !name.toLowerCase().includes(nameQ)) isMatch = false;
+                // 할인율 검색
+                if (discQ && discount !== discQ) isMatch = false;
+                // 유효기간 범위 로직
+                if (minQ && !maxQ) {
+                    if (max < minQ) isMatch = false;
+                } else if (!minQ && maxQ) {
+                    if (min > maxQ) isMatch = false;
+                } else if (minQ && maxQ) {
+                    if (max < minQ || min > maxQ) isMatch = false;
+                }
+
+                item.style.display = isMatch ? "flex" : "none";
+            });
+        });
+    }
+
+    // 7. 기타 버튼 이벤트
+    if (resetBtn) {
+        resetBtn.addEventListener("click", () => {
+            // 모든 필터 입력창 초기화
+            document.getElementById("filterCouponName").value = "";
+            document.getElementById("filterDiscount").value = "";
+            document.getElementById("filterMinDate").value = "";
+            document.getElementById("filterMaxDate").value = "";
+            isExpanded = false;
+            updateCouponVisibility();
+        });
+    }
+
+    if (showAllBtn) {
+        showAllBtn.addEventListener("click", () => {
+            isExpanded = !isExpanded;
+            updateCouponVisibility();
+        });
+    }
+
+    // 모달 열기/닫기 기본
+    document.getElementById("adminOpenBtn").addEventListener("click", () => dialog.showModal());
+    document.getElementById("adminCloseBtn").addEventListener("click", () => dialog.close());
+    document.getElementById("adminCloseBtn2").addEventListener("click", () => dialog2.close());
+
+    // 페이지 로드 시 초기 가시성 설정
+    updateCouponVisibility();
 });
