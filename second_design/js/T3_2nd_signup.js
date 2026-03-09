@@ -50,9 +50,11 @@ window.onload = function () {
     }
 
     // 가입 버튼 클릭
+
+ 
     joinBtn.addEventListener('click', function (e) {
         e.preventDefault();
-        
+
 
         // 초기화
         nameError.textContent = "";
@@ -66,10 +68,19 @@ window.onload = function () {
         let isValid = true;
 
         // 이름
+
+
+
+        const nameRegex = /^[가-힣a-zA-Z]+$/; // 이름엔 영어랑 한글만
+
         if (name.value.trim() === '') {
             nameError.textContent = "이름을 입력해주세요.";
             isValid = false;
+        } else if (!nameRegex.test(name.value.trim())) {
+            nameError.textContent = "이름은 한글 또는 영어만 입력 가능합니다.";
+            isValid = false;
         }
+
 
         // 이메일
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 이메일을 검사하는 정규식 
@@ -130,6 +141,13 @@ window.onload = function () {
                 birthError.textContent = "미래 날짜는 선택할 수 없습니다.";
                 isValid = false;
             }
+            else {
+                let age = today.getFullYear() - year; // 현재날짜 -입력날짜 
+                if (age < 15) {
+                    birthError.textContent = "15세 이상만 가입 가능합니다.";
+                    isValid = false;
+                }
+            }
         }
 
         // 필수 약관
@@ -148,15 +166,15 @@ window.onload = function () {
                 .done(function (res) {
                     console.log("회원가입 성공", res);
                     alert("회원가입 완료!");
-                    window.location.href= "T3_2nd_login.html"
+                    window.location.href = "T3_2nd_login.html"
                 })
                 .fail(function (err) {
                     console.log("회원가입 실패", err);
                     alert("회원가입 실패");
                 });
-        } 
+        }
 
-       
+
     });
 
     const kakaoBtn = document.getElementById("kakao-btn");
@@ -164,11 +182,11 @@ window.onload = function () {
 
     kakaoBtn.addEventListener("click", function () {
         alert("카카오 로그인 기능은 추후 구현 예정입니다.");
-        window.location.href="https://accounts.kakao.com/"
+        window.location.href = "https://accounts.kakao.com/"
     });
-    
+
     naverBtn.addEventListener("click", function () {
         alert("네이버 로그인 기능은 추후 구현 예정입니다.");
-        window.location.href="https://nid.naver.com/"
+        window.location.href = "https://nid.naver.com/"
     });
 }

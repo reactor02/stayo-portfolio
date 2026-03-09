@@ -29,63 +29,155 @@ window.onload = function () {
         })
     }
 
-    const waitingtable = document.querySelector("#waitingTable tbody");
+  
+
+    // 승인대기 테이블 tbody 가져오기
+    const waitingtable = document.querySelector("#waitingtable tbody");
+
+    // 처리완료 테이블 tbody 가져오기
     const doneTable = document.querySelector("#donetable tbody");
 
-    for (let i = 0; i < approve.length; i++) {
+       // 문서 전체에서 클릭 이벤트를 감지 (이벤트 위임 방식)
+    document.addEventListener("click", function (e) {
 
-        approve[i].addEventListener('click', function () {
-            status[i].textContent = "승인";
+        // 클릭된 요소가 승인 버튼이면
+        if (e.target.classList.contains("approve")) {
 
-            const row = approve[i].parentNode.parentNode; // 
+            // 클릭된 버튼이 포함된 가장 가까운 tr 찾기 (행 전체)
+            const row = e.target.closest("tr");
 
+            // 상태 칸(.status)의 텍스트를 승인으로 변경
+            row.querySelector(".status").textContent = "승인";
+
+            // 해당 행을 처리완료 테이블로 이동
             doneTable.appendChild(row);
-            // 관리버튼 변경
-            row.querySelector(".td-actions").innerHTML =  // approve 의 부모의 부모인 tr로 가서 class가 td-actions인것 
+
+            // 관리 버튼을 수정요청 버튼으로 변경
+            row.querySelector(".td-actions").innerHTML =
                 '<button class="mini editRequest">수정요청</button>';
+        }
 
 
+        // 클릭된 요소가 거절 버튼이면
+        if (e.target.classList.contains("refuse")) {
 
-        });
+            // 클릭된 버튼이 속한 행 찾기
+            const row = e.target.closest("tr");
 
-        refuse[i].addEventListener('click', function () {
-            status[i].textContent = "거절";
-            const row = refuse[i].parentNode.parentNode;
+            // 상태를 거절로 변경
+            row.querySelector(".status").textContent = "거절";
 
+            // 처리완료 테이블로 이동
             doneTable.appendChild(row);
-            row.querySelector(".td-actions").innerHTML =  // approve 의 부모의 부모인 tr로 가서 class가 td-actions인것 
+
+            // 관리 버튼을 수정요청으로 변경
+            row.querySelector(".td-actions").innerHTML =
                 '<button class="mini editRequest">수정요청</button>';
-        });
+        }
 
-        pending[i].addEventListener('click', function () {
-            status[i].textContent = "보류";
-            const row = pending[i].parentNode.parentNode;
 
+        // 클릭된 요소가 보류 버튼이면
+        if (e.target.classList.contains("pending")) {
+
+            // 클릭된 버튼이 속한 행 찾기
+            const row = e.target.closest("tr");
+
+            // 상태를 보류로 변경
+            row.querySelector(".status").textContent = "보류";
+
+            // 처리완료 테이블로 이동
             doneTable.appendChild(row);
-            row.querySelector(".td-actions").innerHTML =  // approve 의 부모의 부모인 tr로 가서 class가 td-actions인것 
+
+            // 관리 버튼을 수정요청으로 변경
+            row.querySelector(".td-actions").innerHTML =
                 '<button class="mini editRequest">수정요청</button>';
+        }
 
-        });
 
-    }
-// const editRequest = document.querySelectorAll('.editRequest');
+        // 클릭된 요소가 수정요청 버튼이면
+        if (e.target.classList.contains("editRequest")) {
 
-// for (let i = 0; i < editRequest.length; i++) {
+            // 수정요청 버튼이 있는 행 찾기
+            const row = e.target.closest("tr");
 
-//     editRequest[i].addEventListener('click', function () {
+            // 상태를 다시 대기중으로 변경
+            row.querySelector(".status").textContent = "대기중";
 
-//         const td = editRequest[i].parentElement;
-//         const row = td.parentElement;
+            // 행을 다시 승인대기 테이블로 이동
+            waitingtable.appendChild(row);
 
-//         waitingtable.appendChild(row);
+            // 관리 버튼을 원래대로 복구 (승인 / 거절 / 보류)
+            row.querySelector(".td-actions").innerHTML =
+                '<button class="mini approve">승인</button>' +
+                '<button class="mini refuse">거절</button>' +
+                '<button class="mini pending">보류</button>';
+        }
 
-//         status[i].textContent = "대기중";
+    })
 
-//     });
 
-// }
 
-   
+
+
+
+    // for (let i = 0; i < approve.length; i++) {
+
+    //     approve[i].addEventListener('click', function () {
+    //         status[i].textContent = "승인";
+
+    //         const row = approve[i].parentNode.parentNode; // 
+
+    //         doneTable.appendChild(row);
+    //         // 관리버튼 변경
+    //         row.querySelector(".td-actions").innerHTML =  // approve 의 부모의 부모인 tr로 가서 class가 td-actions인것 
+    //             '<button class="mini editRequest">수정요청</button>';
+
+
+
+    //     });
+
+    //     refuse[i].addEventListener('click', function () {
+    //         status[i].textContent = "거절";
+    //         const row = refuse[i].parentNode.parentNode;
+
+    //         doneTable.appendChild(row);
+    //         row.querySelector(".td-actions").innerHTML =  // approve 의 부모의 부모인 tr로 가서 class가 td-actions인것 
+    //             '<button class="mini editRequest">수정요청</button>';
+    //     });
+
+    //     pending[i].addEventListener('click', function () {
+    //         status[i].textContent = "보류";
+    //         const row = pending[i].parentNode.parentNode;
+
+    //         doneTable.appendChild(row);
+    //         row.querySelector(".td-actions").innerHTML =  // approve 의 부모의 부모인 tr로 가서 class가 td-actions인것 
+    //             '<button class="mini editRequest">수정요청</button>';
+
+    //     });
+
+    // }
+    // doneTable.addEventListener("click", function (e) {
+
+    //     if (e.target.classList.contains("editRequest")) {
+
+    //         const td = e.target.parentElement;
+    //         const row = td.parentElement;
+
+    //         waitingtable.appendChild(row);
+
+    //         const statusCell = row.querySelector(".status");
+    //         statusCell.textContent = "대기중";
+
+    //         row.querySelector(".td-actions").innerHTML =
+    //             '<button class="mini approve">승인</button>' +
+    //             '<button class="mini refuse">거절</button>' +
+    //             '<button class="mini pending">보류</button>';
+
+    //     }
+
+    // });
+
+
 
 
     for (let i = 0; i < energize.length; i++) {
