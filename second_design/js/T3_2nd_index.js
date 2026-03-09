@@ -227,7 +227,7 @@ async function bind() {
             // API 호출 (선택된 type 전달)
             const listRes = await API.V1.TB.Lodging.properties({
                 q: type,       // 호텔·펜션 등 키워드로 검색
-                page: 1,
+                page: 2,
                 pageSize: 6
             });
 

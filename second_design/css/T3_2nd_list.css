@@ -475,6 +475,7 @@ cursor: pointer;
   font-weight: 800;
   font-size: 13px;
   color: #444;
+  cursor: pointer;
 }
 .page--active{
   background: #111;

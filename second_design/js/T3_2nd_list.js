@@ -2,9 +2,14 @@ window.addEventListener('load', () => App.bind());
 
 const App = {
     items: [],
-    filteredItems: [],
     r: null,
     el: {},
+
+    currentPage: 1,
+    pageSize: 10,
+    maxPage: 5,
+    allItems: [],
+    filteredItems: [],
 
     bind() {
         this.cacheDom();
@@ -32,18 +37,13 @@ const App = {
         this.el.resultsCount = document.querySelector('.results-head__meta b');
         this.el.summaryCount = document.querySelector('.summary__desc');
         this.el.citySelect = document.querySelector('.city-select');
+        this.el.pagination = document.querySelector('.pagination');
     },
 
     bindEvents() {
         if (this.el.price_range) {
             this.el.price_range.addEventListener('input', () => {
                 this.renderPrice();
-            });
-        }
-
-        if (this.el.summary__btn) {
-            this.el.summary__btn.addEventListener('click', () => {
-                alert('기능이 준비중입니다');
             });
         }
 
@@ -77,24 +77,57 @@ const App = {
 
         if (this.el.citySelect) {
             this.el.citySelect.addEventListener('change', () => {
+                this.currentPage = 1;
                 this.loadData(this.el.citySelect.value);
+            });
+        }
+
+        if (this.el.pagination) {
+            this.el.pagination.addEventListener('click', (e) => {
+
+                const pageBtn = e.target.closest('[data-page]');
+                const prevBtn = e.target.closest('.prev');
+                const nextBtn = e.target.closest('.next');
+
+                if (pageBtn) {
+                    this.currentPage = Number(pageBtn.dataset.page);
+                    this.renderCurrentPage();
+                    this.renderPagination();
+                    return;
+                }
+
+                if (prevBtn && this.currentPage > 1) {
+                    this.currentPage--;
+                    this.renderCurrentPage();
+                    this.renderPagination();
+                    return;
+                }
+
+                if (nextBtn && this.currentPage < this.totalPages) {
+                    this.currentPage++;
+                    this.renderCurrentPage();
+                    this.renderPagination();
+                }
             });
         }
     },
 
-    async loadData(city = '서울') {
+    async loadData(city = `서울`) {
         try {
             const res = await API.V1.TB.Lodging.properties({
                 city: city,
                 page: 1,
-                pageSize: 10
+                pageSize: 50
             });
 
-            this.r = res;
-            this.items = res.items || [];
-            this.filteredItems = [...this.items];
+            // this.r = res;
+            this.allItems = res.items || [];
+            this.filteredItems = [...this.allItems];
+            this.currentPage = 1;
+            this.handleSort();
+            console.log(this.filteredItems);
 
-            if (this.items.length === 0) {
+            if (this.allItems.length === 0) {
                 this.el.result_grid.innerHTML = `
                     <p style="grid-column:1/-1;text-align:center;color:#999;">
                         조회된 숙소가 없습니다.
@@ -104,10 +137,8 @@ const App = {
                 return;
             }
 
-
-            this.renderCards(this.filteredItems);
             this.renderPrice();
-            this.updateResultCount();
+
 
             const summaryTitle = document.querySelector('.summary__title');
             if (summaryTitle) {
@@ -150,7 +181,7 @@ const App = {
     },
 
     applyFilters() {
-        let list = [...this.items];
+        let list = [...this.allItems];
 
         // 1. 가격 필터
         if (this.el.price_range) {
@@ -170,13 +201,14 @@ const App = {
                     item.grade ||
                     item.hotelGrade ||
                     item.ratingGrade ||
+                    item.stars ||
                     '';
 
                 const gradeText = String(gradeValue);
 
                 return selectedGrades.some((grade) => {
                     if (grade === '기타') {
-                        return !['3성급', '4성급', '5성급'].includes(gradeText);
+                        return !['2성급', '3성급', '4성급', '5성급'].includes(gradeText);
                     }
                     return gradeText === grade || gradeText.includes(grade.replace('성급', ''));
                 });
@@ -230,7 +262,11 @@ const App = {
             sorted.sort((a, b) => b.rating - a.rating);
         }
 
-        this.renderCards(sorted);
+        this.filteredItems = sorted;
+        this.totalPages = Math.min(Math.ceil(this.filteredItems.length / this.pageSize), this.maxPage)
+        this.renderCurrentPage();
+        this.renderPagination();
+        this.updateResultCount();
     },
 
     updateResultCount() {
@@ -254,7 +290,7 @@ const App = {
                     <article class="card">
                         <div class="card__media">
                             <img src="${item.thumbnail}" alt="${item.name}">
-                            <span class="badge badge--dark">할인 중</span>
+                            <span class="badge badge--dark">${item.stars}성급</span>
 
                             <button class="wish" type="button" aria-label="찜하기">
                                 <svg viewBox="0 0 24 24" class="heart" aria-hidden="true">
@@ -292,5 +328,48 @@ const App = {
                 </a>
             `;
         });
+    },
+
+    renderCurrentPage() {
+        const start = (this.currentPage - 1) * this.pageSize;
+        const end = start + this.pageSize;
+        const pageItems = this.filteredItems.slice(start, end);
+
+        this.renderCards(pageItems);
+    },
+
+    renderPagination() {
+        if (!this.el.pagination) return;
+
+        let html = '';
+
+        // 이전
+        html += `
+        <button class="page prev" type="button" ${this.currentPage === 1 ? 'disabled' : ''}>
+            이전
+        </button>
+    `;
+
+        // 페이지 번호
+        for (let i = 1; i <= this.totalPages; i++) {
+            html += `
+            <button 
+                class="page ${i === this.currentPage ? 'page--active' : ''}" 
+                type="button" 
+                data-page="${i}">
+                ${i}
+            </button>
+        `;
+        }
+
+        // 다음
+        html += `
+        <button class="page next" type="button" ${this.currentPage === this.totalPages ? 'disabled' : ''}>
+            다음
+        </button>
+    `;
+
+        this.el.pagination.innerHTML = html;
     }
+
 };
