@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STAYO | 리뷰</title>
+  <script src="../js/T3_2nd_common.js"></script>
+  <script src="../js/T3_2nd_review.js"></script>
+
+  <!-- 폰트(프로젝트 동일) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- 공통 CSS -->
+  <link rel="stylesheet" href="../css/T3_2nd_common.css" />
+  <!-- 페이지 전용 CSS -->
+  <link rel="stylesheet" href="../css/T3_2nd_review.css" />
+</head>
+
+<body>
+  <!-- ==========================
+    공통 헤더(메인과 동일)
+  =========================== -->
+  <header class="header">
+    <div class="container header__inner">
+      <!-- 로고 -->
+      <a href="./T3_2nd_index.html" class="logo" aria-label="STAYO 홈">STAYO</a>
+
+      <!-- 가운데 메뉴 -->
+      <nav class="gnb" aria-label="주요 메뉴">
+        <a href="./list.html" class="gnb__link">숙소</a>
+        <a href="#" class="gnb__link">항공권</a>
+        <a href="#" class="gnb__link">패키지</a>
+        <a href="#" class="gnb__link">액티비티</a>
+        <a href="#" class="gnb__link">렌터카</a>
+      </nav>
+
+      <!-- 오른쪽 -->
+      <div class="header__right">
+        <!-- ✅ 로그인 전 -->
+        <div class="header-guest">
+          <a href="./T3_2nd_login.html" class="btn btn--ghost">
+            <span class="btn__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z" />
+              </svg>
+            </span>
+            로그인
+          </a>
+          <a href="./T3_2nd_signup.html" class="btn btn--solid">회원가입</a>
+        </div>
+
+        <!-- ✅ 로그인 후 -->
+        <div class="header-user">
+          <!-- <a href="./T3_2nd_cart.html" class="icon-btn" aria-label="장바구니">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                                d="M7 4H5L4 6v2h2l3.6 7.59L8.25 18A2 2 0 0 0 10 21h8v-2h-7.42a.25.25 0 0 1-.23-.37L11.1 17h5.45a2 2 0 0 0 1.79-1.11L21 9H7.42l-.94-2zM10 23a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm7 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                        </svg>
+                    </a>
+
+                    <a href="./T3_2nd_mapage.html#sec-wish" class="icon-btn" aria-label="찜 목록">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6 4 4 6.5 4c1.54 0 3.04.81 3.9 2.09C11.26 4.81 12.76 4 14.3 4 16.8 4 18.8 6 18.8 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                        </svg>
+                    </a> -->
+
+          <!-- ✅ 로그인 후 영역 안 -->
+          <div class="user-menu">
+            <!-- user-chip: 클릭 트리거 -->
+            <button class="user-avatar-btn">
+              <span class="user-chip__avatar">MH</span>
+            </button>
+
+            <!-- ✅ 모달(드롭다운 메뉴) -->
+            <div class="user-modal" role="menu" aria-label="유저 메뉴">
+              <a href="./T3_2nd_mapage.html" class="user-modal__item" role="menuitem">마이페이지</a>
+              <a href="./T3_2nd_cart.html" class="user-modal__item" role="menuitem">장바구니</a>
+              <a href="./T3_2nd_mapage.html#sec-wish" class="user-modal__item" role="menuitem">찜목록</a>
+              <button type="button" class="user-modal__item user-modal__logout logout" role="menuitem">
+                로그아웃
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="review-page">
+    <!-- ===================================================
+      상단(브레드크럼 + 타이틀)
+    =================================================== -->
+    <section class="review-top">
+      <div class="container">
+        <nav class="crumb" aria-label="현재 위치">
+          <a href="./T3_2nd_index.html">홈</a>
+          <span class="crumb__sep">/</span>
+          <span class="crumb__current">리뷰</span>
+        </nav>
+
+        <div class="review-title">
+          <h1>리뷰</h1>
+          <h2 class="muted">서울 중구 호텔 센트럴</h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================
+      요약 카드(평점/분포/칩)
+    =================================================== -->
+    <section class="review-summary">
+      <div class="container">
+        <div class="summary-card">
+          <!-- 왼쪽: 평균 평점 -->
+          <div class="summary-left">
+            <div class="avg">
+              <div class="avg__score">4.8</div>
+              <div class="avg__stars" aria-label="평균 별점 4.8/5">
+                ★★★★★
+              </div>
+              <div class="avg__meta">
+                총 <b>1,284</b>개의 리뷰
+              </div>
+            </div>
+
+            <!-- 키워드 칩 -->
+            <div class="chips" aria-label="리뷰 키워드">
+              <button class="chip chip--active whole" type="button">전체</button>
+              <button class="chip clean" type="button">청결</button>
+              <button class="chip loc" type="button">위치</button>
+              <button class="chip cheap" type="button">가성비</button>
+              <button class="chip kind" type="button">친절</button>
+              <button class="chip acco" type="button">시설</button>
+            </div>
+          </div>
+
+          <!-- 오른쪽: 평점 분포(막대) -->
+          <div class="summary-right">
+            <div class="dist" aria-label="평점 분포">
+              <!-- 5점 -->
+              <div class="dist__row">
+                <span class="dist__label">5</span>
+                <div class="dist__bar"><span style="width:78%"></span></div>
+                <span class="dist__pct">78%</span>
+              </div>
+              <!-- 4점 -->
+              <div class="dist__row">
+                <span class="dist__label">4</span>
+                <div class="dist__bar"><span style="width:16%"></span></div>
+                <span class="dist__pct">16%</span>
+              </div>
+              <!-- 3점 -->
+              <div class="dist__row">
+                <span class="dist__label">3</span>
+                <div class="dist__bar"><span style="width:4%"></span></div>
+                <span class="dist__pct">4%</span>
+              </div>
+              <!-- 2점 -->
+              <div class="dist__row">
+                <span class="dist__label">2</span>
+                <div class="dist__bar"><span style="width:1%"></span></div>
+                <span class="dist__pct">1%</span>
+              </div>
+              <!-- 1점 -->
+              <div class="dist__row">
+                <span class="dist__label">1</span>
+                <div class="dist__bar"><span style="width:1%"></span></div>
+                <span class="dist__pct">1%</span>
+              </div>
+            </div>
+
+            <button class="btn-main" type="button" data-open-modal>
+              리뷰 작성하기
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================
+      필터/정렬 바
+    =================================================== -->
+    <section class="review-toolbar">
+      <div class="container toolbar">
+        <div class="toolbar__left">
+          <label class="select">
+            <span class="select__label">정렬</span>
+            <select>
+              <option>최신순</option>
+              <option>평점 높은순</option>
+              <option>평점 낮은순</option>
+            </select>
+          </label>
+
+          <label class="select">
+            <span class="select__label">평점</span>
+            <select>
+              <option>전체</option>
+              <option>5점</option>
+              <option>4점</option>
+              <option>3점</option>
+              <option>2점</option>
+              <option>1점</option>
+            </select>
+          </label>
+        </div>
+
+        <!-- <div class="toolbar__right"> -->
+        <!-- <div class="search"> -->
+        <!-- <input type="text" placeholder="숙소명/키워드 검색" /> -->
+        <!-- <button type="button" aria-label="검색"> -->
+        <!-- <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M10 2a8 8 0 105 14l5 5 2-2-5-5a8 8 0 00-7-12zm0 2a6 6 0 110 12 6 6 0 010-12z" />
+              </svg> -->
+        <!-- </button>
+          </div> -->
+        <!-- </div> -->
+      </div>
+    </section>
+
+    <!-- ===================================================
+      리뷰 리스트
+    =================================================== -->
+    <section class="review-list">
+      <div class="container">
+        <div class="review-grid">
+
+          <!-- 리뷰 카드 -->
+          <article class="rev">
+            <a href="./T3_2nd_review_detail.html">
+              <div class="rev__head">
+                <div class="rev__user">
+                  <div class="avatar" aria-hidden="true">MH</div>
+                  <div>
+                    <div class="rev__name">박민호</div>
+                    <!-- <div class="rev__meta">오션뷰 빌라 인피니티 풀 · 2026-03-01</div> -->
+                    <div class="rev__meta">2026-03-01</div>
+                  </div>
+                </div>
+
+                <div class="rev__rate">
+                  <span class="stars" aria-label="별점 5점">★★★★★</span>
+                  <span class="score">5.0</span>
+                </div>
+              </div>
+
+              <p class="rev__text">
+                사진 그대로 뷰가 미쳤고, 직원분들도 정말 친절했어요. 조식 퀄리티도 만족!
+              </p>
+
+              <!-- 사진(선택) -->
+              <div class="rev__photos">
+                <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=80"
+                  alt="리뷰 사진 1">
+                <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=900&q=80"
+                  alt="리뷰 사진 2">
+                <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80"
+                  alt="리뷰 사진 3">
+              </div>
+
+              <!-- 태그 -->
+              <div class="rev__tags">
+                <span class="tag">청결</span>
+                <span class="tag">친절</span>
+                <span class="tag">가성비</span>
+              </div>
+
+            </a>
+            <!-- 하단 액션(UI) -->
+            <div class="rev__actions">
+              <button class="like like1" type="button" aria-label="도움이 돼요">
+                <span aria-hidden="true">👍</span> 도움돼요 <b class="PMH">12</b>
+              </button>
+              <button class="report" type="button">신고</button>
+            </div>
+          </article>
+
+          <!-- 리뷰 카드 -->
+          <article class="rev">
+            <a href="./T3_2nd_review_detail.html">
+              <div class="rev__head">
+                <div class="rev__user">
+                  <div class="avatar" aria-hidden="true">YS</div>
+                  <div>
+                    <div class="rev__name">이용상</div>
+                    <!-- <div class="rev__meta">모던 부티크 호텔 · 2026-02-26</div> -->
+                    <div class="rev__meta">2026-02-26</div>
+                  </div>
+                </div>
+
+                <div class="rev__rate">
+                  <span class="stars" aria-label="별점 4점">★★★★☆</span>
+                  <span class="score">4.0</span>
+                </div>
+              </div>
+
+              <p class="rev__text">
+                위치가 좋아서 이동하기 편했어요. 방은 아담하지만 깔끔했습니다.
+              </p>
+
+              <div class="rev__tags">
+                <span class="tag">위치</span>
+                <span class="tag">청결</span>
+              </div>
+            </a>
+
+            <div class="rev__actions">
+              <button class="like like2" type="button" aria-label="도움이 돼요">
+                <span aria-hidden="true">👍</span> 도움돼요 <b class="LYS">7</b>
+              </button>
+              <button class="report" type="button">신고</button>
+            </div>
+          </article>
+
+          <!-- 리뷰 카드 -->
+          <article class="rev">
+            <a href="./T3_2nd_review_detail.html">
+              <div class="rev__head">
+                <div class="rev__user">
+                  <div class="avatar" aria-hidden="true">JS</div>
+                  <div>
+                    <div class="rev__name">강정석</div>
+                    <!-- <div class="rev__meta">전통 료칸 스테이 · 2026-02-20</div> -->
+                    <div class="rev__meta">2026-02-20</div>
+                  </div>
+                </div>
+
+                <div class="rev__rate">
+                  <span class="stars" aria-label="별점 5점">★★★★★</span>
+                  <span class="score">5.0</span>
+                </div>
+              </div>
+
+              <p class="rev__text">
+                온천이 너무 좋았고, 조용해서 힐링 제대로 했어요. 다음에 또 오고 싶어요.
+              </p>
+
+              <div class="rev__tags">
+                <span class="tag">시설</span>
+                <span class="tag">조용함</span>
+              </div>
+            </a>
+
+            <div class="rev__actions">
+              <button class="like like3" type="button" aria-label="도움이 돼요">
+                <span aria-hidden="true">👍</span> 도움돼요 <b class="KJS">21</b>
+              </button>
+              <button class="report" type="button">신고</button>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- 페이지네이션(UI) -->
+        <!-- <nav class="pager" aria-label="페이지 이동">
+          <button class="pager__btn" type="button" aria-label="이전">‹</button>
+          <button class="pager__num pager__num--active" type="button">1</button>
+          <button class="pager__num" type="button">2</button>
+          <button class="pager__num" type="button">3</button>
+          <span class="pager__dot">…</span>
+          <button class="pager__num" type="button">10</button>
+          <button class="pager__btn" type="button" aria-label="다음">›</button>
+        </nav> -->
+      </div>
+    </section>
+
+    <!-- ===================================================
+      리뷰 작성 모달(UI)
+    =================================================== -->
+    <div class="modal" hidden aria-hidden="true" role="dialog" aria-label="리뷰 작성" data-modal>
+      <div class="modal__backdrop" data-close-modal></div>
+
+      <div class="modal__panel" role="document">
+        <div class="modal__head">
+          <div class="modal__title">리뷰 작성</div>
+          <button class="modal__close" type="button" aria-label="닫기" data-close-modal>✕</button>
+        </div>
+
+        <form class="write" action="#" method="post">
+          <label class="field">
+            <span class="field__label">숙소명</span>
+            <input class="field__input" type="text" value="서울 중구 호텔 센트럴" readonly />
+          </label>
+
+          <label class="field">
+            <span class="field__label">별점</span>
+            <select class="field__input" required>
+              <option value="" selected disabled>선택</option>
+              <option>5</option>
+              <option>4</option>
+              <option>3</option>
+              <option>2</option>
+              <option>1</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span class="field__label">제목</span>
+            <input type="text" class="field__input field__textarea_title" rows="5" placeholder="제목을 작성해 주세요"
+              required></input>
+          </label>
+          <label class="field">
+            <span class="field__label">내용</span><span class="reply-limit muted">0 / 1000</span>
+            <textarea class="field__input field__textarea_text" rows="5" placeholder="리뷰를 작성해 주세요" required></textarea>
+          </label>
+
+          <div class="field">
+            <span class="field__label">키워드</span>
+
+            <div class="checks">
+              <label class="check"><input type="checkbox"> <span>청결</span></label>
+              <label class="check"><input type="checkbox"> <span>위치</span></label>
+              <label class="check"><input type="checkbox"> <span>가성비</span></label>
+              <label class="check"><input type="checkbox"> <span>친절</span></label>
+              <label class="check"><input type="checkbox"> <span>시설</span></label>
+            </div>
+          </div>
+
+          <label class="field">
+            <span class="field__label">사진 첨부(선택)</span>
+            <input class="field__input" type="file" accept="image/*" multiple />
+          </label>
+
+          <div class="write__actions">
+            <button class="btn-outline" type="button" data-close-modal>취소</button>
+            <button class="btn-main btn-modal" type="button">등록하기</button>
+          </div>
+
+          <p class="muted write__note">* 실제 저장 기능은 추후 JS/서버 연동으로 구현</p>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==========================
+    공통 푸터
+  =========================== -->
+  <footer class="footer">
+    <div class="container footer__top">
+      <div class="footer__brand">
+        <div class="footer__logo">STAYO</div>
+        <p class="footer__desc">
+          대한민국 최고의 숙소를<br />
+          합리적인 가격으로 예약하세요.
+        </p>
+      </div>
+
+      <div class="footer__cols">
+        <div class="footer__col">
+          <div class="footer__title">서비스</div>
+          <a href="./T3_2nd_index.html" class="footer__link">숙소 예약</a>
+          <a href="#" class="footer__link alert">항공권</a>
+          <a href="#" class="footer__link alert">패키지</a>
+          <a href="#" class="footer__link alert">액티비티</a>
+          <a href="#" class="footer__link alert">렌터카</a>
+        </div>
+
+        <div class="footer__col">
+          <div class="footer__title">고객지원</div>
+          <a href="./T3_2nd_mapage.html" class="footer__link">고객센터</a>
+          <a href="./T3_2nd_mapage.html#sec-support" class="footer__link">자주 묻는 질문</a>
+          <a href="./T3_2nd_mapage.html#sec-support" class="footer__link">취소/환불</a>
+          <a href="./T3_2nd_terms.html" class="footer__link">이용약관</a>
+          <a href="./T3_2nd_privacy.html" class="footer__link">개인정보처리방침</a>
+        </div>
+
+        <div class="footer__col">
+          <div class="footer__title">파트너</div>
+          <a href="./T3_2nd_host.html" class="footer__link">숙소 등록</a>
+          <a href="./T3_2nd_partnership.html" class="footer__link">제휴 문의</a>
+          <a href="./T3_2nd_ads.html" class="footer__link">광고 문의</a>
+          <a href="./T3_2nd_api.html" class="footer__link">API</a>
+        </div>
+
+        <div class="footer__col">
+          <div class="footer__title">회사</div>
+          <a href="./T3_2nd_about.html" class="footer__link">회사 소개</a>
+          <a href="#" class="footer__link alert">채용</a>
+          <a href="./T3_2nd_notice.html" class="footer__link">공지사항</a>
+          <a href="#" class="footer__link alert">제휴사</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer__bottom">
+      <div class="footer__copy">© 2026 STAYO. All rights reserved.</div>
+      <div class="footer__bottom-links">
+        2026 TEAM3 HTML 1st Project.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================================================
+    JS: 모달 열기/닫기 (UI)
+  =================================================== -->
+  <script>
+    // document.addEventListener("DOMContentLoaded", () => {
+    //   const modal = document.querySelector("[data-modal]");
+    //   const openBtn = document.querySelector("[data-open-modal]");
+    //   const closeBtns = document.querySelectorAll("[data-close-modal]");
+
+    //   if (!modal || !openBtn) return;
+
+    //   const open = () => {
+    //     modal.hidden = false;
+    //     modal.setAttribute("aria-hidden", "false");
+    //     document.body.style.overflow = "hidden";
+    //   };
+
+    //   const close = () => {
+    //     modal.hidden = true;
+    //     modal.setAttribute("aria-hidden", "true");
+    //     document.body.style.overflow = "";
+    //   };
+
+    //   openBtn.addEventListener("click", open);
+    //   closeBtns.forEach(b => b.addEventListener("click", close));
+
+    //   // ESC로 닫기
+    //   document.addEventListener("keydown", (e) => {
+    //     if (e.key === "Escape" && !modal.hidden) close();
+    //   });
+    // });
+  </script>
+</body>
+
+</html>
