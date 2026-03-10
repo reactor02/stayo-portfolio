@@ -1,0 +1,148 @@
+/* =========================================
+   AI 상담사 위젯 전용 CSS
+   파일명: T3_2nd_ai_chat.css
+========================================== */
+
+/* ── 플로팅 트리거 버튼 ── */
+.ai-trigger {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #111;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    line-height: 1.1;
+}
+
+.ai-trigger span {
+    font-size: 10px;
+}
+
+.ai-trigger:hover {
+    transform: scale(1.1);
+}
+
+/* ── 채팅창 컨테이너 ── */
+.ai-chat-container {
+    position: fixed;
+    bottom: 60px;
+    right: 20px;
+    width: 320px;
+    height: 450px;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1001;
+    border: 1px solid #ddd;
+}
+
+/* ── 헤더 ── */
+.ai-chat-header {
+    background: #111;
+    color: white;
+    padding: 12px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ai-chat-header .title {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.ai-close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* ── 메시지 영역 ── */
+.ai-chat-box {
+    flex: 1;
+    padding: 15px;
+    background: #f8f9fa;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── 입력 영역 ── */
+.ai-chat-input-area {
+    padding: 10px;
+    background: #fff;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 8px;
+}
+
+#ai-prompt {
+    flex: 1;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 8px;
+    outline: none;
+    resize: none;
+    font-size: 13px;
+}
+
+#ai-ask-btn {
+    background: #111;
+    color: white;
+    border: none;
+    padding: 0 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+/* ── 메시지 버블 ── */
+.message {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.message.user {
+    justify-content: flex-end;
+}
+
+.message.model {
+    justify-content: flex-start;
+}
+
+.bubble {
+    max-width: 85%;
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.message.user .bubble {
+    background: #111;
+    color: white;
+    border-bottom-right-radius: 2px;
+}
+
+.message.model .bubble {
+    background: #eee;
+    color: #333;
+    border-bottom-left-radius: 2px;
+}
