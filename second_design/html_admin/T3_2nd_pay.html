@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STAYO | 결제</title>
+
+  <!-- 폰트(프로젝트 동일) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- 공통 CSS -->
+  <link rel="stylesheet" href="../css/T3s_2nd_common.css" />
+  <!-- 페이지 전용 CSS -->
+  <link rel="stylesheet" href="../css/T3_2nd_pay.css" />
+  <script src="../js/T3_2nd_pay.js"></script>
+  <script src="../js/T3_2nd_common.js"></script>
+</head>
+
+<body>
+  <!-- ==========================
+    공통 헤더(메인과 동일)
+  =========================== -->
+  <header class="header">
+    <div class="container header__inner">
+      <!-- 로고 -->
+      <a href="./T3_2nd_index.html" class="logo" aria-label="STAYO 홈">STAYO</a>
+
+      <!-- 가운데 메뉴 -->
+      <nav class="gnb" aria-label="주요 메뉴">
+        <a href="./list.html" class="gnb__link">숙소</a>
+        <a href="#" class="gnb__link">항공권</a>
+        <a href="#" class="gnb__link">패키지</a>
+        <a href="#" class="gnb__link">액티비티</a>
+        <a href="#" class="gnb__link">렌터카</a>
+      </nav>
+
+      <!-- 오른쪽 -->
+      <div class="header__right">
+        <!-- ✅ 로그인 전 -->
+        <div class="header-guest">
+          <a href="./T3_2nd_login.html" class="btn btn--ghost">
+            <span class="btn__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z" />
+              </svg>
+            </span>
+            로그인
+          </a>
+          <a href="./T3_2nd_signup.html" class="btn btn--solid">회원가입</a>
+        </div>
+
+        <!-- ✅ 로그인 후 -->
+        <div class="header-user">
+          <!-- <a href="./T3_2nd_cart.html" class="icon-btn" aria-label="장바구니">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                                d="M7 4H5L4 6v2h2l3.6 7.59L8.25 18A2 2 0 0 0 10 21h8v-2h-7.42a.25.25 0 0 1-.23-.37L11.1 17h5.45a2 2 0 0 0 1.79-1.11L21 9H7.42l-.94-2zM10 23a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm7 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                        </svg>
+                    </a>
+
+                    <a href="./T3_2nd_mapage.html#sec-wish" class="icon-btn" aria-label="찜 목록">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6 4 4 6.5 4c1.54 0 3.04.81 3.9 2.09C11.26 4.81 12.76 4 14.3 4 16.8 4 18.8 6 18.8 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                        </svg>
+                    </a> -->
+
+          <!-- ✅ 로그인 후 영역 안 -->
+          <div class="user-menu">
+            <!-- user-chip: 클릭 트리거 -->
+            <button class="user-avatar-btn">
+              <span class="user-chip__avatar">MH</span>
+            </button>
+
+            <!-- ✅ 모달(드롭다운 메뉴) -->
+            <div class="user-modal" role="menu" aria-label="유저 메뉴">
+              <a href="./T3_2nd_mapage.html" class="user-modal__item" role="menuitem">마이페이지</a>
+              <a href="./T3_2nd_cart.html" class="user-modal__item" role="menuitem">장바구니</a>
+              <a href="./T3_2nd_mapage.html#sec-wish" class="user-modal__item" role="menuitem">찜목록</a>
+              <button type="button" class="user-modal__item user-modal__logout logout" role="menuitem">
+                로그아웃
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="pay">
+    <!-- ==========================
+      상단 타이틀/경로
+    =========================== -->
+    <section class="pay-top">
+      <div class="container">
+        <nav class="crumb" aria-label="현재 위치">
+          <a href="T3_2nd_index.html">홈</a>
+          <span class="crumb__sep">/</span>
+          <a href="T3_2nd_cart.html">장바구니</a>
+          <span class="crumb__sep">/</span>
+          <span class="crumb__current">결제</span>
+        </nav>
+
+        <div class="pay-title">
+          <h1>결제</h1>
+          <p class="muted">예약자 정보와 결제 수단을 입력한 뒤 결제를 완료하세요.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================
+      본문 2열 레이아웃
+      - 좌: 입력 폼(예약자/요청사항/결제수단/약관)
+      - 우: 결제 요약(Sticky)
+    =========================== -->
+    <section class="pay-body">
+      <div class="container pay-grid">
+
+        <!-- LEFT: 결제 입력 영역 -->
+        <section class="pay-left" aria-label="결제 정보 입력">
+
+          <!-- ✅ 예약 상품 요약(간단) -->
+          <article class="card">
+            <div class="card__head">
+              <h2 class="card__title">예약 상품</h2>
+              <a class="link-mini" href="T3_2nd_cart.html">장바구니로</a>
+            </div>
+
+            <div class="booking">
+              <div class="booking__thumb">
+                <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1600&q=80"
+                  alt="서울 중구 호텔 센트럴" />
+              </div>
+              <div class="booking__info">
+                <div class="booking__name">서울 중구 호텔 센트럴</div>
+                <div class="booking__meta muted"> 서울, 대한민국 중구 · 디럭스 더블 · 성인 2명</div>
+
+                <div class="booking__price-info">
+                  <span class="muted">1박 요금</span>
+                  <span id="chipPerNight">₩110,000</span>
+                  <span class="booking__price-sep">·</span>
+                  <span class="muted">총 숙박 요금</span>
+                  <span id="chipTotalRoom">₩220,000</span>
+                </div>
+
+                <div class="booking__dates">
+                  <div class="date-chip">
+                    <span class="date-chip__label muted">체크인</span>
+                    <span class="date-chip__value">2026.03.10</span>
+                  </div>
+                  <div class="date-chip">
+                    <span class="date-chip__label muted">체크아웃</span>
+                    <span class="date-chip__value">2026.03.12</span>
+                  </div>
+                  <div class="date-chip">
+                    <span class="date-chip__label muted">숙박</span>
+                    <span class="date-chip__value">2박</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ✅ 예약자 정보 -->
+          <article class="card">
+            <div class="card__head">
+              <h2 class="card__title">예약자 정보</h2>
+              <span class="card__sub muted red">필수 입력</span>
+            </div>
+
+            <form class="form" action="#" method="post" aria-label="예약자 정보">
+              <div class="form-grid">
+                <label class="field">
+                  <span class="field__label">예약자 이름 <span class="field__required">*</span></span>
+                  <input id="userName" class="field__input" type="text" placeholder="이름을 입력하세요" />
+                  <div id="userNameError" class="field__error" aria-live="polite"
+                    style="display:none;color:red;font-size:12px;margin-top:4px;"></div>
+                </label>
+
+                <label class="field field--full">
+                  <span class="field__label">연락처 <span class="field__required">*</span></span>
+                  <div class="phone-row">
+                    <input id="phoneP1" class="field__input phone__part" type="text" inputmode="numeric" maxlength="4"
+                      placeholder="000" />
+                    <span class="phone__sep">-</span>
+                    <input id="phoneP2" class="field__input phone__part" type="text" inputmode="numeric" maxlength="4"
+                      placeholder="0000" />
+                    <span class="phone__sep">-</span>
+                    <input id="phoneP3" class="field__input phone__part" type="text" inputmode="numeric" maxlength="4"
+                      placeholder="0000" />
+                    <input type="hidden" id="userPhone" name="userPhone" />
+                  </div>
+                  <div id="userPhoneError" class="field__error" aria-live="polite"
+                    style="display:none;color:red;font-size:12px;margin-top:4px;"></div>
+                </label>
+
+                <label class="field field--full email-field">
+                  <span class="field__label">이메일 <span class="field__required">*</span></span>
+                  <div class="email-row">
+                    <input id="emailLocal" class="field__input email__local" type="text" placeholder="example" />
+                    <span class="email__at">@</span>
+                    <select id="emailSelect" class="email__select">
+                      <option value="">선택</option>
+                      <option value="naver.com">naver.com</option>
+                      <option value="gmail.com">gmail.com</option>
+                      <option value="daum.net">daum.net</option>
+                      <option value="hotmail.com">hotmail.com</option>
+                      <option value="icloud.com">icloud.com</option>
+                      <option value="stayo.com">stayo.com</option>
+                      <option value="custom">직접입력</option>
+                    </select>
+                    <input id="emailDomain" class="field__input email__domain" type="text" disabled />
+                  </div>
+                  <div id="emailLocalError" aria-live="polite"
+                    style="display:none;color:#d32f2f;font-size:12px;margin-top:4px;font-weight:900;"></div>
+                </label>
+              </div>
+
+              <!-- 체크인 요청사항 -->
+              <label class="field field--full">
+                <span class="field__label">요청사항 (선택)</span>
+                <textarea class="field__textarea" rows="3" placeholder="예시) 조용한 객실로 부탁드려요"></textarea>
+              </label>
+            </form>
+          </article>
+
+          <!-- ✅ 쿠폰/포인트 -->
+          <article class="card">
+            <div class="card__head">
+              <h2 class="card__title">할인 적용</h2>
+              <span class="card__sub muted">선택</span>
+            </div>
+
+            <div class="discount">
+              <div class="discount__row">
+                <div class="discount__left">
+                  <div class="discount__label">쿠폰</div>
+                  <div class="muted">사용 가능한 쿠폰을 선택하세요</div>
+                </div>
+                <button class="btn-small" type="button">쿠폰 선택</button>
+              </div>
+
+              <div class="discount__row">
+                <div class="discount__left">
+                  <div class="discount__label">포인트</div>
+                  <div class="muted" id="pointOwned">보유 포인트: 12,000P</div>
+                  <div class="muted" id="pointUsedDisplay">사용 포인트: <span id="pointUsedAmt">0</span>P</div>
+                </div>
+                <div class="point">
+                  <div class="point__wrap">
+                    <div class="point__input-row">
+                      <input id="pointInput" class="point__input" type="number" min="0" placeholder="0" />
+                      <button id="pointUseBtn" class="btn-small btn-small--dark" type="button">사용</button>
+                    </div>
+                    <label class="point__all-check">
+                      <input id="pointUseAll" type="checkbox" />
+                      <span>포인트 전체사용</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ✅ 결제 수단 -->
+          <article class="card">
+            <div class="card__head">
+              <h2 class="card__title">결제 수단</h2>
+              <span class="card__sub muted red">필수 선택</span>
+            </div>
+
+            <!-- 결제수단 탭 -->
+            <div class="pay-methods" role="radiogroup" aria-label="결제 수단 선택">
+              <label class="method">
+                <input class="method__radio" type="radio" name="pm" checked />
+                <span class="method__ui">
+                  <span class="method__name">카드 결제</span>
+                  <span class="method__desc muted">국내/해외 카드</span>
+                </span>
+              </label>
+
+              <label class="method">
+                <input class="method__radio" type="radio" name="pm" />
+                <span class="method__ui">
+                  <span class="method__name">간편결제</span>
+                  <span class="method__desc muted">카카오페이/토스</span>
+                </span>
+              </label>
+
+              <label class="method">
+                <input class="method__radio" type="radio" name="pm" />
+                <span class="method__ui">
+                  <span class="method__name">무통장 입금</span>
+                  <span class="method__desc muted">입금 후 확정</span>
+                </span>
+              </label>
+            </div>
+            <!-- 삭제된 흔적 혹시 모르니 남겨둠 -->
+            <!-- 카드 정보 폼(UI용) -->
+            <!-- <div class="cardpay">
+              <div class="form-grid">
+                <label class="field field--full">
+                  <span class="field__label">카드 번호</span>
+                  <div class="card-number-row">
+                    <input id="cardPart1" class="field__input card__part" type="text" inputmode="numeric" maxlength="4" placeholder="0000" />
+                    <input id="cardPart2" class="field__input card__part" type="text" inputmode="numeric" maxlength="4" placeholder="0000" />
+                    <input id="cardPart3" class="field__input card__part" type="text" inputmode="numeric" maxlength="4" placeholder="0000" />
+                    <input id="cardPart4" class="field__input card__part" type="text" inputmode="numeric" maxlength="4" placeholder="0000" />
+                    <input type="hidden" id="cardNumberFull" name="cardNumber" />
+                  </div>
+                </label>
+
+                <label class="field">
+                  <span class="field__label">유효기간</span>
+                  <input class="field__input" type="text" placeholder="MM/YY" />
+                </label>
+
+                <label class="field">
+                  <span class="field__label">CVC</span>
+                  <input class="field__input" type="password" placeholder="***" />
+                </label>
+              </div>
+            </div> -->
+          </article>
+
+          <!-- ✅ 약관 동의 -->
+          <article class="card">
+            <div class="card__head">
+              <h2 class="card__title">약관 동의</h2>
+              <span class="card__sub muted red">필수 선택</span>
+            </div>
+
+            <div class="agree">
+              <label class="check">
+                <input id="agreeAll" type="checkbox" />
+                <span>전체 동의</span>
+              </label>
+
+              <div class="agree__list">
+                <label class="check">
+                  <input id="agree_terms" type="checkbox" data-required="true" />
+                  <span>[필수] 이용약관 동의 <span class="field__required">*</span></span>
+                  <a href="#" class="agree__link" data-type="terms">보기</a>
+                </label>
+
+                <label class="check">
+                  <input id="agree_privacy" type="checkbox" data-required="true" />
+                  <span>[필수] 개인정보 처리방침 동의 <span class="field__required">*</span></span>
+                  <a href="#" class="agree__link" data-type="privacy">보기</a>
+                </label>
+
+                <label class="check">
+                  <input id="agree_marketing" type="checkbox" data-required="false" />
+                  <span>[선택] 마케팅 수신 동의</span>
+                  <a href="#" class="agree__link" data-type="marketing">보기</a>
+                </label>
+              </div>
+
+              <p class="muted agree__note">
+                결제 완료 시 예약이 확정되며, 취소/환불 정책은 숙소 규정에 따릅니다.
+              </p>
+              <div id="agreeError"
+                style="display:none; color:#d32f2f; font-size:12px; margin-top:8px; font-weight:900;"></div>
+            </div>
+          </article>
+
+          <!-- 모바일에서만 보이는 결제 버튼(우측 요약이 아래로 내려오면 중복 방지 가능) -->
+          <div class="mobile-pay">
+            <button id="paid-btn" class="btn-main btn-main--big" type="button"><span
+                id="sumBtnTextMobile">₩242,000</span> 결제하기</button>
+            <p class="muted mobile-pay__note">결제 버튼을 누르면 예약이 완료됩니다 (UI)</p>
+          </div>
+        </section>
+
+        <!-- RIGHT: 결제 요약 (Sticky) -->
+        <aside class="pay-right" aria-label="결제 요약">
+          <div class="summary">
+            <h2 class="summary__title">결제 요약</h2>
+
+            <!-- 가격 상세 -->
+            <div class="summary__rows">
+              <div class="sum-row">
+                <span class="muted">숙박 요금 <span id="sumNightsLabel"
+                    style="font-size:11px;font-weight:700;">(2박)</span></span>
+                <b id="sumRoomPrice">₩220,000</b>
+              </div>
+              <div class="sum-row">
+                <span class="muted">세금 및 수수료 <span style="font-size:11px;font-weight:700;">(10%)</span></span>
+                <b id="sumTaxFee">₩22,000</b>
+              </div>
+
+              <div class="sum-row sum-row--discount" id="sumPointRow" style="display:none;">
+                <span class="muted">포인트 할인</span>
+                <b id="sumPointAmt">-₩0</b>
+              </div>
+
+              <div class="sum-line"></div>
+
+              <div class="sum-row sum-row--total">
+                <span>총 결제 금액</span>
+                <b id="sumTotal">₩242,000</b>
+              </div>
+            </div>
+
+            <button class="btn-main btn-main--big" type="button">
+              <span id="sumBtnText">₩242,000</span> 결제하기
+            </button>
+
+            <p class="summary-note muted">
+              결제하기를 누르면 결제가 완료된 것으로 처리되는 UI입니다.
+            </p>
+          </div>
+
+          <!-- 신뢰 안내 -->
+          <div class="safe">
+            <div class="safe__item">
+              <span class="safe__icon" aria-hidden="true">🔒</span>
+              <div>
+                <div class="safe__title">보안 결제</div>
+                <div class="safe__desc muted">암호화로 안전하게 보호됩니다</div>
+              </div>
+            </div>
+            <div class="safe__item">
+              <span class="safe__icon" aria-hidden="true">📄</span>
+              <div>
+                <div class="safe__title">정책 안내</div>
+                <div class="safe__desc muted">취소/환불 규정은 숙소 정책을 따릅니다</div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+  </main>
+  <!-- 약관 내용 템플릿 -->
+  <template id="tmpl-terms">
+    <h4>이용약관 (샘플)</h4>
+    <p>1. 본 서비스는 예약 및 결제를 지원합니다. 사용자는 정확한 정보 제공에 동의합니다.</p>
+    <p>2. 예약 취소 및 환불 정책은 숙소 정책에 따릅니다. 부정확한 정보로 인한 불이익은 사용자 책임입니다.</p>
+    <p>3. 서비스 이용 중 발생하는 분쟁은 관련 법령 및 회사 이용약관에 따릅니다.</p>
+  </template>
+
+  <template id="tmpl-privacy">
+    <h4>개인정보 처리방침 (샘플)</h4>
+    <p>당사는 이용자의 개인정보를 서비스 제공 목적 범위 내에서만 처리합니다.</p>
+    <p>수집 항목: 이름, 연락처, 이메일, 결제 정보 등. 보유기간 및 파기는 관련 법령에 따릅니다.</p>
+    <p>이용자는 개인정보 처리에 대한 권리를 행사할 수 있습니다. 자세한 내용은 고객센터로 문의해주세요.</p>
+  </template>
+
+  <template id="tmpl-marketing">
+    <h4>마케팅 수신동의 (샘플)</h4>
+    <p>이벤트, 프로모션, 추천 콘텐츠 등의 정보를 이메일/SMS로 발송할 수 있습니다.</p>
+    <p>선택 동의 항목으로, 동의하지 않아도 서비스 이용에 제한이 없습니다.</p>
+  </template>
+
+  <!-- 약관 모달 (공통) -->
+  <div id="termsModal" class="terms-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="terms-modal__overlay" data-action="close"></div>
+    <div class="terms-modal__panel" role="document">
+      <header class="terms-modal__head">
+        <h3 class="terms-modal__title">약관</h3>
+        <button class="terms-modal__close" aria-label="닫기" data-action="close">✕</button>
+      </header>
+      <div id="termsModalContent" class="terms-modal__content" tabindex="0" aria-label="약관 내용"></div>
+      <div class="terms-modal__foot" style="display:flex; gap:10px;">
+
+        <button class="btn-main" type="button" style="flex:2; height:46px;" data-action="close">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 쿠폰 모달 -->
+  <div id="couponModal" class="terms-modal" aria-hidden="true">
+    <div class="terms-modal__overlay" data-action="close"></div>
+    <div class="terms-modal__panel">
+      <header class="terms-modal__head">
+        <h3 class="terms-modal__title">쿠폰 선택</h3>
+        <button class="terms-modal__close" data-action="close">✕</button>
+      </header>
+      <div class="terms-modal__content">
+        <div class="coupon-list">
+          <label class="coupon-item">
+            <input type="radio" name="couponSelect" value="0" data-name="미적용" checked>
+            <div class="coupon-info">
+              <div class="coupon-name">쿠폰 적용 안 함</div>
+              <div class="coupon-val">할인 혜택을 적용하지 않습니다.</div>
+            </div>
+          </label>
+
+          <label class="coupon-item">
+            <input type="radio" name="couponSelect" value="1000" data-name="웰컴 할인 쿠폰">
+            <div class="coupon-info">
+              <div class="coupon-name">웰컴 할인 쿠폰</div>
+              <div class="coupon-val">1,000원 할인</div>
+            </div>
+          </label>
+        </div>
+      </div>
+      <div class="terms-modal__foot">
+        <button id="applyCouponBtn" class="btn-main" type="button" style="width:100%; height:48px;">쿠폰 적용하기</button>
+      </div>
+    </div>
+  </div>
+  <!-- ==========================
+    공통 푸터
+  =========================== -->
+  <footer class="footer">
+    <div class="container footer__top">
+      <div class="footer__brand">
+        <div class="footer__logo">STAYO</div>
+        <p class="footer__desc">
+          대한민국 최고의 숙소를<br />
+          합리적인 가격으로 예약하세요.
+        </p>
+      </div>
+
+      <div class="footer__cols">
+        <div class="footer__col">
+          <div class="footer__title">서비스</div>
+          <a href="./T3_2nd_index.html" class="footer__link">숙소 예약</a>
+          <a href="#" class="footer__link alert">항공권</a>
+          <a href="#" class="footer__link alert">패키지</a>
+          <a href="#" class="footer__link alert">액티비티</a>
+          <a href="#" class="footer__link alert">렌터카</a>
+        </div>
+
+        <div class="footer__col">
+          <div class="footer__title">고객지원</div>
+          <a href="./T3_2nd_mapage.html" class="footer__link">고객센터</a>
+          <a href="./T3_2nd_mapage.html#sec-support" class="footer__link">자주 묻는 질문</a>
+          <a href="./T3_2nd_mapage.html#sec-support" class="footer__link">취소/환불</a>
+          <a href="./T3_2nd_terms.html" class="footer__link">이용약관</a>
+          <a href="./T3_2nd_privacy.html" class="footer__link">개인정보처리방침</a>
+        </div>
+
+        <div class="footer__col">
+          <div class="footer__title">파트너</div>
+          <a href="./T3_2nd_host.html" class="footer__link">숙소 등록</a>
+          <a href="./T3_2nd_partnership.html" class="footer__link">제휴 문의</a>
+          <a href="./T3_2nd_ads.html" class="footer__link">광고 문의</a>
+          <a href="./T3_2nd_api.html" class="footer__link">API</a>
+        </div>
+
+        <div class="footer__col">
+          <div class="footer__title">회사</div>
+          <a href="./T3_2nd_about.html" class="footer__link">회사 소개</a>
+          <a href="#" class="footer__link alert">채용</a>
+          <a href="./T3_2nd_notice.html" class="footer__link">공지사항</a>
+          <a href="#" class="footer__link alert">제휴사</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer__bottom">
+      <div class="footer__copy">© 2026 STAYO. All rights reserved.</div>
+      <div class="footer__bottom-links">
+        2026 TEAM3 HTML 1st Project.
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
