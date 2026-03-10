@@ -54,7 +54,7 @@ window.onload = function () {
 
             // 관리 버튼을 수정요청 버튼으로 변경
             row.querySelector(".td-actions").innerHTML =
-                '<button class="mini editRequest">수정요청</button>';
+                '<button class="mini editRequest">수정</button>';
         }
 
 
@@ -72,7 +72,7 @@ window.onload = function () {
 
             // 관리 버튼을 수정요청으로 변경
             row.querySelector(".td-actions").innerHTML =
-                '<button class="mini editRequest">수정요청</button>';
+                '<button class="mini editRequest">수정</button>';
         }
 
 
@@ -90,7 +90,7 @@ window.onload = function () {
 
             // 관리 버튼을 수정요청으로 변경
             row.querySelector(".td-actions").innerHTML =
-                '<button class="mini editRequest">수정요청</button>';
+                '<button class="mini editRequest">수정</button>';
         }
 
     })
