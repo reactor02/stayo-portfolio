@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const header = document.querySelector(".header");
 
+    // console.log('1111')
     // 헤더가 없을 경우
     if (!header) {
         return;
@@ -44,7 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
             e.stopPropagation();
             alert("준비중입니다.");
         })
-    })   
+    })
+
 });
 
 

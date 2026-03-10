@@ -19,8 +19,11 @@ window.onload = function () {
         // 관리자용 로그인 하드코딩 
         if (emailValue === "asdf1234@stayo.com" && passwordValue === "asdf1234") {
             alert('관리자로 로그인 하시겠습니까?')
+
+            localStorage.setItem("login", "true");
             
             window.document.location.href= "../html_admin/T3_2nd_admin.html" // 이거 관리자용 메인페이지로 링크바꾸면 됨 
+            return;
         }  
 
 
