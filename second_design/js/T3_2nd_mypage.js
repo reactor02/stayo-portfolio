@@ -588,27 +588,28 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // =========================
-// 프로필 수정 기능
+// 프로필 수정 이동 + 저장 기능
 // =========================
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const profileEditBtn = document.querySelector(".profile-card__right .btn-main");
+    const profileBtn = document.querySelector(".profile-card__right .btn-main");
     const profileSection = document.querySelector("#sec-profile");
 
-    const profileInputs = document.querySelectorAll("#sec-profile input, #sec-profile textarea");
-    const saveBtn = document.querySelector("#sec-profile button.save");
+    const profileInputs = document.querySelectorAll("#sec-profile input");
+    const saveBtn = document.querySelector("#sec-profile button[type='submit'], #sec-profile .save-btn");
 
     const sections = document.querySelectorAll(".mysec");
     const menus = document.querySelectorAll(".tab-menu__item");
 
 
-    // -------------------------
-    // 프로필 수정 버튼 클릭
-    // -------------------------
-    if (profileEditBtn) {
 
-        profileEditBtn.addEventListener("click", function (e) {
+    // =========================
+    // 프로필 수정 버튼 → 프로필 관리 이동
+    // =========================
+    if (profileBtn) {
+
+        profileBtn.addEventListener("click", function (e) {
 
             e.preventDefault();
 
@@ -630,55 +631,54 @@ document.addEventListener("DOMContentLoaded", function () {
                 profileMenu.classList.add("tab-menu__item--active");
             }
 
+            window.scrollTo({
+                top: profileSection.offsetTop - 80,
+                behavior: "smooth"
+            });
+
         });
 
     }
 
 
-    // -------------------------
-    // 저장 기능
-    // -------------------------
+
+    // =========================
+    // 저장된 프로필 불러오기
+    // =========================
+    const savedProfile = JSON.parse(localStorage.getItem("profileData"));
+
+    if (savedProfile && profileInputs.length) {
+
+        profileInputs.forEach(input => {
+
+            if (savedProfile[input.name]) {
+                input.value = savedProfile[input.name];
+            }
+
+        });
+
+    }
+
+
+
+    // =========================
+    // 프로필 저장
+    // =========================
     if (saveBtn) {
 
-        saveBtn.addEventListener("click", function () {
+        saveBtn.addEventListener("click", function (e) {
+
+            e.preventDefault();
 
             const profileData = {};
 
             profileInputs.forEach(input => {
-
-                const key = input.name || input.id;
-
-                if (key) {
-                    profileData[key] = input.value;
-                }
-
+                profileData[input.name] = input.value;
             });
 
             localStorage.setItem("profileData", JSON.stringify(profileData));
 
             alert("프로필이 저장되었습니다.");
-
-        });
-
-    }
-
-
-    // -------------------------
-    // 저장된 프로필 불러오기
-    // -------------------------
-    const savedProfile = localStorage.getItem("profileData");
-
-    if (savedProfile) {
-
-        const profileData = JSON.parse(savedProfile);
-
-        profileInputs.forEach(input => {
-
-            const key = input.name || input.id;
-
-            if (profileData[key]) {
-                input.value = profileData[key];
-            }
 
         });
 
