@@ -48,6 +48,9 @@ const App = {
 
         // 리뷰 textarea
         this.el.field__textarea_text = document.querySelector('.field__textarea_text');
+
+        // 신고 버튼
+        this.el.report = document.querySelectorAll('.report');
     },
 
     // 이벤트들을 종류별로 연결
@@ -56,6 +59,7 @@ const App = {
         this.bindLikeEvents();      // 좋아요 클릭 이벤트
         this.bindModalEvents();     // 모달 열기/닫기 이벤트
         this.bindTextCountEvents(); // 글자수 카운트 이벤트
+        this.reportEvent();
     },
 
     // 칩 버튼 클릭 이벤트 등록
@@ -67,6 +71,18 @@ const App = {
                 this.setActive(chip);
             });
         });
+    },
+
+    reportEvent () {
+        this.el.report[0].addEventListener('click', () => {
+            window.location.href = "./T3_2nd_mapage_guest.html";
+        } )
+        this.el.report[1].addEventListener('click', () => {
+            window.location.href = "./T3_2nd_mapage_guest.html";
+        } )
+        this.el.report[2].addEventListener('click', () => {
+            window.location.href = "./T3_2nd_mapage_guest.html";
+        } )
     },
 
     // 선택한 칩만 active 클래스를 주는 함수
