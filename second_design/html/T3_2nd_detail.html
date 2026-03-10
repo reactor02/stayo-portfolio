@@ -467,58 +467,83 @@
         <!-- 체크인/아웃/인원 입력 UI(기능 없음) -->
         <div class="book-form">
           <div class="book-grid">
-            <div class="book-field">
+            <div class="book-field" id="box1">
               <div class="book-label">체크인</div>
-              <div class="book-value">03/10</div>
+              <div class="book-value">
+                <span class="date-placeholder">2026.03.20</span>
+                <span class="date-value" id="dv1"></span>
+                <input type="date" id="date1" class="date-input-hidden">
+              </div>
             </div>
-            <div class="book-field">
-              <div class="book-label">체크아웃</div>
-              <div class="book-value">03/12</div>
-            </div>
-            <div class="book-field book-field--full">
-              <div class="book-label">인원</div>
-              <div class="book-value">성인 2명</div>
-            </div>
-          </div>
 
-          <!-- 가격 요약 -->
-          <div class="book-summary">
-            <div class="sum-row">
-              <span class="muted"></span>
-              <!-- <b>₩378,000</b> -->
+            <div class="book-field" id="box2">
+              <div class="book-label">체크아웃</div>
+              <div class="book-value">
+                <span class="date-placeholder">2026.03.22</span>
+                <span class="date-value" id="dv2"></span>
+                <input type="date" id="date2" class="date-input-hidden">
+              </div>
             </div>
-            <!-- <div class="sum-row">
+            <div class="book-field book-field--full guest-box" id="guestBox">
+              <div class="book-label">인원</div>
+              <div class="book-value" id="guestText">성인 2명</div>
+
+              <div class="guest-popup" id="guestPopup">
+                <div class="guest-row">
+                  <div>
+                    <div class="guest-title">성인</div>
+                    <div class="guest-desc">만 13세 이상</div>
+                  </div>
+
+                  <div class="guest-control">
+                    <button type="button" id="guestMinus">-</button>
+                    <span id="guestCount">2</span>
+                    <button type="button" id="guestPlus">+</button>
+                  </div>
+                </div>
+
+                <button type="button" class="guest-confirm" id="guestConfirm">확인</button>
+              </div>
+            </div>
+
+            <!-- 가격 요약 -->
+            <div class="book-summary">
+              <div class="sum-row">
+                <span class="muted"></span>
+                <!-- <b>₩378,000</b> -->
+              </div>
+              <!-- <div class="sum-row">
                   <span class="muted">세금 및 수수료</span>
                   <b>₩22,000</b>
                 </div> -->
-            <div class="sum-line"></div>
-            <div class="sum-row sum-row--total">
-              <span>총 합계</span>
-              <b>₩550,000</b>
+              <div class="sum-line"></div>
+              <div class="sum-row sum-row--total">
+                <span>총 합계</span>
+                <b>₩550,000</b>
+              </div>
+            </div>
+
+            <a href="./T3_2nd_pay.html">
+              <button class="btn-main btn-main--big" type="button">
+                예약하기
+              </button>
+            </a>
+
+            <div class="book-note muted">
+              결제 전까지 예약이 확정되지 않습니다.
             </div>
           </div>
-
-          <a href="./T3_2nd_pay.html">
-            <button class="btn-main btn-main--big" type="button">
-              예약하기
-            </button>
-          </a>
-
-          <div class="book-note muted">
-            결제 전까지 예약이 확정되지 않습니다.
-          </div>
         </div>
-      </div>
 
-      <!-- 빠른 이동(앵커) -->
-      <nav class="anchor" aria-label="섹션 바로가기">
-        <a href="#about">숙소 소개</a>
-        <a href="#rooms">객실 선택</a>
-        <a href="#amenities">편의시설</a>
-        <a href="#reviews">후기</a>
-        <a href="#policy">이용 규정</a>
-        <a href="#location">위치</a>
-      </nav>
+        <!-- 빠른 이동(앵커) -->
+        <nav class="anchor" aria-label="섹션 바로가기">
+          <a href="#about">숙소 소개</a>
+          <a href="#rooms">객실 선택</a>
+          <a href="#amenities">편의시설</a>
+          <a href="#reviews">후기</a>
+          <a href="#policy">이용 규정</a>
+          <a href="#location">위치</a>
+        </nav>
     </aside>
     </div>
     </section>

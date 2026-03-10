@@ -70,7 +70,8 @@ const App = {
 
                 const heart = wishBtn.querySelector('.heart');
                 if (heart) {
-                    heart.classList.toggle('active');
+                    // heart.classList.toggle('active');
+                    alert('로그인해주세요')
                 }
             });
         }

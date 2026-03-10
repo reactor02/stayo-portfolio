@@ -243,6 +243,8 @@ const App = {
     async bind() {
         this.cacheDom();
         this.bindEvents();
+        this.initDatePicker();
+        this.initGuestPicker();
         await this.loadProperty();
         this.checkExpiredCoupons();
     },
@@ -273,8 +275,25 @@ const App = {
 
         this.el.wishBtn = document.querySelector('.wish-btn');
         this.el.wishHeart = document.querySelector('.wish-btn .heart');
-        this.el.cartBtn = document.querySelector('.cart-btn')
-        this.el.shareBtn = document.querySelector('.share-btn') 
+        this.el.cartBtn = document.querySelector('.cart-btn');
+        this.el.shareBtn = document.querySelector('.share-btn');
+
+        // 날짜 선택
+        this.el.date1 = document.getElementById('date1');
+        this.el.date2 = document.getElementById('date2');
+        this.el.box1 = document.getElementById('box1');
+        this.el.box2 = document.getElementById('box2');
+        this.el.dv1 = document.getElementById('dv1');
+        this.el.dv2 = document.getElementById('dv2');
+
+        // 인원 선택
+        this.el.guestBox = document.getElementById('guestBox');
+        this.el.guestPopup = document.getElementById('guestPopup');
+        this.el.guestText = document.getElementById('guestText');
+        this.el.guestMinus = document.getElementById('guestMinus');
+        this.el.guestPlus = document.getElementById('guestPlus');
+        this.el.guestCount = document.getElementById('guestCount');
+        this.el.guestConfirm = document.getElementById('guestConfirm');
     },
 
     // 이벤트 등록
@@ -355,12 +374,12 @@ const App = {
             });
         }
         if (this.el.cartBtn) {
-            this.el.cartBtn.addEventListener('click',()=>{
+            this.el.cartBtn.addEventListener('click', () => {
                 alert('장바구니에 추가되었습니다')
             })
         }
         if (this.el.shareBtn) {
-            this.el.shareBtn.addEventListener('click',()=>{
+            this.el.shareBtn.addEventListener('click', () => {
                 alert(`주소가 복사되었습니다 \n${window.document.location.href}`)
             })
         }
@@ -532,6 +551,87 @@ const App = {
                 metaArea.className = 'item__meta muted';
                 metaArea.innerText = `유효기간: ${expMin} ~ ${expMax}`;
             }
+        });
+    },
+    initDatePicker() {
+        const today = new Date().toISOString().split('T')[0];
+        this.el.date1.min = today;
+        this.el.date2.min = today;
+
+        function formatDate(val) {
+            const [y, m, d] = val.split('-');
+            return `${y}.${m}.${d}`;
+        }
+
+        this.el.box1.addEventListener('click', () => {
+            this.el.date1.showPicker?.();
+        });
+
+        this.el.box2.addEventListener('click', () => {
+            this.el.date2.showPicker?.();
+        });
+
+        this.el.date1.addEventListener('change', () => {
+            const val = this.el.date1.value;
+            if (!val) return;
+
+            this.el.dv1.textContent = formatDate(val);
+            this.el.box1.classList.add('has-value');
+
+            const next = new Date(val);
+            next.setDate(next.getDate() + 1);
+            this.el.date2.min = next.toISOString().split('T')[0];
+
+            if (this.el.date2.value && this.el.date2.value <= val) {
+                this.el.date2.value = '';
+                this.el.dv2.textContent = '';
+                this.el.box2.classList.remove('has-value');
+            }
+
+            setTimeout(() => this.el.date2.showPicker?.(), 50);
+        });
+
+        this.el.date2.addEventListener('change', () => {
+            const val = this.el.date2.value;
+            if (!val) return;
+
+            this.el.dv2.textContent = formatDate(val);
+            this.el.box2.classList.add('has-value');
+        });
+    },
+    initGuestPicker() {
+        let count = 2;
+
+        if (!this.el.guestBox) return;
+
+        this.el.guestBox.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.el.guestPopup.classList.toggle('open');
+        });
+
+        this.el.guestPopup.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        this.el.guestMinus.addEventListener('click', () => {
+            if (count > 1) {
+                count--;
+                this.el.guestCount.textContent = count;
+            }
+        });
+
+        this.el.guestPlus.addEventListener('click', () => {
+            count++;
+            this.el.guestCount.textContent = count;
+        });
+
+        this.el.guestConfirm.addEventListener('click', () => {
+            this.el.guestText.textContent = `성인 ${count}명`;
+            this.el.guestPopup.classList.remove('open');
+        });
+
+        document.addEventListener('click', () => {
+            this.el.guestPopup.classList.remove('open');
         });
     }
 };
