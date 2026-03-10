@@ -15,28 +15,32 @@
     <link rel="stylesheet" href="../css/T3_2nd_common.css" />
     <link rel="stylesheet" href="../css/T3_2nd_pay_complete.css" />
 
-    <script src="../js/T3_2nd_common.js" defer></script>
+    <script src="../js_guest/T3_2nd_common_guest.js"></script>
 </head>
 
 <body>
     <!-- ==========================
-    공통 헤더
+    공통 헤더(게스트)
   =========================== -->
     <header class="header">
         <div class="container header__inner">
-            <a href="./T3_2nd_index.html" class="logo" aria-label="STAYO 홈">STAYO</a>
+            <!-- 로고 -->
+            <a href="./T3_2nd_index_guest.html" class="logo" aria-label="STAYO 홈">STAYO</a>
 
+            <!-- 가운데 메뉴 -->
             <nav class="gnb" aria-label="주요 메뉴">
-                <a href="./list.html" class="gnb__link">숙소</a>
-                <a href="#" class="gnb__link alert">항공권</a>
-                <a href="#" class="gnb__link alert">패키지</a>
-                <a href="#" class="gnb__link alert">액티비티</a>
-                <a href="#" class="gnb__link alert">렌터카</a>
+                <a href="./T3_2nd_list_guest.html" class="gnb__link">숙소</a>
+                <a href="#" class="gnb__link">항공권</a>
+                <a href="#" class="gnb__link">패키지</a>
+                <a href="#" class="gnb__link">액티비티</a>
+                <a href="#" class="gnb__link">렌터카</a>
             </nav>
 
+            <!-- 오른쪽 -->
             <div class="header__right">
+                <!-- ✅ 로그인 전 -->
                 <div class="header-guest">
-                    <a href="./T3_2nd_login.html" class="btn btn--ghost">
+                    <a href="../html/T3_2nd_login.html" class="btn btn--ghost">
                         <span class="btn__icon" aria-hidden="true">
                             <svg viewBox="0 0 24 24">
                                 <path
@@ -45,24 +49,7 @@
                         </span>
                         로그인
                     </a>
-                    <a href="./T3_2nd_signup.html" class="btn btn--solid">회원가입</a>
-                </div>
-
-                <div class="header-user">
-                    <div class="user-menu">
-                        <button class="user-avatar-btn" type="button" aria-label="유저 메뉴 열기">
-                            <span class="user-chip__avatar">MH</span>
-                        </button>
-
-                        <div class="user-modal" role="menu" aria-label="유저 메뉴">
-                            <a href="./T3_2nd_mapage.html" class="user-modal__item" role="menuitem">마이페이지</a>
-                            <a href="./T3_2nd_cart.html" class="user-modal__item" role="menuitem">장바구니</a>
-                            <a href="./T3_2nd_mapage.html#sec-wish" class="user-modal__item" role="menuitem">찜목록</a>
-                            <button type="button" class="user-modal__item user-modal__logout logout" role="menuitem">
-                                로그아웃
-                            </button>
-                        </div>
-                    </div>
+                    <a href="../html/T3_2nd_signup.html" class="btn btn--solid">회원가입</a>
                 </div>
             </div>
         </div>
@@ -73,11 +60,9 @@
         <section class="pay-complete__top">
             <div class="container">
                 <nav class="crumb" aria-label="현재 위치">
-                    <a href="./T3_2nd_index.html">홈</a>
+                    <a href="./T3_2nd_index_guest.html">홈</a>
                     <span class="crumb__sep">/</span>
-                    <a href="./T3_2nd_cart.html">장바구니</a>
-                    <span class="crumb__sep">/</span>
-                    <a href="./T3_2nd_pay.html">결제</a>
+                    <a href="./T3_2nd_pay_guest.html">결제</a>
                     <span class="crumb__sep">/</span>
                     <span class="crumb__current">결제 완료</span>
                 </nav>
@@ -99,9 +84,14 @@
                             </div>
 
                             <h1 class="complete-title">결제가 완료되었습니다</h1>
+                            <div class="complete-action-top">
+                                <a href="./T3_2nd_index_guest.html" class="complete-check-btn">
+                                    홈으로
+                                </a>
+                            </div>
                             <p class="complete-desc">
                                 예약이 정상적으로 접수되었습니다.<br>
-                                예약 내역과 상세 정보는 마이페이지에서 확인하실 수 있습니다.
+                                예약 내역과 상세 정보는 입력하신 문자와 이메일로 발송되었습니다.
                             </p>
 
                             <div class="complete-number-box">

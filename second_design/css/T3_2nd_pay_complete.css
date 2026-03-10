@@ -402,6 +402,38 @@
   font-weight: 700;
 }
 
+/* 예약내역 확인 버튼 */
+.complete-action-top{
+  margin-top: 22px;
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: center;
+}
+
+.complete-check-btn{
+
+  height: 44px;
+  padding: 0 22px;
+
+  border-radius: 14px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 900;
+  font-size: 14px;
+
+  background: #111;
+  color: #fff;
+
+  transition: .2s ease;
+}
+
+.complete-check-btn:hover{
+  filter: brightness(1.05);
+}
+
 /* 반응형 */
 @media (max-width: 1100px){
   .complete-layout{
