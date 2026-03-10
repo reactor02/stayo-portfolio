@@ -415,68 +415,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // =========================
-// 프로필 수정 기능
-// =========================
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const editBtn = document.querySelector(".profile-card__right .btn-main");
-
-    if (!editBtn) return;
-
-    editBtn.addEventListener("click", function (e) {
-
-        e.preventDefault();
-
-        const loginUser = localStorage.getItem("loginUser");
-
-        if (!loginUser) {
-            alert("로그인이 필요합니다.");
-            return;
-        }
-
-        // 현재 프로필 데이터 불러오기
-        const userData = JSON.parse(localStorage.getItem(loginUser)) || {};
-
-        const currentName = userData.name || "";
-        const currentEmail = userData.email || "";
-        const currentPhone = userData.phone || "";
-
-        // prompt로 수정
-        const newName = prompt("이름을 수정하세요.", currentName);
-        if (newName === null) return;
-
-        const newEmail = prompt("이메일을 수정하세요.", currentEmail);
-        if (newEmail === null) return;
-
-        const newPhone = prompt("전화번호를 수정하세요.", currentPhone);
-        if (newPhone === null) return;
-
-        const updatedUser = {
-            ...userData,
-            name: newName,
-            email: newEmail,
-            phone: newPhone
-        };
-
-        localStorage.setItem(loginUser, JSON.stringify(updatedUser));
-
-        alert("프로필이 수정되었습니다.");
-
-        // 화면 즉시 반영
-        const nameEl = document.querySelector(".profile-name");
-        const emailEl = document.querySelector(".profile-email");
-        const phoneEl = document.querySelector(".profile-phone");
-
-        if (nameEl) nameEl.textContent = newName;
-        if (emailEl) emailEl.textContent = newEmail;
-        if (phoneEl) phoneEl.textContent = newPhone;
-
-    });
-
-});
-
-// =========================
 // 로그인 상태에 따른 화면 제어 (강화)
 // =========================
 
@@ -646,5 +584,104 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     window.addEventListener("scroll", scrollSpy);
+
+});
+
+// =========================
+// 프로필 수정 기능
+// =========================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const profileEditBtn = document.querySelector(".profile-card__right .btn-main");
+    const profileSection = document.querySelector("#sec-profile");
+
+    const profileInputs = document.querySelectorAll("#sec-profile input, #sec-profile textarea");
+    const saveBtn = document.querySelector("#sec-profile button.save");
+
+    const sections = document.querySelectorAll(".mysec");
+    const menus = document.querySelectorAll(".tab-menu__item");
+
+
+    // -------------------------
+    // 프로필 수정 버튼 클릭
+    // -------------------------
+    if (profileEditBtn) {
+
+        profileEditBtn.addEventListener("click", function (e) {
+
+            e.preventDefault();
+
+            sections.forEach(sec => {
+                sec.style.display = "none";
+            });
+
+            if (profileSection) {
+                profileSection.style.display = "block";
+            }
+
+            menus.forEach(menu => {
+                menu.classList.remove("tab-menu__item--active");
+            });
+
+            const profileMenu = document.querySelector('a[href="#sec-profile"]');
+
+            if (profileMenu) {
+                profileMenu.classList.add("tab-menu__item--active");
+            }
+
+        });
+
+    }
+
+
+    // -------------------------
+    // 저장 기능
+    // -------------------------
+    if (saveBtn) {
+
+        saveBtn.addEventListener("click", function () {
+
+            const profileData = {};
+
+            profileInputs.forEach(input => {
+
+                const key = input.name || input.id;
+
+                if (key) {
+                    profileData[key] = input.value;
+                }
+
+            });
+
+            localStorage.setItem("profileData", JSON.stringify(profileData));
+
+            alert("프로필이 저장되었습니다.");
+
+        });
+
+    }
+
+
+    // -------------------------
+    // 저장된 프로필 불러오기
+    // -------------------------
+    const savedProfile = localStorage.getItem("profileData");
+
+    if (savedProfile) {
+
+        const profileData = JSON.parse(savedProfile);
+
+        profileInputs.forEach(input => {
+
+            const key = input.name || input.id;
+
+            if (profileData[key]) {
+                input.value = profileData[key];
+            }
+
+        });
+
+    }
 
 });
