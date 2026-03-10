@@ -603,6 +603,8 @@ window.onload = function () {
 const navItems = document.querySelectorAll('aside[aria-label="관리자 메뉴"] .admin-nav__item');
 const sections = document.querySelectorAll(".panel.anchor");
 
+let isClickScrolling = false;
+
 // 2. 활성화 클래스 교체 함수
 function activateAdminMenu(id) {
     navItems.forEach(item => {
