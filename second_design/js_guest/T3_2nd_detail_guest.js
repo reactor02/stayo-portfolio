@@ -1,0 +1,413 @@
+window.addEventListener('load', () => App.bind());
+
+const App = {
+    // API에서 받아온 숙소 목록 저장
+    items: [],
+
+    // 숙소 목록 전체 응답 저장
+    listRes: null,
+
+    // 현재 선택된 숙소의 propertyId 저장
+    propertyId: null,
+
+    // 자주 사용할 DOM 요소 저장
+    el: {},
+
+    // 시작 함수
+    // DOM 찾기, 이벤트 연결, 숙소 정보 불러오기, 쿠폰 만료 체크 실행
+    async bind() {
+        this.cacheDom();
+        this.bindEvents();
+        this.initDatePicker();
+        this.initGuestPicker();
+        await this.loadProperty();
+        this.checkExpiredCoupons();
+    },
+
+    // 필요한 DOM 요소를 한 번만 찾아서 저장
+    cacheDom() {
+        // 숙소 상단 정보 영역
+        this.el.property_title = document.querySelector('.property-title');
+        this.el.muted = document.querySelector('.muted');
+        this.el.star = document.querySelector('.meta-item b');
+        this.el.meta_item = document.querySelector('.meta-item');
+
+        // 사진 모달 관련 요소
+        this.el.modalBg = document.querySelector('#modalBg');
+        this.el.modalClose = document.querySelector('#modalClose');
+        this.el.modalTitle = document.querySelector('#modalTitle');
+        this.el.modalBody = document.querySelector('#modalBody');
+
+        // 갤러리 영역과 전체보기 버튼
+        this.el.galleryGrid = document.querySelector('.gallery-grid');
+        this.el.allBtn = document.querySelector('.gallery-all');
+
+        // 객실 목록과 예약 요약 영역
+        this.el.room_list = document.querySelector('.room-list');
+        this.el.book_price = document.querySelector('.book-price');
+        this.el.sum_row = document.querySelector('.sum-row b');
+        this.el.sum_row1 = document.querySelector('.sum-row span');
+
+        this.el.wishBtn = document.querySelector('.wish-btn');
+        this.el.wishHeart = document.querySelector('.wish-btn .heart');
+        this.el.cartBtn = document.querySelector('.cart-btn');
+        this.el.shareBtn = document.querySelector('.share-btn');
+
+        // 날짜 선택
+        this.el.date1 = document.getElementById('date1');
+        this.el.date2 = document.getElementById('date2');
+        this.el.box1 = document.getElementById('box1');
+        this.el.box2 = document.getElementById('box2');
+        this.el.dv1 = document.getElementById('dv1');
+        this.el.dv2 = document.getElementById('dv2');
+
+        // 인원 선택
+        this.el.guestBox = document.getElementById('guestBox');
+        this.el.guestPopup = document.getElementById('guestPopup');
+        this.el.guestText = document.getElementById('guestText');
+        this.el.guestMinus = document.getElementById('guestMinus');
+        this.el.guestPlus = document.getElementById('guestPlus');
+        this.el.guestCount = document.getElementById('guestCount');
+        this.el.guestConfirm = document.getElementById('guestConfirm');
+    },
+
+    // 이벤트 등록
+    bindEvents() {
+        // 모달 닫기 버튼 클릭 시 모달 닫기
+        this.el.modalClose.addEventListener('click', () => {
+            this.closeModal();
+        });
+
+        // 모달 배경 클릭 시 바깥 영역이면 모달 닫기
+        this.el.modalBg.addEventListener('click', (e) => {
+            if (e.target === this.el.modalBg) {
+                this.closeModal();
+            }
+        });
+
+        // ESC 키를 누르면 모달 닫기
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.closeModal();
+            }
+        });
+
+        // 갤러리 이미지 클릭 시 해당 이미지를 모달로 크게 보기
+        this.el.galleryGrid.addEventListener('click', (e) => {
+            const a = e.target.closest('[data-modal="photo"]');
+            if (!a) return;
+
+            // a 태그 기본 이동 막기
+            e.preventDefault();
+
+            const img = a.querySelector('img');
+            if (!img) return;
+
+            this.openModal(
+                '사진 상세보기',
+                `<img src="${img.src}" alt="${img.alt}" style="width:100%; height:auto; border-radius:12px;">`
+            );
+        });
+
+        // 사진 전체보기 버튼이 있으면 갤러리 안 모든 이미지를 모달에 출력
+        if (this.el.allBtn) {
+            this.el.allBtn.addEventListener('click', () => {
+                const imgs = [...document.querySelectorAll('.gallery-item img')];
+
+                const html = imgs.map((i) => {
+                    return `<img src="${i.src}" alt="${i.alt}" style="width:100%; height:auto; border-radius:12px; margin-bottom:10px;">`;
+                }).join('');
+
+                this.openModal('사진 전체보기', html);
+            });
+        }
+
+        // 객실 목록에서 선택 버튼 클릭 시 예약 요약 가격 변경
+        this.el.room_list.addEventListener('click', (e) => {
+            const btn = e.target.closest('.btn-main');
+            if (!btn) return;
+
+            const room = btn.closest('.room');
+            const priceText = room.querySelector('.room__price').textContent.trim();
+
+            this.updateBooking(priceText);
+        });
+
+        if (this.el.wishBtn) {
+            this.el.wishBtn.addEventListener('click', () => {
+                // this.el.wishBtn.classList.toggle('is-liked');
+
+                // const liked = this.el.wishBtn.classList.contains('is-liked');
+
+                alert('로그인 해주세요');
+                // if (liked) {
+                //     this.el.wishHeart.style.fill = '#ff5a5f';
+                //     this.el.wishHeart.style.stroke = '#ff5a5f';
+                // } else {
+                //     this.el.wishHeart.style.fill = 'none';
+                //     this.el.wishHeart.style.stroke = 'currentColor';
+                // }
+            });
+        }
+        if (this.el.cartBtn) {
+            this.el.cartBtn.addEventListener('click', () => {
+                alert('로그인 해주세요')
+            })
+        }
+        if (this.el.shareBtn) {
+            this.el.shareBtn.addEventListener('click', () => {
+                alert(`주소가 복사되었습니다 \n${window.document.location.href}`)
+            })
+        }
+    },
+
+    // 숙소 목록 API 호출
+    async loadProperty() {
+        try {
+            this.listRes = await API.V1.TB.Lodging.properties({
+                city: '서울',
+                page: 1,
+                pageSize: 50
+            });
+
+            // 숙소 목록 저장
+            this.items = this.listRes.items;
+
+            // 데이터가 없으면 종료
+            if (!this.items.length) return;
+
+            // 첫 번째 숙소 정보를 화면에 출력
+            this.renderProperty(this.items[0]);
+
+            // 첫 번째 숙소의 propertyId 저장 후 객실 목록 불러오기
+            this.propertyId = this.items[0].propertyId;
+            this.loadRooms(this.propertyId);
+
+        } catch (error) {
+            console.error('숙소 정보 불러오기 실패:', error);
+        }
+    },
+
+    // 숙소 기본 정보 출력
+    renderProperty(item) {
+        this.el.property_title.innerHTML = item.name;
+        this.el.muted.innerHTML = item.reviewCount;
+        this.el.star.innerHTML = item.rating;
+        this.el.meta_item.innerHTML = item.city + ' , 대한민국 · ' + item.district;
+    },
+
+    // 모달 열기
+    // 제목과 본문 HTML을 넣고 on 클래스를 추가
+    openModal(htmlTitle, htmlBody) {
+        this.el.modalTitle.textContent = htmlTitle;
+        this.el.modalBody.innerHTML = htmlBody;
+        this.el.modalBg.classList.add('on');
+    },
+
+    // 모달 닫기
+    closeModal() {
+        this.el.modalBg.classList.remove('on');
+    },
+
+    // 객실 목록 API 호출
+    async loadRooms(propertyId) {
+        try {
+            const res = await API.V1.TB.Lodging.rooms(propertyId);
+            this.renderRooms(res.rooms);
+        } catch (error) {
+            console.error('객실 정보 불러오기 실패:', error);
+        }
+    },
+
+    // 객실 카드에 사용할 랜덤 이미지 목록
+    hotelImages: [
+        "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+        "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267",
+        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b",
+        "https://images.unsplash.com/photo-1590490360182-c33d57733427",
+        "https://images.unsplash.com/photo-1578683010236-d716f9a3f461"
+    ],
+
+    // 객실 카드에 넣을 이미지를 랜덤으로 하나 반환
+    getRandomImage() {
+        const index = Math.floor(Math.random() * this.hotelImages.length);
+        return this.hotelImages[index];
+    },
+
+    // 객실 목록 출력
+    renderRooms(list = []) {
+        // 기존 객실 목록 비우기
+        this.el.room_list.innerHTML = '';
+
+        list.forEach((r) => {
+            this.el.room_list.innerHTML += `
+                <article class="room">
+                    <div class="room__media">
+                        <img src="${this.getRandomImage()}" />
+                    </div>
+
+                    <div class="room__body">
+                        <div class="room__title">${r.name}</div>
+                        <div class="room__meta muted">${r.capacity}인 · 더블베드 2 · 28m²</div>
+
+                        <div class="room__tags">
+                            <span class="tag">무료 취소</span>
+                            <span class="tag">조식 옵션</span>
+                            <span class="tag">시티뷰</span>
+                        </div>
+                    </div>
+
+                    <div class="room__side">
+                        <div class="room__price">₩ ${this.formatMoney(r.basePrice)}</div>
+                        <button class="btn-main" type="button">선택</button>
+                    </div>
+                </article>
+            `;
+        });
+    },
+
+    // 객실 선택 시 예약 요약 정보 업데이트
+    updateBooking(priceText) {
+        // 선택한 객실 1박 가격 표시
+        this.el.book_price.innerHTML = priceText;
+
+        // "₩ 120000" 형태의 문자열에서 숫자만 꺼내기
+        const numberPrice = Number(
+            priceText.replace('₩', '').replaceAll(',', '').trim()
+        );
+
+        // 2박 기준 총 가격 계산
+        const totalPrice = numberPrice * 2;
+
+        // 총 합계 표시
+        this.el.sum_row.innerHTML = '₩ ' + this.formatMoney(totalPrice);
+
+        // 1박 가격과 숙박 수 표시
+        this.el.sum_row1.innerHTML = priceText + ' / 2박';
+    },
+
+    // 숫자에 3자리마다 콤마 추가
+    formatMoney(num) {
+        let money = '' + num;
+        let result = '';
+
+        while (money.length > 3) {
+            result = ',' + money.substring(money.length - 3) + result;
+            money = money.substring(0, money.length - 3);
+        }
+
+        result = money + result;
+        return result;
+    },
+
+    // 쿠폰 유효기간이 지났는지 확인하고 표시 문구 변경
+    checkExpiredCoupons() {
+        // 오늘 날짜를 yyyy-mm-dd 형식으로 구함
+        const today = new Date().toISOString().split('T')[0];
+        const items = document.querySelectorAll('#couponList .item');
+
+        items.forEach((item) => {
+            const metaArea = item.querySelector('.item__meta');
+            if (!metaArea) return;
+
+            // 유효기간 텍스트에서 시작일과 종료일 추출
+            const metaText = metaArea.innerText;
+            const dateMatch = metaText.match(/(\d{4}-\d{2}-\d{2})\s*~\s*(\d{4}-\d{2}-\d{2})/);
+            if (!dateMatch) return;
+
+            const expMin = dateMatch[1];
+            const expMax = dateMatch[2];
+
+            // 오늘 날짜가 종료일보다 크면 만료 처리
+            if (today > expMax) {
+                metaArea.className = 'item__meta muted line-through';
+                metaArea.innerText = `유효기간만료: ${expMin} ~ ${expMax}`;
+            } else {
+                // 아직 유효한 쿠폰이면 원래 스타일 유지
+                metaArea.className = 'item__meta muted';
+                metaArea.innerText = `유효기간: ${expMin} ~ ${expMax}`;
+            }
+        });
+    },
+    initDatePicker() {
+        const today = new Date().toISOString().split('T')[0];
+        this.el.date1.min = today;
+        this.el.date2.min = today;
+
+        function formatDate(val) {
+            const [y, m, d] = val.split('-');
+            return `${y}.${m}.${d}`;
+        }
+
+        this.el.box1.addEventListener('click', () => {
+            this.el.date1.showPicker?.();
+        });
+
+        this.el.box2.addEventListener('click', () => {
+            this.el.date2.showPicker?.();
+        });
+
+        this.el.date1.addEventListener('change', () => {
+            const val = this.el.date1.value;
+            if (!val) return;
+
+            this.el.dv1.textContent = formatDate(val);
+            this.el.box1.classList.add('has-value');
+
+            const next = new Date(val);
+            next.setDate(next.getDate() + 1);
+            this.el.date2.min = next.toISOString().split('T')[0];
+
+            if (this.el.date2.value && this.el.date2.value <= val) {
+                this.el.date2.value = '';
+                this.el.dv2.textContent = '';
+                this.el.box2.classList.remove('has-value');
+            }
+
+            setTimeout(() => this.el.date2.showPicker?.(), 50);
+        });
+
+        this.el.date2.addEventListener('change', () => {
+            const val = this.el.date2.value;
+            if (!val) return;
+
+            this.el.dv2.textContent = formatDate(val);
+            this.el.box2.classList.add('has-value');
+        });
+    },
+    initGuestPicker() {
+        let count = 2;
+
+        if (!this.el.guestBox) return;
+
+        this.el.guestBox.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.el.guestPopup.classList.toggle('open');
+        });
+
+        this.el.guestPopup.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        this.el.guestMinus.addEventListener('click', () => {
+            if (count > 1) {
+                count--;
+                this.el.guestCount.textContent = count;
+            }
+        });
+
+        this.el.guestPlus.addEventListener('click', () => {
+            count++;
+            this.el.guestCount.textContent = count;
+        });
+
+        this.el.guestConfirm.addEventListener('click', () => {
+            this.el.guestText.textContent = `성인 ${count}명`;
+            this.el.guestPopup.classList.remove('open');
+        });
+
+        document.addEventListener('click', () => {
+            this.el.guestPopup.classList.remove('open');
+        });
+    }
+};

@@ -287,7 +287,7 @@ const App = {
 
         list.forEach((item) => {
             this.el.result_grid.innerHTML += `
-                <a href="./T3_2nd_detail.html" style="text-decoration:none;color:inherit;">
+                <a href="./T3_2nd_detail_guest.html" style="text-decoration:none;color:inherit;">
                     <article class="card">
                         <div class="card__media">
                             <img src="${item.thumbnail}" alt="${item.name}">

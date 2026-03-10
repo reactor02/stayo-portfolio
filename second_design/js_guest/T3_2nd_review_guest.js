@@ -85,19 +85,22 @@ const App = {
     bindLikeEvents() {
         if (this.el.like1) {
             this.el.like1.addEventListener('click', () => {
-                this.increaseLike(this.el.PMH);
+                // this.increaseLike(this.el.PMH);
+                alert('로그인 해주세요');
             });
         }
 
         if (this.el.like2) {
             this.el.like2.addEventListener('click', () => {
-                this.increaseLike(this.el.LYS);
+                // this.increaseLike(this.el.LYS);
+                alert('로그인 해주세요');
             });
         }
 
         if (this.el.like3) {
             this.el.like3.addEventListener('click', () => {
-                this.increaseLike(this.el.KJS);
+                // this.increaseLike(this.el.KJS);
+                alert('로그인 해주세요');
             });
         }
     },
@@ -116,7 +119,8 @@ const App = {
         if (this.el.modal && this.el.openBtn) {
             // 모달 열기
             this.el.openBtn.addEventListener('click', () => {
-                this.openModal();
+                // this.openModal();
+                alert('로그인 해주세요')
             });
 
             // 닫기 버튼들에 모달 닫기 연결

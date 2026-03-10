@@ -46,12 +46,14 @@ const App = {
         // 모달 열기/닫기 이벤트 연결
         if (this.el.modal && this.el.openBtn) {
             this.el.openBtn.addEventListener('click', () => {
-                this.openModal();
+                // this.openModal();
+                alert('로그인 해주세요');
             });
 
             this.el.closeBtns.forEach((btn) => {
                 btn.addEventListener('click', () => {
-                    this.closeModal();
+                    // this.closeModal();
+                    alert('로그인 해주세요');
                 });
             });
         }
@@ -79,7 +81,8 @@ const App = {
         // 댓글 등록 버튼 클릭 시 댓글 추가
         if (this.el.btn_comment) {
             this.el.btn_comment.addEventListener('click', () => {
-                this.addComment();
+                // this.addComment();
+                alert('로그인 해주세요');
             });
         }
 
@@ -93,12 +96,13 @@ const App = {
         // 도움돼요 버튼 클릭 시 숫자 증가
         if (this.el.act) {
             this.el.act.addEventListener('click', () => {
-                this.increaseLike();
+                // this.increaseLike();
+                alert('로그인 해주세요');
             });
         }
 
         if (this.el.share) {
-            this.el.share.addEventListener('click', () => {
+            this.el.share.addEventListener('click',() => {
                 alert(`주소가 복사되었습니다\n${window.document.location.href}`)
             })
         }
@@ -205,38 +209,39 @@ const App = {
             const input = item.querySelector('.reply-input');
             const list = item.querySelector('.reply-list');
             const text = input.value.trim();
+            alert('로그인 해주세요');
 
-            // 공백만 입력된 경우 등록하지 않음
-            if (!text) return;
+            // // 공백만 입력된 경우 등록하지 않음
+            // if (!text) return;
 
-            // 현재 날짜를 yyyy.mm.dd 형식으로 생성
-            const now = new Date();
-            const date = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')}`;
+            // // 현재 날짜를 yyyy.mm.dd 형식으로 생성
+            // const now = new Date();
+            // const date = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')}`;
 
-            // 답글 구조 추가
-            list.insertAdjacentHTML('beforeend', `
-                <li class="reply-item">
-                    <div class="reply-head">
-                        <div class="reply-user">
-                            <span class="avatar sm">ME</span>
-                            <span class="name">나</span>
-                        </div>
-                        <time class="date">${date}</time>
-                    </div>
-                    <p class="reply-text"></p>
-                </li>
-            `);
+            // // 답글 구조 추가
+            // list.insertAdjacentHTML('beforeend', `
+            //     <li class="reply-item">
+            //         <div class="reply-head">
+            //             <div class="reply-user">
+            //                 <span class="avatar sm">ME</span>
+            //                 <span class="name">나</span>
+            //             </div>
+            //             <time class="date">${date}</time>
+            //         </div>
+            //         <p class="reply-text"></p>
+            //     </li>
+            // `);
 
-            // 입력한 답글 텍스트 삽입
-            // textContent를 사용해 HTML이 그대로 실행되지 않도록 처리
-            list.lastElementChild.querySelector('.reply-text').textContent = text;
+            // // 입력한 답글 텍스트 삽입
+            // // textContent를 사용해 HTML이 그대로 실행되지 않도록 처리
+            // list.lastElementChild.querySelector('.reply-text').textContent = text;
 
-            // 입력창 초기화
-            input.value = '';
+            // // 입력창 초기화
+            // input.value = '';
 
-            // 글자 수 표시도 초기화
-            const limitEl = item.querySelector('.reply-limit');
-            if (limitEl) limitEl.textContent = '0 / 200';
+            // // 글자 수 표시도 초기화
+            // const limitEl = item.querySelector('.reply-limit');
+            // if (limitEl) limitEl.textContent = '0 / 200';
         }
     },
 
