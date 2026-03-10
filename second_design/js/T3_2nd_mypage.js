@@ -598,3 +598,53 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+// =========================
+// 스크롤 따라 메뉴 자동 선택 (Scroll Spy)
+// =========================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const sections = document.querySelectorAll(".mysec");
+    const menus = document.querySelectorAll(".tab-menu__item");
+
+    function activateMenu(id) {
+
+        menus.forEach(menu => {
+            menu.classList.remove("tab-menu__item--active");
+        });
+
+        const activeMenu = document.querySelector(`a[href="#${id}"]`);
+
+        if (activeMenu) {
+            activeMenu.classList.add("tab-menu__item--active");
+        }
+
+    }
+
+    function scrollSpy() {
+
+        let currentSection = "";
+
+        sections.forEach(section => {
+
+            const sectionTop = section.offsetTop - 120;
+            const sectionHeight = section.offsetHeight;
+
+            if (window.scrollY >= sectionTop &&
+                window.scrollY < sectionTop + sectionHeight) {
+
+                currentSection = section.getAttribute("id");
+
+            }
+
+        });
+
+        if (currentSection) {
+            activateMenu(currentSection);
+        }
+
+    }
+
+    window.addEventListener("scroll", scrollSpy);
+
+});
