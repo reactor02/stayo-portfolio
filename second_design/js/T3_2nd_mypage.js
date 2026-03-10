@@ -685,3 +685,58 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+
+// =========================
+// 비밀번호 변경 기능
+// =========================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const changeBtns = document.querySelectorAll("button");
+
+    changeBtns.forEach(btn => {
+
+        if (btn.innerText.includes("변경하기")) {
+
+            btn.addEventListener("click", function (e) {
+
+                e.preventDefault();
+
+                const passwordInputs = document.querySelectorAll('input[type="password"]');
+
+                if (passwordInputs.length < 2) {
+                    alert("비밀 번호가 변경되지 않았습니다.");
+                    return;
+                }
+
+                const currentPw = passwordInputs[0].value.trim();
+                const newPw = passwordInputs[1].value.trim();
+
+                const savedPw = localStorage.getItem("userPassword") || "1234";
+
+
+                // 현재 비밀번호 확인
+                if (currentPw !== savedPw || newPw === "") {
+
+                    alert("비밀 번호가 변경되지 않았습니다.");
+                    return;
+
+                }
+
+
+                // 변경 성공
+                localStorage.setItem("userPassword", newPw);
+
+                alert("비밀 번호가 변경되었습니다.");
+
+                passwordInputs.forEach(input => {
+                    input.value = "";
+                });
+
+            });
+
+        }
+
+    });
+
+});
