@@ -239,6 +239,7 @@ window.onload = function () {
     }
 
     showall2.addEventListener("click", function () {
+         let item = document.querySelectorAll('.item--warn')
         if (opened2 == false) {
             // 전체보기
             for (let i = 0; i < item.length; i++) {
@@ -268,7 +269,8 @@ window.onload = function () {
     for (let i = 0; i < hide.length; i++) {
         hide[i].addEventListener('click', function () {
             alert('해당 리뷰가 숨김처리 되었습니다.')
-            item[i].style.display = 'none'
+            const card = this.closest('.item--warn')
+            card.remove()
 
         })
     }
@@ -277,42 +279,36 @@ window.onload = function () {
     for (let i = 0; i < keep.length; i++) {
         keep[i].addEventListener('click', function () {
             alert('해당 리뷰 유지 되었습니다.')
-            item[i].style.display = 'none'
+            const card = this.closest('.item--warn')
+            card.remove()
         })
     }
 
     const reportView = document.querySelectorAll(".reportView");
-    const modal = document.querySelector("#reportModal");
-    const reportText = document.querySelector("#reportText");
-    const closeReport = document.querySelector("#closeReport");
+    const content = document.querySelectorAll(".rep-content");
 
     for (let i = 0; i < reportView.length; i++) {
 
         reportView[i].addEventListener("click", function () {
 
-            const item = reportView[i].closest(".item");
+            // 해당 카드 안의 신고내용 영역
 
-            const report = item.dataset.report;
+            // 펼치기 / 접기
+            if (content[i].style.display === "block") {
 
-            reportText.textContent = report;
+                content[i].style.display = "none";
+                this.textContent = "신고내용보기";
 
-            modal.style.display = "flex";
+            } else {
+
+                content[i].style.display = "block";
+                this.textContent = "닫기";
+
+            }
 
         });
 
     }
-
-    closeReport.addEventListener("click", function () {
-        modal.style.display = "none";
-    });
-
-    modal.addEventListener("click", function (e) {
-
-        if (e.target === modal) {
-            modal.style.display = "none";
-        }
-
-    });
 
     /* ================================================
    [최종 통합] 쿠폰 관리 시스템 (생성·수정·검색·가시성)
