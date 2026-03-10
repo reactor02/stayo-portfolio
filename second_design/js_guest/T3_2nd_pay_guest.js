@@ -173,11 +173,22 @@ function bind() {
             updateFinalDisplay();
         };
 
-        pointUseBtn.addEventListener('click', () => applyPoint(parseInt(pointInput.value, 10) || 0));
+        const pointConfirm = () => {
+            const ok = confirm('포인트는 회원만 이용 가능합니다.\n지금 가입하시면 12,000포인트를 드려요.\n회원가입하시겠습니까?');
+            if (ok) {
+                window.location.href = '../html/T3_2nd_signup.html';
+            } else {
+                alert('포인트 적용을 취소했습니다.');
+            }
+        };
+
+        pointUseBtn.addEventListener('click', pointConfirm);
+
         if (pointUseAll) {
-            pointUseAll.addEventListener('change', function () {
-                applyPoint(this.checked ? OWNED_POINT : 0);
-                pointInput.value = this.checked ? OWNED_POINT : '';
+            pointUseAll.addEventListener('click', function (e) {
+                e.preventDefault();
+                this.checked = false;
+                pointConfirm();
             });
         }
     })();
@@ -233,8 +244,13 @@ function bind() {
         const couponOpenBtn = document.querySelector('.discount .discount__row:first-child .btn-small');
         if (couponOpenBtn) {
             couponOpenBtn.addEventListener('click', () => {
-                couponModal.setAttribute('aria-hidden', 'false');
-                document.body.style.overflow = 'hidden';
+                const ok = confirm('쿠폰은 회원가입을 한 사람만 이용 가능합니다.\n회원가입하시겠습니까?');
+                if (ok) {
+                    window.location.href = '../html/T3_2nd_signup.html';
+                } else {
+                    alert('쿠폰 적용을 취소했습니다.');
+                    closeCouponModal();
+                }
             });
         }
         couponModal.querySelectorAll('[data-action="close"]').forEach(btn => {
@@ -256,7 +272,7 @@ function bind() {
                 const nameErrorEl = document.getElementById('userNameError');
                 if (!name || !/^[가-힣a-zA-Z]+$/.test(name)) {
                     if (nameErrorEl) {
-                        nameErrorEl.textContent = name ? '이름은 한글과 영어만 됩니다.' : '예약자 이름을 입력해주세요.';
+                        nameErrorEl.textContent = name ? '이름은 한글과영어만 됩니다.' : '예약자 이름을 입력해주세요.';
                         nameErrorEl.style.display = 'block';
                     }
                     if (!firstErrorEl) firstErrorEl = userNameEl;
@@ -304,7 +320,7 @@ function bind() {
                 } else {
                     try {
                         alert('결제가 완료되었습니다.');
-                        window.location.href = "T3_2nd_pay_complete.html";
+                        window.location.href = "T3_2nd_pay_complete_guest.html";
                     } catch (err) {
                         alert('결제 도중에 예기치 못한 문제가 생겼습니다.');
                     }
