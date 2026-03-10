@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>STAYO | 리뷰 상세</title>
   <script src="../js/T3_2nd_common.js"></script>
-  <script src="../js/T3_2nd_review_detail.js"></script>
+  <script src="../js_guest/T3_2nd_review_detail_guest.js"></script>
   <!-- 폰트(프로젝트 동일) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,11 +27,11 @@
   <header class="header">
     <div class="container header__inner">
       <!-- 로고 -->
-      <a href="./T3_2nd_index.html" class="logo" aria-label="STAYO 홈">STAYO</a>
+      <a href="./T3_2nd_index_guest.html" class="logo" aria-label="STAYO 홈">STAYO</a>
 
       <!-- 가운데 메뉴 -->
       <nav class="gnb" aria-label="주요 메뉴">
-        <a href="./list.html" class="gnb__link">숙소</a>
+        <a href="./T3_2nd_list_guest.html" class="gnb__link">숙소</a>
         <a href="#" class="gnb__link">항공권</a>
         <a href="#" class="gnb__link">패키지</a>
         <a href="#" class="gnb__link">액티비티</a>
@@ -42,7 +42,7 @@
       <div class="header__right">
         <!-- ✅ 로그인 전 -->
         <div class="header-guest">
-          <a href="./T3_2nd_login.html" class="btn btn--ghost">
+          <a href="../html/T3_2nd_login.html" class="btn btn--ghost">
             <span class="btn__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24">
                 <path
@@ -51,7 +51,7 @@
             </span>
             로그인
           </a>
-          <a href="./T3_2nd_signup.html" class="btn btn--solid">회원가입</a>
+          <a href="../html/T3_2nd_signup.html" class="btn btn--solid">회원가입</a>
         </div>
 
         <!-- ✅ 로그인 후 -->
@@ -100,15 +100,15 @@
     <section class="rev-top">
       <div class="container">
         <nav class="crumb" aria-label="현재 위치">
-          <a href="./T3_2nd_detail.html">상세</a>
+          <a href="./T3_2nd_detail_guest.html">상세</a>
           <span class="crumb__sep">/</span>
-          <a href="./T3_2nd_review.html">리뷰</a>
+          <a href="./T3_2nd_review_guest.html">리뷰</a>
           <span class="crumb__sep">/</span>
           <span class="crumb__current">리뷰 상세</span>
         </nav>
 
         <div class="rev-top__row">
-          <a href="./T3_2nd_review.html" class="back">
+          <a href="./T3_2nd_review_guest.html" class="back">
             <span class="back__icon" aria-hidden="true">←</span>
             리뷰 목록으로
           </a>
@@ -116,8 +116,8 @@
           <!-- (UI) 신고/공유 버튼 -->
           <div class="rev-top__actions">
             <button class="btn-outline btn-outline--sm" type="button" data-open-modal>수정</button>
-            <a href="./T3_2nd_mapage.html"><button class="btn-outline btn-outline--sm" type="button">신고</button></a>
-            <button class="btn-outline btn-outline--sm" type="button">공유</button>
+            <a href="./T3_2nd_mapage_guest.html"><button class="btn-outline btn-outline--sm" type="button">신고</button></a>
+            <button class="btn-outline btn-outline--sm share" type="button">공유</button>
           </div>
         </div>
       </div>
@@ -360,9 +360,9 @@
 
             <div class="stay-card__btns">
               <!-- 상세페이지로 돌아가기 -->
-              <a href="./T3_2nd_detail.html" class="btn-main">숙소 상세 보기</a>
+              <a href="./T3_2nd_detail_guest.html" class="btn-main">숙소 상세 보기</a>
               <!-- 리뷰 목록으로 -->
-              <a href="./T3_2nd_review.html" class="btn-outline">리뷰 더 보기</a>
+              <a href="./T3_2nd_review_guest.html" class="btn-outline">리뷰 더 보기</a>
             </div>
           </div>
         </aside>
@@ -471,7 +471,7 @@
       <div class="footer__cols">
         <div class="footer__col">
           <div class="footer__title">서비스</div>
-          <a href="./T3_2nd_index.html" class="footer__link">숙소 예약</a>
+          <a href="./T3_2nd_index_guest.html" class="footer__link">숙소 예약</a>
           <a href="#" class="footer__link alert">항공권</a>
           <a href="#" class="footer__link alert">패키지</a>
           <a href="#" class="footer__link alert">액티비티</a>
@@ -480,9 +480,9 @@
 
         <div class="footer__col">
           <div class="footer__title">고객지원</div>
-          <a href="./T3_2nd_mapage.html" class="footer__link">고객센터</a>
-          <a href="./T3_2nd_mapage.html#sec-support" class="footer__link">자주 묻는 질문</a>
-          <a href="./T3_2nd_mapage.html#sec-support" class="footer__link">취소/환불</a>
+          <a href="./T3_2nd_mapage_guest.html" class="footer__link">고객센터</a>
+          <a href="./T3_2nd_mapage_guest.html" class="footer__link">자주 묻는 질문</a>
+          <a href="./T3_2nd_mapage_guest.html" class="footer__link">취소/환불</a>
           <a href="./T3_2nd_terms.html" class="footer__link">이용약관</a>
           <a href="./T3_2nd_privacy.html" class="footer__link">개인정보처리방침</a>
         </div>
