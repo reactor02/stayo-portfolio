@@ -616,11 +616,13 @@ function activateAdminMenu(id) {
 
 // 3. 스크롤 감지 로직
 function adminScrollSpy() {
+
+    if (isClickScrolling) return;
+
     let currentSectionId = "";
 
     sections.forEach(section => {
-        // 상단 헤더 높이(약 92px) 및 여유 공간을 고려하여 오프셋 설정
-        const sectionTop = section.offsetTop - 150; 
+        const sectionTop = section.offsetTop - 150;
         const sectionHeight = section.offsetHeight;
 
         if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
@@ -638,13 +640,19 @@ window.addEventListener("scroll", adminScrollSpy);
 
 // 5. 메뉴 클릭 시 부드러운 이동 및 즉시 활성화
 navItems.forEach(item => {
-    item.addEventListener("click", function (e) {
-        // 기본 앵커 이동은 유지하되, 클릭 즉시 UI 피드백 제공
+    item.addEventListener("click", function () {
+
+        isClickScrolling = true;
+
         navItems.forEach(nav => nav.classList.remove("admin-nav__item--active"));
         this.classList.add("admin-nav__item--active");
+
+        setTimeout(() => {
+            isClickScrolling = false;
+        }, 500);
+
     });
 });
-
 
 
 }

@@ -79,12 +79,12 @@
 }
 
 .admin-nav__item:hover{
-  background: rgba(17,17,17,0.04);
+  /* background: rgba(17,17,17,0.04); */
   transform: translateY(-1px);
 }
-.over:hover{
+/* .over:hover{
   background: rgba(17,17,17,0.88);
-}
+} */
 
 .admin-nav__item--active{
   background: rgba(17,17,17,0.88);
