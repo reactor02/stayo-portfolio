@@ -221,66 +221,120 @@ async function bind() {
     // ──────────────────────────────────────────────
     const categoryBtns = document.querySelectorAll('.category-btn');
 
+    // ── 호텔 탭 전용 하드코딩 카드 (내용은 직접 채워주세요) ──
+    const HARDCODED_HOTEL_CARD = `
+        <a href="./T3_2nd_detail.html">
+            <article class="card">
+                <div class="card__media">
+                    <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1600&q=80
+" alt="서울 중구 호텔 센트럴" />
+                    <span class="badge badge--dark">할인 중</span>
+                    <button class="wish" type="button" aria-label="찜하기">
+                        <svg viewBox="0 0 24 24" class="heart" aria-hidden="true">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+                            2 6 4 4 6.5 4
+                            8.04 4 9.54 4.81 10.4 6.09
+                            11.26 4.81 12.76 4 14.3 4
+                            16.8 4 18.8 6 18.8 8.5
+                            c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="card__body">
+                    <div class="card__title">서울 중구 호텔 센트럴</div>
+                    <div class="card__meta">서울 · 중구</div>
+                    <div class="card__row">
+                        <div class="card__rating">
+                            <span class="star">★</span> 4.8
+                            <span class="count">10</span>
+                        </div>
+                        <div class="card__price">
+                            ₩110,000 <span>/ 1박</span>
+                        </div>
+                    </div>
+                    <div class="card__tags">
+                        <span class="tag">기타 편의시설</span>
+                    </div>
+                </div>
+            </article>
+        </a>
+    `;
+
+    // 카드 HTML을 생성하는 헬퍼 함수
+    function createCardHTML(item) {
+        return `
+            <a href="./T3_2nd_detail.html">
+                <article class="card">
+                    <div class="card__media">
+                        <img src="${item.thumbnail}" alt="${item.name}" />
+                        <span class="badge badge--dark">할인 중</span>
+                        <button class="wish" type="button" aria-label="찜하기">
+                            <svg viewBox="0 0 24 24" class="heart" aria-hidden="true">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+                                2 6 4 4 6.5 4
+                                8.04 4 9.54 4.81 10.4 6.09
+                                11.26 4.81 12.76 4 14.3 4
+                                16.8 4 18.8 6 18.8 8.5
+                                c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="card__body">
+                        <div class="card__title">${item.name}</div>
+                        <div class="card__meta">${item.city} · ${item.district}</div>
+                        <div class="card__row">
+                            <div class="card__rating">
+                                <span class="star">★</span> ${item.rating}
+                                <span class="count">${item.reviewCount}</span>
+                            </div>
+                            <div class="card__price">
+                                ₩${item.priceFrom.toLocaleString()} <span>/ 1박</span>
+                            </div>
+                        </div>
+                        <div class="card__tags">
+                            <span class="tag">기타 편의시설</span>
+                        </div>
+                    </div>
+                </article>
+            </a>
+        `;
+    }
+
     // 숙소 리스트를 그리는 함수
     async function loadLodgings(type = '호텔') {
         try {
-            // API 호출 (선택된 type 전달)
+            const isHotel = type === '호텔';
+
+            // 호텔이면 하드코딩 1개 자리를 빼고 API에서 5개만 요청
+            const apiPageSize = isHotel ? 5 : 6;
+
             const listRes = await API.V1.TB.Lodging.properties({
-                q: type,       // 호텔·펜션 등 키워드로 검색
+                q: type,
                 page: 2,
-                pageSize: 6
+                pageSize: apiPageSize
             });
 
             const result_grid = document.querySelector('.result-grid');
 
-            // 1. 기존에 그려져 있던 카드들을 모두 지웁니다.
+            // 기존 카드 전부 제거
             result_grid.innerHTML = '';
 
-            // 2. 데이터가 없을 경우 처리
+            // 데이터가 없을 경우 처리
             if (!listRes.items || listRes.items.length === 0) {
                 result_grid.innerHTML = '<p>조회된 숙소가 없습니다.</p>';
                 return;
             }
 
-            // 2. 새로운 데이터로 카드 생성
+            // 호텔 탭: 하드코딩 카드를 맨 앞에 삽입 후 API 카드 5개 추가 → 총 6개
+            if (isHotel) {
+                result_grid.innerHTML = HARDCODED_HOTEL_CARD;
+            }
+
+            // API에서 받아온 카드 추가
             listRes.items.forEach((item) => {
-                result_grid.innerHTML += `
-                    <a href="./T3_2nd_detail.html">
-                        <article class="card">
-                            <div class="card__media">
-                                <img src="${item.thumbnail}" alt="${item.name}" />
-                                <span class="badge badge--dark">할인 중</span>
-                                <button class="wish" type="button" aria-label="찜하기">
-                                    <svg viewBox="0 0 24 24" class="heart" aria-hidden="true">
-                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
-                                        2 6 4 4 6.5 4
-                                        8.04 4 9.54 4.81 10.4 6.09
-                                        11.26 4.81 12.76 4 14.3 4
-                                        16.8 4 18.8 6 18.8 8.5
-                                        c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                                    </svg>
-                                </button>
-                            </div>
-                            <div class="card__body">
-                                <div class="card__title">${item.name}</div>
-                                <div class="card__meta">${item.city} · ${item.district}</div>
-                                <div class="card__row">
-                                    <div class="card__rating">
-                                        <span class="star">★</span> ${item.rating}
-                                        <span class="count">${item.reviewCount}</span>
-                                    </div>
-                                    <div class="card__price">
-                                        ₩${item.priceFrom.toLocaleString()} <span>/ 1박</span>
-                                    </div>
-                                </div>
-                                <div class="card__tags">
-                                    <span class="tag">기타 편의시설</span>
-                                </div>
-                            </div>
-                        </article>
-                    </a>
-                `;
+                result_grid.innerHTML += createCardHTML(item);
             });
+
         } catch (error) {
             console.error('숙소 로딩 실패:', error);
             document.querySelector('.result-grid').innerHTML = '<p>데이터를 불러오는 중 오류가 발생했습니다.</p>';
