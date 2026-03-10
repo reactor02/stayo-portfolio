@@ -96,7 +96,7 @@ window.onload = function () {
     })
 
     // 클릭된 요소가 수정요청 버튼이면
-    doneTable.addEventListener("click", function () {
+    doneTable.addEventListener("click", function (e) {
         if (e.target.classList.contains("editRequest")) {
 
             // 수정요청 버튼이 있는 행 찾기
@@ -277,6 +277,7 @@ window.onload = function () {
     for (let i = 0; i < keep.length; i++) {
         keep[i].addEventListener('click', function () {
             alert('해당 리뷰 유지 되었습니다.')
+             item[i].style.display = 'none'
         })
     }
 
