@@ -594,6 +594,57 @@ window.onload = function () {
     // 페이지 로드 시 초기 가시성 설정
     updateCouponVisibility();
 
+    // =========================================
+// 관리자 사이드바 스크롤 스파 (Scroll Spy)
+// =========================================
+
+// 1. 대상 요소 선택
+// 사이드바 내의 모든 메뉴 아이템(a 태그)과 본문의 섹션들(.anchor 클래스 기준)
+const navItems = document.querySelectorAll('aside[aria-label="관리자 메뉴"] .admin-nav__item');
+const sections = document.querySelectorAll(".panel.anchor");
+
+// 2. 활성화 클래스 교체 함수
+function activateAdminMenu(id) {
+    navItems.forEach(item => {
+        item.classList.remove("admin-nav__item--active");
+        // href 속성이 해당 섹션 ID와 일치하는 메뉴 찾기
+        if (item.getAttribute("href") === `#${id}`) {
+            item.classList.add("admin-nav__item--active");
+        }
+    });
+}
+
+// 3. 스크롤 감지 로직
+function adminScrollSpy() {
+    let currentSectionId = "";
+
+    sections.forEach(section => {
+        // 상단 헤더 높이(약 92px) 및 여유 공간을 고려하여 오프셋 설정
+        const sectionTop = section.offsetTop - 150; 
+        const sectionHeight = section.offsetHeight;
+
+        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+            currentSectionId = section.getAttribute("id");
+        }
+    });
+
+    if (currentSectionId) {
+        activateAdminMenu(currentSectionId);
+    }
+}
+
+// 4. 이벤트 리스너 등록
+window.addEventListener("scroll", adminScrollSpy);
+
+// 5. 메뉴 클릭 시 부드러운 이동 및 즉시 활성화
+navItems.forEach(item => {
+    item.addEventListener("click", function (e) {
+        // 기본 앵커 이동은 유지하되, 클릭 즉시 UI 피드백 제공
+        navItems.forEach(nav => nav.classList.remove("admin-nav__item--active"));
+        this.classList.add("admin-nav__item--active");
+    });
+});
+
 
 
 }
