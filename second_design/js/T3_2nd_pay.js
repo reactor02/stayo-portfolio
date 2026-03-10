@@ -63,7 +63,8 @@ function bind() {
     // =============================================
     if (userNameEl) {
         const nameErrorEl = document.getElementById('userNameError');
-        const korean = /^[가-힣]+$/;
+        const korean = /^[가-힣a-zA-Z]+$/;
+        const letter = /^[ㄱ-ㅎㅏ-ㅣ]+$/;
         userNameEl.addEventListener('input', function () {
             if (nameErrorEl && this.value.trim().length > 0 && korean.test(this.value.trim()))
                 nameErrorEl.style.display = 'none';
@@ -74,10 +75,14 @@ function bind() {
             if (!val) {
                 nameErrorEl.textContent = '예약자 이름을 입력해주세요.';
                 nameErrorEl.style.display = 'block';
-            } else if (!korean.test(val)) {
-                nameErrorEl.textContent = '이름은 한글만 됩니다.';
+            } else if (!korean.test(val) && !letter.test(val)) {
+                nameErrorEl.textContent = '이름은 한글과 영어만 됩니다.';
                 nameErrorEl.style.display = 'block';
-            } else {
+            } else if(letter.test(val)){
+                nameErrorEl.textContent = '올바른 형식이 아닙니다.';
+                nameErrorEl.style.display = 'block';
+            }
+            else {
                 nameErrorEl.style.display = 'none';
             }
         });
@@ -281,9 +286,16 @@ function bind() {
 
                 // 필수 약관
                 const requiredNodes = document.querySelectorAll('.agree__list input[type="checkbox"][data-required="true"]');
-                if (Array.from(requiredNodes).some(n => !n.checked)) {
+                let allRequired = true;
+                for (let i = 0; i < requiredNodes.length; i++) {
+                    if (!requiredNodes[i].checked) {
+                        allRequired = false;
+                        break;
+                    }
+                }
+                if (!allRequired) {
                     if (agreeErr) { agreeErr.textContent = '필수 약관에 모두 동의해주세요.'; agreeErr.style.display = 'block'; }
-                    if (!firstErrorEl) firstErrorEl = document.querySelector('.agree__all');
+                    if (!firstErrorEl) firstErrorEl = document.querySelector('.agree__list');
                 }
 
                 if (firstErrorEl) {

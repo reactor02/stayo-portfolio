@@ -1,562 +1,599 @@
-/**
- * T3_2nd_mypage.js  ─  마이페이지 + 로그인 페이지 통합 스크립트
- * ═══════════════════════════════════════════════════════════════════════════
- *
- *  ┌─ HTML 연결 방법 ──────────────────────────────────────────────────────┐
- *  │  T3_2nd_mapage.html  → 주석 해제:                                    │
- *  │    <script src="../js/T3_2nd_mypage.js"></script>                     │
- *  │                                                                       │
- *  │  T3_2nd_login.html   → </body> 직전에 추가:                          │
- *  │    <script src="../js/T3_2nd_mypage.js"></script>                     │
- *  └───────────────────────────────────────────────────────────────────────┘
- *
- *  ┌─ 동작 규칙 ───────────────────────────────────────────────────────────┐
- *  │                                                                       │
- *  │  [비로그인 - 마이페이지 진입]                                         │
- *  │    → 예약·찜·쿠폰 요약 카드, 프로필 카드,                            │
- *  │      사이드 탭 메뉴 4개(예약 내역/찜 목록/쿠폰·포인트/프로필 관리),   │
- *  │      탭 콘텐츠 4개, 나의 문의 내역 블록 → 전부 숨김                  │
- *  │    → 고객센터 탭 메뉴 항목만 표시 (클릭 유도)                        │
- *  │    → 탭 콘텐츠 영역(#sec-support)도 숨긴 채 대기                     │
- *  │    → 로그인 유도 배너 표시                                            │
- *  │                                                                       │
- *  │  [비로그인 - 고객센터 탭 클릭]                                        │
- *  │    → 로그인 유도 배너 제거                                            │
- *  │    → #sec-support 섹션만 표시 (나머지 숨김 유지)                      │
- *  │    → 고객센터 탭 active, 나의 문의 내역은 계속 숨김                   │
- *  │                                                                       │
- *  │  [로그인 성공 후 마이페이지 복귀]                                     │
- *  │    → 숨겨진 모든 요소 복원                                            │
- *  │    → 예약 내역 탭 활성화                                              │
- *  │    → ✅ 토스트 메시지 1회 표시                                        │
- *  │                                                                       │
- *  │  [로그아웃 클릭]                                                      │
- *  │    → sessionStorage 초기화                                            │
- *  │    → 마이페이지이면 즉시 비로그인 상태로 전환                         │
- *  └───────────────────────────────────────────────────────────────────────┘
- *
- *  ┌─ 데모 계정 (실서버 연동 시 handleLogin 내 검증 로직 교체) ───────────┐
- *  │  아이디 : minho@stayo.com   /   비밀번호 : 1234                      │
- *  └───────────────────────────────────────────────────────────────────────┘
- */
+document.addEventListener("DOMContentLoaded", function () {
 
-(function () {
-  'use strict';
+    // =========================
+    // 마이페이지 메뉴
+    // =========================
+    const tabMenus = document.querySelectorAll(".tab-menu__item");
 
-  /* =========================================================================
-   * 공통 상수
-   * ========================================================================= */
-  var DEMO_ID     = 'minho@stayo.com';
-  var DEMO_PW     = '1234';
-  var BANNER_ID   = 'mypage-login-banner';
-  var HIDDEN_ATTR = 'data-mp-hidden';
+    const reservation = document.querySelector('a[href="#sec-reservation"]');
+    const wish = document.querySelector('a[href="#sec-wish"]');
+    const coupon = document.querySelector('a[href="#sec-coupon"]');
+    const profile = document.querySelector('a[href="#sec-profile"]');
+    const support = document.querySelector('a[href="#sec-support"]');
 
-  /* =========================================================================
-   * 공통 유틸 ─ 요소 숨기기 / 복원
-   * ========================================================================= */
-  function hide(el) {
-    if (!el || el.hasAttribute(HIDDEN_ATTR)) return;
-    var computed = window.getComputedStyle(el).display;
-    el.setAttribute(HIDDEN_ATTR, computed === 'none' ? '' : computed);
-    el.style.display = 'none';
-  }
+    const sections = document.querySelectorAll(".mysec");
 
-  function show(el) {
-    if (!el || !el.hasAttribute(HIDDEN_ATTR)) return;
-    var orig = el.getAttribute(HIDDEN_ATTR);
-    el.style.display = orig || '';
-    el.removeAttribute(HIDDEN_ATTR);
-  }
+    const summaryCards = document.querySelector(".summary-cards");
+    const profileCard = document.querySelector(".profile-card");
 
-  function hideAll(list) { list.forEach(hide); }
-  function showAll(list) { list.forEach(show); }
+    const logoutBtn = document.querySelector(".logout");
 
-  /* =========================================================================
-   * 공통 유틸 ─ 로그인 상태 판단
-   * ========================================================================= */
-  function isLoggedIn() {
-    return sessionStorage.getItem('isLoggedIn') === 'true';
-  }
+    // 고객센터 블록
+    const inquiryBlocks = document.querySelectorAll(".support__block");
 
-  /* =========================================================================
-   * ███████████████████  SECTION A : 마이페이지  ████████████████████████████
-   * ========================================================================= */
 
-  /* ── A-1. 대상 요소 수집 ───────────────────────────────────────────────── */
-  function getTargets() {
-    // 고객센터를 제외한 사이드 탭 메뉴 항목 4개
-    var menuItems = Array.from(
-      document.querySelectorAll('.tab-menu__item')
-    ).filter(function (a) {
-      return !(a.getAttribute('href') || '').includes('sec-support');
-    });
 
-    // 고객센터 > 나의 문의 내역 블록
-    var inquiryBlock = null;
-    document.querySelectorAll('.support__title').forEach(function (h) {
-      if (h.textContent.trim() === '나의 문의 내역') {
-        inquiryBlock = h.closest('.support__block');
-      }
-    });
+    // =========================
+    // 로그인 상태 확인
+    // =========================
+    function checkLogin() {
 
-    return {
-      profileCard   : document.querySelector('.profile-card'),
-      summaryCards  : document.querySelector('.summary-cards'),
-      menuItems     : menuItems,
-      sections      : [
-        document.getElementById('sec-reservation'),
-        document.getElementById('sec-wish'),
-        document.getElementById('sec-coupon'),
-        document.getElementById('sec-profile'),
-      ],
-      secSupport    : document.getElementById('sec-support'),   // 고객센터 섹션
-      inquiryBlock  : inquiryBlock,
-      headerGuest   : document.querySelector('.header-guest'),
-      headerUser    : document.querySelector('.header-user'),
-    };
-  }
+        const isLogin = localStorage.getItem("loginUser");
 
-  /* ── A-2. 활성 탭 전환 ─────────────────────────────────────────────────── */
-  function setActiveTab(targetHref) {
-    document.querySelectorAll('.tab-menu__item').forEach(function (el) {
-      el.classList.toggle(
-        'tab-menu__item--active',
-        (el.getAttribute('href') || '') === targetHref
-      );
-    });
-  }
+        if (!isLogin) {
 
-  /* ── A-3. 로그인 유도 배너 생성 / 제거 ─────────────────────────────────── */
-  function createBanner() {
-    if (document.getElementById(BANNER_ID)) return;
+            if (reservation) reservation.style.display = "none";
+            if (wish) wish.style.display = "none";
+            if (coupon) coupon.style.display = "none";
+            if (profile) profile.style.display = "none";
 
-    var banner = document.createElement('div');
-    banner.id  = BANNER_ID;
-    banner.setAttribute('role', 'alert');
-    banner.style.cssText = [
-      'margin:32px auto',
-      'max-width:520px',
-      'padding:40px 32px',
-      'background:#fff',
-      'border:1.5px solid #e5e7eb',
-      'border-radius:16px',
-      'text-align:center',
-      'box-shadow:0 4px 24px rgba(0,0,0,.08)',
-      'font-family:inherit',
-    ].join(';');
+            if (summaryCards) summaryCards.style.display = "none";
+            if (profileCard) profileCard.style.display = "none";
 
-    banner.innerHTML = [
-      '<div style="font-size:52px;margin-bottom:18px;">🔒</div>',
-      '<p style="font-size:19px;font-weight:700;color:#111;margin:0 0 10px;">',
-        '로그인이 필요한 서비스입니다',
-      '</p>',
-      '<p style="font-size:14px;color:#6b7280;margin:0 0 28px;line-height:1.75;">',
-        '예약 내역, 찜 목록, 쿠폰·포인트 등 다양한 혜택을<br>',
-        '로그인 후 이용하실 수 있습니다.',
-      '</p>',
-      '<div style="display:flex;gap:12px;justify-content:center;">',
-        '<button id="mypage-login-btn" type="button"',
-          ' style="padding:12px 32px;background:#2563eb;color:#fff;border:none;',
-                  'border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;">',
-          '로그인',
-        '</button>',
-        '<a href="./T3_2nd_signup.html"',
-          ' style="display:inline-flex;align-items:center;padding:12px 32px;',
-                  'background:#f3f4f6;color:#374151;border-radius:8px;',
-                  'font-size:14px;font-weight:700;text-decoration:none;">',
-          '회원가입',
-        '</a>',
-      '</div>',
-    ].join('');
+            inquiryBlocks.forEach(block => {
 
-    // 탭 콘텐츠 영역(.tab-content) 안 첫 번째 자리에 삽입
-    var tabContent = document.querySelector('.tab-content');
-    var gridEl     = document.querySelector('.my-grid');
+                const title = block.querySelector(".support__title");
 
-    if (tabContent) {
-      tabContent.insertBefore(banner, tabContent.firstChild);
-    } else if (gridEl) {
-      gridEl.appendChild(banner);
-    }
+                if (title && title.innerText.includes("나의 문의")) {
+                    block.style.display = "none";
+                }
 
-    // [로그인] 클릭 → 복귀 URL 저장 후 로그인 페이지로 이동
-    var btn = document.getElementById('mypage-login-btn');
-    if (btn) {
-      btn.addEventListener('click', function () {
-        sessionStorage.setItem('loginReturnUrl', location.href);
-        location.href = './T3_2nd_login.html';
-      });
-    }
-  }
+            });
 
-  function removeBanner() {
-    var el = document.getElementById(BANNER_ID);
-    if (el) el.parentNode.removeChild(el);
-  }
+            sections.forEach(sec => {
+                sec.style.display = "none";
+            });
 
-  /* ── A-4. 로그인 직후 복귀 토스트 (1회) ───────────────────────────────── */
-  function showToastIfNeeded() {
-    if (sessionStorage.getItem('justLoggedIn') !== 'true') return;
-    sessionStorage.removeItem('justLoggedIn');
+            const supportSection = document.querySelector("#sec-support");
 
-    var toast = document.createElement('div');
-    toast.setAttribute('role', 'status');
-    toast.style.cssText = [
-      'position:fixed',
-      'top:84px',
-      'left:50%',
-      'transform:translateX(-50%) translateY(-12px)',
-      'background:#111827',
-      'color:#fff',
-      'padding:13px 28px',
-      'border-radius:40px',
-      'font-size:14px',
-      'font-weight:600',
-      'box-shadow:0 8px 28px rgba(0,0,0,.22)',
-      'z-index:99999',
-      'opacity:0',
-      'transition:opacity .3s ease, transform .3s ease',
-      'white-space:nowrap',
-      'pointer-events:none',
-    ].join(';');
-    toast.textContent = '✅ 로그인되었습니다. 마이페이지 기능을 이용하실 수 있습니다.';
-    document.body.appendChild(toast);
+            if (supportSection) {
+                supportSection.style.display = "block";
+            }
 
-    requestAnimationFrame(function () {
-      toast.style.opacity   = '1';
-      toast.style.transform = 'translateX(-50%) translateY(0)';
-    });
+            tabMenus.forEach(menu => {
+                menu.classList.remove("tab-menu__item--active");
+            });
 
-    setTimeout(function () {
-      toast.style.opacity   = '0';
-      toast.style.transform = 'translateX(-50%) translateY(-10px)';
-      setTimeout(function () {
-        if (toast.parentNode) toast.parentNode.removeChild(toast);
-      }, 320);
-    }, 3000);
-  }
+            if (support) {
+                support.classList.add("tab-menu__item--active");
+            }
 
-  /* ── A-5. [비로그인] 마이페이지 진입 시 UI ─────────────────────────────── *
-   *  · 프로필 카드 / 요약 카드 / 탭 메뉴 4개 / 탭 콘텐츠 4개               *
-   *    / 고객센터 섹션(#sec-support) / 나의 문의 내역 → 모두 숨김           *
-   *  · 고객센터 탭 메뉴 항목만 표시 (클릭 유도)                             *
-   *  · 로그인 유도 배너 표시                                                 *
-   * ========================================================================= */
-  function applyGuestUI() {
-    var t = getTargets();
-
-    // 프로필 카드 / 요약 카드 / 나의 문의 내역 숨김
-    hide(t.profileCard);
-    hide(t.summaryCards);
-    hide(t.inquiryBlock);
-
-    // 고객센터를 제외한 사이드 탭 메뉴 항목 숨김
-    hideAll(t.menuItems);
-
-    // 탭 콘텐츠 섹션 4개 숨김 (예약/찜/쿠폰/프로필)
-    hideAll(t.sections);
-
-    // 고객센터 섹션도 숨김 (배너 표시 중에는 콘텐츠 안 보임)
-    hide(t.secSupport);
-
-    // 헤더: 비로그인 상태
-    show(t.headerGuest);
-    hide(t.headerUser);
-
-    // 고객센터 탭만 active
-    setActiveTab('#sec-support');
-
-    // 로그인 유도 배너 표시
-    createBanner();
-  }
-
-  /* ── A-6. [비로그인] 고객센터 탭 클릭 시 UI ────────────────────────────── *
-   *  · 배너 제거 후 #sec-support 섹션만 표시                                *
-   *  · 프로필·요약·메뉴 4개·섹션 4개·나의 문의 내역은 숨김 유지            *
-   * ========================================================================= */
-  function applyGuestSupportUI() {
-    var t = getTargets();
-
-    // 배너 제거
-    removeBanner();
-
-    // 고객센터 섹션만 표시
-    show(t.secSupport);
-
-    // 나머지는 계속 숨김 유지
-    hide(t.profileCard);
-    hide(t.summaryCards);
-    hide(t.inquiryBlock);
-    hideAll(t.menuItems);
-    hideAll(t.sections);
-
-    // 헤더: 비로그인 상태
-    show(t.headerGuest);
-    hide(t.headerUser);
-
-    // 고객센터 탭 active 유지
-    setActiveTab('#sec-support');
-  }
-
-  /* ── A-7. [로그인] 전체 UI 복원 ────────────────────────────────────────── */
-  function applyUserUI() {
-    var t = getTargets();
-
-    // 배너 제거
-    removeBanner();
-
-    // 모든 영역 복원
-    show(t.profileCard);
-    show(t.summaryCards);
-    show(t.inquiryBlock);
-    showAll(t.menuItems);
-    showAll(t.sections);
-    show(t.secSupport);
-
-    // 헤더: 로그인 상태
-    show(t.headerUser);
-    hide(t.headerGuest);
-
-    // 예약 내역 탭 활성화
-    setActiveTab('#sec-reservation');
-
-    // 로그인 직후이면 토스트 표시
-    showToastIfNeeded();
-  }
-
-  /* ── A-8. [로그아웃] 후 비로그인 상태 전환 ─────────────────────────────── */
-  function applyLogoutUI() {
-    applyGuestUI();
-  }
-
-  /* ── A-9. 고객센터 탭 클릭 이벤트 바인딩 ───────────────────────────────── */
-  function bindSupportTabClick() {
-    var supportTab = document.querySelector('.tab-menu__item[href="#sec-support"]');
-    if (!supportTab) return;
-
-    supportTab.addEventListener('click', function (e) {
-      if (!isLoggedIn()) {
-        e.preventDefault();
-        // 배너를 닫고 고객센터 콘텐츠만 표시
-        applyGuestSupportUI();
-      }
-      // 로그인 상태이면 기본 탭 이동 동작 그대로
-    });
-  }
-
-  /* ── A-10. 로그아웃 버튼 바인딩 ────────────────────────────────────────── */
-  function bindLogout() {
-    document.querySelectorAll('.logout').forEach(function (btn) {
-      if (btn.dataset.logoutBound) return;
-      btn.dataset.logoutBound = 'true';
-
-      btn.addEventListener('click', function () {
-        sessionStorage.removeItem('isLoggedIn');
-        sessionStorage.removeItem('justLoggedIn');
-        sessionStorage.removeItem('loginReturnUrl');
-
-        // 마이페이지이면 페이지 이동 없이 즉시 비로그인 상태로 전환
-        var path = location.pathname;
-        if (path.includes('mapage') || path.includes('mypage')) {
-          applyLogoutUI();
-        } else {
-          location.href = './T3_2nd_index.html';
         }
-      });
-    });
-  }
 
-  /* ── A-11. 마이페이지 초기화 ────────────────────────────────────────────── */
-  function initMypage() {
-    if (isLoggedIn()) {
-      applyUserUI();
-    } else {
-      applyGuestUI();
+        else {
+
+            if (reservation) reservation.style.display = "flex";
+            if (wish) wish.style.display = "flex";
+            if (coupon) coupon.style.display = "flex";
+            if (profile) profile.style.display = "flex";
+
+            if (summaryCards) summaryCards.style.display = "grid";
+            if (profileCard) profileCard.style.display = "flex";
+
+            inquiryBlocks.forEach(block => {
+                block.style.display = "block";
+            });
+
+        }
+
     }
 
-    // 고객센터 탭 클릭 감시
-    bindSupportTabClick();
+    checkLogin();
 
-    // 로그아웃 버튼 바인딩
-    bindLogout();
-  }
 
-  /* =========================================================================
-   * ███████████████████  SECTION B : 로그인 페이지  █████████████████████████
-   * ========================================================================= */
 
-  /* ── B-1. 폼 / 입력 요소 탐색 ──────────────────────────────────────────── */
-  function getForm() {
-    return document.getElementById('login-form') ||
-           document.querySelector('form');
-  }
+    // =========================
+    // 메뉴 클릭 시 색상 변경
+    // =========================
+    tabMenus.forEach(menu => {
 
-  function getIdInput() {
-    return document.getElementById('login-id')           ||
-           document.querySelector('[name="userId"]')     ||
-           document.querySelector('[name="email"]')      ||
-           document.querySelector('input[type="email"]') ||
-           document.querySelector('input[type="text"]');
-  }
+        menu.addEventListener("click", function () {
 
-  function getPwInput() {
-    return document.getElementById('login-pw')              ||
-           document.querySelector('[name="password"]')      ||
-           document.querySelector('[name="pw"]')            ||
-           document.querySelector('input[type="password"]');
-  }
+            tabMenus.forEach(m => {
+                m.classList.remove("tab-menu__item--active");
+            });
 
-  /* ── B-2. 에러 메시지 영역 ─────────────────────────────────────────────── */
-  function getOrCreateErrorEl(form) {
-    var el = document.getElementById('login-error');
-    if (el) return el;
+            this.classList.add("tab-menu__item--active");
 
-    el = document.createElement('p');
-    el.id = 'login-error';
-    el.setAttribute('role', 'alert');
-    el.setAttribute('aria-live', 'assertive');
-    el.style.cssText = [
-      'color:#ef4444',
-      'font-size:13px',
-      'font-weight:500',
-      'margin:10px 0 0',
-      'display:none',
-    ].join(';');
+        });
 
-    var submitBtn = form.querySelector('[type="submit"], button:not([type])');
-    submitBtn ? form.insertBefore(el, submitBtn) : form.appendChild(el);
-    return el;
-  }
-
-  function showError(el, msg) {
-    el.textContent     = msg;
-    el.style.display   = 'block';
-    el.style.animation = 'none';
-    void el.offsetWidth; // reflow
-    el.style.animation = 'mp-shake .32s ease';
-  }
-
-  function clearError(el) {
-    el.textContent   = '';
-    el.style.display = 'none';
-  }
-
-  /* ── B-3. 흔들림 keyframe CSS (1회 주입) ───────────────────────────────── */
-  function injectShakeCSS() {
-    if (document.getElementById('mp-shake-css')) return;
-    var s = document.createElement('style');
-    s.id = 'mp-shake-css';
-    s.textContent =
-      '@keyframes mp-shake{' +
-        '0%,100%{transform:translateX(0)}' +
-        '20%,60%{transform:translateX(-6px)}' +
-        '40%,80%{transform:translateX(6px)}' +
-      '}';
-    document.head.appendChild(s);
-  }
-
-  /* ── B-4. 로그인 성공 처리 ──────────────────────────────────────────────── */
-  function onLoginSuccess() {
-    sessionStorage.setItem('isLoggedIn',   'true');
-    sessionStorage.setItem('justLoggedIn', 'true'); // 마이페이지 토스트 트리거
-
-    var returnUrl = sessionStorage.getItem('loginReturnUrl');
-    if (returnUrl) {
-      sessionStorage.removeItem('loginReturnUrl');
-      location.href = returnUrl; // ← 마이페이지(또는 원래 페이지)로 복귀
-    } else {
-      location.href = './T3_2nd_index.html';
-    }
-  }
-
-  /* ── B-5. 로그인 검증 ───────────────────────────────────────────────────── *
-   *  실서버 연동 시 아래 함수 내부를 fetch 호출로 교체하세요.               *
-   *                                                                           *
-   *  fetch('/api/login', {                                                    *
-   *    method : 'POST',                                                       *
-   *    headers: { 'Content-Type': 'application/json' },                      *
-   *    body   : JSON.stringify({ email: idVal, password: pwVal })             *
-   *  })                                                                       *
-   *  .then(function (r) { return r.json(); })                                 *
-   *  .then(function (data) {                                                  *
-   *    if (data.success) onLoginSuccess();                                    *
-   *    else showError(errorEl, data.message || '로그인에 실패했습니다.');     *
-   *  })                                                                       *
-   *  .catch(function () {                                                     *
-   *    showError(errorEl, '서버 오류가 발생했습니다.');                       *
-   *  });                                                                      *
-   * ========================================================================= */
-  function handleLogin(idVal, pwVal, errorEl) {
-    if (!idVal) { showError(errorEl, '아이디(이메일)를 입력해 주세요.'); return; }
-    if (!pwVal) { showError(errorEl, '비밀번호를 입력해 주세요.');       return; }
-
-    if (idVal === DEMO_ID && pwVal === DEMO_PW) {
-      clearError(errorEl);
-      onLoginSuccess();
-    } else {
-      showError(errorEl, '아이디 또는 비밀번호가 올바르지 않습니다.');
-    }
-  }
-
-  /* ── B-6. 이미 로그인 상태이면 즉시 복귀 ───────────────────────────────── */
-  function redirectIfAlreadyLoggedIn() {
-    if (!isLoggedIn()) return;
-    var url = sessionStorage.getItem('loginReturnUrl');
-    if (url) { sessionStorage.removeItem('loginReturnUrl'); location.replace(url); }
-    else      { location.replace('./T3_2nd_index.html'); }
-  }
-
-  /* ── B-7. 로그인 페이지 초기화 ─────────────────────────────────────────── */
-  function initLogin() {
-    redirectIfAlreadyLoggedIn();
-    injectShakeCSS();
-
-    var form    = getForm();
-    var idInput = getIdInput();
-    var pwInput = getPwInput();
-
-    if (!form) {
-      console.warn('[T3_2nd_mypage.js] 로그인 폼을 찾을 수 없습니다.');
-      return;
-    }
-
-    var errorEl = getOrCreateErrorEl(form);
-
-    [idInput, pwInput].forEach(function (input) {
-      if (!input) return;
-      input.addEventListener('input', function () { clearError(errorEl); });
     });
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      handleLogin(
-        idInput ? idInput.value.trim() : '',
-        pwInput ? pwInput.value        : '',
-        errorEl
-      );
-    });
-  }
 
-  /* =========================================================================
-   * ███████████████  SECTION C : 진입점 ─ 현재 페이지 자동 감지  ████████████
-   *
-   *  파일명에 'login' 포함  →  로그인 페이지 모드
-   *  그 외                  →  마이페이지 모드
-   * ========================================================================= */
-  document.addEventListener('DOMContentLoaded', function () {
-    var isLoginPage =
-      location.pathname.toLowerCase().includes('login') ||
-      !!document.getElementById('login-form')           ||
-      !!document.querySelector('input[type="password"]');
 
-    if (isLoginPage) {
-      initLogin();
-    } else {
-      initMypage();
+    // =========================
+    // 로그아웃 기능
+    // =========================
+    if (logoutBtn) {
+
+        logoutBtn.addEventListener("click", function () {
+
+            localStorage.removeItem("loginUser");
+
+            alert("로그아웃 되었습니다.");
+
+            checkLogin();
+
+            window.location.href = "./T3_2nd_index.html";
+
+        });
+
     }
+
+
+
+    // =========================
+    // 리뷰 작성 버튼 기능
+    // =========================
+    const reviewBtns = document.querySelectorAll("button");
+
+    reviewBtns.forEach(btn => {
+
+        if (btn.innerText.includes("리뷰작성")) {
+
+            btn.addEventListener("click", function () {
+
+                alert("리뷰 작성 페이지로 이동합니다.");
+
+            });
+
+        }
+
+    });
+
+
+
+    // =========================
+    // 찜목록 전체보기 기능
+    // =========================
+    const wishMoreBtn = document.querySelector(".link-mini");
+
+    if (wishMoreBtn) {
+
+        wishMoreBtn.addEventListener("click", function (e) {
+
+            e.preventDefault();
+
+            const wishSection = document.querySelector("#sec-wish");
+
+            if (wishSection) {
+
+                sections.forEach(sec => {
+                    sec.style.display = "none";
+                });
+
+                wishSection.style.display = "block";
+
+                tabMenus.forEach(m => {
+                    m.classList.remove("tab-menu__item--active");
+                });
+
+                if (wish) {
+                    wish.classList.add("tab-menu__item--active");
+                }
+
+            }
+
+        });
+
+    }
+
+
+
+    // =========================
+    // 문의 접수 알림
+    // =========================
+    const inquiryForm = document.querySelector(".inquiry");
+
+    if (inquiryForm) {
+
+        inquiryForm.addEventListener("submit", function (e) {
+
+            e.preventDefault();
+
+            alert("문의가 접수되었습니다. 빠르게 답변드리겠습니다.");
+
+            inquiryForm.reset();
+
+        });
+
+    }
+
+
+
+    // =========================
+    // FAQ 토글 기능
+    // =========================
+    const faqQuestions = document.querySelectorAll(".faq__q");
+
+    faqQuestions.forEach(question => {
+
+        question.addEventListener("click", function () {
+
+            const answer = this.nextElementSibling;
+
+            const expanded = this.getAttribute("aria-expanded") === "true";
+
+            this.setAttribute("aria-expanded", !expanded);
+
+            if (answer) {
+
+                if (answer.hidden) {
+
+                    answer.hidden = false;
+
+                } else {
+
+                    answer.hidden = true;
+
+                }
+
+            }
+
+        });
+
+    });
+
+});
+
+  /* ================================
+     5. FAQ 설명 자동 추가 (3개)
+  ================================= */
+
+  const faqAnswers = document.querySelectorAll(".faq__a");
+
+  const faqDescriptions = [
+    "예약 상세 페이지에서 취소 가능 여부를 확인 후 취소할 수 있습니다. 환불 규정은 숙소 정책에 따라 다르게 적용됩니다.",
+    "체크인 및 체크아웃 시간은 숙소 상세 페이지와 예약 확인서에서 확인할 수 있습니다.",
+    "쿠폰은 결제 단계에서 적용 가능하며 일부 상품에서는 제한될 수 있습니다."
+  ];
+
+  faqAnswers.forEach((faq, index) => {
+
+    if (faq.textContent.trim() === "") {
+      faq.textContent = faqDescriptions[index] || "자세한 내용은 고객센터로 문의해주세요.";
+    }
+
   });
 
-})();
+  // =========================
+// 프로필 수정 기능
+// =========================
+
+// 프로필 입력 필드
+const profileInputs = document.querySelectorAll(".profile-card input");
+
+// 버튼
+const editProfileBtn = document.querySelector(".profile-edit");
+const saveProfileBtn = document.querySelector(".profile-save");
+
+// 로그인된 사용자
+const loginUser = localStorage.getItem("loginUser");
 
 
+// 처음에는 입력창 비활성화
+profileInputs.forEach(input => {
+    input.disabled = true;
+});
 
+
+// 프로필 수정 버튼 클릭
+if (editProfileBtn) {
+
+    editProfileBtn.addEventListener("click", function () {
+
+        profileInputs.forEach(input => {
+            input.disabled = false;
+        });
+
+        alert("프로필을 수정할 수 있습니다.");
+
+    });
+
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    // =========================
+    // 나의 문의 내역 자세히 보기 기능
+    // =========================
+
+    const detailButtons = document.querySelectorAll("button");
+
+    const inquiryDetails = [
+        {
+            keyword: "예약 취소 시 수수료가 발생하는지 문의드립니다",
+            detail: "예약 취소 시 수수료는 숙소 정책에 따라 다르게 적용됩니다. 일반적으로 체크인 24시간 이전 취소는 무료이며, 이후 취소 시 일부 수수료가 발생할 수 있습니다. 정확한 환불 규정은 예약 상세 페이지의 취소 정책을 확인해 주세요."
+        },
+        {
+            keyword: "결제 단계에서 쿠폰이 보이지 않습니다",
+            detail: "쿠폰이 보이지 않는 경우는 다음과 같은 이유가 있을 수 있습니다. 사용 가능한 기간이 만료되었거나, 최소 결제 금액 조건을 충족하지 못했을 수 있습니다. 또한 특정 숙소나 상품에는 쿠폰 사용이 제한될 수 있으니 쿠폰 사용 조건을 확인해 주세요."
+        }
+    ];
+
+
+    // 모든 버튼 검사
+    detailButtons.forEach(btn => {
+
+        if (btn.innerText.includes("자세히 보기")) {
+
+            btn.addEventListener("click", function () {
+
+                const inquiryItem = this.closest("li") || this.parentElement;
+
+                if (!inquiryItem) return;
+
+                let detailBox = inquiryItem.querySelector(".inquiry-detail-text");
+
+                // 이미 열려있으면 닫기
+                if (detailBox) {
+
+                    detailBox.remove();
+                    this.innerText = "자세히 보기";
+                    return;
+
+                }
+
+                const textContent = inquiryItem.innerText;
+
+                let detailText = "";
+
+                inquiryDetails.forEach(item => {
+
+                    if (textContent.includes(item.keyword)) {
+                        detailText = item.detail;
+                    }
+
+                });
+
+                if (detailText === "") {
+                    detailText = "문의 내용에 대한 자세한 답변은 고객센터를 통해 확인하실 수 있습니다.";
+                }
+
+                // 상세 텍스트 생성
+                detailBox = document.createElement("div");
+                detailBox.className = "inquiry-detail-text";
+
+                detailBox.style.marginTop = "10px";
+                detailBox.style.padding = "12px";
+                detailBox.style.background = "#f5f5f5";
+                detailBox.style.borderRadius = "6px";
+                detailBox.style.fontSize = "14px";
+                detailBox.style.lineHeight = "1.6";
+
+                detailBox.textContent = detailText;
+
+                inquiryItem.appendChild(detailBox);
+
+                this.innerText = "닫기";
+
+            });
+
+        }
+
+    });
+
+});
+
+// =========================
+// 상세보기 버튼 → 호텔 센트럴 페이지 이동
+// =========================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const detailMoveBtns = document.querySelectorAll("button");
+
+    detailMoveBtns.forEach(btn => {
+
+        if (btn.innerText.includes("상세보기")) {
+
+            btn.addEventListener("click", function () {
+
+                // 기존 기능 실행 후 페이지 이동
+                setTimeout(function(){
+
+                    window.location.href = "./seoul_junggu_hotel_central.html";
+
+                }, 300);
+
+            });
+
+        }
+
+    });
+
+});
+
+// =========================
+// 프로필 수정 기능
+// =========================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const editBtn = document.querySelector(".profile-card__right .btn-main");
+
+    if (!editBtn) return;
+
+    editBtn.addEventListener("click", function (e) {
+
+        e.preventDefault();
+
+        const loginUser = localStorage.getItem("loginUser");
+
+        if (!loginUser) {
+            alert("로그인이 필요합니다.");
+            return;
+        }
+
+        // 현재 프로필 데이터 불러오기
+        const userData = JSON.parse(localStorage.getItem(loginUser)) || {};
+
+        const currentName = userData.name || "";
+        const currentEmail = userData.email || "";
+        const currentPhone = userData.phone || "";
+
+        // prompt로 수정
+        const newName = prompt("이름을 수정하세요.", currentName);
+        if (newName === null) return;
+
+        const newEmail = prompt("이메일을 수정하세요.", currentEmail);
+        if (newEmail === null) return;
+
+        const newPhone = prompt("전화번호를 수정하세요.", currentPhone);
+        if (newPhone === null) return;
+
+        const updatedUser = {
+            ...userData,
+            name: newName,
+            email: newEmail,
+            phone: newPhone
+        };
+
+        localStorage.setItem(loginUser, JSON.stringify(updatedUser));
+
+        alert("프로필이 수정되었습니다.");
+
+        // 화면 즉시 반영
+        const nameEl = document.querySelector(".profile-name");
+        const emailEl = document.querySelector(".profile-email");
+        const phoneEl = document.querySelector(".profile-phone");
+
+        if (nameEl) nameEl.textContent = newName;
+        if (emailEl) emailEl.textContent = newEmail;
+        if (phoneEl) phoneEl.textContent = newPhone;
+
+    });
+
+});
+
+// =========================
+// 로그인 상태에 따른 화면 제어 (강화)
+// =========================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    function updatePageByLogin() {
+
+        const isLogin = localStorage.getItem("loginUser");
+
+        const sections = document.querySelectorAll(".mysec");
+        const supportSection = document.querySelector("#sec-support");
+
+        const menus = document.querySelectorAll(".tab-menu__item");
+
+        const reservation = document.querySelector('a[href="#sec-reservation"]');
+        const wish = document.querySelector('a[href="#sec-wish"]');
+        const coupon = document.querySelector('a[href="#sec-coupon"]');
+        const profile = document.querySelector('a[href="#sec-profile"]');
+
+        const summaryCards = document.querySelector(".summary-cards");
+        const profileCard = document.querySelector(".profile-card");
+
+
+        // =========================
+        // 로그아웃 상태
+        // =========================
+        if (!isLogin) {
+
+            sections.forEach(sec => {
+                sec.style.display = "none";
+            });
+
+            if (supportSection) {
+                supportSection.style.display = "block";
+            }
+
+            if (reservation) reservation.style.display = "none";
+            if (wish) wish.style.display = "none";
+            if (coupon) coupon.style.display = "none";
+            if (profile) profile.style.display = "none";
+
+            if (summaryCards) summaryCards.style.display = "none";
+            if (profileCard) profileCard.style.display = "none";
+
+            menus.forEach(menu => {
+                menu.classList.remove("tab-menu__item--active");
+            });
+
+        }
+
+
+        // =========================
+        // 로그인 상태
+        // =========================
+        else {
+
+            sections.forEach(sec => {
+                sec.style.display = "block";
+            });
+
+            if (reservation) reservation.style.display = "flex";
+            if (wish) wish.style.display = "flex";
+            if (coupon) coupon.style.display = "flex";
+            if (profile) profile.style.display = "flex";
+
+            if (summaryCards) summaryCards.style.display = "grid";
+            if (profileCard) profileCard.style.display = "flex";
+
+        }
+
+    }
+
+    // 페이지 최초 로딩
+    updatePageByLogin();
+
+    // 로그아웃 버튼 연동
+    const logoutBtn = document.querySelector(".logout");
+
+    if (logoutBtn) {
+
+        logoutBtn.addEventListener("click", function () {
+
+            localStorage.removeItem("loginUser");
+
+            setTimeout(function () {
+
+                updatePageByLogin();
+
+            }, 100);
+
+        });
+
+    }
+
+});
+
+// =========================
+// 리뷰 작성 페이지 이동 기능
+// =========================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const reviewBtns = document.querySelectorAll("button");
+
+    reviewBtns.forEach(btn => {
+
+        if (btn.innerText.includes("리뷰작성") || btn.innerText.includes("리뷰 작성")) {
+
+            btn.addEventListener("click", function () {
+
+                // 리뷰 작성 페이지 이동
+                window.location.href = "./review_write.html";
+
+            });
+
+        }
+
+    });
+
+});

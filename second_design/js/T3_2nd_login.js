@@ -81,3 +81,6 @@ window.onload = function () {
 
 
 };
+
+// 로그인 성공 시
+localStorage.setItem("loginUser", "true");

@@ -12,12 +12,13 @@
 
 .track{
   display:flex;
+ 
 }
 
 .slide{
   flex:0 0 300px;
   height:200px;
-
+  
   display:flex;
   align-items:center;
   justify-content:center;
