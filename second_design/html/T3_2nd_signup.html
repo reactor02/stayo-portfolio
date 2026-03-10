@@ -184,8 +184,13 @@
 
               <!-- 비밀번호 -->
               <label class="field">
+                
                 <span class="field__label">비밀번호</span>
+                
+                <div class="password-box">
                 <input id="password" class="field__input" type="password" placeholder="비밀번호를 입력하세요" required />
+                <button type="button" id="pw-btn">👁</button>
+                </div>
                 <span class="field__help">영문/숫자/특수문자 조합 8자 이상을 권장해요.</span>
                 <span id="passwordError" class="error-msg"></span>
               </label>
@@ -193,8 +198,11 @@
               <!-- 비밀번호 확인 -->
               <label class="field">
                 <span class="field__label">비밀번호 확인</span>
+                <div class="password-box">
                 <input id="passwordcheck" class="field__input" type="password" placeholder="비밀번호를 한 번 더 입력하세요"
                   required />
+                  <button type="button" id="pw-btn">👁</button>
+                  </div>
                 <span id="passwordCheckError" class="error-msg"></span>
               </label>
 

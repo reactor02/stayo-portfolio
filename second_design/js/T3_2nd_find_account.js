@@ -1,6 +1,4 @@
 window.onload = function () {
-
-
     // DOM 전부 위로 정리
     //  탭 & 레이아웃
     const tabId = document.getElementById("tab-id");
@@ -20,6 +18,9 @@ window.onload = function () {
 
     //  아이디 찾기 에러
     const idError = formId.querySelector(".error-msg");
+    // const idNameError = idName.parentElement.querySelector(".error-msg");
+    // const idPhoneError = idPhone.parentElement.querySelector(".error-msg");
+
     const idVerifyError = document.getElementById("id-verify-error");
 
     //  아이디 버튼
@@ -48,7 +49,7 @@ window.onload = function () {
     const idverifyBtn = document.querySelector("#id-verify-btn");
     const pwverifyBtn = document.querySelector("#pw-verify-btn");
 
-    // 정규식
+    // 정규 표현식
     const verifyRegex = /^\d{6}$/; // 인증번호 6자리 숫자 검사식 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 이메일 검사식
     const nameRegex = /^[가-힣A-Za-z]+$/; // 한글과 영어만 입력 가능한 정규식 
@@ -56,7 +57,7 @@ window.onload = function () {
     // 아이디 찾기
     idBtn.addEventListener("click", function (e) {
 
-        // e.preventDefault();
+        e.preventDefault();
 
         let isValid = true;
 
@@ -111,6 +112,7 @@ window.onload = function () {
 
         if (isValid) {
             alert("아이디 찾기 요청이 완료되었습니다.");
+            window.document.location.href = "T3_2nd_login.html"
         }
     });
 
@@ -147,7 +149,7 @@ window.onload = function () {
             isValid = false;
         }
 
-        else if (!nameRegex.test(nameValue)) { 
+        else if (!nameRegex.test(nameValue)) {
             nameError.textContent = "이름은 한글과 영어만 입력 가능합니다.";
             nameError.classList.remove("hide");
             isValid = false;
@@ -199,6 +201,7 @@ window.onload = function () {
 
         if (isValid) {
             alert("비밀번호 재설정이 완료되었습니다.");
+            window.document.location.href = "T3_2nd_login.html"
         }
     });
 
@@ -282,28 +285,28 @@ window.onload = function () {
         phoneError.classList.add("hide");
 
         if (emailValue === "" && nameValue === "" && phoneValue === "") {
-            pwError.textContent = "이메일, 이름, 휴대폰 번호를 입력해주세요.";
-            pwError.classList.remove("hide");
+            phoneError.textContent = "이메일, 이름, 휴대폰 번호를 입력해주세요.";
+            phoneError.classList.remove("hide");
 
         } else if (emailValue === "") {
-            pwError.textContent = "이메일을 입력해주세요.";
-            pwError.classList.remove("hide");
+            emailError.textContent = "이메일을 입력해주세요.";
+            emailError.classList.remove("hide");
 
         } else if (nameValue === "") {
-            pwError.textContent = "이름을 입력해주세요.";
-            pwError.classList.remove("hide");
+            nameError.textContent = "이름을 입력해주세요.";
+            nameError.classList.remove("hide");
 
         } else if (phoneValue === "") {
-            pwError.textContent = "휴대폰 번호를 입력해주세요.";
-            pwError.classList.remove("hide");
+            phoneError.textContent = "휴대폰 번호를 입력해주세요.";
+            phoneError.classList.remove("hide");
 
         } else if (isNaN(phoneValue)) {
-            pwError.textContent = "휴대폰 번호는 숫자만 입력해주세요.";
-            pwError.classList.remove("hide");
+            phoneError.textContent = "휴대폰 번호는 숫자만 입력해주세요.";
+            phoneError.classList.remove("hide");
 
         } else if (phoneValue.length < 10 || phoneValue.length > 11) {
-            pwError.textContent = "휴대폰 번호는 10~11자리로 입력해주세요.";
-            pwError.classList.remove("hide");
+            phoneError.textContent = "휴대폰 번호는 10~11자리로 입력해주세요.";
+            phoneError.classList.remove("hide");
 
         } else {
             alert("인증번호가 발송되었습니다.");
@@ -311,5 +314,156 @@ window.onload = function () {
 
     });
 
+    /* 위에 코드를 그대로 유지한채로 input 전체에 이벤트를 걸고
+   실시간 input 검사해서 에러 메시지 띄우기 
+     */
+
+    const inputs = document.querySelectorAll("input");
+
+    inputs.forEach(function (input) {
+
+        input.addEventListener("input", function () {
+
+            const id = input.id;
+            const value = input.value.trim();
+
+            /* 아이디 찾기 */
+
+            if (id === "id-name") {
+
+                idError.classList.add("hide");
+
+                if (value === "") {
+                    idError.textContent = "이름을 입력해주세요.";
+                    idError.classList.remove("hide");
+
+                } else if (!nameRegex.test(value)) {
+                    idError.textContent = "이름은 한글과 영어만 입력 가능합니다.";
+                    idError.classList.remove("hide");
+                }
+            }
+
+            if (id === "id-phone") {
+
+                idError.classList.add("hide");
+
+                if (value === "") {
+                    idError.textContent = "휴대폰 번호를 입력해주세요.";
+                    idError.classList.remove("hide");
+
+                } else if (isNaN(value)) {
+                    idError.textContent = "휴대폰 번호는 숫자만 입력해주세요.";
+                    idError.classList.remove("hide");
+
+                } else if (value.length < 10 || value.length > 11) {
+                    idError.textContent = "휴대폰 번호는 10~11자리로 입력해주세요.";
+                    idError.classList.remove("hide");
+                }
+            }
+
+            if (id === "id-verify") {
+
+                idVerifyError.classList.add("hide");
+
+                if (value === "") {
+                    idVerifyError.textContent = "인증번호를 입력해주세요.";
+                    idVerifyError.classList.remove("hide");
+
+                } else if (!verifyRegex.test(value)) {
+                    idVerifyError.textContent = "인증번호가 6자리가 아닙니다.";
+                    idVerifyError.classList.remove("hide");
+                }
+            }
+
+
+            /* 비밀번호 찾기 */
+
+            if (id === "pw-email") {
+
+                emailError.classList.add("hide");
+
+                if (!emailRegex.test(value)) {
+                    emailError.textContent = "올바른 이메일 형식이 아닙니다.";
+                    emailError.classList.remove("hide");
+                }
+            }
+
+            if (id === "pw-name") {
+
+                nameError.classList.add("hide");
+
+                if (value === "") {
+                    nameError.textContent = "이름을 입력해주세요.";
+                    nameError.classList.remove("hide");
+
+                } else if (!nameRegex.test(value)) {
+                    nameError.textContent = "이름은 한글과 영어만 입력 가능합니다.";
+                    nameError.classList.remove("hide");
+                }
+            }
+
+            if (id === "pw-phone") {
+
+                phoneError.classList.add("hide");
+
+                if (value === "") {
+                    phoneError.textContent = "휴대폰 번호를 입력해주세요.";
+                    phoneError.classList.remove("hide");
+
+                } else if (isNaN(value)) {
+                    phoneError.textContent = "휴대폰 번호는 숫자만 입력해주세요.";
+                    phoneError.classList.remove("hide");
+
+                } else if (value.length < 10 || value.length > 11) {
+                    phoneError.textContent = "휴대폰 번호는 10~11자리로 입력해주세요.";
+                    phoneError.classList.remove("hide");
+                }
+            }
+
+            if (id === "password") {
+
+                passwordError.classList.add("hide");
+
+                if (value === "") {
+                    passwordError.textContent = "새 비밀번호를 입력해주세요.";
+                    passwordError.classList.remove("hide");
+                }
+            }
+
+            if (id === "passwordcheck") {
+
+                passwordcheckError.classList.add("hide");
+
+                if (password.value !== passwordcheck.value) {
+                    passwordcheckError.textContent = "비밀번호가 일치하지 않습니다.";
+                    passwordcheckError.classList.remove("hide");
+                }
+            }
+
+            if (id === "pw-verify") {
+
+                pwVerifyError.classList.add("hide");
+
+                if (value === "") {
+                    pwVerifyError.textContent = "인증번호를 입력해주세요.";
+                    pwVerifyError.classList.remove("hide");
+
+                } else if (!verifyRegex.test(value)) {
+                    pwVerifyError.textContent = "인증번호가 6자리가 아닙니다.";
+                    pwVerifyError.classList.remove("hide");
+                }
+            }
+
+        });
+
+    });
+
 
 };
+
+
+
+
+
+
+

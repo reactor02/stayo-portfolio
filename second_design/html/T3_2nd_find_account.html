@@ -158,13 +158,14 @@
                 <label class="field">
                   <span class="field__label">이름</span>
                   <input id="id-name" class="field__input" type="text" placeholder="이름을 입력하세요" required />
+                  <p class="error-msg hide"></p>
                 </label>
 
                 <label class="field">
                   <span class="field__label">휴대폰 번호</span>
                   <input id="id-phone" class="field__input" type="tel" placeholder="010-0000-0000" required />
+                  <p class="error-msg hide"></p>
                 </label>
-                <p class="error-msg hide"></p>
               </div>
 
               <!-- 인증번호(선택 UI) -->
@@ -176,10 +177,10 @@
                     <button id="id-verify-btn" class="btn-outline verify-btn" type="button">인증요청</button>
                     <p id="id-verify-error" class="verify__timer hide"></p>
                   </div>
+                  <p class="error-msg hide"></p>
+                  <p class="muted verify__note"></p>
 
                 </label>
-                <p class="error-msg hide"></p>
-                <p class="muted verify__note"></p>
               </div>
 
               <button class="btn-main btn-main--big find-btn" type="submit">아이디 찾기</button>
@@ -225,6 +226,7 @@
                   <p id="email-error" class="error-msg hide"></p>
                 </label>
 
+                
                 <label class="field">
                   <span class="field__label">이름</span>
                   <input id="pw-name" class="field__input" type="text" placeholder="이름을 입력하세요" required />
@@ -236,6 +238,7 @@
                   <input id="pw-phone" class="field__input" type="tel" placeholder="01000000000" required />
                   <p id="phone-error" class="error-msg hide"></p>
                 </label>
+
               </div>
 
               <!-- 인증 -->

@@ -49,64 +49,118 @@ window.onload = function () {
         });
     }
 
+    // 비밀번호 확인 버튼 클릭하면 볼 수 있게 
+    const pwbtn = document.querySelector("#pw-btn");
+
+    pwbtn.addEventListener("click", function () {
+
+        if (password.type === "password") {
+            password.type = "text";
+        } else {
+            password.type = "password";
+        }
+
+    });
+    //  여기는 비밀번호 확인일때도 같이 동작하도록
+    if (passwordcheck.type === "password") {
+        passwordcheck.type = "text";
+    } else {
+        passwordcheck.type = "password";
+    }
+
+    //  이름 실시간 검사 
+    name.addEventListener("input", function () {
+
+        const nameRegex = /^[가-힣a-zA-Z]+$/;
+
+        if (name.value.trim() === '') {
+            nameError.textContent = "이름을 입력해주세요.";
+        }
+        else if (!nameRegex.test(name.value.trim())) {
+            nameError.textContent = "이름은 한글 또는 영어만 입력 가능합니다.";
+        }
+        else {
+            nameError.textContent = "";
+        }
+
+    });
+
+
+    //  이메일 실시간 검사 
+    email.addEventListener("input", function () {
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (email.value.trim() === "") {
+            emailError.textContent = "이메일을 입력해주세요.";
+        }
+        else if (!emailRegex.test(email.value.trim())) {
+            emailError.textContent = "올바른 이메일 형식이 아닙니다.";
+        }
+        else {
+            emailError.textContent = "";
+        }
+
+    });
+
+
+    // 비밀번호 실시간 검사 
+    password.addEventListener("input", function () {
+
+        if (password.value.trim().length < 8) {
+            passwordError.textContent = "비밀번호는 8자 이상이어야 합니다.";
+        }
+        else {
+            passwordError.textContent = "";
+        }
+
+    });
+
+
+    //  비밀번호 확인 실시간 검사 
+    passwordcheck.addEventListener("input", function () {
+
+        if (passwordcheck.value.trim() === "") {
+            passwordCheckError.textContent = "비밀번호 확인을 입력해주세요.";
+        }
+        else if (password.value.trim() !== passwordcheck.value.trim()) {
+            passwordCheckError.textContent = "비밀번호가 일치하지 않습니다.";
+        }
+        else {
+            passwordCheckError.textContent = "";
+        }
+
+    });
+
+
+    //  휴대폰 실시간 검사 
+    phone.addEventListener("input", function () {
+
+        const phoneRegex = /^\d{10,11}$/;
+
+        if (!phoneRegex.test(phone.value.trim())) {
+            phoneError.textContent = "전화번호는 - 없이 숫자만 10~11자리로 입력하세요.";
+        }
+        else {
+            phoneError.textContent = "";
+        }
+
+    });
+
+
     // 가입 버튼 클릭
 
- 
+
     joinBtn.addEventListener('click', function (e) {
         e.preventDefault();
 
 
-        // 초기화
-        nameError.textContent = "";
-        emailError.textContent = "";
-        passwordError.textContent = "";
-        passwordCheckError.textContent = "";
-        phoneError.textContent = "";
+
         birthError.textContent = "";
         agreeError.textContent = "";
 
         let isValid = true;
 
-        // 이름
-
-
-
-        const nameRegex = /^[가-힣a-zA-Z]+$/; // 이름엔 영어랑 한글만
-
-        if (name.value.trim() === '') {
-            nameError.textContent = "이름을 입력해주세요.";
-            isValid = false;
-        } else if (!nameRegex.test(name.value.trim())) {
-            nameError.textContent = "이름은 한글 또는 영어만 입력 가능합니다.";
-            isValid = false;
-        }
-
-
-        // 이메일
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 이메일을 검사하는 정규식 
-        if (!emailRegex.test(email.value.trim())) {
-            emailError.textContent = "올바른 이메일 형식이 아닙니다.";
-            isValid = false;
-        }
-
-        // 비밀번호
-        if (password.value.trim().length < 8) {
-            passwordError.textContent = "비밀번호는 8자 이상이어야 합니다.";
-            isValid = false;
-        }
-
-        // 비밀번호 확인
-        if (password.value.trim() !== passwordcheck.value.trim()) {
-            passwordCheckError.textContent = "비밀번호가 일치하지 않습니다.";
-            isValid = false;
-        }
-
-        // 휴대폰
-        const phoneRegex = /^\d{10,11}$/; // 10~11자리 숫자만 입력하게
-        if (!phoneRegex.test(phone.value.trim())) {
-            phoneError.textContent = "전화번호는 - 없이 숫자만 10~11자리로 입력하세요.";
-            isValid = false;
-        }
 
         // 생년월일
 

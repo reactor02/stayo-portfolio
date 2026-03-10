@@ -410,6 +410,24 @@
   font-size: 10px;
 }
 
+ /* 비밀번호 확인 버튼  */
+.password-box{
+    display:flex;
+    align-items:center;
+}
+
+.password-box input{
+    flex:1;
+}
+
+.pw-btn{
+    margin-left:8px;
+    background:none;
+    border:none;
+    cursor:pointer;
+    font-size:18px;
+}
+
 /* 반응형 */
 @media (max-width: 640px) {
   .row-2 {
