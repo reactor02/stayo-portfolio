@@ -262,7 +262,7 @@ window.onload = function () {
 
 
 
-    const hide = document.querySelectorAll('.hide')  // 리뷰 신고 관리의 숨김버튼
+    const hide = document.querySelectorAll('.hideview')  // 리뷰 신고 관리의 숨김버튼
     const keep = document.querySelectorAll('.keep')  // 리뷰 신고 관리의 유지버튼
 
     for (let i = 0; i < hide.length; i++) {
@@ -277,9 +277,42 @@ window.onload = function () {
     for (let i = 0; i < keep.length; i++) {
         keep[i].addEventListener('click', function () {
             alert('해당 리뷰 유지 되었습니다.')
-             item[i].style.display = 'none'
+            item[i].style.display = 'none'
         })
     }
+
+    const reportView = document.querySelectorAll(".reportView");
+    const modal = document.querySelector("#reportModal");
+    const reportText = document.querySelector("#reportText");
+    const closeReport = document.querySelector("#closeReport");
+
+    for (let i = 0; i < reportView.length; i++) {
+
+        reportView[i].addEventListener("click", function () {
+
+            const item = reportView[i].closest(".item");
+
+            const report = item.dataset.report;
+
+            reportText.textContent = report;
+
+            modal.style.display = "flex";
+
+        });
+
+    }
+
+    closeReport.addEventListener("click", function () {
+        modal.style.display = "none";
+    });
+
+    modal.addEventListener("click", function (e) {
+
+        if (e.target === modal) {
+            modal.style.display = "none";
+        }
+
+    });
 
     /* ================================================
    [최종 통합] 쿠폰 관리 시스템 (생성·수정·검색·가시성)
