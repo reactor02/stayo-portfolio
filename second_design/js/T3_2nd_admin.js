@@ -8,7 +8,7 @@ window.onload = function () {
     const status1 = document.querySelectorAll('.status1'); // 상태 표시칸
     const energize = document.querySelectorAll('.energize'); // 활성화 버튼
     const stop = document.querySelectorAll('.stop'); // 정지 버튼
-
+    
 
 
     // const excel = document.querySelector('#excel')
@@ -618,7 +618,7 @@ function activateAdminMenu(id) {
 
 // 3. 스크롤 감지 로직
 function adminScrollSpy() {
-
+    
     if (isClickScrolling) return;
 
     let currentSectionId = "";
