@@ -17,9 +17,9 @@ window.onload = function () {
     const idVerifyInput = document.getElementById("id-verify");
 
     //  아이디 찾기 에러
-    const idError = formId.querySelector(".error-msg");
-    // const idNameError = idName.parentElement.querySelector(".error-msg");
-    // const idPhoneError = idPhone.parentElement.querySelector(".error-msg");
+    // const idError = formId.querySelector(".error-msg");
+    const idNameError = idName.parentElement.querySelector(".error-msg");
+    const idPhoneError = idPhone.parentElement.querySelector(".error-msg");
 
     const idVerifyError = document.getElementById("id-verify-error");
 
@@ -65,37 +65,38 @@ window.onload = function () {
         const phoneValue = idPhone.value.trim();
         const verifyValue = idVerifyInput.value.trim();
 
-        idError.classList.add("hide");
+        idNameError.classList.add("hide");
+        idPhoneError.classList.add("hide");
         idVerifyError.classList.add("hide");
 
         if (nameValue === "" && phoneValue === "") {
-            idError.textContent = "이름과 휴대폰 번호를 입력해주세요.";
-            idError.classList.remove("hide");
+            idNameError.textContent = "이름과 휴대폰 번호를 입력해주세요.";
+            idNameError.classList.remove("hide");
             isValid = false;
 
         } else if (nameValue === "") {
-            idError.textContent = "이름을 입력해주세요.";
-            idError.classList.remove("hide");
+            idNameError.textContent = "이름을 입력해주세요.";
+            idNameError.classList.remove("hide");
             isValid = false;
 
         } else if (!nameRegex.test(nameValue)) {
-            idError.textContent = "이름은 한글과 영어만 입력 가능합니다.";
-            idError.classList.remove("hide");
+            idNameError.textContent = "이름은 한글과 영어만 입력 가능합니다.";
+            idNameError.classList.remove("hide");
             isValid = false;
         }
         else if (phoneValue === "") {
-            idError.textContent = "휴대폰 번호를 입력해주세요.";
-            idError.classList.remove("hide");
+            idPhoneError.textContent = "휴대폰 번호를 입력해주세요.";
+            idPhoneError.classList.remove("hide");
             isValid = false;
 
         } else if (isNaN(phoneValue)) { // 숫자가 아니라면 
-            idError.textContent = "휴대폰 번호는 숫자만 입력해주세요.";
-            idError.classList.remove("hide");
+            idPhoneError.textContent = "휴대폰 번호는 숫자만 입력해주세요.";
+            idPhoneError.classList.remove("hide");
             isValid = false;
 
         } else if (phoneValue.length < 10 || phoneValue.length > 11) {
-            idError.textContent = "휴대폰 번호는 10~11자리로 입력해주세요.";
-            idError.classList.remove("hide");
+            idPhoneError.textContent = "휴대폰 번호는 10~11자리로 입력해주세요.";
+            idPhoneError.classList.remove("hide");
             isValid = false;
         }
 
@@ -245,27 +246,28 @@ window.onload = function () {
         const nameValue = idName.value.trim();
         const phoneValue = idPhone.value.trim();
 
-        idError.classList.add("hide");
+        idNameError.classList.add("hide");
+        idPhoneError.classList.add("hide");
 
         if (nameValue === "" && phoneValue === "") {
-            idError.textContent = "이름과 휴대폰 번호를 입력해주세요.";
-            idError.classList.remove("hide");
+            idNameError.textContent = "이름과 휴대폰 번호를 입력해주세요.";
+            idNameError.classList.remove("hide");
 
         } else if (nameValue === "") {
-            idError.textContent = "이름을 입력해주세요.";
-            idError.classList.remove("hide");
+            idNameError.textContent = "이름을 입력해주세요.";
+            idNameError.classList.remove("hide");
 
         } else if (phoneValue === "") {
-            idError.textContent = "휴대폰 번호를 입력해주세요.";
-            idError.classList.remove("hide");
+            idPhoneError.textContent = "휴대폰 번호를 입력해주세요.";
+            idPhoneError.classList.remove("hide");
 
         } else if (isNaN(phoneValue)) {
-            idError.textContent = "휴대폰 번호는 숫자만 입력해주세요.";
-            idError.classList.remove("hide");
+            idPhoneError.textContent = "휴대폰 번호는 숫자만 입력해주세요.";
+            idPhoneError.classList.remove("hide");
 
         } else if (phoneValue.length < 10 || phoneValue.length > 11) {
-            idError.textContent = "휴대폰 번호는 10~11자리로 입력해주세요.";
-            idError.classList.remove("hide");
+            idPhoneError.textContent = "휴대폰 번호는 10~11자리로 입력해주세요.";
+            idPhoneError.classList.remove("hide");
 
         } else {
             alert("인증번호가 발송되었습니다.");
@@ -331,33 +333,33 @@ window.onload = function () {
 
             if (id === "id-name") {
 
-                idError.classList.add("hide");
+                idNameError.classList.add("hide");
 
                 if (value === "") {
-                    idError.textContent = "이름을 입력해주세요.";
-                    idError.classList.remove("hide");
+                    idNameError.textContent = "이름을 입력해주세요.";
+                    idNameError.classList.remove("hide");
 
                 } else if (!nameRegex.test(value)) {
-                    idError.textContent = "이름은 한글과 영어만 입력 가능합니다.";
-                    idError.classList.remove("hide");
+                    idNameError.textContent = "이름은 한글과 영어만 입력 가능합니다.";
+                    idNameError.classList.remove("hide");
                 }
             }
 
             if (id === "id-phone") {
 
-                idError.classList.add("hide");
+               idPhoneError.classList.add("hide");;
 
                 if (value === "") {
-                    idError.textContent = "휴대폰 번호를 입력해주세요.";
-                    idError.classList.remove("hide");
+                    idPhoneError.textContent = "휴대폰 번호를 입력해주세요.";
+                    idPhoneError.classList.remove("hide");
 
                 } else if (isNaN(value)) {
-                    idError.textContent = "휴대폰 번호는 숫자만 입력해주세요.";
-                    idError.classList.remove("hide");
+                    idPhoneError.textContent = "휴대폰 번호는 숫자만 입력해주세요.";
+                    idPhoneError.classList.remove("hide");
 
                 } else if (value.length < 10 || value.length > 11) {
-                    idError.textContent = "휴대폰 번호는 10~11자리로 입력해주세요.";
-                    idError.classList.remove("hide");
+                    idPhoneError.textContent = "휴대폰 번호는 10~11자리로 입력해주세요.";
+                    idPhoneError.classList.remove("hide");
                 }
             }
 
