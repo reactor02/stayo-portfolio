@@ -35,6 +35,14 @@ const App = {
         this.el.like2 = document.querySelector('.like2');
         this.el.like3 = document.querySelector('.like3');
 
+        // 삭제 버튼들
+        this.el.del1 = document.querySelector('.del1');
+        this.el.del2 = document.querySelector('.del2');
+        this.el.del3 = document.querySelector('.del3');
+
+        // 삭제할 돔들
+        this.el.rev1 = document.querySelectorAll('.review-grid article');
+
         // 좋아요 숫자가 들어있는 요소들
         this.el.PMH = document.querySelector('.PMH');
         this.el.LYS = document.querySelector('.LYS');
@@ -48,9 +56,6 @@ const App = {
 
         // 리뷰 textarea
         this.el.field__textarea_text = document.querySelector('.field__textarea_text');
-
-        // 신고 버튼
-        this.el.report = document.querySelectorAll('.report');
     },
 
     // 이벤트들을 종류별로 연결
@@ -59,7 +64,7 @@ const App = {
         this.bindLikeEvents();      // 좋아요 클릭 이벤트
         this.bindModalEvents();     // 모달 열기/닫기 이벤트
         this.bindTextCountEvents(); // 글자수 카운트 이벤트
-        this.reportEvent();
+        this.bindDelEvents();
     },
 
     // 칩 버튼 클릭 이벤트 등록
@@ -71,18 +76,6 @@ const App = {
                 this.setActive(chip);
             });
         });
-    },
-
-    reportEvent () {
-        this.el.report[0].addEventListener('click', () => {
-            window.location.href = "./T3_2nd_mapage_guest.html";
-        } )
-        this.el.report[1].addEventListener('click', () => {
-            window.location.href = "./T3_2nd_mapage_guest.html";
-        } )
-        this.el.report[2].addEventListener('click', () => {
-            window.location.href = "./T3_2nd_mapage_guest.html";
-        } )
     },
 
     // 선택한 칩만 active 클래스를 주는 함수
@@ -102,22 +95,56 @@ const App = {
         if (this.el.like1) {
             this.el.like1.addEventListener('click', () => {
                 // this.increaseLike(this.el.PMH);
-                alert('로그인 해주세요');
+                alert('관리자는 좋아요를 누를 수 없습니다');
             });
         }
 
         if (this.el.like2) {
             this.el.like2.addEventListener('click', () => {
                 // this.increaseLike(this.el.LYS);
-                alert('로그인 해주세요');
+                alert('관리자는 좋아요를 누를 수 없습니다');
             });
         }
 
         if (this.el.like3) {
             this.el.like3.addEventListener('click', () => {
                 // this.increaseLike(this.el.KJS);
-                alert('로그인 해주세요');
+                alert('관리자는 좋아요를 누를 수 없습니다');
             });
+        }
+
+        
+    },
+
+    bindDelEvents(){
+        if (this.el.del1) {
+            this.el.del1.addEventListener('click', () => {
+                this.el.rev1[0].innerHTML = '<b class="del-ment">삭제되었습니다<b>';
+                this.el.rev1[0].style.display = 'flex';
+                this.el.rev1[0].style.justifyContent = 'center';
+                this.el.rev1[0].style.alignContent = 'center';
+                this.el.rev1[0].style.flexWrap = 'wrap';
+            })
+        }
+
+        if (this.el.del2) {
+            this.el.del2.addEventListener('click', () => {
+                this.el.rev1[1].innerHTML = '<b class="del-ment">삭제되었습니다<b>';
+                this.el.rev1[1].style.display = 'flex';
+                this.el.rev1[1].style.justifyContent = 'center';
+                this.el.rev1[1].style.alignContent = 'center';
+                this.el.rev1[1].style.flexWrap = 'wrap';
+            })
+        }
+
+        if (this.el.del3) {
+            this.el.del3.addEventListener('click', () => {
+                this.el.rev1[2].innerHTML = '<b class="del-ment">삭제되었습니다<b>';
+                this.el.rev1[2].style.display = 'flex';
+                this.el.rev1[2].style.justifyContent = 'center';
+                this.el.rev1[2].style.alignContent = 'center';
+                this.el.rev1[2].style.flexWrap = 'wrap';
+            })
         }
     },
 
@@ -136,7 +163,7 @@ const App = {
             // 모달 열기
             this.el.openBtn.addEventListener('click', () => {
                 // this.openModal();
-                alert('로그인 해주세요')
+                alert('관리자는 리뷰를 작성할 수 없습니다')
             });
 
             // 닫기 버튼들에 모달 닫기 연결

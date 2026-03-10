@@ -192,7 +192,7 @@
               </div>
             </div>
           </article>
-          
+
           <!-- 장바구니 비었을 때 UI(필요하면 사용)
           <div class="empty">
             <div class="empty__icon">🧺</div>
@@ -222,7 +222,7 @@
                 <span class="muted">세금 및 수수료</span>
                 <b>₩22,000</b>
               </div>
-            
+
 
               <div class="sum-line"></div>
 
@@ -234,7 +234,6 @@
 
             <!-- 결제 진행 -->
             <a class="btn-main btn-main--big" href="./T3_2nd_pay.html">결제하기</a>
-
             <p class="summary-note muted">
               결제하기를 누르면 예약 및 결제 화면으로 이동합니다.
             </p>
@@ -262,6 +261,32 @@
 
       </div>
     </section>
+    <!-- ai 세트 -->
+    <link rel="stylesheet" href="../css/T3_2nd_ai_chat.css">
+    <script src="../js/T3_2nd_ai_chat.js"></script>
+    <div id="ai-trigger" class="ai-trigger">
+      <span>AI<br>상담사</span>
+    </div>
+
+    <!-- ② 채팅창 -->
+    <div id="ai-chat-container" class="ai-chat-container" style="display: none;">
+      <div class="ai-chat-header">
+        <span class="title">STAYO AI 상담원</span>
+        <button id="ai-close-btn" class="ai-close-btn">×</button>
+      </div>
+
+      <div id="ai-chat-box" class="ai-chat-box">
+        <div class="message model">
+          <div class="bubble">안녕하세요! STAYO 숙박 예약 상담원입니다. 무엇을 도와드릴까요?</div>
+        </div>
+      </div>
+
+      <div class="ai-chat-input-area">
+        <textarea id="ai-prompt" placeholder="메시지 입력..." rows="1"></textarea>
+        <button id="ai-ask-btn">전송</button>
+      </div>
+    </div>
+
   </main>
 
   <!-- ==========================

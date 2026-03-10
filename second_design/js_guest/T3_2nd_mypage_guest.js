@@ -201,7 +201,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             e.preventDefault();
 
-            alert("문의가 접수되었습니다. 빠르게 답변드리겠습니다.");
+            alert("답변은 이메일로 전송될 예정입니다.");
 
             inquiryForm.reset();
 
@@ -740,3 +740,5 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
+ 
