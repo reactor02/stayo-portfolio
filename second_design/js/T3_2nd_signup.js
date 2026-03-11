@@ -27,6 +27,26 @@ window.onload = function () {
     const agree2 = document.querySelector('#agree2');
     const agree3 = document.querySelector('#agree3');
 
+    
+    const idPhone = document.querySelector("#phone");
+    const idName = document.querySelector("#name");
+    
+    const regex = /[^0-9]/g;
+    const regexName = /[^ㄱ-ㅎ가-힣-a-zA-Z]/g;
+    
+    // name을 가져와서 
+    // 정규 표현식으로 ㄱ~ㅎ a~z ,A-Z 가 오면 공백으로 만드는 코드 
+    // console.log(idPhone)
+    idName.addEventListener('input', (e)=>{
+        e.target.value = e.target.value.replace(regexName, "");
+    })
+    
+    // phone을 가져와서 숫자가 아니면 공백으로 만드는 코드
+    idPhone.addEventListener("input", (e)=>{
+
+        e.target.value = e.target.value.replace(regex, ""); 
+    })
+
 
     // 전체 동의 체크
     agreeAll.addEventListener('change', function () {
@@ -49,7 +69,7 @@ window.onload = function () {
         });
     }
 
-    // 비밀번호 확인 버튼 클릭하면 볼 수 있게 
+    // 비밀번호 입력하세요 옆에 버튼 클릭하면 입력한 것 볼 수 있게 
     const pwbtn = document.querySelector("#pw-btn");
 
     pwbtn.addEventListener("click", function () {

@@ -183,7 +183,13 @@ window.onload = function () {
             passwordcheckError.classList.remove("hide");
             isValid = false;
 
-        } else if (passwordValue !== passwordcheckValue) {
+        } else if (passwordValue.length < 8) {
+            passwordcheckError.textContent = "비밀번호는 8글자 이상이여야 합니다.";
+            passwordcheckError.classList.remove("hide");
+            isValid = false;
+        }
+
+        else if (passwordValue !== passwordcheckValue) {
             passwordcheckError.textContent = "비밀번호가 일치하지 않습니다.";
             passwordcheckError.classList.remove("hide");
             isValid = false;
@@ -347,7 +353,7 @@ window.onload = function () {
 
             if (id === "id-phone") {
 
-               idPhoneError.classList.add("hide");;
+                idPhoneError.classList.add("hide");;
 
                 if (value === "") {
                     idPhoneError.textContent = "휴대폰 번호를 입력해주세요.";
