@@ -112,7 +112,7 @@ window.onload = function () {
         }
 
         if (isValid) {
-            alert("아이디 찾기 요청이 완료되었습니다.");
+            alert("아이디는 wj******@stayo.com입니다");
             window.document.location.href = "T3_2nd_login.html"
         }
     });
@@ -293,8 +293,8 @@ window.onload = function () {
         phoneError.classList.add("hide");
 
         if (emailValue === "" && nameValue === "" && phoneValue === "") {
-            phoneError.textContent = "이메일, 이름, 휴대폰 번호를 입력해주세요.";
-            phoneError.classList.remove("hide");
+            nameError.textContent = "이메일, 이름, 휴대폰 번호를 입력해주세요.";
+            nameError.classList.remove("hide");
 
         } else if (emailValue === "") {
             emailError.textContent = "이메일을 입력해주세요.";

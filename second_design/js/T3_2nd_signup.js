@@ -26,25 +26,26 @@ window.onload = function () {
     const agree1 = document.querySelector('#agree1');
     const agree2 = document.querySelector('#agree2');
     const agree3 = document.querySelector('#agree3');
+    const agree4 = document.querySelector('#agree4');
 
-    
+
     const idPhone = document.querySelector("#phone");
     const idName = document.querySelector("#name");
-    
+
     const regex = /[^0-9]/g;
     const regexName = /[^ㄱ-ㅎ가-힣-a-zA-Z]/g;
-    
+
     // name을 가져와서 
     // 정규 표현식으로 ㄱ~ㅎ a~z ,A-Z 가 오면 공백으로 만드는 코드 
     // console.log(idPhone)
-    idName.addEventListener('input', (e)=>{
+    idName.addEventListener('input', (e) => {
         e.target.value = e.target.value.replace(regexName, "");
     })
-    
-    // phone을 가져와서 숫자가 아니면 공백으로 만드는 코드
-    idPhone.addEventListener("input", (e)=>{
 
-        e.target.value = e.target.value.replace(regex, ""); 
+    // phone을 가져와서 숫자가 아니면 공백으로 만드는 코드
+    idPhone.addEventListener("input", (e) => {
+
+        e.target.value = e.target.value.replace(regex, "");
     })
 
 
@@ -61,7 +62,7 @@ window.onload = function () {
             let allChecked = true;
 
             // 필수 3개 체크박스만 확인
-            if (!agree1.checked || !agree2.checked || !agree3.checked) {
+            if (!agree1.checked || !agree2.checked || !agree3.checked || !agree4.checked) {
                 allChecked = false;
             }
 
@@ -71,6 +72,7 @@ window.onload = function () {
 
     // 비밀번호 입력하세요 옆에 버튼 클릭하면 입력한 것 볼 수 있게 
     const pwbtn = document.querySelector("#pw-btn");
+    const pwbtn1 = document.querySelector("#pw-btn1");
 
     pwbtn.addEventListener("click", function () {
 
@@ -82,11 +84,15 @@ window.onload = function () {
 
     });
     //  여기는 비밀번호 확인일때도 같이 동작하도록
-    if (passwordcheck.type === "password") {
-        passwordcheck.type = "text";
-    } else {
-        passwordcheck.type = "password";
-    }
+    pwbtn1.addEventListener("click", function () {
+
+        if (passwordcheck.type === "password") {
+            passwordcheck.type = "text";
+        } else {
+            passwordcheck.type = "password";
+        }
+
+    });
 
     //  이름 실시간 검사 
     name.addEventListener("input", function () {
@@ -172,6 +178,7 @@ window.onload = function () {
 
 
     joinBtn.addEventListener('click', function (e) {
+
         e.preventDefault();
 
 
@@ -180,6 +187,30 @@ window.onload = function () {
         agreeError.textContent = "";
 
         let isValid = true;
+
+        if (name.value.trim() === '') {
+            nameError.textContent = "이름을 입력해주세요.";
+        }
+
+        if (email.value.trim() === "") {
+            emailError.textContent = "이메일을 입력해주세요.";
+            isValid = false;
+        }
+
+        if (password.value.trim().length < 8) {
+            passwordError.textContent = "비밀번호는 8자 이상이어야 합니다.";
+            isValid = false;
+        }
+        
+        if (passwordcheck.value.trim() === "") {
+            passwordCheckError.textContent = "비밀번호 확인을 입력해주세요.";
+        }
+
+        if (password.value !== passwordcheck.value) {
+            passwordCheckError.textContent = "비밀번호가 일치하지 않습니다.";
+            isValid = false;
+        }
+
 
 
         // 생년월일

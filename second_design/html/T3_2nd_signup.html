@@ -164,19 +164,22 @@
 
           <!-- RIGHT: 폼 -->
           <div class="signup-form-wrap">
-            <h2 class="form-title">STAYO 계정 만들기</h2>
+            <div class="form-header">
+              <h2 class="form-title">STAYO 계정 만들기</h2>
+              <span class="required-text">*은 필수 정보입니다</span>
+            </div>
 
             <form class="signup-form" action="#" method="post">
               <!-- 이름 -->
               <label class="field">
-                <span class="field__label">이름</span>
+                <span class="field__label"><span class="required">*</span> 이름</span>
                 <input id="name" class="field__input" type="text" placeholder="이름을 입력하세요" required />
                 <span id="nameError" class="error-msg"></span>
               </label>
 
               <!-- 이메일 -->
               <label class="field">
-                <span class="field__label">이메일</span>
+                <span class="field__label"><span class="required">*</span> 이메일</span>
                 <input id="email" class="field__input" type="email" placeholder="example@stayo.com" required />
                 <span id="emailError" class="error-msg"></span>
               </label>
@@ -184,12 +187,12 @@
 
               <!-- 비밀번호 -->
               <label class="field">
-                
-                <span class="field__label">비밀번호</span>
-                
+
+                <span class="field__label"><span class="required">*</span> 비밀번호</span>
+
                 <div class="password-box">
-                <input id="password" class="field__input" type="password" placeholder="비밀번호를 입력하세요" required />
-                <button type="button" id="pw-btn">👁</button>
+                  <input id="password" class="field__input" type="password" placeholder="비밀번호를 입력하세요" required />
+                  <button type="button" id="pw-btn">👁</button>
                 </div>
                 <span class="field__help">영문/숫자/특수문자 조합 8자 이상을 권장해요.</span>
                 <span id="passwordError" class="error-msg"></span>
@@ -197,19 +200,19 @@
 
               <!-- 비밀번호 확인 -->
               <label class="field">
-                <span class="field__label">비밀번호 확인</span>
+                <span class="field__label"><span class="required">*</span> 비밀번호 확인</span>
                 <div class="password-box">
-                <input id="passwordcheck" class="field__input" type="password" placeholder="비밀번호를 한 번 더 입력하세요"
-                  required />
-                  <button type="button" id="pw-btn">👁</button>
-                  </div>
+                  <input id="passwordcheck" class="field__input" type="password" placeholder="비밀번호를 한 번 더 입력하세요"
+                    required />
+                  <button type="button" id="pw-btn1">👁</button>
+                </div>
                 <span id="passwordCheckError" class="error-msg"></span>
               </label>
 
               <!-- 휴대폰 -->
               <div class="row-2">
                 <label class="field">
-                  <span class="field__label">통신사</span>
+                  <span class="field__label"><span class="required">*</span> 통신사</span>
                   <select class="field__select" required>
                     <option value="" selected>통신사 선택</option>
                     <option value="SKT">SKT</option>
@@ -220,7 +223,7 @@
                 </label>
 
                 <label class="field">
-                  <span class="field__label">휴대폰 번호</span>
+                  <span class="field__label"><span class="required">*</span> 휴대폰번호</span>
                   <input id="phone" maxlength="11" class="field__input" type="tel" placeholder="01012345678" required />
                   <span id="phoneError" class="error-msg"></span>
                 </label>
@@ -229,13 +232,13 @@
               <!-- 생년월일 -->
               <div class="row-3">
                 <label class="field">
-                  <span class="field__label">생년(YYYY)</span>
+                  <span class="field__label"><span class="required">*</span> 생년(YYYY)</span>
                   <input id="birthYear" class="field__input" type="text" inputmode="numeric" maxlength="4"
                     placeholder="예) 2002" required />
                 </label>
 
                 <label class="field">
-                  <span class="field__label">월(MM)</span>
+                 <span class="field__label"><span class="required">*</span> 월(MM)</span>
                   <select id="birthMonth" class="field__select" required>
                     <option value="" selected disabled>월</option>
                     <option value="01">01</option>
@@ -254,7 +257,7 @@
                 </label>
 
                 <label class="field">
-                  <span class="field__label">일(DD)</span>
+                  <span class="field__label"><span class="required">*</span> 일(DD)</span>
                   <input id="birthDay" class="field__input" type="text" inputmode="numeric" maxlength="2"
                     placeholder="예) 09" required />
                 </label>
@@ -282,7 +285,7 @@
 
                 <label class="check">
                   <input type="checkbox" id="agree3" class="agreeItem" required />
-                  <span class="check__text">[필수]  15세 이상입니다</span>
+                  <span class="check__text">[필수] 15세 이상입니다</span>
                 </label>
 
                 <label class="check">
