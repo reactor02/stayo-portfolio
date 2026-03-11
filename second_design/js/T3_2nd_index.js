@@ -486,4 +486,17 @@ async function bind() {
         destAuto = setInterval(destMove, 3000);
     });
 
+    const promo__btn = document.querySelector('.promo__btn')
+    const header = document.querySelector(".header")
+    promo__btn.addEventListener('click', function(e){
+        if(header.classList.contains("is-login")){
+             e.preventDefault()
+            alert("이벤트 대상자가 아닙니다");
+            return;
+        } else{
+
+        }
+
+    });
+
 }

@@ -67,6 +67,8 @@ const App = {
         document.addEventListener('click', (e) => {
             this.handleCommentToggle(e);
             this.handleReplyActions(e);
+            this.handleDeleteComment(e);
+            this.handleDeleteReply(e);
         });
 
         // 입력 이벤트를 이용해 댓글, 답글, 리뷰 글자 수 제한 및 카운트 처리
@@ -224,6 +226,7 @@ const App = {
                         <time class="date">${date}</time>
                     </div>
                     <p class="reply-text"></p>
+                    <button type="button" class="btn-reply btn-del2">삭제</button>
                 </li>
             `);
 
@@ -276,7 +279,8 @@ const App = {
                 </div>
                 <p class="comment-text"></p>
                 <div class="comment-actions">
-                    <button type="button" class="btn-reply" data-reply-open>답글</button>
+                    <button type="button" class="btn-reply" data-reply-open>답글</button><b> /</b>
+                    <button type="button" class="btn-reply btn-del">삭제</button>
                 </div>
                 <div class="reply-box" hidden>
                     <ul class="reply-list"></ul>
@@ -360,5 +364,26 @@ const App = {
         const spl = this.el.act.textContent.split(' ');
         spl[1]++;
         this.el.act.textContent = `${spl[0]} ${spl[1]}`;
+    },
+
+    handleDeleteComment(e) {
+        const delBtn = e.target.closest('.btn-del');
+        if (!delBtn) return;
+
+        const item = delBtn.closest('.comment-item');
+        if (!item) return;
+
+        item.remove();
+        this.updateCommentCount();
+    },
+
+    handleDeleteReply(e) {
+        const delBtn = e.target.closest('.btn-del2');
+        if (!delBtn) return;
+
+        const replyItem = delBtn.closest('.reply-item');
+        if (!replyItem) return;
+
+        replyItem.remove();
     }
 };
