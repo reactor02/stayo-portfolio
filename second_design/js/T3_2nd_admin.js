@@ -601,16 +601,32 @@ window.onload = function () {
 // 1. 대상 요소 선택
 // 사이드바 내의 모든 메뉴 아이템(a 태그)과 본문의 섹션들(.anchor 클래스 기준)
 const navItems = document.querySelectorAll('aside[aria-label="관리자 메뉴"] .admin-nav__item');
-const sections = document.querySelectorAll(".panel.anchor");
+// sec1은 body 태그에 있어 .panel.anchor로 잡히지 않으므로 별도 처리
+const panelSections = Array.from(document.querySelectorAll(".panel.anchor"));
+const sec1El = document.getElementById("sec1"); // body 태그
+const sections = sec1El ? [sec1El, ...panelSections] : panelSections;
 
 let isClickScrolling = false;
 
-// 2. 활성화 클래스 교체 함수
+// 2. 섹션 ID → 사이드바 href 매핑 테이블
+// 사이드바에 없는 섹션(sec-stays-done, sec-dashboard 등)은 가장 가까운 메뉴로 대응
+const sectionToMenuMap = {
+    "sec1":             "#sec1",
+    "sec-dashboard":    "#sec1",           // 최근예약 패널 → 대시보드 메뉴
+    "sec-stays-waiting":"#sec-stays-waiting",
+    "sec-stays-done":   "#sec-stays-waiting", // 처리완료 패널 → 숙소 승인/등록 메뉴 유지
+    "sec-users":        "#sec-users",
+    "sec-reviews":      "#sec-reviews",
+    "sec-promos":       "#sec-promos",
+    "sec-settings":     "#sec-settings",
+};
+
+// 활성화 클래스 교체 함수
 function activateAdminMenu(id) {
+    const targetHref = sectionToMenuMap[id] || `#${id}`;
     navItems.forEach(item => {
         item.classList.remove("admin-nav__item--active");
-        // href 속성이 해당 섹션 ID와 일치하는 메뉴 찾기
-        if (item.getAttribute("href") === `#${id}`) {
+        if (item.getAttribute("href") === targetHref) {
             item.classList.add("admin-nav__item--active");
         }
     });
@@ -621,16 +637,44 @@ function adminScrollSpy() {
     
     if (isClickScrolling) return;
 
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight;
+
+    // 최하단 도달 시 → 마지막 섹션 강제 활성화
+    if (scrollY + windowHeight >= docHeight - 10) {
+        const lastSection = panelSections[panelSections.length - 1];
+        if (lastSection) activateAdminMenu(lastSection.getAttribute("id"));
+        return;
+    }
+
+    // 첫 번째 .panel.anchor 위에 있으면 → 대시보드(sec1) 활성화
+    const firstPanelTop = panelSections[0] ? panelSections[0].offsetTop - 150 : Infinity;
+    if (scrollY < firstPanelTop) {
+        activateAdminMenu("sec1");
+        return;
+    }
+
     let currentSectionId = "";
 
-    sections.forEach(section => {
+    panelSections.forEach(section => {
         const sectionTop = section.offsetTop - 150;
         const sectionHeight = section.offsetHeight;
 
-        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
             currentSectionId = section.getAttribute("id");
         }
     });
+
+    // 중간 구간에서 매칭된 섹션이 없으면 직전에 지나친 섹션을 유지
+    if (!currentSectionId) {
+        for (let i = panelSections.length - 1; i >= 0; i--) {
+            if (scrollY >= panelSections[i].offsetTop - 150) {
+                currentSectionId = panelSections[i].getAttribute("id");
+                break;
+            }
+        }
+    }
 
     if (currentSectionId) {
         activateAdminMenu(currentSectionId);
