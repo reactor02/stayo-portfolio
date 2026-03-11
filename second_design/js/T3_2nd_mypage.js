@@ -325,7 +325,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 모든 버튼 검사
     detailButtons.forEach(btn => {
 
-        if (btn.innerText.includes("자세히 보기")) {
+        if (btn.innerText.includes("답변 보기")) {
 
             btn.addEventListener("click", function () {
 
@@ -339,7 +339,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (detailBox) {
 
                     detailBox.remove();
-                    this.innerText = "자세히 보기";
+                    this.innerText = "답변 보기";
                     return;
 
                 }
@@ -737,6 +737,298 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
 
+    });
+
+});
+
+// =========================
+// 예약 취소 기능
+// T3_2nd_mypage.js 와 연동
+// =========================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    // -------------------------------------------------------
+    // 예약 상태 데이터 (localStorage 기반)
+    // 키: "reservations"  값: [{ id, cancelled }, ...]
+    // -------------------------------------------------------
+    function getReservations() {
+        return JSON.parse(localStorage.getItem("reservations")) || [];
+    }
+
+    function saveReservations(data) {
+        localStorage.setItem("reservations", JSON.stringify(data));
+    }
+
+    // -------------------------------------------------------
+    // 예약 카드 초기화
+    //  - 카드마다 고유 id(data-reservation-id) 부여
+    //  - 이미 취소된 카드는 취소 완료 상태로 렌더링
+    // -------------------------------------------------------
+    function initReservationCards() {
+
+        const bookingCards = document.querySelectorAll(".booking-card");
+        const savedData    = getReservations();
+
+        bookingCards.forEach(function (card, index) {
+
+            // 이용 완료 카드(리뷰작성 버튼이 있는 카드)는 취소 대상에서 제외
+            const reviewBtn = Array.from(
+                card.querySelectorAll("button")
+            ).find(function (btn) {
+                return btn.innerText.includes("리뷰작성") || btn.innerText.includes("리뷰 작성");
+            });
+
+            if (reviewBtn) return;
+
+            // 고유 ID 부여
+            const cardId = "booking-" + index;
+            card.setAttribute("data-reservation-id", cardId);
+
+            // 취소 버튼 탐색
+            const cancelBtn = Array.from(
+                card.querySelectorAll("button")
+            ).find(function (btn) {
+                return btn.innerText.trim().replace(/\s/g, "") === "예약취소";
+            });
+
+            if (!cancelBtn) return;
+
+            // 저장된 취소 상태 반영
+            const saved = savedData.find(function (r) { return r.id === cardId; });
+
+            if (saved && saved.cancelled) {
+                applyCancelledStyle(card, cancelBtn);
+            } else {
+                // 취소 버튼 이벤트 등록
+                cancelBtn.addEventListener("click", function () {
+                    handleCancelClick(card, cancelBtn, cardId);
+                });
+            }
+        });
+    }
+
+    // -------------------------------------------------------
+    // 취소 버튼 클릭 핸들러
+    // -------------------------------------------------------
+    function handleCancelClick(card, cancelBtn, cardId) {
+
+        // 숙소명 추출 (있으면 메시지에 포함)
+        const titleEl   = card.querySelector(".booking-card__title");
+        const hotelName = titleEl ? titleEl.innerText.trim() : "해당 예약";
+
+        // 확인 다이얼로그
+        const confirmed = confirm(
+            "예약 취소하시겠습니까?\n\n" +
+            "· 숙소: " + hotelName + "\n" +
+            "· 환불 규정은 숙소 정책에 따라 다를 수 있습니다."
+        );
+
+        if (!confirmed) return;
+
+        // ----- 취소 처리 -----
+        const reservations = getReservations();
+        const existing     = reservations.find(function (r) { return r.id === cardId; });
+
+        if (existing) {
+            existing.cancelled = true;
+        } else {
+            reservations.push({ id: cardId, cancelled: true });
+        }
+
+        saveReservations(reservations);
+
+        // UI 업데이트
+        applyCancelledStyle(card, cancelBtn);
+
+        // 예약 건수 요약 카드 업데이트
+        updateReservationCount();
+
+        alert("예약이 취소되었습니다.\n환불은 영업일 기준 3~5일 내 처리됩니다.");
+    }
+
+    // -------------------------------------------------------
+    // 취소 완료 스타일 적용
+    // -------------------------------------------------------
+    function applyCancelledStyle(card, cancelBtn) {
+
+        // 배지 변경
+        const badge = card.querySelector(".badge");
+        if (badge) {
+            badge.textContent = "예약 취소";
+            badge.classList.remove("badge--dark");
+            badge.classList.add("badge--cancel");
+        }
+
+        // 카드 흐림 처리
+        card.style.opacity = "0.55";
+
+        // 취소 버튼 비활성화
+        cancelBtn.textContent         = "취소 완료";
+        cancelBtn.disabled            = true;
+        cancelBtn.style.cursor        = "default";
+        cancelBtn.style.opacity       = "0.6";
+        cancelBtn.style.pointerEvents = "none";
+
+        // 이미 복구 버튼이 있으면 중복 추가 방지
+        if (card.querySelector(".btn-undo-cancel")) return;
+
+        // "취소 복구" 버튼 추가
+        const undoBtn = document.createElement("button");
+        undoBtn.type      = "button";
+        undoBtn.className = "btn-outline btn-undo-cancel";
+        undoBtn.textContent = "취소 복구";
+        cancelBtn.parentNode.appendChild(undoBtn);
+
+        undoBtn.addEventListener("click", function () {
+            handleUndoCancel(card, cancelBtn, undoBtn,
+                             card.getAttribute("data-reservation-id"));
+        });
+    }
+
+    // -------------------------------------------------------
+    // 예약 취소 복구 핸들러
+    // -------------------------------------------------------
+    function handleUndoCancel(card, cancelBtn, undoBtn, cardId) {
+
+        const confirmed = confirm("예약 취소를 복구하시겠습니까?");
+        if (!confirmed) return;
+
+        // localStorage 상태 복구
+        const reservations = getReservations();
+        const existing     = reservations.find(function (r) { return r.id === cardId; });
+        if (existing) existing.cancelled = false;
+        saveReservations(reservations);
+
+        // 배지 원복
+        const badge = card.querySelector(".badge");
+        if (badge) {
+            badge.textContent = "예약 완료";
+            badge.classList.remove("badge--cancel");
+            badge.classList.add("badge--dark");
+        }
+
+        // 카드 흐림 해제
+        card.style.opacity = "1";
+
+        // 취소 버튼 복구
+        cancelBtn.textContent         = "예약취소";
+        cancelBtn.disabled            = false;
+        cancelBtn.style.cursor        = "";
+        cancelBtn.style.opacity       = "";
+        cancelBtn.style.pointerEvents = "";
+
+        // 취소 버튼에 이벤트 재등록
+        cancelBtn.addEventListener("click", function onCancelAgain() {
+            cancelBtn.removeEventListener("click", onCancelAgain);
+            handleCancelClick(card, cancelBtn, cardId);
+        });
+
+        // 복구 버튼 제거
+        undoBtn.remove();
+
+        // 예약 건수 업데이트
+        updateReservationCount();
+
+        alert("예약 취소가 복구되었습니다.");
+    }
+
+    // -------------------------------------------------------
+    // 요약 카드의 예약 건수 업데이트
+    // -------------------------------------------------------
+    function updateReservationCount() {
+
+        const sumCards = document.querySelectorAll(".sum");
+
+        sumCards.forEach(function (sum) {
+
+            const titleEl = sum.querySelector(".sum__title");
+            if (!titleEl || titleEl.innerText.trim() !== "예약") return;
+
+            const valueEl = sum.querySelector(".sum__value");
+            if (!valueEl) return;
+
+            // 취소되지 않은 예약 카드 수 계산
+            const totalCards     = document.querySelectorAll(".booking-card[data-reservation-id]").length;
+            const cancelledCount = getReservations().filter(function (r) { return r.cancelled; }).length;
+            const activeCount    = Math.max(0, totalCards - cancelledCount);
+
+            valueEl.textContent = activeCount + "건";
+        });
+    }
+
+    // -------------------------------------------------------
+    // 취소 배지 스타일 동적 삽입
+    // -------------------------------------------------------
+    (function injectCancelStyle() {
+        const style = document.createElement("style");
+        style.textContent =
+            ".badge--cancel {" +
+            "  background: #e53935 !important;" +
+            "  color: #fff !important;" +
+            "}" +
+            ".booking-card {" +
+            "  transition: opacity 0.3s;" +
+            "}";
+        document.head.appendChild(style);
+    })();
+
+    // -------------------------------------------------------
+    // 실행
+    // -------------------------------------------------------
+    initReservationCards();
+    updateReservationCount();
+
+});
+
+// =========================
+// 상세보기 / 리뷰 작성 페이지 이동 기능
+// 기존 T3_2nd_mypage.js 는 건드리지 않음
+// =========================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    document.querySelectorAll(".booking-card").forEach(function (card) {
+
+        // -------------------------------------------------------
+        // 상세보기 버튼 → ../html/T3_2nd_detail.html
+        // HTML에 <a> 태그로 이미 감싸진 경우도 있으므로
+        // 버튼 자체와 내부 <a> 모두 href 를 덮어씁니다.
+        // -------------------------------------------------------
+        card.querySelectorAll("button").forEach(function (btn) {
+
+            if (!btn.innerText.trim().includes("상세보기")) return;
+
+            // 버튼 안에 <a> 태그가 있으면 href 교체
+            const anchor = btn.querySelector("a");
+            if (anchor) {
+                anchor.href = "../html/T3_2nd_detail.html";
+            }
+
+            // 버튼 클릭 이벤트로도 이동 (a 태그 없는 경우 대비)
+            btn.addEventListener("click", function (e) {
+                // a 태그가 있으면 a 태그의 기본 동작에 맡기고, 없으면 직접 이동
+                if (!btn.querySelector("a")) {
+                    window.location.href = "../html/T3_2nd_detail.html";
+                }
+            });
+        });
+
+        // -------------------------------------------------------
+        // 리뷰 작성 버튼 → ../html/T3_2nd_review.html
+        // 기존 mypage.js 의 이벤트보다 나중에 등록되므로
+        // stopImmediatePropagation 으로 기존 핸들러 무력화 후 이동
+        // -------------------------------------------------------
+        card.querySelectorAll("button").forEach(function (btn) {
+
+            const text = btn.innerText.trim();
+            if (!text.includes("리뷰작성") && !text.includes("리뷰 작성")) return;
+
+            btn.addEventListener("click", function (e) {
+                e.stopImmediatePropagation(); // 기존 alert / review_write.html 핸들러 차단
+                window.location.href = "../html/T3_2nd_review.html";
+            });
+        });
     });
 
 });
